@@ -1,5 +1,5 @@
 within HanserModelica;
-model Electrical4
+model Electrical4 "R-L series circuit, graphical implementation"
   extends Modelica.Icons.Example;
   // Parameters are constant variables
   parameter Modelica.SIunits.Resistance R = 10 "Resistance";

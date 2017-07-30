@@ -1,5 +1,5 @@
 within HanserModelica;
-model Electrical1
+model Electrical1 "R-L series circuit, first implementation"
   extends Modelica.Icons.Example;
   // Parameters are constant variables
   parameter Real R = 10 "Resistance";
@@ -11,7 +11,10 @@ model Electrical1
 initial equation
   i = 0;
 equation
-  // 3 equation, 3 unknowns
+  /* 
+  3 equation
+  3 unknowns v,vR,vL
+  */
   v = vR + vL;
   vR = R*i;
   vL = L*der(i);

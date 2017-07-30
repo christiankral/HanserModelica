@@ -1,5 +1,5 @@
 within HanserModelica;
-model Electrical2
+model Electrical2 "R-L series circuit, second implementation"
   extends Modelica.Icons.Example;
   // Parameters are constant variables
   parameter Real R(quantity="resistance",unit="Ohm") = 10 "Resistance";

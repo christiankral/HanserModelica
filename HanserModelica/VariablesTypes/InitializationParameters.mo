@@ -3,7 +3,7 @@ model InitializationParameters
   extends Modelica.Icons.Example;
   parameter Integer a=5;                 // explicit assingment
   parameter Real b(start=0);             // not fixed
-  parameter Real c(start=0,fixed=false); // not assigned here
+  parameter Real c(fixed=false);         // not assigned here
   parameter Real d(start=0,fixed=false); // not assigned here
   parameter Real e(fixed=false);         // not assigned here
   parameter Real f(fixed=false,start=1); // not assigned here
@@ -16,7 +16,7 @@ initial equation
   e=cos(e);                              // non-linear equation
   A*Ainv=identity(size(A,1));            // implicit calculation
 initial algorithm
-  for i in 1:a loop                      // i in 1:a = [1,2,...,a]
+  for i in 1:a loop                      // i in 1:a = {1,2,...,a}
     f:=f*i;
   end for;
 end InitializationParameters;

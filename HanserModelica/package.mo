@@ -10,5 +10,5 @@ package HanserModelica
 
 
 
-  annotation (uses(Modelica(version="3.2.2")));
+  annotation (uses(Modelica(version="trunk")));
 end HanserModelica;

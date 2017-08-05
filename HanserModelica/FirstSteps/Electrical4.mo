@@ -1,4 +1,4 @@
-within HanserModelica;
+within HanserModelica.FirstSteps;
 model Electrical4 "R-L series circuit, graphical implementation"
   extends Modelica.Icons.Example;
   // Parameters are constant variables

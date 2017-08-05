@@ -1,4 +1,4 @@
-within HanserModelica;
+within HanserModelica.Classes;
 model Aliasing "Demonstrating aliasing effect"
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;

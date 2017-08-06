@@ -6,7 +6,7 @@ HanserModelica is an educational library
 
 This library is published under the [BSD-3-Clause](https://opensource.org/licenses/BSD-3-Clause).
 
-Copyright 2013-2017 Christian Kral and Anton Haumer
+Copyright 2017 Christian Kral 
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 

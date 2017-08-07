@@ -1,6 +1,6 @@
 # HanserModelica
 
-HanserModelica is an educational library
+HanserModelica is an educational Modelica library
 
 # License
 

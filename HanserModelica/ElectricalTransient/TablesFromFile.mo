@@ -1,4 +1,4 @@
-within HanserModelica.Concepts;
+within HanserModelica.ElectricalTransient;
 model TablesFromFile "Application of tables read from file"
   parameter String fileName=Modelica.Utilities.Files.loadResource(
     "modelica://HanserModelica/Resources/Tables/table.txt") "File name";

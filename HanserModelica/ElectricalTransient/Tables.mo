@@ -1,4 +1,4 @@
-within HanserModelica.Concepts;
+within HanserModelica.ElectricalTransient;
 model Tables "Application of tables"
   extends Modelica.Icons.Example;
   parameter Modelica.SIunits.Inductance L = 2 "Inductance";

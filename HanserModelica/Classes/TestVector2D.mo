@@ -1,5 +1,5 @@
 within HanserModelica.Classes;
-model UseVector2D "Application of Vector2D"
+model TestVector2D "Application of Vector2D"
   extends Modelica.Icons.Example;
   parameter Vector2D a(x=3,y=4) "Vector";
   parameter Real aMag=sqrt(a.x^2+a.y^2) "Magnitude of a";
@@ -8,4 +8,4 @@ model UseVector2D "Application of Vector2D"
 equation
   der(v.x)=a.x/T;
   der(v.y)=a.y/T;
-end UseVector2D;
+end TestVector2D;

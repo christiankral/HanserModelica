@@ -1,4 +1,4 @@
-within HanserModelica.ElectricalTransient;
+within HanserModelica.Electrical;
 model RLSeries "R-L series circuit"
   extends Modelica.Electrical.Analog.Interfaces.TwoPin;
   parameter Real R(start=1) "Resistance";

@@ -1,4 +1,4 @@
-within HanserModelica.ElectricalTransient;
+within HanserModelica.Electrical;
 model Signals "Application of signals, sources, sesors"
   extends Modelica.Icons.Example;
   parameter Modelica.SIunits.Resistance R = 10 "Resistance";

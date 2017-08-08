@@ -1,4 +1,4 @@
-within HanserModelica.ElectricalTransient;
+within HanserModelica.Electrical;
 model ConditionalComponents "Conditional components"
   extends Modelica.Icons.Example;
   parameter Modelica.SIunits.Resistance R = 10 "Resistance";

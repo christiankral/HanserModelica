@@ -1,4 +1,4 @@
 within HanserModelica;
-package Electrical "Modelica concepts"
+package Electrical "Electrical Modelica concepts"
 extends Modelica.Icons.ExamplesPackage;
 end Electrical;

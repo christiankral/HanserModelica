@@ -3,3 +3,5 @@ TestFuse
 RectifierConstantLoad
 QuasiStaticMultiPhase
 Coupling
+SimpleTransformer
+Rectifier12pulse

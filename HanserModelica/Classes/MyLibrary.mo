@@ -1,5 +1,6 @@
 within HanserModelica.Classes;
 package MyLibrary
+
   package Components
     model MyComponent
     end MyComponent;
@@ -9,7 +10,7 @@ package MyLibrary
     model MyExperiment
       .HanserModelica.Classes.MyLibrary.Components.MyComponent component1;
       HanserModelica.Classes.MyLibrary.Components.MyComponent component2;
-      Classes.MyLibrary.Components.MyComponent component3;
+      Components.MyComponent component3;
       MyLibrary.Components.MyComponent myComponent4;
       Components.MyComponent myComponent5;
     end MyExperiment;

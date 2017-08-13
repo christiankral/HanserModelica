@@ -17,7 +17,7 @@ model StarDelta "Example of star connected sources and delta connected load"
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-70,20})));
-  Modelica.Electrical.MultiPhase.Ideal.IdealClosingSwitch switch annotation (Placement(transformation(extent={{-60,30},{-40,50}})));
+  Modelica.Electrical.MultiPhase.Ideal.IdealClosingSwitch switch(Ron=fill(1E-5, 3), Goff=fill(1E-5, 3)) annotation (Placement(transformation(extent={{-60,30},{-40,50}})));
   Modelica.Electrical.MultiPhase.Basic.Resistor resistor(R=fill(1, 3)) annotation (Placement(transformation(extent={{-30,30},{-10,50}})));
   Modelica.Electrical.MultiPhase.Basic.Inductor inductor(L=fill(0.01, 3)) annotation (Placement(transformation(extent={{0,30},{20,50}})));
   Modelica.Blocks.Sources.BooleanStep booleanStep[3](startTime=fill(0.02, 3)) annotation (Placement(transformation(extent={{-90,50},{-70,70}})));

@@ -1,8 +1,15 @@
 within HanserModelica.Magnetic;
 model TestTransformer "Test of transformer model"
   extends Modelica.Icons.Example;
-  Transformer transformer(
-    N1=2113,N2=70,R1=18.5,R2=20.3E-3,G_m1sigma=1.84E-8,G_m2sigma=1.84E-8,R_m=1770,Gc=6.56) annotation (Placement(transformation(extent={{-40,0},{-20,20}})));
+  Components.Transformer transformer(
+    N1=2113,
+    N2=70,
+    R1=18.5,
+    R2=20.3E-3,
+    G_m1sigma=1.84E-8,
+    G_m2sigma=1.84E-8,
+    R_m=1770,
+    Gc=6.56) annotation (Placement(transformation(extent={{-40,0},{-20,20}})));
   Modelica.Electrical.Analog.Basic.Ground ground1 annotation (Placement(transformation(extent={{-50,-32},{-30,-12}})));
   Modelica.Electrical.Analog.Basic.Ground ground2 annotation (Placement(transformation(extent={{-30,-32},{-10,-12}})));
   Modelica.Electrical.Analog.Basic.Resistor loadResistor(R=2) annotation (Placement(transformation(

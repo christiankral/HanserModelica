@@ -1,5 +1,5 @@
 within HanserModelica.Magnetic;
-model Coupling "Electro magnetic coupling"
+model Coupling "Electro-magnetic coupling"
   extends Modelica.Icons.Example;
   parameter Modelica.SIunits.Resistance R = 10 "Resistance";
   parameter Modelica.SIunits.Inductance L = 2 "Inductance";

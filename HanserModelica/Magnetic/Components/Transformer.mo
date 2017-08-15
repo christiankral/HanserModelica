@@ -1,4 +1,4 @@
-within HanserModelica.Magnetic;
+within HanserModelica.Magnetic.Components;
 model Transformer "Transformer model"
   parameter Integer N1 "Number of primary turns";
   parameter Integer N2 "Number of secondary turns";

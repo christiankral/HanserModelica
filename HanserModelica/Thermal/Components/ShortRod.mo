@@ -12,7 +12,6 @@ model ShortRod "Short rod"
     annotation (Placement(transformation(extent={{-10,-18},{10,-38}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_b annotation (Placement(transformation(extent={{90,-10},{110,10}}), iconTransformation(extent={{90,-10},{110,10}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heatFlow annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
 equation
   connect(thermalResistor1.port_b, thermalResistor2.port_a) annotation (Line(points={{-40,0},{2,0},{40,0}}, color={191,0,0}));
   connect(heatCapacitor.port, thermalResistor2.port_a) annotation (Line(points={{0,-18},{0,0},{40,0}}, color={191,0,0}));

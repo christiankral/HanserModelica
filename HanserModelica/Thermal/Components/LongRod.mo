@@ -11,7 +11,7 @@ model LongRod "Long rod consisting of n short rods"
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_b annotation (Placement(transformation(extent={{90,-10},{110,10}})));
 equation
   connect(port_a, shortRod[1].port_a) annotation (Line(points={{-100,0},{-60,0},{-10,0}}, color={191,0,0}));
-  connect(shortRod[n].port_b, port_b) annotation (Line(points={{10,0},{10,0},{100,0}},  color={191,0,0}));
+  connect(shortRod[n].port_b, port_b) annotation (Line(points={{10,0},{100,0}},         color={191,0,0}));
   // Create interconnections
   for i in 1:n-1 loop
     connect(shortRod[i].port_b,shortRod[i+1].port_a);

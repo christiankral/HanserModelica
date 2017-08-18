@@ -1,9 +1,11 @@
 Components
+Records
 Signals
 Tables
 TablesFromFile
 ConditionalComponents
 TestRLSeries
+TestRLSeriesRecord
 StarDelta
 Rectifier
 QuasiStatic

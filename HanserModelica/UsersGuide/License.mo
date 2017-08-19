@@ -1,5 +1,5 @@
 within HanserModelica.UsersGuide;
-class License "Modelica License 1.1"
+class License "BSD-3-Clause"
   extends Modelica.Icons.Information;
   annotation (
     preferredView = "info",

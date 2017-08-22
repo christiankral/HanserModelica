@@ -9,12 +9,10 @@ model Electrical4 "R-L series circuit, graphical implementation"
   Modelica.SIunits.Voltage vR = resistor.v "Voltage drop of resistor";
   Modelica.SIunits.Voltage vL = inductor.v "Voltage drop of inductor";
   Modelica.SIunits.Current i = resistor.i "Current";
-  Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(transformation(extent={{-50,-20},{-30,0}})));
+  Modelica.Electrical.Analog.Basic.Ground ground
+    annotation (Placement(transformation(extent={{-50,-20},{-30,0}})));
   Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V=v)
-                                                                     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
-        origin={-40,20})));
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}},rotation=270,origin={-40,20})));
   Modelica.Electrical.Analog.Basic.Resistor resistor(R=R) annotation (Placement(transformation(extent={{-20,30},{0,50}})));
   Modelica.Electrical.Analog.Basic.Inductor inductor(L=L) annotation (Placement(transformation(extent={{20,30},{40,50}})));
 initial equation

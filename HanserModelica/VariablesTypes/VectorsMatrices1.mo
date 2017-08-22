@@ -2,7 +2,7 @@ within HanserModelica.VariablesTypes;
 model VectorsMatrices1
   extends Modelica.Icons.Example;
   parameter Real a[3]={1,2,3};   // a = {1,2,3}
-  parameter Real[3] b={3,2,1};   // b = {3,2,1}
+  parameter Real[3] b={3,2,1};   // b = {3,2,1} alternative syntax
   parameter Real c[3]=zeros(3);  // c = {0,0,0}
   parameter Real d[:]=ones(3);   // d = {1,1,1}
   parameter Real e[3]=fill(4,3); // e = {4,4,4}

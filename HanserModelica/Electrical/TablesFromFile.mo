@@ -6,4 +6,5 @@ model TablesFromFile "Application of tables read from file"
       tableOnFile=true,
       tableName="resistor",
       fileName=fileName));
+  annotation(experiment(StopTime=4,Interval=0.001,Tolerance=1e-06));
 end TablesFromFile;

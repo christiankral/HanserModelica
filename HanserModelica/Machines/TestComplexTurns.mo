@@ -8,7 +8,7 @@ model TestComplexTurns "Test function complexTurns"
       winding,
       nc=10,
       offset=-110*pi/180) "Complex numbers of turns";
-  parameter Real turns[winding.m] = Modelica.ComplexMath.'abs'(N)
+  parameter Real effectiveTurns[winding.m] = Modelica.ComplexMath.'abs'(N)
     "Magnitudes of complex numbers of turns";
   parameter Modelica.SIunits.Angle orientiation[winding.m](
     each displayUnit="deg")=

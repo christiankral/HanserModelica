@@ -251,7 +251,9 @@ equation
       points={{0,-20},{0,0},{40,0},{40,-20}},
                               color={0,0,255}));
   connect(terminalBox.plug_sn, imc.plug_sn) annotation (Line(points={{76,-70},{76,-70}}, color={0,0,255}));
-  annotation (experiment(StopTime=2.5, Interval=0.0001, Tolerance=1e-06), Documentation(
+  annotation (experiment(StopTime=2.5, Interval=0.0001, Tolerance=1e-06),
+    __OpenModelica_simulationFlags(jacobian = "", nls = "newton", s = "dassl", lv = "LOG_STATS"),
+    Documentation(
         info="<html>
 <p>At start time tStart1 three phase voltage is supplied to the asynchronous induction machine with squirrel cage via the transformer;
 the machine starts from standstill, accelerating inertias against load torque quadratic dependent on speed;
@@ -279,4 +281,5 @@ Simulate for 2.5 seconds and plot (versus time):</p>
                   fillPattern=FillPattern.Solid,
                   textStyle={TextStyle.Bold},
           textString="%m phase transient")}));
+
 end IMC_Transformer;

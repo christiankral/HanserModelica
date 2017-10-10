@@ -10,6 +10,9 @@ model IMC_withLosses "Induction machine with squirrel cage and losses"
   parameter Modelica.SIunits.Voltage VNominal=400 "Nominal RMS voltage";
   parameter Modelica.SIunits.Current INominal=32.85 "Nominal RMS current";
   parameter Real pfNominal=0.898 "Nominal power factor";
+  parameter Modelica.SIunits.Power PsNominal=sqrt(3)*VNominal*INominal*pfNominal "Nominal stator power";
+  parameter Modelica.SIunits.Power lossNominal=PsNominal-PNominal "Nominal losses";
+  parameter Real effNominal=0.9049 "Nominal efficiency";
   parameter Modelica.SIunits.Frequency fNominal=50 "Nominal frequency";
   parameter Modelica.SIunits.AngularVelocity wNominal(displayUnit="rev/min")=from_rpm(1462.5)
     "Nominal speed";
@@ -35,6 +38,10 @@ protected
       0.9088,0.9089,0.9070,0.9044,0.9043,0.9008,0.8972};
 public
   output Modelica.SIunits.Power PmechQS=powerSensorQS.power "Mechanical output";
+  output Modelica.SIunits.Power Ps_simQS=sqrt(3)*VNominal*I_simQS*pf_simQS "Simulated stator power";
+  output Modelica.SIunits.Power Ps_measQS=sqrt(3)*VNominal*I_measQS*pf_measQS "Simulated stator power";
+  output Modelica.SIunits.Power loss_simQS=Ps_simQS-PmechQS "Simulated total losses";
+  output Modelica.SIunits.Power loss_measQS=Ps_measQS-PmechQS "Measured total losses";
   output Modelica.SIunits.Current I_simQS=currentQuasiRMSSensorQS.I "Simulated current";
   output Modelica.SIunits.Current I_measQS=combiTable1DsQS.y[1] "Measured current";
   output Modelica.SIunits.AngularVelocity w_simQS(displayUnit="rev/min") = imcQS.wMechanical "Simulated speed";

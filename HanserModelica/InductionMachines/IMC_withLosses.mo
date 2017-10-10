@@ -11,9 +11,9 @@ model IMC_withLosses "Induction machine with squirrel cage and losses"
   parameter Modelica.SIunits.Current INominal=32.85 "Nominal RMS current";
   parameter Real pfNominal=0.898 "Nominal power factor";
   parameter Modelica.SIunits.Frequency fNominal=50 "Nominal frequency";
-  parameter Modelica.SIunits.AngularVelocity wNominal=from_rpm(1462.5)
+  parameter Modelica.SIunits.AngularVelocity wNominal(displayUnit="rev/min")=from_rpm(1462.5)
     "Nominal speed";
-  parameter Modelica.SIunits.AngularVelocity w0=from_rpm(1499.64)
+  parameter Modelica.SIunits.AngularVelocity w0(displayUnit="rev/min")=from_rpm(1499.64)
     "Nominal speed";
   parameter Modelica.SIunits.Torque TNominal=PNominal/wNominal
     "Nominal torque";
@@ -144,8 +144,7 @@ equation
     experiment(StopTime=10, Interval=0.0001, Tolerance=1e-06),
     Documentation(info="<html>
 <ul>
-<li>Simulate for 5 seconds: The machine is started at nominal speed, flux is build up in the machine.</li>
-<li>Continue the simulation for additional 5 seconds: Subsequently a load ramp is applied.</li>
+<li>Simulate for 10 seconds: The machine is started at nominal speed, subsequently a load ramp is applied.</li>
 <li>Compare by plotting versus PmechQS:</li>
 </ul>
 <table>
@@ -158,7 +157,7 @@ equation
 <table>
 <tr><td>Nominal stator current            </td><td>     32.85  </td><td>A      </td></tr>
 <tr><td>Power factor                      </td><td>      0.898 </td><td>       </td></tr>
-<tr><td>Speed                             </td><td>   1462.4   </td><td>rpm    </td></tr>
+<tr><td>Speed                             </td><td>   1462.5   </td><td>rpm    </td></tr>
 <tr><td>Electrical input                  </td><td> 20,443.95  </td><td>W      </td></tr>
 <tr><td>Stator copper losses              </td><td>    770.13  </td><td>W      </td></tr>
 <tr><td>Stator core losses                </td><td>    410.00  </td><td>W      </td></tr>

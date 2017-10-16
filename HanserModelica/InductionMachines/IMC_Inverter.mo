@@ -192,7 +192,7 @@ equation
   connect(groundMachineQS.pin, starMachineQS.pin_n) annotation (Line(
       points={{-20,26},{-10,26}},
       color={85,170,255}));
-  connect(starMachineQS.plug_p, terminalBoxQS.starpoint) annotation (Line(points={{10,26},{10,32},{20,32}}, color={85,170,255}));
+  connect(starMachineQS.plug_p, terminalBoxQS.starpoint) annotation (Line(points={{10,26},{10,32},{21,32}}, color={85,170,255}));
   connect(groundQS.pin, starQS.pin_n) annotation (Line(
       points={{-50,50},{-50,50}},
       color={85,170,255}));
@@ -204,12 +204,12 @@ equation
       points={{0,50},{10,50}},
       color={85,170,255}));
   connect(vfControllerQS.y, signalVoltageQS.V) annotation (Line(
-      points={{-39,80},{-4,80},{-4,62}}, color={85,170,255}));
+      points={{-39,80},{-6,80},{-6,60}}, color={85,170,255}));
   connect(ramp.y, vfControllerQS.u) annotation (Line(points={{-79,0},{-70,0},{-70,80},{-62,80}}, color={0,0,127}));
-  connect(ramp.y, signalVoltageQS.f) annotation (Line(points={{-79,0},{-70,0},{-70,66},{-16,66},{-16,62}}, color={0,0,127}));
+  connect(ramp.y, signalVoltageQS.f) annotation (Line(points={{-79,0},{-70,0},{-70,66},{-14,66},{-14,60}}, color={0,0,127}));
   connect(ramp.y, vfController.u) annotation (Line(points={{-79,0},{-70,0},{-70,-20},{-62,-20}}, color={0,0,127}));
-  connect(vfController.y, signalVoltage.v) annotation (Line(points={{-39,-20},{-10,-20},{-10,-38}}, color={0,0,127}));
-  connect(starMachine.plug_p, terminalBox.starpoint) annotation (Line(points={{10,-74},{10,-68},{20,-68}},   color={0,0,255}));
+  connect(vfController.y, signalVoltage.v) annotation (Line(points={{-39,-20},{-10,-20},{-10,-43}}, color={0,0,127}));
+  connect(starMachine.plug_p, terminalBox.starpoint) annotation (Line(points={{10,-74},{10,-68},{21,-68}},   color={0,0,255}));
   connect(groundMachine.p,starMachine. pin_n) annotation (Line(points={{-20,-74},{-10,-74}}, color={0,0,255}));
   annotation (
     experiment(StopTime=1.5, Interval=0.0001, Tolerance=1E-6),

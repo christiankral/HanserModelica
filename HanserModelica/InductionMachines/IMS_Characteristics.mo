@@ -111,7 +111,7 @@ equation
       color={85,170,255}));
   connect(starMachineQS.plug_p, terminalBoxQS.starpoint) annotation (
       Line(
-      points={{-40,40},{-40,52},{20,52}},
+      points={{-40,40},{-40,52},{21,52}},
       color={85,170,255}));
   connect(vSourceQS.plug_p, pSensorQS.currentP) annotation (Line(points={{-80,70},{-80,80},{-70,80}}, color={85,170,255}));
   connect(ramp.y,speed. w_ref) annotation (Line(points={{79,40},{72,40}}, color={0,0,127}));

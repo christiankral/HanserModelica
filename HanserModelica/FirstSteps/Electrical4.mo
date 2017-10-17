@@ -5,7 +5,7 @@ model Electrical4 "R-L series circuit, graphical implementation"
   parameter Modelica.SIunits.Resistance R = 10 "Resistance";
   parameter Modelica.SIunits.Inductance L = 2 "Inductance";
   parameter Modelica.SIunits.Voltage v = 20 "Total DC voltage";
-  // Alias variables to simplify reult access
+  // Alias variables to simplify result access
   Modelica.SIunits.Voltage vR = resistor.v "Voltage drop of resistor";
   Modelica.SIunits.Voltage vL = inductor.v "Voltage drop of inductor";
   Modelica.SIunits.Current i = resistor.i "Current";

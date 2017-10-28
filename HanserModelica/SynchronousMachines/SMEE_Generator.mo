@@ -13,7 +13,6 @@ model SMEE_Generator "Electrical excited synchronous machine operating as genera
     "Initial excitation current";
   parameter Modelica.SIunits.Angle gamma0(displayUnit="deg") = 0
     "Initial rotor displacement angle";
-  output Modelica.SIunits.Power Ptr=powerSensor.power "Transient power";
   output Modelica.SIunits.Power Pqs=powerSensorQS.y.re "QS power";
   Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.SynchronousMachines.SM_ElectricalExcited smeeQS(
     p=2,
@@ -66,7 +65,7 @@ model SMEE_Generator "Electrical excited synchronous machine operating as genera
       final w_fixed=w, useSupport=false) annotation (Placement(
         transformation(extent={{100,20},{80,40}})));
   parameter
-    Modelica.Electrical.Machines.Utilities.SynchronousMachineData
+    MoveTo_MSL.Electrical.Machines.Utilities.SynchronousMachineData
     smeeData(
     SNominal=30e3,
     VsNominal=100,
@@ -136,9 +135,6 @@ model SMEE_Generator "Electrical excited synchronous machine operating as genera
         extent={{10,-10},{-10,10}},
         rotation=90,
         origin={30,30})));
-initial equation
-  sum(smee.is) = 0;
-  smee.is[1:2] = zeros(2);
 
 equation
   connect(mechanicalPowerSensorQS.flange_b, constantSpeedQS.flange)

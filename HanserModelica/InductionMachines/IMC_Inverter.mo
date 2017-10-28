@@ -32,15 +32,16 @@ model IMC_Inverter "Induction machine with squirrel cage and inverter"
     strayLoadParameters=imcData.strayLoadParameters,
     TrRef=imcData.TrRef,
     m=m,
-    TsOperational=293.15,
     Rs=imcData.Rs*m/3,
     Lssigma=imcData.Lssigma*m/3,
     Lszero=imcData.Lszero*m/3,
     Lm=imcData.Lm*m/3,
     Lrsigma=imcData.Lrsigma*m/3,
     Rr=imcData.Rr*m/3,
+    TsOperational=373.15,
+    effectiveStatorTurns=imcData.effectiveStatorTurns,
     alpha20r=imcData.alpha20r,
-    TrOperational=293.15) annotation (Placement(transformation(extent={
+    TrOperational=373.15) annotation (Placement(transformation(extent={
             {20,-90},{40,-70}})));
   Modelica.Blocks.Sources.Ramp ramp(          duration=tRamp, height=f)
     annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
@@ -73,7 +74,11 @@ model IMC_Inverter "Induction machine with squirrel cage and inverter"
   Modelica.Electrical.Machines.Utilities.MultiTerminalBox terminalBox(terminalConnection="Y", m=m) annotation (Placement(transformation(extent={{20,-74},{40,-54}})));
   parameter
     MoveTo_MSL.Electrical.Machines.Utilities.ParameterRecords.AIM_SquirrelCageData
-    imcData "Machine data"
+    imcData(
+    TsRef=373.15,
+    effectiveStatorTurns=64,
+    TrRef=373.15)
+            "Machine data"
     annotation (Placement(transformation(extent={{70,70},{90,90}})));
   Modelica.Electrical.MultiPhase.Sensors.CurrentQuasiRMSSensor
     currentQuasiRMSSensor(final m=m) annotation (Placement(
@@ -95,14 +100,15 @@ model IMC_Inverter "Induction machine with squirrel cage and inverter"
     gammar(fixed=true, start=+pi/2),
     gamma(fixed=true, start=-pi/2),
     wMechanical(fixed=true, start=0),
-    TsOperational=293.15,
     Rs=imcData.Rs*m/3,
     Lssigma=imcData.Lssigma*m/3,
     Lm=imcData.Lm*m/3,
     Lrsigma=imcData.Lrsigma*m/3,
     Rr=imcData.Rr*m/3,
+    TsOperational=373.15,
+    effectiveStatorTurns=imcData.effectiveStatorTurns,
     alpha20r=imcData.alpha20r,
-    TrOperational=293.15) annotation (Placement(transformation(extent={{20,10},{40,30}})));
+    TrOperational=373.15) annotation (Placement(transformation(extent={{20,10},{40,30}})));
   Modelica.Mechanics.Rotational.Components.Inertia loadInertiaQS(J=
         JLoad) annotation (Placement(transformation(extent={{50,10},{70,
             30}})));
@@ -212,7 +218,7 @@ equation
   connect(starMachine.plug_p, terminalBox.starpoint) annotation (Line(points={{10,-74},{10,-68},{20,-68}},   color={0,0,255}));
   connect(groundMachine.p,starMachine. pin_n) annotation (Line(points={{-20,-74},{-10,-74}}, color={0,0,255}));
   annotation (
-    experiment(StopTime=1.5, Interval=0.0001, Tolerance=1E-6),
+    experiment(StopTime=1.5, Interval=0.0001, Tolerance=1E-8),
     Documentation(info="<html>
 
 <p>This example compares a time transient and a quasi static model of a multi phase induction machine.

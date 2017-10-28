@@ -33,9 +33,10 @@ model IMC_YD "Induction machine with squirrel cage starting Y-D"
     Lm=imcData.Lm*m/3,
     Rr=imcData.Rr*m/3,
     m=m,
-    TsOperational=293.15,
+    TsOperational=373.15,
+    effectiveStatorTurns=imcData.effectiveStatorTurns,
     alpha20r=imcData.alpha20r,
-    TrOperational=293.15) annotation (Placement(transformation(extent={{20,10},{40,30}})));
+    TrOperational=373.15) annotation (Placement(transformation(extent={{20,10},{40,30}})));
   Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor currentQuasiRMSSensorQS(m=m) annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=270,
@@ -68,7 +69,10 @@ model IMC_YD "Induction machine with squirrel cage starting Y-D"
     TorqueDirection=false,
     tau_nominal=-TLoad,
     useSupport=false) annotation (Placement(transformation(extent={{100,10},{80,30}})));
-  parameter MoveTo_MSL.Electrical.Machines.Utilities.ParameterRecords.AIM_SquirrelCageData imcData annotation (Placement(transformation(extent={{70,70},{90,90}})));
+  parameter MoveTo_MSL.Electrical.Machines.Utilities.ParameterRecords.AIM_SquirrelCageData imcData(
+    TsRef=373.15,
+    effectiveStatorTurns=64,
+    TrRef=373.15)                                                                                  annotation (Placement(transformation(extent={{70,72},{90,92}})));
 
   Modelica.Magnetic.FundamentalWave.BasicMachines.AsynchronousInductionMachines.AIM_SquirrelCage imc(
     p=imcData.p,
@@ -89,9 +93,11 @@ model IMC_YD "Induction machine with squirrel cage starting Y-D"
     Lm=imcData.Lm*m/3,
     Lrsigma=imcData.Lrsigma*m/3,
     Rr=imcData.Rr*m/3,
-    TsOperational=293.15,
+    effectiveStatorTurns=imcData.effectiveStatorTurns,
+    m=m,
+    TsOperational=373.15,
     alpha20r=imcData.alpha20r,
-    TrOperational=293.15) annotation (Placement(transformation(extent={{20,-90},{40,-70}})));
+    TrOperational=373.15) annotation (Placement(transformation(extent={{20,-90},{40,-70}})));
   Modelica.Electrical.Machines.Sensors.CurrentQuasiRMSSensor
                                                     currentQuasiRMSSensor annotation (Placement(transformation(extent={{-10,10},{10,-10}}, rotation=270,
         origin={30,-30})));
@@ -168,7 +174,7 @@ equation
       Line(
       points={{30,-50},{30,-40}}, color={0,0,255}));
   connect(imc.flange, loadInertia.flange_a) annotation (Line(points={{40,-80},{50,-80}}));
-  annotation (experiment(StopTime=2.5,Interval=0.001,Tolerance=1e-06),
+  annotation (experiment(StopTime=2.5,Interval=0.0001,Tolerance=1e-06),
     __OpenModelica_simulationFlags(jacobian = "", nls = "newton", s = "dassl", lv = "LOG_STATS"),
     Documentation(
         info="<html>

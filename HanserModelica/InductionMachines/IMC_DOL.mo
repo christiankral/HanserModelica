@@ -101,8 +101,9 @@ model IMC_DOL "Induction machine with squirrel cage started directly on line (DO
     Rr=imcData.Rr*m/3,
     TrRef=imcData.TrRef,
     m=m,
-    TsOperational=293.15,
-    TrOperational=293.15) annotation (Placement(transformation(extent={{20,-70},{40,-50}})));
+    TsOperational=373.15,
+    effectiveStatorTurns=imcData.effectiveStatorTurns,
+    TrOperational=373.15) annotation (Placement(transformation(extent={{20,-70},{40,-50}})));
   Modelica.Mechanics.Rotational.Components.Inertia loadInertia(J=J_Load)
     annotation (Placement(transformation(extent={{50,-70},{70,-50}})));
   Modelica.Mechanics.Rotational.Sources.QuadraticSpeedDependentTorque
@@ -123,7 +124,11 @@ model IMC_DOL "Induction machine with squirrel cage started directly on line (DO
     useSupport=false) annotation (Placement(transformation(extent={{100,30},{80,50}})));
   parameter
     MoveTo_MSL.Electrical.Machines.Utilities.ParameterRecords.AIM_SquirrelCageData
-    imcData "Machine data"
+    imcData(
+    TsRef=373.15,
+    effectiveStatorTurns=64,
+    TrRef=373.15)
+            "Machine data"
     annotation (Placement(transformation(extent={{70,72},{90,92}})));
   Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.InductionMachines.IM_SquirrelCage imcQS(
     Jr=imcData.Jr,
@@ -144,10 +149,11 @@ model IMC_DOL "Induction machine with squirrel cage started directly on line (DO
     TrRef=imcData.TrRef,
     m=m,
     wMechanical(fixed=true),
-    TsOperational=293.15,
     gammar(fixed=true, start=pi/2),
     gamma(fixed=true, start=-pi/2),
-    TrOperational=293.15) annotation (Placement(transformation(extent={{20,30},{40,50}})));
+    TsOperational=373.15,
+    effectiveStatorTurns=imcData.effectiveStatorTurns,
+    TrOperational=373.15) annotation (Placement(transformation(extent={{20,30},{40,50}})));
   Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground
     groundMachineQS annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},

@@ -34,7 +34,11 @@ model IMC_Characteristics "Characteristic curves of Induction machine with squir
   Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor iSensorQS(m=m) annotation (Placement(transformation(extent={{-10,70},{10,90}})));
   parameter
     MoveTo_MSL.Electrical.Machines.Utilities.ParameterRecords.AIM_SquirrelCageData
-    imcData "Machine data"
+    imcData(
+    effectiveStatorTurns=64,
+    TsRef=373.15,
+    TrRef=373.15)
+            "Machine data"
     annotation (Placement(transformation(extent={{70,72},{90,92}})));
   Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.InductionMachines.IM_SquirrelCage imcQS(
     Js=imcData.Js,
@@ -55,8 +59,9 @@ model IMC_Characteristics "Characteristic curves of Induction machine with squir
     TrRef=imcData.TrRef,
     m=m,
     Jr=0*imcData.Jr,
-    TsOperational=293.15,
-    TrOperational=293.15) annotation (Placement(transformation(extent={{20,30},{40,50}})));
+    TsOperational=373.15,
+    effectiveStatorTurns=imcData.effectiveStatorTurns,
+    TrOperational=373.15) annotation (Placement(transformation(extent={{20,30},{40,50}})));
   Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground
     groundMachineQS annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},

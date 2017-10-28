@@ -75,6 +75,7 @@ public
     Lrsigma=imcData.Lrsigma*m/3,
     Rr=imcData.Rr*m/3,
     m=m,
+    effectiveStatorTurns=imcData.effectiveStatorTurns,
     alpha20r=imcData.alpha20r) annotation (Placement(transformation(extent={{-20,60},{0,80}})));
   Modelica.Magnetic.QuasiStatic.FundamentalWave.Utilities.MultiTerminalBox terminalBoxQS(terminalConnection="D", m=m) annotation (Placement(transformation(extent={{-20,76},{0,96}})));
   Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.PowerSensor electricalPowerSensorQS(m=m) annotation (Placement(transformation(
@@ -126,7 +127,8 @@ public
     Lm=66.4/(2*pi*fNominal),
     Lrsigma=2.31/(2*pi*fNominal),
     Rr=0.42,
-    alpha20r(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Aluminium) annotation (Placement(transformation(extent={{-60,12},{-40,32}})));
+    alpha20r(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Aluminium,
+    effectiveStatorTurns=270.1)                                                                    annotation (Placement(transformation(extent={{-60,12},{-40,32}})));
 equation
   connect(starQS.pin_n, groundQS.pin) annotation (Line(points={{-90,30},{-90,20}}, color={85,170,255}));
   connect(sineVoltageQS.plug_n, starQS.plug_p) annotation (Line(points={{-90,60},{-90,50}}, color={85,170,255}));
@@ -188,6 +190,7 @@ equation
 <tr><td>Temperature coefficient           </td><td> aluminium </td><td>       </td></tr>
 <tr><td>Reference temperature             </td><td> 20        </td><td>&deg;C </td></tr>
 <tr><td>Operation temperature             </td><td> 90        </td><td>&deg;C </td></tr>
+<tr><td>Effective number of stator turns  </td><td>270.1      </td><td>       </td></tr>
 </table>
 <p>See:<br>
 Anton Haumer, Christian Kral, Hansj&ouml;rg Kapeller, Thomas B&auml;uml, Johannes V. Gragger<br>

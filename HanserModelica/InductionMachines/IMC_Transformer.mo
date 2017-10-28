@@ -33,9 +33,10 @@ model IMC_Transformer "Induction machine with squirrel cage starting with transf
     Lrsigma=imcData.Lrsigma,
     Rr=imcData.Rr,
     TrRef=imcData.TrRef,
-    TsOperational=293.15,
+    TsOperational=373.15,
+    effectiveStatorTurns=imcData.effectiveStatorTurns,
     alpha20r=imcData.alpha20r,
-    TrOperational=293.15) annotation (Placement(transformation(extent={{80,10},{60,30}})));
+    TrOperational=373.15) annotation (Placement(transformation(extent={{80,10},{60,30}})));
   Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor iSensorQS(m=m) annotation (Placement(transformation(
         origin={-40,80},
         extent={{-10,10},{10,-10}},
@@ -111,7 +112,10 @@ model IMC_Transformer "Induction machine with squirrel cage starting with transf
     useSupport=false) annotation (Placement(transformation(extent={{0,10},{20,30}})));
   Modelica.Magnetic.QuasiStatic.FundamentalWave.Utilities.TerminalBox terminalBoxQS(terminalConnection="D", m=m)
                                                                                                             annotation (Placement(transformation(extent={{80,26},{60,46}})));
-  parameter MoveTo_MSL.Electrical.Machines.Utilities.ParameterRecords.AIM_SquirrelCageData imcData annotation (Placement(transformation(extent={{80,52},{100,72}})));
+  parameter MoveTo_MSL.Electrical.Machines.Utilities.ParameterRecords.AIM_SquirrelCageData imcData(
+    TsRef=373.15,
+    effectiveStatorTurns=64,
+    TrRef=373.15)                                                                                  annotation (Placement(transformation(extent={{80,52},{100,72}})));
   Modelica.Magnetic.FundamentalWave.BasicMachines.AsynchronousInductionMachines.AIM_SquirrelCage imc(
     p=imcData.p,
     fsNominal=imcData.fsNominal,
@@ -131,9 +135,11 @@ model IMC_Transformer "Induction machine with squirrel cage starting with transf
     Lm=imcData.Lm*m/3,
     Lrsigma=imcData.Lrsigma*m/3,
     Rr=imcData.Rr*m/3,
-    TsOperational=293.15,
+    m=m,
+    TsOperational=373.15,
+    effectiveStatorTurns=imcData.effectiveStatorTurns,
     alpha20r=imcData.alpha20r,
-    TrOperational=293.15) annotation (Placement(transformation(extent={{80,-90},{60,-70}})));
+    TrOperational=373.15) annotation (Placement(transformation(extent={{80,-90},{60,-70}})));
   Modelica.Electrical.MultiPhase.Sensors.CurrentQuasiRMSSensor iSensor(m=m) annotation (Placement(transformation(
         origin={-40,-20},
         extent={{-10,10},{10,-10}},

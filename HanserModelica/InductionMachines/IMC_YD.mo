@@ -68,7 +68,7 @@ model IMC_YD "Induction machine with squirrel cage starting Y-D"
     TorqueDirection=false,
     tau_nominal=-TLoad,
     useSupport=false) annotation (Placement(transformation(extent={{100,10},{80,30}})));
-  parameter Modelica.Electrical.Machines.Utilities.ParameterRecords.AIM_SquirrelCageData imcData annotation (Placement(transformation(extent={{70,70},{90,90}})));
+  parameter MoveTo_MSL.Electrical.Machines.Utilities.ParameterRecords.AIM_SquirrelCageData imcData annotation (Placement(transformation(extent={{70,70},{90,90}})));
 
   Modelica.Magnetic.FundamentalWave.BasicMachines.AsynchronousInductionMachines.AIM_SquirrelCage imc(
     p=imcData.p,

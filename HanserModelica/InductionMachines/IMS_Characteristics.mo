@@ -44,7 +44,7 @@ model IMS_Characteristics "Characteristic curves of induction machine with slip 
     TsOperational=566.3,
     TrOperational=566.3) annotation (Placement(transformation(extent={{20,30},{40,50}})));
   parameter
-    Modelica.Electrical.Machines.Utilities.ParameterRecords.AIM_SlipRingData
+    MoveTo_MSL.Electrical.Machines.Utilities.ParameterRecords.AIM_SlipRingData
     imsData "Machine data"
     annotation (Placement(transformation(extent={{70,72},{90,92}})));
   Modelica.Electrical.QuasiStationary.MultiPhase.Sources.VoltageSource vSourceQS(
@@ -111,7 +111,7 @@ equation
       color={85,170,255}));
   connect(starMachineQS.plug_p, terminalBoxQS.starpoint) annotation (
       Line(
-      points={{-40,40},{-40,52},{21,52}},
+      points={{-40,40},{-40,52},{20,52}},
       color={85,170,255}));
   connect(vSourceQS.plug_p, pSensorQS.currentP) annotation (Line(points={{-80,70},{-80,80},{-70,80}}, color={85,170,255}));
   connect(ramp.y,speed. w_ref) annotation (Line(points={{79,40},{72,40}}, color={0,0,127}));

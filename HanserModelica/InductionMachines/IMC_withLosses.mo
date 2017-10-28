@@ -112,7 +112,7 @@ public
     startTime=4.5,
     duration=5.5) annotation (Placement(transformation(extent={{-20,0},{0,20}})));
   Modelica.Blocks.Tables.CombiTable1Ds combiTable1DsQS(table={{Ptable[j],Itable[j],ntable[j],ctable[j],etable[j]} for j in 1:size(Ptable, 1)}, smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative) annotation (Placement(transformation(extent={{40,30},{60,50}})));
-  parameter Modelica.Electrical.Machines.Utilities.ParameterRecords.AIM_SquirrelCageData imcData(
+  parameter MoveTo_MSL.Electrical.Machines.Utilities.ParameterRecords.AIM_SquirrelCageData imcData(
     statorCoreParameters(PRef=410, VRef=387.9),
     Jr=0.12,
     Rs=0.56,

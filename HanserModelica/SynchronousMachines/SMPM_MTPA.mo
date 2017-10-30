@@ -12,16 +12,21 @@ model SMPM_MTPA "Test example: PermanentMagnetSynchronousMachine fed by current 
   parameter Modelica.SIunits.Time tStep=1.2 "Time of load torque step";
   parameter Modelica.SIunits.Inertia JLoad=0.29 "Load's moment of inertia";
   parameter Modelica.SIunits.AngularVelocity wNominal = 2*pi*fNominal/smpmData.p "Nominal angular velocity";
-  Modelica.SIunits.Angle thetaQS=rotorAngleQS.rotorDisplacementAngle "Rotor displacement angle, quasi stastic";
+  Modelica.SIunits.Angle theta=rotorAngleQS.rotorDisplacementAngle "Rotor displacement angle, quasi stastic";
+  parameter Boolean positiveRange = false "Use positive range of angles";
+  Modelica.SIunits.Angle phi_i = Modelica.Math.wrapAngle(smpmQS.arg_is[1],positiveRange) "Angle of current";
+  Modelica.SIunits.Angle phi_v = Modelica.Math.wrapAngle(smpmQS.arg_vs[1],positiveRange) "Angle of voltage";
+  Modelica.SIunits.Angle phi = Modelica.Math.wrapAngle(phi_v-phi_i,positiveRange) "Angle between voltage and current";
+  Modelica.SIunits.Angle epsilon = Modelica.Math.wrapAngle(phi-theta,positiveRange) "Current angle";
 
   parameter
     Modelica.Electrical.Machines.Utilities.ParameterRecords.SM_PermanentMagnetData
     smpmData(useDamperCage=false, effectiveStatorTurns=64,
     fsNominal=fNominal,
-    TsRef=373.15,
     Lmd=0.1/(2*pi*fNominal),
-    Lmq=0.3/(2*pi*fNominal))      "Machine data"
-    annotation (Placement(transformation(extent={{80,72},{100,92}})));
+    Lmq=0.3/(2*pi*fNominal),
+    TsRef=373.15)                 "Machine data"
+    annotation (Placement(transformation(extent={{60,40},{80,60}})));
   Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.SynchronousMachines.SM_PermanentMagnet
     smpmQS(
     p=smpmData.p,
@@ -32,7 +37,6 @@ model SMPM_MTPA "Test example: PermanentMagnetSynchronousMachine fed by current 
     Jr=smpmData.Jr,
     Js=smpmData.Js,
     frictionParameters=smpmData.frictionParameters,
-    wMechanical(fixed=true),
     statorCoreParameters=smpmData.statorCoreParameters,
     strayLoadParameters=smpmData.strayLoadParameters,
     VsOpenCircuit=smpmData.VsOpenCircuit,
@@ -47,15 +51,15 @@ model SMPM_MTPA "Test example: PermanentMagnetSynchronousMachine fed by current 
     permanentMagnetLossParameters=smpmData.permanentMagnetLossParameters,
     phiMechanical(fixed=true, start=0),
     m=m,
-    TsOperational=293.15,
-    alpha20s=smpmData.alpha20s,
     effectiveStatorTurns=smpmData.effectiveStatorTurns,
+    TsOperational=373.15,
+    alpha20s=smpmData.alpha20s,
     alpha20r=smpmData.alpha20r,
-    TrOperational=293.15) annotation (Placement(transformation(extent={{0,10},{20,30}})));
+    TrOperational=373.15) annotation (Placement(transformation(extent={{0,10},{20,30}})));
 
   Modelica.Mechanics.Rotational.Sources.ConstantSpeed
     quadraticSpeedDependentTorqueQS(w_fixed=wNominal)
-    annotation (Placement(transformation(extent={{100,10},{80,30}})));
+    annotation (Placement(transformation(extent={{80,10},{60,30}})));
   Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star
     starMachineQS(m=
         Modelica.Electrical.MultiPhase.Functions.numberOfSymmetricBaseSystems(
@@ -95,7 +99,8 @@ model SMPM_MTPA "Test example: PermanentMagnetSynchronousMachine fed by current 
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={30,90})));
-  Modelica.Magnetic.QuasiStatic.FundamentalWave.Sensors.RotorDisplacementAngle rotorAngleQS(m=m, p=smpmData.p) annotation (Placement(transformation(
+  Modelica.Magnetic.QuasiStatic.FundamentalWave.Sensors.RotorDisplacementAngle rotorAngleQS(m=m, p=smpmData.p,
+    positiveRange=positiveRange)                                                                               annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=90,
         origin={40,20})));
@@ -111,11 +116,11 @@ model SMPM_MTPA "Test example: PermanentMagnetSynchronousMachine fed by current 
   Modelica.ComplexBlocks.Sources.ComplexRotatingPhasor rotSource(magnitude=100, w=2*pi) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
-        origin={-80,30})));
-  Modelica.ComplexBlocks.ComplexMath.ComplexToReal complexToReal annotation (Placement(transformation(
+        origin={-70,30})));
+  Modelica.ComplexBlocks.ComplexMath.ComplexToReal toReal annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
-        origin={-80,60})));
+        origin={-70,60})));
 equation
   connect(starMachineQS.plug_p, terminalBoxQS.starpoint) annotation (
       Line(
@@ -152,10 +157,10 @@ equation
   connect(voltageQuasiRMSSensorQS.plug_n, currentRMSSensorQS.plug_n) annotation (Line(points={{-10,50},{10,50}},color={85,170,255}));
   connect(starMQS.pin_n, starMachineQS.pin_n) annotation (Line(points={{-40,30},{-40,20},{-30,20}}, color={85,170,255}));
   connect(starMQS.plug_p, voltageQuasiRMSSensorQS.plug_p) annotation (Line(points={{-40,50},{-30,50}}, color={85,170,255}));
-  connect(quadraticSpeedDependentTorqueQS.flange, rotorAngleQS.flange) annotation (Line(points={{80,20},{30,20}}, color={0,0,0}));
-  connect(complexToReal.u, rotSource.y) annotation (Line(points={{-80,48},{-80,41}}, color={85,170,255}));
-  connect(complexToReal.re, currentControllerQS.id_rms) annotation (Line(points={{-86,72},{-86,96},{-42,96}}, color={0,0,127}));
-  connect(currentControllerQS.iq_rms, complexToReal.im) annotation (Line(points={{-42,84},{-74,84},{-74,72}}, color={0,0,127}));
+  connect(quadraticSpeedDependentTorqueQS.flange, rotorAngleQS.flange) annotation (Line(points={{60,20},{30,20}}, color={0,0,0}));
+  connect(toReal.u, rotSource.y) annotation (Line(points={{-70,48},{-70,41}}, color={85,170,255}));
+  connect(toReal.re, currentControllerQS.id_rms) annotation (Line(points={{-76,72},{-76,96},{-42,96}}, color={0,0,127}));
+  connect(currentControllerQS.iq_rms, toReal.im) annotation (Line(points={{-42,84},{-64,84},{-64,72}}, color={0,0,127}));
   annotation (
     experiment(StopTime=1, Interval=1E-3, Tolerance=1E-6),
     Documentation(info="<html>
@@ -163,7 +168,7 @@ equation
 This example compares a time transient and a quasi static model of a permanent magnet synchronous machine. The machines are fed by a current source. The current components are oriented at the magnetic field orientation and transformed to the stator fixed reference frame. This way the machines are operated at constant torque. The machines start to accelerate from standstill.</p>
 
 <p>
-Simulate for 2 seconds and plot (versus time):
+Simulate for 1 second and plot (versus time):
 </p>
 
 <ul>
@@ -180,5 +185,5 @@ to numerically stabilize the simulation.</p>
         Text(
           extent={{20,0},{100,-8}},
                   textStyle={TextStyle.Bold},
-          textString="%m phase quasi static",        lineColor={0,0,0})}));
+          textString="%m phase quasi static", lineColor={0,0,0})}));
 end SMPM_MTPA;

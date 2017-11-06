@@ -165,15 +165,29 @@ equation
     experiment(StopTime=1, Interval=1E-3, Tolerance=1E-6),
     Documentation(info="<html>
 <p>
-This example compares a time transient and a quasi static model of a permanent magnet synchronous machine. The machines are fed by a current source. The current components are oriented at the magnetic field orientation and transformed to the stator fixed reference frame. This way the machines are operated at constant torque. The machines start to accelerate from standstill.</p>
+This example investigates the maximum torque per amps (MTPA) of a quasi static permanent magnet synchronous machine. 
+The machines is operated at constant speed. The current magnitude is kept constant and the current angle is
+rotated from 0 to 360 degrees with the simulation period of one second.</p>
 
 <p>
-Simulate for 1 second and plot (versus time):
+In this simulation the angle is the following angles are calculated:</p> 
+
+<ul>
+<li><code>phi_v<code> = angle of voltage phasor</li>
+<li><code>phi_i<code> = angle of current phasor</li>
+<li><code>phiphi_v - phi_i</code> = angle between voltage and current phasor</li>
+<li><code>theta</code> = rotor displacement angle</li>
+<li><code>epsilon = phi - theta</code> = current angle</li>
+</ul>
+
+<p>
+Simulate for 1 second and plot (versus angle epsilon):
 </p>
 
 <ul>
-<li><code>smpm|smpmQS.wMechanical</code>: machine speed</li>
-<li><code>smpm|smpmQS.tauElectrical</code>: machine torque</li>
+<li><code>smpmQS.tauElectrical</code>: machine torque</li>
+<li><code>smpmQS.abs_vs[1]</code>: machine phase voltage magnitude</li>
+<li><code>phi</code>: phase angle between voltage and current phasor</li>
 </ul>
 
 <h5>Note</h5>

@@ -178,7 +178,7 @@ equation
       Tolerance=1e-06),
     Documentation(info="<html>
 <p>
-This example compares a time transient and a quasi static model of a electrically excited synchronous machine. 
+This example compares investigates a quasi static model of a electrically excited synchronous machine. 
 The electrically excited synchronous generators are connected to the grid and driven with constant speed.
 Since speed is slightly smaller than synchronous speed corresponding to mains frequency,
 rotor angle is very slowly increased. This allows to see several characteristics dependent on rotor angle.
@@ -189,10 +189,8 @@ Simulate for 30 seconds and plot versus <code>rotorAngle|rotorAngleQS.rotorDispl
 </p>
 
 <ul>
-<li><code>smpm|smpmQS.tauElectrical</code>: machine torque</li>
+<li><code>smpmQS.tauElectrical</code>: machine torque</li>
 </ul>
-
-<p>Since the rotor slip is very low the transient and quasi static electro magnetic torque are practically equal.</p>
 </html>"),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}),

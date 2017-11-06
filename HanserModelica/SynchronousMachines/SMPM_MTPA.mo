@@ -57,9 +57,7 @@ model SMPM_MTPA "Test example: PermanentMagnetSynchronousMachine fed by current 
     alpha20r=smpmData.alpha20r,
     TrOperational=373.15) annotation (Placement(transformation(extent={{0,10},{20,30}})));
 
-  Modelica.Mechanics.Rotational.Sources.ConstantSpeed
-    quadraticSpeedDependentTorqueQS(w_fixed=wNominal)
-    annotation (Placement(transformation(extent={{80,10},{60,30}})));
+  Modelica.Mechanics.Rotational.Sources.ConstantSpeed constantSpeed(w_fixed=wNominal) annotation (Placement(transformation(extent={{80,10},{60,30}})));
   Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star
     starMachineQS(m=
         Modelica.Electrical.MultiPhase.Functions.numberOfSymmetricBaseSystems(
@@ -157,7 +155,7 @@ equation
   connect(voltageQuasiRMSSensorQS.plug_n, currentRMSSensorQS.plug_n) annotation (Line(points={{-10,50},{10,50}},color={85,170,255}));
   connect(starMQS.pin_n, starMachineQS.pin_n) annotation (Line(points={{-40,30},{-40,20},{-30,20}}, color={85,170,255}));
   connect(starMQS.plug_p, voltageQuasiRMSSensorQS.plug_p) annotation (Line(points={{-40,50},{-30,50}}, color={85,170,255}));
-  connect(quadraticSpeedDependentTorqueQS.flange, rotorAngleQS.flange) annotation (Line(points={{60,20},{30,20}}, color={0,0,0}));
+  connect(constantSpeed.flange, rotorAngleQS.flange) annotation (Line(points={{60,20},{30,20}}, color={0,0,0}));
   connect(toReal.u, rotSource.y) annotation (Line(points={{-70,48},{-70,41}}, color={85,170,255}));
   connect(toReal.re, currentControllerQS.id_rms) annotation (Line(points={{-76,72},{-76,96},{-42,96}}, color={0,0,127}));
   connect(currentControllerQS.iq_rms, toReal.im) annotation (Line(points={{-42,84},{-64,84},{-64,72}}, color={0,0,127}));

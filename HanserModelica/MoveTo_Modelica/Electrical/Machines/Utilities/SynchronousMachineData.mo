@@ -1,4 +1,4 @@
-within HanserModelica.MoveTo_MSL.Electrical.Machines.Utilities;
+within HanserModelica.MoveTo_Modelica.Electrical.Machines.Utilities;
 record SynchronousMachineData "Computes machine parameter from usual datasheet"
   extends Modelica.Icons.Record;
   import Modelica.Constants.pi;

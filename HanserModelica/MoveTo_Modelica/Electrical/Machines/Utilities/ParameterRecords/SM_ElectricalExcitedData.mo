@@ -1,4 +1,4 @@
-within HanserModelica.MoveTo_MSL.Electrical.Machines.Utilities.ParameterRecords;
+within HanserModelica.MoveTo_Modelica.Electrical.Machines.Utilities.ParameterRecords;
 record SM_ElectricalExcitedData
   "Common parameters for synchronous induction machines with electrical excitation"
   extends SM_ReluctanceRotorData(Lmd=1.5/(2*pi*fsNominal), Lmq=1.5/(2*pi*

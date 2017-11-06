@@ -1,4 +1,4 @@
-within HanserModelica.MoveTo_MSL.Electrical.Machines.Utilities.ParameterRecords;
+within HanserModelica.MoveTo_Modelica.Electrical.Machines.Utilities.ParameterRecords;
 record SM_ReluctanceRotorData
   "Common parameters for synchronous induction machines with reluctance rotor"
   extends InductionMachineData(Lssigma=0.1/(2*pi*fsNominal));

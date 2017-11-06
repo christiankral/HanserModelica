@@ -1,4 +1,4 @@
-within HanserModelica.MoveTo_MSL.Electrical.Machines.Utilities.ParameterRecords;
+within HanserModelica.MoveTo_Modelica.Electrical.Machines.Utilities.ParameterRecords;
 record InductionMachineData "Common parameters for induction machines"
   extends Modelica.Icons.Record;
   import Modelica.Constants.pi;

@@ -1,4 +1,4 @@
-within HanserModelica.MoveTo_MSL.Electrical.Machines.Utilities.ParameterRecords;
+within HanserModelica.MoveTo_Modelica.Electrical.Machines.Utilities.ParameterRecords;
 record SM_PermanentMagnetData
   "Common parameters for synchronous induction machines with permanent magnet"
   extends SM_ReluctanceRotorData(Lmd=0.3/(2*pi*fsNominal), Lmq=0.3/(2*pi*

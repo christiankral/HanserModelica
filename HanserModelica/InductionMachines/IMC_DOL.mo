@@ -122,14 +122,10 @@ model IMC_DOL "Induction machine with squirrel cage started directly on line (DO
     tau_nominal=-T_Load,
     TorqueDirection=false,
     useSupport=false) annotation (Placement(transformation(extent={{100,30},{80,50}})));
-  parameter
-    MoveTo_MSL.Electrical.Machines.Utilities.ParameterRecords.AIM_SquirrelCageData
-    imcData(
+  parameter MoveTo_Modelica.Electrical.Machines.Utilities.ParameterRecords.AIM_SquirrelCageData imcData(
     TsRef=373.15,
     effectiveStatorTurns=64,
-    TrRef=373.15)
-            "Machine data"
-    annotation (Placement(transformation(extent={{70,72},{90,92}})));
+    TrRef=373.15) "Machine data" annotation (Placement(transformation(extent={{70,72},{90,92}})));
   Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.InductionMachines.IM_SquirrelCage imcQS(
     Jr=imcData.Jr,
     Js=imcData.Js,

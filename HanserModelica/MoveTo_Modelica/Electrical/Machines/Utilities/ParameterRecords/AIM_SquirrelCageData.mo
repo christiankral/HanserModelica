@@ -1,4 +1,4 @@
-within HanserModelica.MoveTo_MSL.Electrical.Machines.Utilities.ParameterRecords;
+within HanserModelica.MoveTo_Modelica.Electrical.Machines.Utilities.ParameterRecords;
 record AIM_SquirrelCageData
   "Common parameters for asynchronous induction machines with squirrel cage"
   extends InductionMachineData;

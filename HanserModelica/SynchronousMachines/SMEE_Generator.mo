@@ -65,9 +65,7 @@ model SMEE_Generator "Electrical excited synchronous machine operating as genera
   Modelica.Mechanics.Rotational.Sources.ConstantSpeed constantSpeedQS(
       final w_fixed=w, useSupport=false) annotation (Placement(
         transformation(extent={{100,20},{80,40}})));
-  parameter
-    MoveTo_MSL.Electrical.Machines.Utilities.SynchronousMachineData
-    smeeData(
+  parameter MoveTo_Modelica.Electrical.Machines.Utilities.SynchronousMachineData smeeData(
     SNominal=30e3,
     VsNominal=100,
     fsNominal=50,
@@ -91,8 +89,7 @@ model SMEE_Generator "Electrical excited synchronous machine operating as genera
     TrSpecification=373.15,
     TrRef=373.15,
     TeSpecification=373.15,
-    TeRef=373.15) "Machine data"
-    annotation (Placement(transformation(extent={{70,70},{90,90}})));
+    TeRef=373.15) "Machine data" annotation (Placement(transformation(extent={{70,70},{90,90}})));
 
   Modelica.Electrical.QuasiStationary.MultiPhase.Sources.VoltageSource
     voltageSourceQS(

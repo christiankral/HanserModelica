@@ -113,7 +113,7 @@ public
     startTime=4.5,
     duration=5.5) annotation (Placement(transformation(extent={{-20,0},{0,20}})));
   Modelica.Blocks.Tables.CombiTable1Ds combiTable1DsQS(table={{Ptable[j],Itable[j],ntable[j],ctable[j],etable[j]} for j in 1:size(Ptable, 1)}, smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative) annotation (Placement(transformation(extent={{40,30},{60,50}})));
-  parameter MoveTo_MSL.Electrical.Machines.Utilities.ParameterRecords.AIM_SquirrelCageData imcData(
+  parameter MoveTo_Modelica.Electrical.Machines.Utilities.ParameterRecords.AIM_SquirrelCageData imcData(
     statorCoreParameters(PRef=410, VRef=387.9),
     Jr=0.12,
     Rs=0.56,
@@ -128,7 +128,7 @@ public
     Lrsigma=2.31/(2*pi*fNominal),
     Rr=0.42,
     alpha20r(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Aluminium,
-    effectiveStatorTurns=270.1)                                                                    annotation (Placement(transformation(extent={{-60,12},{-40,32}})));
+    effectiveStatorTurns=270.1) annotation (Placement(transformation(extent={{-60,12},{-40,32}})));
 equation
   connect(starQS.pin_n, groundQS.pin) annotation (Line(points={{-90,30},{-90,20}}, color={85,170,255}));
   connect(sineVoltageQS.plug_n, starQS.plug_p) annotation (Line(points={{-90,60},{-90,50}}, color={85,170,255}));

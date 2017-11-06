@@ -72,14 +72,10 @@ model IMC_Inverter "Induction machine with squirrel cage and inverter"
     offsetTorque=0) annotation (Placement(transformation(extent={{96,-90},
             {76,-70}})));
   Modelica.Electrical.Machines.Utilities.MultiTerminalBox terminalBox(terminalConnection="Y", m=m) annotation (Placement(transformation(extent={{20,-74},{40,-54}})));
-  parameter
-    MoveTo_MSL.Electrical.Machines.Utilities.ParameterRecords.AIM_SquirrelCageData
-    imcData(
+  parameter MoveTo_Modelica.Electrical.Machines.Utilities.ParameterRecords.AIM_SquirrelCageData imcData(
     TsRef=373.15,
     effectiveStatorTurns=64,
-    TrRef=373.15)
-            "Machine data"
-    annotation (Placement(transformation(extent={{70,70},{90,90}})));
+    TrRef=373.15) "Machine data" annotation (Placement(transformation(extent={{70,70},{90,90}})));
   Modelica.Electrical.MultiPhase.Sensors.CurrentQuasiRMSSensor
     currentQuasiRMSSensor(final m=m) annotation (Placement(
         transformation(

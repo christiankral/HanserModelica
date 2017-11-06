@@ -45,14 +45,10 @@ model IMS_Characteristics "Characteristic curves of induction machine with slip 
     effectiveStatorTurns=imsData.effectiveStatorTurns,
     TrOperational=373.15)
                          annotation (Placement(transformation(extent={{20,30},{40,50}})));
-  parameter
-    MoveTo_MSL.Electrical.Machines.Utilities.ParameterRecords.AIM_SlipRingData
-    imsData(
+  parameter MoveTo_Modelica.Electrical.Machines.Utilities.ParameterRecords.AIM_SlipRingData imsData(
     effectiveStatorTurns=64,
     TsRef=373.15,
-    TrRef=373.15)
-            "Machine data"
-    annotation (Placement(transformation(extent={{70,72},{90,92}})));
+    TrRef=373.15) "Machine data" annotation (Placement(transformation(extent={{70,72},{90,92}})));
   Modelica.Electrical.QuasiStationary.MultiPhase.Sources.VoltageSource vSourceQS(
     m=m,
     phi=-Modelica.Electrical.MultiPhase.Functions.symmetricOrientation(m),

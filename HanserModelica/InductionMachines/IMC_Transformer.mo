@@ -112,10 +112,10 @@ model IMC_Transformer "Induction machine with squirrel cage starting with transf
     useSupport=false) annotation (Placement(transformation(extent={{0,10},{20,30}})));
   Modelica.Magnetic.QuasiStatic.FundamentalWave.Utilities.TerminalBox terminalBoxQS(terminalConnection="D", m=m)
                                                                                                             annotation (Placement(transformation(extent={{80,26},{60,46}})));
-  parameter MoveTo_MSL.Electrical.Machines.Utilities.ParameterRecords.AIM_SquirrelCageData imcData(
+  parameter MoveTo_Modelica.Electrical.Machines.Utilities.ParameterRecords.AIM_SquirrelCageData imcData(
     TsRef=373.15,
     effectiveStatorTurns=64,
-    TrRef=373.15)                                                                                  annotation (Placement(transformation(extent={{80,52},{100,72}})));
+    TrRef=373.15) annotation (Placement(transformation(extent={{80,52},{100,72}})));
   Modelica.Magnetic.FundamentalWave.BasicMachines.AsynchronousInductionMachines.AIM_SquirrelCage imc(
     p=imcData.p,
     fsNominal=imcData.fsNominal,

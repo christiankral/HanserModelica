@@ -22,10 +22,9 @@ model SMR_MTPA "Test example: Synchronous reluctance machine, investigating maxi
     useDamperCage=false,
     effectiveStatorTurns=64,
     fsNominal=fNominal,
-    TsRef=373.15,
-    Lmd=1.85/(2*pi*fNominal),
-    Lmq=0.57/(2*pi*fNominal))
-                  "Machine data" annotation (Placement(transformation(extent={{60,40},{80,60}})));
+    Lmd=2.9/(2*pi*fNominal),
+    Lmq=0.35/(2*pi*fNominal),
+    TsRef=373.15) "Machine data" annotation (Placement(transformation(extent={{60,40},{80,60}})));
   Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.SynchronousMachines.SM_ReluctanceRotor smrQS(
     p=smrData.p,
     fsNominal=smrData.fsNominal,

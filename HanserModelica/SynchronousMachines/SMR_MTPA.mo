@@ -3,12 +3,11 @@ model SMR_MTPA "Test example: Synchronous reluctance machine, investigating maxi
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   parameter Integer m=3 "Number of phases";
-  parameter Modelica.SIunits.Voltage VNominal=100
-    "Nominal RMS voltage per phase";
+  parameter Modelica.SIunits.Voltage VNominal=100 "Nominal RMS voltage per phase";
   parameter Modelica.SIunits.Frequency fNominal=50 "Nominal frequency";
   parameter Modelica.SIunits.Frequency f=50 "Actual frequency";
   parameter Modelica.SIunits.Time tRamp=1 "Frequency ramp";
-  parameter Modelica.SIunits.Torque TLoad=181.4 "Nominal load torque";
+  parameter Modelica.SIunits.Torque TLoad=88.67 "Nominal load torque";
   parameter Modelica.SIunits.Time tStep=1.2 "Time of load torque step";
   parameter Modelica.SIunits.Inertia JLoad=0.29 "Load's moment of inertia";
   parameter Modelica.SIunits.AngularVelocity wNominal=2*pi*fNominal/smrData.p "Nominal angular velocity";
@@ -23,9 +22,10 @@ model SMR_MTPA "Test example: Synchronous reluctance machine, investigating maxi
     useDamperCage=false,
     effectiveStatorTurns=64,
     fsNominal=fNominal,
-    Lmd=0.1/(2*pi*fNominal),
-    Lmq=0.3/(2*pi*fNominal),
-    TsRef=373.15) "Machine data" annotation (Placement(transformation(extent={{60,40},{80,60}})));
+    TsRef=373.15,
+    Lmd=1.85/(2*pi*fNominal),
+    Lmq=0.57/(2*pi*fNominal))
+                  "Machine data" annotation (Placement(transformation(extent={{60,40},{80,60}})));
   Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.SynchronousMachines.SM_ReluctanceRotor smrQS(
     p=smrData.p,
     fsNominal=smrData.fsNominal,

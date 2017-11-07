@@ -8,6 +8,7 @@ model SMPM_CurrentSource "Test example: PermanentMagnetSynchronousMachine fed by
   parameter Modelica.SIunits.Frequency fNominal=smpmData.fsNominal "Nominal frequency";
   parameter Modelica.SIunits.Frequency f=50 "Actual frequency";
   parameter Modelica.SIunits.Time tRamp=1 "Frequency ramp";
+  parameter Modelica.SIunits.AngularFrequency wNominal = 2*pi*fNominal/smpmData.p "Nominal angular velocity";
   parameter Modelica.SIunits.Torque TLoad=181.4 "Nominal load torque";
   parameter Modelica.SIunits.Time tStep=1.2 "Time of load torque step";
   parameter Modelica.SIunits.Inertia JLoad=0.29
@@ -97,8 +98,7 @@ model SMPM_CurrentSource "Test example: PermanentMagnetSynchronousMachine fed by
   Modelica.Mechanics.Rotational.Components.Inertia inertiaLoad(J=0.29)
     annotation (Placement(transformation(extent={{50,-90},{70,-70}})));
   Modelica.Mechanics.Rotational.Sources.QuadraticSpeedDependentTorque
-    quadraticSpeedDependentTorque(tau_nominal=-181.4, w_nominal(
-        displayUnit="rpm") = 157.07963267949)
+    quadraticSpeedDependentTorque(tau_nominal=-TLoad, w_nominal(displayUnit="rpm") = wNominal)
     annotation (Placement(transformation(extent={{100,-90},{80,-70}})));
   parameter
     Modelica.Electrical.Machines.Utilities.ParameterRecords.SM_PermanentMagnetData
@@ -144,8 +144,7 @@ model SMPM_CurrentSource "Test example: PermanentMagnetSynchronousMachine fed by
   Modelica.Mechanics.Rotational.Components.Inertia inertiaLoadQS(J=0.29)
     annotation (Placement(transformation(extent={{50,10},{70,30}})));
   Modelica.Mechanics.Rotational.Sources.QuadraticSpeedDependentTorque
-    quadraticSpeedDependentTorqueQS(tau_nominal=-181.4, w_nominal(
-        displayUnit="rpm") = 157.07963267949)
+    quadraticSpeedDependentTorqueQS(tau_nominal=-TLoad, w_nominal(displayUnit="rpm") = wNominal)
     annotation (Placement(transformation(extent={{100,10},{80,30}})));
   Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star
     starMachineQS(m=

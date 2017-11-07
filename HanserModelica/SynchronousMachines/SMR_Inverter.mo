@@ -1,23 +1,19 @@
 within HanserModelica.SynchronousMachines;
 model SMR_Inverter "Synchronous reluctance machine with squirrel cage and inverter"
-  import Modelica;
+
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   parameter Integer m=3 "Number of phases";
-  parameter Modelica.SIunits.Voltage VNominal=100
-    "Nominal RMS voltage per phase";
+  parameter Modelica.SIunits.Voltage VNominal=100 "Nominal RMS voltage per phase";
   parameter Modelica.SIunits.Frequency fNominal=smrData.fsNominal "Nominal frequency";
   parameter Modelica.SIunits.Frequency f=fNominal "Maximum operational frequency";
   Modelica.SIunits.Frequency fActual=ramp.y "Actual frequency";
   parameter Modelica.SIunits.Time tRamp=1 "Frequency ramp";
-  parameter Modelica.SIunits.Torque TLoad=46 "Nominal load torque";
+  parameter Modelica.SIunits.Torque TLoad=88.67 "Nominal load torque";
   parameter Modelica.SIunits.Time tStep=1.2 "Time of load torque step";
-  parameter Modelica.SIunits.Inertia JLoad=0.29
-    "Load's moment of inertia";
-  output Modelica.SIunits.Current Itr=currentQuasiRMSSensor.I
-    "Transient RMS current";
-  output Modelica.SIunits.Current Iqs=currentQuasiRMSSensorQS.I
-    "QS RMS current";
+  parameter Modelica.SIunits.Inertia JLoad=0.29 "Load's moment of inertia";
+  output Modelica.SIunits.Current Itr=currentQuasiRMSSensor.I "Transient RMS current";
+  output Modelica.SIunits.Current Iqs=currentQuasiRMSSensorQS.I "QS RMS current";
   Modelica.Magnetic.FundamentalWave.BasicMachines.SynchronousInductionMachines.SM_ReluctanceRotor
     smr(
     p=smrData.p,
@@ -79,7 +75,11 @@ model SMR_Inverter "Synchronous reluctance machine with squirrel cage and invert
   Modelica.Electrical.Machines.Utilities.MultiTerminalBox terminalBox(terminalConnection="Y", m=m) annotation (Placement(transformation(extent={{20,-74},{40,-54}})));
   parameter
     Modelica.Electrical.Machines.Utilities.ParameterRecords.SM_ReluctanceRotorData
-    smrData(TsRef=373.15, TrRef=373.15)
+    smrData(
+    TsRef=373.15,
+    Lmd=1.85/(2*pi*fNominal),
+    Lmq=0.57/(2*pi*fNominal),
+    TrRef=373.15)
             "Machine data"
     annotation (Placement(transformation(extent={{70,70},{90,90}})));
   Modelica.Electrical.MultiPhase.Sensors.CurrentQuasiRMSSensor

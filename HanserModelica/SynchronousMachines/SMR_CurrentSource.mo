@@ -17,6 +17,10 @@ model SMR_CurrentSource "Test example: Synchronous reluctance machine fed by cur
   final parameter Modelica.SIunits.Current Iq = INominal*cos(epsilon) "Current, q axis";
   Modelica.SIunits.Angle thetaQS=rotorAngleQS.rotorDisplacementAngle "Rotor displacement angle, quasi stastic";
   Modelica.SIunits.Angle theta=rotorDisplacementAngle.rotorDisplacementAngle "Rotor displacement angle, transient";
+  parameter Boolean positiveRange = false "Use positive range of angles, if true";
+  Modelica.SIunits.Angle phi_i=Modelica.Math.wrapAngle(smrQS.arg_is[1], positiveRange) "Angle of current";
+  Modelica.SIunits.Angle phi_v=Modelica.Math.wrapAngle(smrQS.arg_vs[1], positiveRange) "Angle of voltage";
+  Modelica.SIunits.Angle phi = Modelica.Math.wrapAngle(phi_v-phi_i,positiveRange) "Angle between voltage and current";
 
   Modelica.Electrical.MultiPhase.Sources.SignalCurrent signalCurrent(
       final m=m) annotation (Placement(transformation(

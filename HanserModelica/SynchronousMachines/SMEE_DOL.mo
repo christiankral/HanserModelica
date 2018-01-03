@@ -6,6 +6,7 @@ model SMEE_DOL "ElectricalExcitedSynchronousInductionMachine starting direct on 
   parameter Modelica.SIunits.Frequency fNominal=50 "Nominal frequency";
   parameter Modelica.SIunits.Voltage Ve=smeeData.Re*smeeData.IeOpenCircuit "Excitation current";
   parameter Modelica.SIunits.Angle gamma0(displayUnit="deg") = 0 "Initial rotor displacement angle";
+  Modelica.SIunits.Current irRMS = sqrt(smee.ir[1]^2+smee.ir[2]^2)/sqrt(2) "Quasi RMS rotor current";
   Modelica.Magnetic.FundamentalWave.BasicMachines.SynchronousInductionMachines.SM_ElectricalExcited smee(
     phiMechanical(start=-(Modelica.Constants.pi + gamma0)/smee.p, fixed=true),
     fsNominal=smeeData.fsNominal,
@@ -40,7 +41,7 @@ model SMEE_DOL "ElectricalExcitedSynchronousInductionMachine starting direct on 
     TeOperational=293.15,
     alpha20e=smeeData.alpha20e,
     sigmae=smeeData.sigmae*m/3)
-                          annotation (Placement(transformation(extent={{-20,-50},{0,-30}})));
+      annotation (Placement(transformation(extent={{-20,-50},{0,-30}})));
   Modelica.Electrical.Machines.Sensors.RotorDisplacementAngle rotorDisplacementAngle(p=smee.p, m=m) annotation (Placement(transformation(
         origin={20,-40},
         extent={{-10,10},{10,-10}},
@@ -50,12 +51,12 @@ model SMEE_DOL "ElectricalExcitedSynchronousInductionMachine starting direct on 
         origin={-40,-70},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  Modelica.Mechanics.Rotational.Sensors.MultiSensor mSensor annotation (Placement(transformation(extent={{40,-50},{60,-30}})));
-  Modelica.Electrical.MultiPhase.Sensors.MultiSensor sensor(m=m) annotation (Placement(transformation(
+  Modelica.Mechanics.Rotational.Sensors.MultiSensor mechanicalSensor annotation (Placement(transformation(extent={{40,-50},{60,-30}})));
+  Modelica.Electrical.MultiPhase.Sensors.MultiSensor electricalSensor(m=m) annotation (Placement(transformation(
         origin={40,30},
         extent={{-10,-10},{10,10}},
         rotation=270)));
-  Modelica.Electrical.MultiPhase.Sensors.CurrentQuasiRMSSensor iSensor(m=m) annotation (Placement(transformation(
+  Modelica.Electrical.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensor(m=m) annotation (Placement(transformation(
         origin={40,0},
         extent={{-10,-10},{10,10}},
         rotation=270)));
@@ -105,7 +106,7 @@ model SMEE_DOL "ElectricalExcitedSynchronousInductionMachine starting direct on 
     TeSpecification=293.15,
     TeRef=293.15) annotation (Placement(transformation(extent={{-20,-80},{0,-60}})));
 
-  Modelica.Electrical.MultiPhase.Ideal.IdealClosingSwitch idealCloser(
+  Modelica.Electrical.MultiPhase.Ideal.IdealClosingSwitch switch(
     final m=m,
     Ron=fill(1e-5*m/3, m),
     Goff=fill(1e-5*m/3, m)) annotation (Placement(transformation(
@@ -132,7 +133,7 @@ equation
     annotation (Line(points={{-60,50},{-60,40}}, color={0,0,255}));
   connect(star.plug_p, sineVoltage.plug_n)
     annotation (Line(points={{-40,50},{-30,50}}, color={0,0,255}));
-  connect(terminalBox.plugSupply, iSensor.plug_n) annotation (Line(points={{-10,-28},{-10,-10},{40,-10}}, color={0,0,255}));
+  connect(terminalBox.plugSupply, currentRMSSensor.plug_n) annotation (Line(points={{-10,-28},{-10,-10},{40,-10}}, color={0,0,255}));
   connect(terminalBox.plug_sn, smee.plug_sn) annotation (Line(
       points={{-16,-30},{-16,-30}},
       color={0,0,255}));
@@ -141,12 +142,9 @@ equation
       color={0,0,255}));
   connect(smee.flange, rotorDisplacementAngle.flange) annotation (Line(
       points={{0,-40},{10,-40}}));
-  connect(smee.flange, mSensor.flange_a) annotation (Line(points={{0,-40},{40,-40}}));
-  connect(sineVoltage.plug_p, idealCloser.plug_p)
-    annotation (Line(points={{-10,50},{0,50}},        color={0,0,255}));
-  connect(booleanReplicator.y, idealCloser.control)
-    annotation (Line(points={{1,10},{10,10},{10,38}},
-                                                 color={255,0,255}));
+  connect(smee.flange, mechanicalSensor.flange_a) annotation (Line(points={{0,-40},{40,-40}}));
+  connect(sineVoltage.plug_p, switch.plug_p) annotation (Line(points={{-10,50},{0,50}}, color={0,0,255}));
+  connect(booleanReplicator.y, switch.control) annotation (Line(points={{1,10},{10,10},{10,38}}, color={255,0,255}));
   connect(booleanStep.y, booleanReplicator.u)
     annotation (Line(points={{-29,10},{-22,10}}, color={255,0,255}));
   connect(groundExcitation.p, rampVoltage.n)
@@ -156,31 +154,33 @@ equation
                                           color={0,0,255}));
   connect(rampVoltage.p, smee.pin_ep) annotation (Line(points={{-40,-30},{-30,-30},{-30,-34},{-20,-34}},
                                           color={0,0,255}));
-  connect(mSensor.flange_b, torqueStep.flange) annotation (Line(points={{60,-40},{70,-40}}, color={0,0,0}));
-  connect(idealCloser.plug_n, sensor.pc) annotation (Line(points={{20,50},{40,50},{40,40}}, color={0,0,255}));
-  connect(sensor.nv, terminalBox.plug_sn) annotation (Line(points={{30,30},{20,30},{20,-20},{-16,-20},{-16,-30}}, color={0,0,255}));
-  connect(sensor.nc, iSensor.plug_p) annotation (Line(points={{40,20},{40,10}}, color={0,0,255}));
-  connect(sensor.pv, sensor.pc) annotation (Line(points={{50,30},{50,40},{40,40}}, color={0,0,255}));
-  annotation (experiment(
-      StopTime=3,
-      Interval=0.0001,
-      Tolerance=1e-006),                                                Documentation(info="<html>
-<p>An electrically excited synchronous generator is started direct on line utilizing the damper cage (and the shorted excitation winding) at 0.1 seconds.<br>
-At t = 0.5 seconds, the excitation voltage is raised to achieve no-load excitation current. Note, that reactive power of the stator goes to zero.<br>
-At t = 1 second, a driving torque step is applied to the shaft (i.e. the turbine is activated). Note, that active and reactive power of the stator changes. 
+  connect(mechanicalSensor.flange_b, torqueStep.flange) annotation (Line(points={{60,-40},{70,-40}}, color={0,0,0}));
+  connect(switch.plug_n, electricalSensor.pc) annotation (Line(points={{20,50},{40,50},{40,40}}, color={0,0,255}));
+  connect(electricalSensor.nv, terminalBox.plug_sn) annotation (Line(points={{30,30},{20,30},{20,-20},{-16,-20},{-16,-30}}, color={0,0,255}));
+  connect(electricalSensor.nc, currentRMSSensor.plug_p) annotation (Line(points={{40,20},{40,10}}, color={0,0,255}));
+  connect(electricalSensor.pv, electricalSensor.pc) annotation (Line(points={{50,30},{50,40},{40,40}}, color={0,0,255}));
+  annotation (experiment(StopTime=3,Interval=0.0001,Tolerance=1e-006),
+    Documentation(info="<html>
+<p>An electrically excited synchronous generator is started direct on line utilizing the damper cage 
+(and the shorted excitation winding) at 0 seconds.</p>
+<p>At t = 0.5 seconds, the excitation voltage is raised to achieve the no-load excitation current. 
+Note, that reactive power of the stator goes to zero.</p>
+<p>At t = 2 second, a driving torque step is applied to the shaft (i.e. the turbine is activated). 
+Note, that the active (and the reactive) power of the stator change. 
 To drive at higher torque, i.e., produce more electric power, excitation has to be adapted.
 </p>
 
-<p>Simulate for 2 seconds and plot:</p>
+<p>Simulate for 3 seconds and plot:</p>
 
 <ul>
-<li><code>smee.tauElectrical</code></li>
-<li><code>smee.wMechanical</code></li>
-<li><code>smee.ie</code></li>
-<li><code>rotorDisplacementAngle.rotorDisplacementAngle</code></li>
-<li><code>iSensor.I</code></li>
-<li><code>sensor.powerTotal</code></li>
-<li><code>mSensor.power</code></li>
+<li><code>smee.tauElectrical</code>: electric torque</li>
+<li><code>smee.wMechanical</code>: mechanical speed</li>
+<li><code>currentRMSSensor.I</code>: quasi RMS stator current</li>
+<li><code>irRMS</code>: quasi RMS rotor current</li>
+<li><code>smee.ie</code>: excitation current</li>
+<li><code>rotorDisplacementAngle.rotorDisplacementAngle</code>: rotor displacement angle</li>
+<li><code>electricalSensor.powerTotal</code>: total electric real power</li>
+<li><code>mechanicalSensor.power</code>: mechanical power</li>
 </ul>
 
 <p>Default machine parameters are used.</p>

@@ -1,5 +1,5 @@
 within HanserModelica.SynchronousMachines;
-model SMR_MTPA "Test example: Synchronous reluctance machine, investigating maximum torque per Amps"
+model SMR_MTPA "Synchronous reluctance machine, investigating maximum torque per Amps"
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   parameter Integer m=3 "Number of phases";

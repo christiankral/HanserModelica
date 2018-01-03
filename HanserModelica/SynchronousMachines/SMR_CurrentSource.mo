@@ -1,5 +1,5 @@
 within HanserModelica.SynchronousMachines;
-model SMR_CurrentSource "Test example: Synchronous reluctance machine fed by current source"
+model SMR_CurrentSource "Synchronous reluctance machine fed by current source"
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   parameter Integer m=3 "Number of phases";

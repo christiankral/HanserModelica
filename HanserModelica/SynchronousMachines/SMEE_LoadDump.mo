@@ -1,5 +1,5 @@
 within HanserModelica.SynchronousMachines;
-model SMEE_LoadDump "Test example: ElectricalExcitedSynchronousInductionMachine with voltage controller"
+model SMEE_LoadDump "ElectricalExcitedSynchronousInductionMachine with voltage controller"
 
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;

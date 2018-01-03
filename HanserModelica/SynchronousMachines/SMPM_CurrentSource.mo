@@ -1,5 +1,5 @@
 within HanserModelica.SynchronousMachines;
-model SMPM_CurrentSource "Test example: PermanentMagnetSynchronousMachine fed by current source"
+model SMPM_CurrentSource "PermanentMagnetSynchronousMachine fed by current source"
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   parameter Integer m=3 "Number of phases";

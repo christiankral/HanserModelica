@@ -1,5 +1,5 @@
 within HanserModelica.SynchronousMachines;
-model SMEE_Rectifier "Test example: ElectricalExcitedSynchronousInductionMachine with rectifier"
+model SMEE_Rectifier "ElectricalExcitedSynchronousInductionMachine with rectifier"
 
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;

@@ -8,14 +8,16 @@ model SMR_Slip "Synchronous reluctance machine operated at small slip"
   parameter Modelica.SIunits.Frequency fNominal=50 "Nominal frequency";
   parameter Modelica.SIunits.AngularVelocity w=
       Modelica.SIunits.Conversions.from_rpm(1499) "Nominal speed";
-  parameter Modelica.SIunits.Current Ie=19 "Excitation current";
-  parameter Modelica.SIunits.Current Ie0=10
-    "Initial excitation current";
   parameter Modelica.SIunits.Angle gamma0(displayUnit="deg") = 0
     "Initial rotor displacement angle";
-  output Modelica.SIunits.Power Pqs=powerSensorQS.apparentPowerTotal.re "QS real power";
-  output Modelica.SIunits.ReactivePower Qqs=powerSensorQS.apparentPowerTotal.im "QS reactive power";
-  Modelica.SIunits.Angle thetaQS=rotorAngleQS.rotorDisplacementAngle "Rotor displacement angle";
+  output Modelica.SIunits.Power P=powerSensorQS.apparentPowerTotal.re "QS real power";
+  output Modelica.SIunits.ReactivePower Q=powerSensorQS.apparentPowerTotal.im "QS reactive power";
+  Modelica.SIunits.Angle theta=rotorAngleQS.rotorDisplacementAngle "Rotor displacement angle";
+  parameter Boolean positiveRange = false "Use positive range of angles, if true";
+  Modelica.SIunits.Angle phi_i=Modelica.Math.wrapAngle(smrQS.arg_is[1], positiveRange) "Angle of current";
+  Modelica.SIunits.Angle phi_v=Modelica.Math.wrapAngle(smrQS.arg_vs[1], positiveRange) "Angle of voltage";
+  Modelica.SIunits.Angle phi = Modelica.Math.wrapAngle(phi_v-phi_i,positiveRange) "Angle between voltage and current";
+  Modelica.SIunits.Angle epsilon = Modelica.Math.wrapAngle(phi-theta,positiveRange) "Current angle";
   Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.SynchronousMachines.SM_ReluctanceRotor smrQS(
     p=2,
     fsNominal=smrData.fsNominal,

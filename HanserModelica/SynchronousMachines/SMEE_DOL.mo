@@ -99,6 +99,7 @@ model SMEE_DOL "ElectricalExcitedSynchronousInductionMachine starting direct on 
     alpha20s(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero,
     alpha20r(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero,
     alpha20e(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero,
+    effectiveStatorTurns=64,
     TsSpecification=293.15,
     TsRef=293.15,
     TrSpecification=293.15,

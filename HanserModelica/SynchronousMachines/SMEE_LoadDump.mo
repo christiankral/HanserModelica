@@ -1,6 +1,5 @@
 within HanserModelica.SynchronousMachines;
-model SMEE_LoadDump "ElectricalExcitedSynchronousInductionMachine with voltage controller"
-
+model SMEE_LoadDump "Electrical excited synchronous machine with voltage controller"
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   constant Integer m=3 "Number of phases";
@@ -13,19 +12,14 @@ model SMEE_LoadDump "ElectricalExcitedSynchronousInductionMachine with voltage c
     max=1) = 0.8 "Load power factor";
   parameter Modelica.SIunits.Resistance RLoad=ZNominal*powerFactor
     "Load resistance";
-  parameter Modelica.SIunits.Inductance LLoad=ZNominal*sqrt(1 -
-      powerFactor^2)/(2*pi*smeeData.fsNominal) "Load inductance";
+  parameter Modelica.SIunits.Inductance LLoad=ZNominal*sqrt(1-powerFactor^2)/(2*pi*smeeData.fsNominal) "Load inductance";
   parameter Modelica.SIunits.Voltage Ve0=smee.IeOpenCircuit*
-      Modelica.Electrical.Machines.Thermal.convertResistance(
-            smee.Re,
-            smee.TeRef,
-            smee.alpha20e,
-            smee.TeOperational) "No load excitation voltage";
+    Modelica.Electrical.Machines.Thermal.convertResistance(smee.Re,smee.TeRef,smee.alpha20e,smee.TeOperational)
+    "No load excitation voltage";
   parameter Real k=2*Ve0/smeeData.VsNominal "Voltage controller: gain";
   parameter Modelica.SIunits.Time Ti=smeeData.Td0Transient/2
     "Voltage controller: integral time constant";
-  output Real controlError=(setPointGain.y - voltageQuasiRMSSensor.V)/
-      smeeData.VsNominal;
+  output Real controlError=(setPointGain.y - voltageQuasiRMSSensor.V)/smeeData.VsNominal;
   Modelica.Magnetic.FundamentalWave.BasicMachines.SynchronousInductionMachines.SM_ElectricalExcited smee(
     fsNominal=smeeData.fsNominal,
     TsRef=smeeData.TsRef,

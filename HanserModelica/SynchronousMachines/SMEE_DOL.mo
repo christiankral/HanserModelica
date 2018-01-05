@@ -1,5 +1,5 @@
 within HanserModelica.SynchronousMachines;
-model SMEE_DOL "ElectricalExcitedSynchronousInductionMachine starting direct on line"
+model SMEE_DOL "Electrical excited synchronous machine starting direct on line"
   extends Modelica.Icons.Example;
   parameter Integer m=3 "Number of phases";
   parameter Modelica.SIunits.Voltage VNominal=100 "Nominal RMS voltage per phase";

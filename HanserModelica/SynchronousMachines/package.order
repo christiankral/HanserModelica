@@ -2,6 +2,9 @@ SMEE_DOL
 SMEE_Generator
 SMEE_LoadDump
 SMEE_Rectifier
+SMEE_Synchronization
+SMEE_Synchronization10deg
+SMEE_ShortCIrcuit
 SMPM_CurrentSource
 SMPM_MTPA
 SMR_Inverter

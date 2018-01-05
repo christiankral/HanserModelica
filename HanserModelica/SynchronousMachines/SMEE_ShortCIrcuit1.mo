@@ -1,5 +1,5 @@
 within HanserModelica.SynchronousMachines;
-model SMEE_ShortCIrcuit "Short circuit of electrical excited synchronous machine "
+model SMEE_ShortCIrcuit1 "One phase short circuit of electrical excited synchronous machine "
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   parameter Integer m=3 "Number of phases";
@@ -187,4 +187,4 @@ This noise is caused by the interaction of the high resistance of the switch and
                   fillPattern=FillPattern.Solid,
                   textStyle={TextStyle.Bold},
           textString="%m phase quasi static")}));
-end SMEE_ShortCIrcuit;
+end SMEE_ShortCIrcuit1;

@@ -103,7 +103,7 @@ model SMEE_Synchronization "Electrical excited synchronous machine synchronized 
     TrSpecification=293.15,
     TrRef=293.15,
     TeSpecification=293.15,
-    TeRef=293.15) annotation (Placement(transformation(extent={{-30,-40},{-10,-20}})));
+    TeRef=293.15) annotation (Placement(transformation(extent={{-50,-40},{-30,-20}})));
 
   Modelica.Electrical.MultiPhase.Ideal.IdealClosingSwitch switch(
     final m=m,
@@ -147,35 +147,28 @@ equation
       Interval=0.0001,
       Tolerance=1e-08),
     Documentation(info="<html>
-<p>An electrically excited synchronous generator is started direct on line utilizing the damper cage 
-(and the shorted excitation winding) at 0 seconds.</p>
-<p>At t = 0.5 seconds, the excitation voltage is raised to achieve the no-load excitation current. 
-Note, that reactive power of the stator goes to zero.</p>
-<p>At t = 2 second, a driving torque step is applied to the shaft (i.e. the turbine is activated). 
-Note, that the active (and the reactive) power of the stator change. 
-To drive at higher torque, i.e., produce more electric power, excitation has to be adapted.
+<p>An electrically excited synchronous machine is running with synchrous speed. 
+The RMS values of the open circuit machine voltages and mains voltage are equal. 
+Tha phase shift if the machine and mains voltages are euqal. However, the parameter
+phi can be used to cause lagging phase angles of the mains voltage.</p>
+
+<p>After 0.1 seconds the synchronization switch closes. The shaft of the synchronous
+machine is not connected, such that neither mechanical speed nor torque are fixed. As the machine and mains 
+voltages are equal for each phase, there are neither electrical nor mechanical reactions
+of the machine on the closing switch.
 </p>
 
-<p>Simulate for 3 seconds and plot:</p>
+<p>Simulate for 0.5 seconds and plot:</p>
 
 <ul>
 <li><code>smee.tauElectrical</code>: electric torque</li>
 <li><code>smee.wMechanical</code>: mechanical speed</li>
-<li><code>currentRMSSensor.I</code>: quasi RMS stator current</li>
-<li><code>irRMS</code>: quasi RMS rotor current</li>
-<li><code>smee.ie</code>: excitation current</li>
-<li><code>rotorDisplacementAngle.rotorDisplacementAngle</code>: rotor displacement angle</li>
-<li><code>electricalSensor.powerTotal</code>: total electric real power</li>
-<li><code>mechanicalSensor.power</code>: mechanical power</li>
+<li><code>smee.is[1]</code>: stator phase current 1</li>
+<li><code>smee.stator.abs_Phi</code>: magnitude of stator flux</li>
 </ul>
 
 <p>Default machine parameters are used.</p>
 
-<h5>Note</h5>
-<p>The mains switch is closed at time = 0 in order to avoid non physical noise calculated by the <code>rotorDisplacementAngle</code>. 
-This noise is caused by the interaction of the high resistance of the switch and the machine, see 
-<a href=\"https://github.com/modelica/Modelica/issues/2388\">#2388</a>. 
-</p>
 </html>"),
     Diagram(graphics={                      Text(
                   extent={{-60,-8},{20,-16}},

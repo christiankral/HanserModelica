@@ -233,7 +233,7 @@ equation
 <p>An electrically excited synchronous generator is driven with constant speed. 
 Voltage is controlled, the set point depends on speed. The generator is loaded with a rectifier.</p>
 
-<p>Default machine parameters are used</p>
+<p>Default machine parameters are used.</p>
 
 </html>"));
 end SMEE_Rectifier;

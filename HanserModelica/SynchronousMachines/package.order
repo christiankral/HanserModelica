@@ -5,9 +5,12 @@ SMEE_Rectifier
 SMEE_Synchronization
 SMEE_Synchronization10deg
 SMEE_ShortCIrcuit1
+SMEE_ShortCIrcuit2
+SMEE_ShortCIrcuit3
 SMPM_CurrentSource
 SMPM_MTPA
 SMR_Inverter
 SMR_MTPA
 SMR_CurrentSource
 SMR_Slip
+Templates

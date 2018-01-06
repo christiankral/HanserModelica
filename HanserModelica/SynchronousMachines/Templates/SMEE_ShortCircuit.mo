@@ -1,6 +1,6 @@
 within HanserModelica.SynchronousMachines.Templates;
 partial model SMEE_ShortCircuit "Template for short circuits of electrical excited synchronous machine"
-  extends Modelica.Icons.Example;
+  extends Modelica.Electrical.PowerConverters.Icons.ExampleTemplate;
   import Modelica.Constants.pi;
   parameter Integer m=3 "Number of phases";
   parameter Integer p=2 "Number of poles";

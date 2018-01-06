@@ -6,8 +6,8 @@ model SMEE_Generator "Electrical excited synchronous machine operating as genera
   parameter Modelica.SIunits.Voltage VsNominal=100
     "Nominal RMS voltage per phase";
   parameter Modelica.SIunits.Frequency fsNominal=smeeData.fsNominal "Nominal frequency";
-  parameter Modelica.SIunits.AngularVelocity w=
-      Modelica.SIunits.Conversions.from_rpm(1499) "Nominal speed";
+  parameter Modelica.SIunits.AngularVelocity w(displayUnit="rev/min")=
+      Modelica.SIunits.Conversions.from_rpm(1499) "Actual speed";
   parameter Modelica.SIunits.Current Ie=19 "Excitation current";
   parameter Modelica.SIunits.Current Ie0=10
     "Initial excitation current";
@@ -63,7 +63,8 @@ model SMEE_Generator "Electrical excited synchronous machine operating as genera
   Modelica.Electrical.Machines.Sensors.MechanicalPowerSensor
     mechanicalPowerSensorQS annotation (Placement(transformation(extent={{50,20},{70,40}})));
   Modelica.Mechanics.Rotational.Sources.ConstantSpeed constantSpeedQS(
-      final w_fixed=w, useSupport=false) annotation (Placement(
+                       useSupport=false, final w_fixed=w)
+                                         annotation (Placement(
         transformation(extent={{100,20},{80,40}})));
   parameter MoveTo_Modelica.Electrical.Machines.Utilities.SynchronousMachineData smeeData(
     SNominal=30e3,

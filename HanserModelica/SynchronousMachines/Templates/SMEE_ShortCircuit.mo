@@ -1,5 +1,5 @@
 within HanserModelica.SynchronousMachines.Templates;
-partial model SMEE_ShortCIrcuit "Template for short circuits of electrical excited synchronous machine"
+partial model SMEE_ShortCircuit "Template for short circuits of electrical excited synchronous machine"
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   parameter Integer m=3 "Number of phases";
@@ -153,4 +153,4 @@ are different for the three different short circuit conditions.</p>
                   fillPattern=FillPattern.Solid,
                   textStyle={TextStyle.Bold},
           textString="%m phase quasi static")}));
-end SMEE_ShortCIrcuit;
+end SMEE_ShortCircuit;

@@ -7,6 +7,8 @@ SMEE_Synchronization10deg
 SMEE_ShortCircuit1
 SMEE_ShortCircuit2
 SMEE_ShortCircuit3
+SMEE_VCurve0
+SMEE_VCurve25
 SMPM_CurrentSource
 SMPM_MTPA
 SMR_Inverter

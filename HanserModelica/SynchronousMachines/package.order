@@ -8,7 +8,9 @@ SMEE_ShortCircuit1
 SMEE_ShortCircuit2
 SMEE_ShortCircuit3
 SMEE_VCurve0
-SMEE_VCurve25
+SMEE_VCurve33
+SMEE_VCurve67
+SMEE_VCurve100
 SMPM_CurrentSource
 SMPM_MTPA
 SMR_Inverter

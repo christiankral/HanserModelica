@@ -8,18 +8,17 @@ model SMEE_VCurve0 "V curves of electrical excited synchronous machine operated 
     "Nominal RMS voltage per phase";
   parameter Modelica.SIunits.Frequency fsNominal=smeeData.fsNominal "Nominal frequency";
   parameter Modelica.SIunits.AngularVelocity wNominal=2*pi*fsNominal/p "Nominal speed";
-  parameter Modelica.SIunits.Current IeMax=25 "Maximum excitation current";
+  parameter Modelica.SIunits.Current IeMax=31 "Maximum excitation current";
   parameter Modelica.SIunits.Current Ie0=10 "No load excitation current";
   parameter Modelica.SIunits.Torque tauMax=smeeData.SNominal/wNominal "Maximum torque at power factor = 1";
   parameter Modelica.SIunits.Angle gamma0(displayUnit="deg") = 0 "Initial rotor displacement angle";
   output Modelica.SIunits.Power Pqs=powerSensorQS.apparentPowerTotal.re "QS real power";
   output Modelica.SIunits.ReactivePower Qqs=powerSensorQS.apparentPowerTotal.im "QS reactive power";
   Modelica.SIunits.Angle thetaQS=rotorAngleQS.rotorDisplacementAngle "Rotor displacement angle";
-  //
-  // gammar(fixed=true, start=pi/2),
 
  Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.SynchronousMachines.SM_ElectricalExcited smeeQS(
     phiMechanical(start=-(pi + gamma0)/p, fixed=true),
+    gammar(fixed=true, start=pi/2),
     fsNominal=smeeData.fsNominal,
     TsRef=smeeData.TsRef,
     alpha20s(displayUnit="1/K") = smeeData.alpha20s,
@@ -135,12 +134,10 @@ model SMEE_VCurve0 "V curves of electrical excited synchronous machine operated 
         origin={30,20})));
 
   Modelica.Blocks.Sources.Ramp ramp(
-    startTime=10,
     height=-IeMax,
     offset=IeMax,
-    duration=90)  annotation (Placement(transformation(extent={{-80,10},{-60,30}})));
-initial equation
-  der(smeeQS.abs_is[1])=0;
+    duration=200,
+    startTime=0)  annotation (Placement(transformation(extent={{-80,10},{-60,30}})));
 algorithm
   when rotorAngleQS.rotorDisplacementAngle>=pi/2 then
     terminate("Exit of simulation");

@@ -110,10 +110,7 @@ partial model SMEE_ShortCIrcuit "Template for short circuits of electrical excit
   Modelica.Electrical.MultiPhase.Basic.PlugToPin_p pin3(m=m, k=3) annotation (Placement(transformation(extent={{-30,20},{-50,40}})));
   Modelica.Electrical.Machines.Sensors.MechanicalPowerSensor
     mechanicalPowerSensorQS annotation (Placement(transformation(extent={{40,-40},{60,-20}})));
-  Modelica.Mechanics.Rotational.Sources.ConstantSpeed constantSpeedQS(
-                       useSupport=false, final w_fixed=wNominal)
-                                         annotation (Placement(
-        transformation(extent={{90,-40},{70,-20}})));
+  Modelica.Mechanics.Rotational.Sources.ConstantSpeed constantSpeed(useSupport=false, final w_fixed=wNominal) annotation (Placement(transformation(extent={{90,-40},{70,-20}})));
 initial equation
   // sum(smee.is) = 0;
   smee.is[1:2] = zeros(2);
@@ -141,8 +138,7 @@ equation
   connect(pin2.plug_p, switch.plug_p) annotation (Line(points={{-38,50},{-20,50}}, color={0,0,255}));
   connect(pin3.plug_p, switch.plug_p) annotation (Line(points={{-38,30},{-30,30},{-30,50},{-20,50}}, color={0,0,255}));
   connect(terminalBox.starpoint, groundExcitation.p) annotation (Line(points={{10,-18},{10,-14},{-30,-14},{-30,-50},{-10,-50}}, color={0,0,255}));
-  connect(mechanicalPowerSensorQS.flange_b,constantSpeedQS. flange)
-    annotation (Line(points={{60,-30},{70,-30}}));
+  connect(mechanicalPowerSensorQS.flange_b, constantSpeed.flange) annotation (Line(points={{60,-30},{70,-30}}));
   connect(smee.flange, mechanicalPowerSensorQS.flange_a) annotation (Line(points={{30,-30},{40,-30}}, color={0,0,0}));
   annotation (
     Documentation(info="<html>

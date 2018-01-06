@@ -1,5 +1,5 @@
 within HanserModelica.SynchronousMachines;
-model SMEE_Generator "Electrical excited synchronous machine operating as generator"
+model SMEE_Slip "Electrical excited synchronous machine operating at small slip"
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   parameter Integer m=3 "Number of stator phases";
@@ -199,4 +199,4 @@ Simulate for 30 seconds and plot versus <code>rotorAngle|rotorAngleQS.rotorDispl
                   fillPattern=FillPattern.Solid,
                   textStyle={TextStyle.Bold},
           textString="%m phase quasi static")}));
-end SMEE_Generator;
+end SMEE_Slip;

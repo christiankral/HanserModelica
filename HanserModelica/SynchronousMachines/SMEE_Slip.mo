@@ -13,9 +13,10 @@ model SMEE_Slip "Electrical excited synchronous machine operating at small slip"
     "Initial excitation current";
   parameter Modelica.SIunits.Angle gamma0(displayUnit="deg") = 0
     "Initial rotor displacement angle";
-  output Modelica.SIunits.Power Pqs=powerSensorQS.apparentPowerTotal.re "QS real power";
-  output Modelica.SIunits.ReactivePower Qqs=powerSensorQS.apparentPowerTotal.im "QS reactive power";
-  Modelica.SIunits.Angle thetaQS=rotorAngleQS.rotorDisplacementAngle "Rotor displacement angle";
+  output Modelica.SIunits.Power P=powerSensorQS.apparentPowerTotal.re "QS real power";
+  output Modelica.SIunits.ReactivePower Q=powerSensorQS.apparentPowerTotal.im "QS reactive power";
+  output Modelica.SIunits.ApparentPower S=sqrt(P^2+Q^2) "QS apparent power";
+  Modelica.SIunits.Angle theta=rotorAngleQS.rotorDisplacementAngle "Rotor displacement angle";
   Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.SynchronousMachines.SM_ElectricalExcited smeeQS(
     p=2,
     fsNominal=smeeData.fsNominal,

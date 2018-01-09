@@ -4,6 +4,8 @@ model IMS_Characteristics "Characteristic curves of induction machine with slip 
   import Modelica.Constants.pi;
   parameter Integer m=3 "Number of stator phases";
   parameter Integer mr=3 "Number of rotor phases";
+  parameter Integer mBase=Modelica.Electrical.MultiPhase.Functions.numberOfSymmetricBaseSystems(m)
+    "Number of base systems";
   parameter Modelica.SIunits.Voltage VsNominal=100
     "Nominal RMS voltage per phase";
   parameter Modelica.SIunits.Frequency fNominal=imsData.fsNominal "Nominal frequency";
@@ -70,9 +72,7 @@ model IMS_Characteristics "Characteristic curves of induction machine with slip 
   Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.PowerSensor pSensorQS(m=m) annotation (Placement(transformation(extent={{-70,70},{-50,90}})));
   Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor iSensorQS(m=m) annotation (Placement(transformation(extent={{-10,70},{10,90}})));
   Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star
-    starMachineQS(m=
-        Modelica.Electrical.MultiPhase.Functions.numberOfSymmetricBaseSystems(
-                                                                     m))
+    starMachineQS(m=mBase)
     annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=270,

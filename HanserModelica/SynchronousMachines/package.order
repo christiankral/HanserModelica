@@ -1,6 +1,7 @@
 SMEE_DOL
 SMEE_Synchronization
-SMEE_Synchronization10deg
+SMEE_SynchronizationPhase
+SMEE_SynchronizationExcitation
 SMEE_Slip
 SMEE_LoadDump
 SMEE_Rectifier

@@ -46,10 +46,10 @@ model SMEE_Synchronization "Electrical excited synchronous machine synchronized 
     TeOperational=293.15,
     alpha20e=smeeData.alpha20e,
     sigmae=smeeData.sigmae*m/3)
-      annotation (Placement(transformation(extent={{30,-42},{50,-22}})));
+      annotation (Placement(transformation(extent={{30,-40},{50,-20}})));
   Modelica.Electrical.Analog.Basic.Ground groundExcitation annotation (
       Placement(transformation(
-        origin={10,-62},
+        origin={10,-60},
         extent={{-10,-10},{10,10}},
         rotation=0)));
   Modelica.Electrical.MultiPhase.Sensors.MultiSensor electricalSensor(m=m) annotation (Placement(transformation(
@@ -75,10 +75,10 @@ model SMEE_Synchronization "Electrical excited synchronous machine synchronized 
         extent={{-10,-10},{10,10}},
         rotation=0)));
   Modelica.Electrical.Analog.Sources.ConstantCurrent constantCurrent(I=smeeData.IeOpenCircuit) annotation (Placement(transformation(
-        origin={10,-32},
+        origin={10,-30},
         extent={{-10,-10},{10,10}},
         rotation=90)));
-  Modelica.Electrical.Machines.Utilities.TerminalBox terminalBox(terminalConnection="Y", m=m) annotation (Placement(transformation(extent={{30,-26},{50,-6}})));
+  Modelica.Electrical.Machines.Utilities.TerminalBox terminalBox(terminalConnection="Y", m=m) annotation (Placement(transformation(extent={{30,-24},{50,-4}})));
   parameter Modelica.Electrical.Machines.Utilities.SynchronousMachineData smeeData(
     SNominal=30e3,
     VsNominal=100,
@@ -115,6 +115,7 @@ model SMEE_Synchronization "Electrical excited synchronous machine synchronized 
   Modelica.Blocks.Sources.BooleanStep booleanStep(startTime=0.1)
                                                                annotation (Placement(transformation(extent={{-50,0},{-30,20}})));
   Modelica.Blocks.Routing.BooleanReplicator booleanReplicator(nout=m) annotation (Placement(transformation(extent={{-20,20},{0,0}})));
+  Modelica.Mechanics.Rotational.Sources.ConstantTorque constantTorque(tau_constant=0) annotation (Placement(transformation(extent={{80,-40},{60,-20}})));
 initial equation
   // sum(smee.is) = 0;
   smee.is[1:2] = zeros(2);
@@ -124,28 +125,26 @@ equation
     annotation (Line(points={{-60,50},{-60,40}}, color={0,0,255}));
   connect(star.plug_p, sineVoltage.plug_n)
     annotation (Line(points={{-40,50},{-30,50}}, color={0,0,255}));
-  connect(terminalBox.plugSupply, currentRMSSensor.plug_n) annotation (Line(points={{40,-20},{40,-10}},            color={0,0,255}));
+  connect(terminalBox.plugSupply, currentRMSSensor.plug_n) annotation (Line(points={{40,-18},{40,-10}},            color={0,0,255}));
   connect(terminalBox.plug_sn, smee.plug_sn) annotation (Line(
-      points={{34,-22},{34,-22}},
+      points={{34,-20},{34,-20}},
       color={0,0,255}));
   connect(terminalBox.plug_sp, smee.plug_sp) annotation (Line(
-      points={{46,-22},{46,-22}},
+      points={{46,-20},{46,-20}},
       color={0,0,255}));
   connect(sineVoltage.plug_p, switch.plug_p) annotation (Line(points={{-10,50},{0,50}}, color={0,0,255}));
   connect(booleanReplicator.y, switch.control) annotation (Line(points={{1,10},{10,10},{10,38}}, color={255,0,255}));
   connect(booleanStep.y, booleanReplicator.u)
     annotation (Line(points={{-29,10},{-22,10}}, color={255,0,255}));
   connect(switch.plug_n, electricalSensor.pc) annotation (Line(points={{20,50},{40,50},{40,40}}, color={0,0,255}));
-  connect(electricalSensor.nv, terminalBox.plug_sn) annotation (Line(points={{30,30},{20,30},{20,-10},{34,-10},{34,-22}},   color={0,0,255}));
+  connect(electricalSensor.nv, terminalBox.plug_sn) annotation (Line(points={{30,30},{20,30},{20,-8},{34,-8},{34,-20}},     color={0,0,255}));
   connect(electricalSensor.nc, currentRMSSensor.plug_p) annotation (Line(points={{40,20},{40,10}}, color={0,0,255}));
   connect(electricalSensor.pv, electricalSensor.pc) annotation (Line(points={{50,30},{50,40},{40,40}}, color={0,0,255}));
-  connect(constantCurrent.p, groundExcitation.p) annotation (Line(points={{10,-42},{10,-52}},   color={0,0,255}));
-  connect(constantCurrent.p, smee.pin_en) annotation (Line(points={{10,-42},{20,-42},{20,-38},{30,-38}},     color={0,0,255}));
-  connect(smee.pin_ep, constantCurrent.n) annotation (Line(points={{30,-26},{20,-26},{20,-22},{10,-22}},     color={0,0,255}));
-  annotation (experiment(
-      StopTime=0.5,
-      Interval=0.0001,
-      Tolerance=1e-08),
+  connect(constantCurrent.p, groundExcitation.p) annotation (Line(points={{10,-40},{10,-50}},   color={0,0,255}));
+  connect(constantCurrent.p, smee.pin_en) annotation (Line(points={{10,-40},{20,-40},{20,-36},{30,-36}},     color={0,0,255}));
+  connect(smee.pin_ep, constantCurrent.n) annotation (Line(points={{30,-24},{20,-24},{20,-20},{10,-20}},     color={0,0,255}));
+  connect(smee.flange, constantTorque.flange) annotation (Line(points={{50,-30},{60,-30}}, color={0,0,0}));
+  annotation (experiment(StopTime=0.5,Interval=0.0001,Tolerance=1e-08),
     Documentation(info="<html>
 <p>An electrically excited synchronous machine is running with synchrous speed. 
 The RMS values of the open circuit machine voltages and mains voltage are equal. 

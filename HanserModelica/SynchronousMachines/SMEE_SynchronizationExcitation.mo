@@ -1,7 +1,7 @@
 ﻿within HanserModelica.SynchronousMachines;
 model SMEE_SynchronizationExcitation "Synchronizazion of electrical excited synchronous machine with 10° voltage phase shift"
-  extends SMEE_Synchronization(constantCurrent(I=1.15*smeeData.IeOpenCircuit));
-  annotation (experiment(StopTime=0.5,Interval=0.0001,Tolerance=1e-08),
+  extends SMEE_Synchronization(constantCurrent(I=1.10*smeeData.IeOpenCircuit));
+  annotation (experiment(StopTime=0.3,Interval=0.0001,Tolerance=1e-08),
     Documentation(info="<html>
 <p>An electrically excited synchronous machine is running with synchrous speed. 
 The RMS values of the open circuit machine voltages and mains voltage are equal. 

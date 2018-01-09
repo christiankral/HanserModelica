@@ -144,7 +144,7 @@ equation
   connect(constantCurrent.p, smee.pin_en) annotation (Line(points={{10,-40},{20,-40},{20,-36},{30,-36}},     color={0,0,255}));
   connect(smee.pin_ep, constantCurrent.n) annotation (Line(points={{30,-24},{20,-24},{20,-20},{10,-20}},     color={0,0,255}));
   connect(smee.flange, constantTorque.flange) annotation (Line(points={{50,-30},{60,-30}}, color={0,0,0}));
-  annotation (experiment(StopTime=0.5,Interval=0.0001,Tolerance=1e-08),
+  annotation (experiment(StopTime=0.3,Interval=0.0001,Tolerance=1e-08),
     Documentation(info="<html>
 <p>An electrically excited synchronous machine is running with synchrous speed. 
 The RMS values of the open circuit machine voltages and mains voltage are equal. 

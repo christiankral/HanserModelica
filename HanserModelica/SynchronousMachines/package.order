@@ -3,12 +3,12 @@ SMEE_Synchronization
 SMEE_SynchronizationPhase
 SMEE_SynchronizationExcitation
 SMEE_Slip
-SMEE_LoadDump
-SMEE_Rectifier
 SMEE_VCurve0
 SMEE_VCurve1
 SMEE_VCurve2
 SMEE_VCurve3
+SMEE_LoadDump
+SMEE_Rectifier
 SMEE_ShortCircuit1
 SMEE_ShortCircuit2
 SMEE_ShortCircuit3

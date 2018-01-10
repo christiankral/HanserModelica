@@ -139,7 +139,7 @@ model SMEE_VCurve0 "V curves of electrical excited synchronous machine operated 
     duration=200,
     startTime=0)  annotation (Placement(transformation(extent={{-80,10},{-60,30}})));
 algorithm
-  when rotorAngleQS.rotorDisplacementAngle>=pi/2 then
+  when rotorAngleQS.rotorDisplacementAngle>=1.5*pi/2 then
     terminate("Exit of simulation");
   end when;
 equation

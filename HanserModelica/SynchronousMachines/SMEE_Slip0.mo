@@ -1,5 +1,5 @@
 within HanserModelica.SynchronousMachines;
-model SMEE_Slip "Electrical excited synchronous machine operating at small slip"
+model SMEE_Slip0 "Electrical excited synchronous machine operating at small slip and Ie = 0"
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   parameter Integer m=3 "Number of stator phases";
@@ -56,7 +56,7 @@ model SMEE_Slip "Electrical excited synchronous machine operating at small slip"
         origin={-50,12},
         extent={{-10,-10},{10,10}},
         rotation=270)));
-  Modelica.Electrical.Analog.Sources.ConstantCurrent rampCurrentQS(I=Ie)
+  Modelica.Electrical.Analog.Sources.ConstantCurrent rampCurrentQS(I=0)
        annotation (Placement(transformation(
         origin={-28,30},
         extent={{-10,-10},{10,10}},
@@ -170,11 +170,7 @@ equation
   connect(powerSensorQS.nc, terminalBoxQS.plugSupply) annotation (Line(points={{0,56},{0,42}}, color={85,170,255}));
   connect(powerSensorQS.pv, powerSensorQS.pc) annotation (Line(points={{10,66},{10,76},{0,76}}, color={85,170,255}));
   connect(powerSensorQS.nv, starQS.plug_p) annotation (Line(points={{-10,66},{-50,66},{-50,80}}, color={85,170,255}));
-  annotation (
-    experiment(
-      StopTime=30,
-      Interval=1E-3,
-      Tolerance=1e-06),
+  annotation (experiment(StopTime=30,Interval=1E-3,Tolerance=1e-06),
     Documentation(info="<html>
 <p>
 This example compares investigates a quasi static model of a electrically excited synchronous machine. 
@@ -200,4 +196,4 @@ Simulate for 30 seconds and plot versus <code>rotorAngle|rotorAngleQS.rotorDispl
                   fillPattern=FillPattern.Solid,
                   textStyle={TextStyle.Bold},
           textString="%m phase quasi static")}));
-end SMEE_Slip;
+end SMEE_Slip0;

@@ -2,7 +2,10 @@ SMEE_DOL
 SMEE_Synchronization
 SMEE_SynchronizationPhase
 SMEE_SynchronizationExcitation
-SMEE_Slip
+SMEE_Slip0
+SMEE_Slip1
+SMEE_Slip2
+SMEE_Slip3
 SMEE_VCurve0
 SMEE_VCurve1
 SMEE_VCurve2

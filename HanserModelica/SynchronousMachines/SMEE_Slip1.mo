@@ -10,7 +10,7 @@ model SMEE_Slip1 "Electrical excited synchronous machine operating at small slip
       Modelica.SIunits.Conversions.from_rpm(1499) "Actual speed";
   parameter Modelica.SIunits.Current IeMax=19 "Maximum excitation current";
   parameter Modelica.SIunits.Current Ie0=10 "Open circuit excitation current for nominal voltage";
-  parameter Modelica.SIunits.Current Ie=10 "Actual open circuit current";
+  parameter Modelica.SIunits.Current Ie=0 "Actual open circuit current";
   parameter Modelica.SIunits.Angle gamma0(displayUnit="deg") = 0
     "Initial rotor displacement angle";
   output Modelica.SIunits.Power P=powerSensorQS.apparentPowerTotal.re "QS real power";

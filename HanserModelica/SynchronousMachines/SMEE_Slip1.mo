@@ -13,6 +13,12 @@ model SMEE_Slip1 "Electrical excited synchronous machine operating at small slip
   parameter Modelica.SIunits.Current Ie=0 "Actual open circuit current";
   parameter Modelica.SIunits.Angle gamma0(displayUnit="deg") = 0
     "Initial rotor displacement angle";
+  parameter Boolean positiveRange = false "Use positive range of angles, if true";
+  Modelica.SIunits.Angle phi_i=Modelica.Math.wrapAngle(smeeQS.arg_is[1], positiveRange) "Angle of current";
+  Modelica.SIunits.Angle phi_v=Modelica.Math.wrapAngle(smeeQS.arg_vs[1], positiveRange) "Angle of voltage";
+  Modelica.SIunits.Angle phi = Modelica.Math.wrapAngle(phi_v-phi_i,positiveRange) "Angle between voltage and current";
+  Modelica.SIunits.Angle epsilon = Modelica.Math.wrapAngle(phi-theta,positiveRange) "Current angle";
+  Modelica.SIunits.ComplexCurrent isr[m] = smeeQS.is*Modelica.ComplexMath.exp(Complex(0,theta+pi/2)) "Stator current w.r.t. rotor fixed frame";
   output Modelica.SIunits.Power P=powerSensorQS.apparentPowerTotal.re "QS real power";
   output Modelica.SIunits.ReactivePower Q=powerSensorQS.apparentPowerTotal.im "QS reactive power";
   output Modelica.SIunits.ApparentPower S=sqrt(P^2+Q^2) "QS apparent power";

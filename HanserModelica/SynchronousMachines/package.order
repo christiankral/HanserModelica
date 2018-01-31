@@ -10,7 +10,11 @@ SMEE_VCurve1
 SMEE_VCurve2
 SMEE_VCurve3
 SMEE_VCurve4
-SMEE_LoadImpedance
+SMEE_LoadImpedance1
+SMEE_LoadImpedance4
+SMEE_LoadImpedance3
+SMEE_LoadImpedance2
+SMEE_LoadImpedance5
 SMEE_LoadDump
 SMEE_Rectifier
 SMEE_ShortCircuit1

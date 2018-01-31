@@ -19,7 +19,7 @@ model SMEE_LoadDump "Electrical excited synchronous machine with voltage control
   parameter Real k=2*Ve0/smeeData.VsNominal "Voltage controller: gain";
   parameter Modelica.SIunits.Time Ti=smeeData.Td0Transient/2
     "Voltage controller: integral time constant";
-  output Real controlError=(setPointGain.y - voltageQuasiRMSSensor.V)/smeeData.VsNominal;
+  output Real controlError=(setPointGain.y - voltageRMSSensor.V)/smeeData.VsNominal;
   Modelica.Magnetic.FundamentalWave.BasicMachines.SynchronousInductionMachines.SM_ElectricalExcited smee(
     fsNominal=smeeData.fsNominal,
     TsRef=smeeData.TsRef,
@@ -85,8 +85,6 @@ model SMEE_LoadDump "Electrical excited synchronous machine with voltage control
         extent={{-10,-10},{10,10}})));
   Modelica.Mechanics.Rotational.Sources.Speed speed
     annotation (Placement(transformation(extent={{50,-40},{30,-20}})));
-  Modelica.Blocks.Sources.Ramp speedRamp(height=wNominal, duration=1)
-    annotation (Placement(transformation(extent={{80,-40},{60,-20}})));
   Modelica.Mechanics.Rotational.Sensors.SpeedSensor speedSensor
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -95,15 +93,18 @@ model SMEE_LoadDump "Electrical excited synchronous machine with voltage control
   Modelica.Blocks.Math.Gain setPointGain(k=(smeeData.VsNominal/wNominal)/
         unitMagneticFlux)
     annotation (Placement(transformation(extent={{-50,-90},{-70,-70}})));
-  Modelica.Electrical.Machines.Sensors.VoltageQuasiRMSSensor voltageQuasiRMSSensor(ToSpacePhasor1(y(each start=1E-3, each fixed=true))) annotation (Placement(transformation(extent={{-10,-10},{10,10}}, rotation=270)));
+  Modelica.Electrical.Machines.Sensors.VoltageQuasiRMSSensor voltageRMSSensor(ToSpacePhasor1(y(each start=1E-3, each fixed=true))) annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={-30,0})));
   Modelica.Blocks.Continuous.LimPID voltageController(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     k=k,
     Ti=Ti,
     yMax=2.5*Ve0,
     yMin=0,
-    initType=Modelica.Blocks.Types.InitPID.InitialState,
-    Td=0.001)
+    Td=0.001,
+    initType=Modelica.Blocks.Types.InitPID.InitialState)
     annotation (Placement(transformation(extent={{-70,-20},{-50,-40}})));
   Modelica.Electrical.Analog.Sources.SignalVoltage excitationVoltage
     annotation (Placement(transformation(
@@ -114,12 +115,12 @@ model SMEE_LoadDump "Electrical excited synchronous machine with voltage control
       Placement(transformation(
         origin={-30,-60},
         extent={{-10,-10},{10,10}})));
-  Modelica.Electrical.Machines.Sensors.CurrentQuasiRMSSensor currentQuasiRMSSensor annotation (Placement(transformation(
+  Modelica.Electrical.Machines.Sensors.CurrentQuasiRMSSensor currentRMSSensor annotation (Placement(transformation(
         origin={10,30},
         extent={{-10,10},{10,-10}},
         rotation=270)));
   Modelica.Blocks.Sources.BooleanPulse loadControl(period=4, startTime=2)
-    annotation (Placement(transformation(extent={{-40,70},{-20,90}})));
+    annotation (Placement(transformation(extent={{-70,10},{-50,30}})));
   Modelica.Electrical.MultiPhase.Ideal.CloserWithArc switch(
     m=m,
     Ron=fill(1e-5, m),
@@ -128,7 +129,7 @@ model SMEE_LoadDump "Electrical excited synchronous machine with voltage control
     dVdt=fill(10e3, m),
     Vmax=fill(60, m),
     closerWithArc(off(start=fill(true, m), fixed=fill(true, m))))
-    annotation (Placement(transformation(extent={{0,40},{-20,60}})));
+    annotation (Placement(transformation(extent={{0,60},{-20,40}})));
   Modelica.Electrical.MultiPhase.Basic.Resistor loadResistor(m=m, R=fill(
         RLoad, m))
     annotation (Placement(transformation(extent={{-30,40},{-50,60}})));
@@ -143,6 +144,9 @@ model SMEE_LoadDump "Electrical excited synchronous machine with voltage control
 protected
   constant Modelica.SIunits.MagneticFlux unitMagneticFlux=1
     annotation (HideResult=true);
+public
+  Modelica.Blocks.Sources.Ramp speedRamp(height=wNominal, duration=1)
+    annotation (Placement(transformation(extent={{80,-40},{60,-20}})));
 initial equation
   smee.airGap.V_msr = Complex(0, 0);
   //conditional damper cage currents are defined as fixed start values
@@ -158,45 +162,40 @@ equation
       points={{-30,-40},{-20,-40},{-20,-36},{0,-36}}, color={0,0,255}));
   connect(excitationVoltage.n, groundExcitation.p) annotation (Line(
       points={{-30,-40},{-30,-50}}, color={0,0,255}));
-  connect(voltageQuasiRMSSensor.plug_n, smee.plug_sn) annotation (Line(
-      points={{0,-10},{4,-10},{4,-20}}, color={0,0,255}));
-  connect(voltageQuasiRMSSensor.plug_p, smee.plug_sp) annotation (Line(
-      points={{0,10},{16,10},{16,-20}}, color={0,0,255}));
-  connect(terminalBox.plugSupply, currentQuasiRMSSensor.plug_n)
-    annotation (Line(
-      points={{10,-18},{10,20}}, color={0,0,255}));
+  connect(voltageRMSSensor.plug_n, smee.plug_sn) annotation (Line(points={{-30,-10},{4,-10},{4,-20}}, color={0,0,255}));
+  connect(voltageRMSSensor.plug_p, smee.plug_sp) annotation (Line(points={{-30,10},{16,10},{16,-20}}, color={0,0,255}));
+  connect(terminalBox.plugSupply, currentRMSSensor.plug_n) annotation (Line(points={{10,-18},{10,20}}, color={0,0,255}));
   connect(smee.flange, speed.flange) annotation (Line(
       points={{20,-30},{30,-30}}));
   connect(speed.flange, speedSensor.flange) annotation (Line(
       points={{30,-30},{30,-40}}));
-  connect(speedRamp.y, speed.w_ref) annotation (Line(
-      points={{59,-30},{52,-30}}, color={0,0,127}));
   connect(setPointGain.y, voltageController.u_s) annotation (Line(
       points={{-71,-80},{-80,-80},{-80,-30},{-72,-30}}, color={0,0,127}));
   connect(speedSensor.w, setPointGain.u) annotation (Line(
       points={{30,-61},{30,-80},{-48,-80}}, color={0,0,127}));
-  connect(voltageQuasiRMSSensor.V, voltageController.u_m) annotation (
-      Line(
-      points={{-11,0},{-60,0},{-60,-18}}, color={0,0,127}));
+  connect(voltageRMSSensor.V, voltageController.u_m) annotation (Line(points={{-41,0},{-60,0},{-60,-18}}, color={0,0,127}));
   connect(voltageController.y, excitationVoltage.v) annotation (Line(
       points={{-49,-30},{-42,-30}}, color={0,0,127}));
   connect(loadInductor.plug_p, loadResistor.plug_n) annotation (Line(
       points={{-60,50},{-50,50}}, color={0,0,255}));
   connect(loadResistor.plug_p, switch.plug_n) annotation (Line(
       points={{-30,50},{-20,50}}, color={0,0,255}));
-  connect(switch.plug_p, currentQuasiRMSSensor.plug_p) annotation (Line(
-      points={{0,50},{10,50},{10,40}}, color={0,0,255}));
+  connect(switch.plug_p, currentRMSSensor.plug_p) annotation (Line(points={{0,50},{10,50},{10,40}}, color={0,0,255}));
   connect(star.plug_p, loadInductor.plug_n) annotation (Line(
       points={{-90,40},{-90,50},{-80,50}}, color={0,0,255}));
   connect(loadControl.y, switch.control[1]) annotation (Line(
-      points={{-19,80},{-10,80},{-10,62}}, color={255,0,255}));
+      points={{-49,20},{-10,20},{-10,38}}, color={255,0,255}));
   connect(loadControl.y, switch.control[2]) annotation (Line(
-      points={{-19,80},{-10,80},{-10,62}}, color={255,0,255}));
+      points={{-49,20},{-10,20},{-10,38}}, color={255,0,255}));
   connect(loadControl.y, switch.control[3]) annotation (Line(
-      points={{-19,80},{-10,80},{-10,62}}, color={255,0,255}));
+      points={{-49,20},{-10,20},{-10,38}}, color={255,0,255}));
   connect(star.pin_n, ground.p) annotation (Line(
       points={{-90,20},{-90,10}}, color={0,0,255}));
-  annotation (experiment(StopTime=10, Interval=1E-4, Tolerance=1e-06), Documentation(info="<html>
+  connect(speed.w_ref, speedRamp.y) annotation (Line(points={{52,-30},{59,-30}}, color={0,0,127}));
+  annotation (experiment(
+      StopTime=6,
+      Interval=0.0001,
+      Tolerance=1e-06),                                                Documentation(info="<html>
 <p>An electrically excited synchronous generator is started with a speed ramp, then driven with constant speed.
 Voltage is controlled, the set point depends on speed. After start-up the generator is loaded, the load is rejected.</p>
 

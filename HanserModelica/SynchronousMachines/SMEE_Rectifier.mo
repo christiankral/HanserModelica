@@ -76,12 +76,12 @@ model SMEE_Rectifier "Electrical excited synchronous machine with rectifier"
     TrSpecification=373.15,
     TrRef=373.15,
     TeSpecification=373.15,
-    TeRef=373.15) annotation (Placement(transformation(extent={{0,-70},{20,-50}})));
+    TeRef=373.15) annotation (Placement(transformation(extent={{-70,52},{-50,72}})));
 
   Modelica.Electrical.Machines.Utilities.TerminalBox terminalBox(terminalConnection="Y") annotation (Placement(transformation(extent={{0,-24},{20,-4}})));
   Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
         transformation(
-        origin={-20,60},
+        origin={40,40},
         extent={{-10,-10},{10,10}},
         rotation=90)));
   Modelica.Mechanics.Rotational.Sources.Speed speed
@@ -94,7 +94,7 @@ model SMEE_Rectifier "Electrical excited synchronous machine with rectifier"
         origin={30,-50})));
   Modelica.Blocks.Math.Gain setPointGain(k=(smeeData.VsNominal/wNominal)/
         unitMagneticFlux)
-    annotation (Placement(transformation(extent={{-50,-90},{-70,-70}})));
+    annotation (Placement(transformation(extent={{-50,-80},{-70,-60}})));
   Modelica.Blocks.Continuous.LimPID voltageController(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     k=k,
@@ -117,7 +117,7 @@ model SMEE_Rectifier "Electrical excited synchronous machine with rectifier"
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
-        origin={-20,90})));
+        origin={40,70})));
   Modelica.Electrical.MultiPhase.Ideal.IdealDiode idealDiode1(
     m=m,
     Ron=fill(1E-5, m),
@@ -125,7 +125,7 @@ model SMEE_Rectifier "Electrical excited synchronous machine with rectifier"
     Vknee=fill(0, m)) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
-        origin={0,80})));
+        origin={60,60})));
   Modelica.Electrical.MultiPhase.Ideal.IdealDiode idealDiode2(
     m=m,
     Ron=fill(1E-5, m),
@@ -133,32 +133,32 @@ model SMEE_Rectifier "Electrical excited synchronous machine with rectifier"
     Vknee=fill(0, m)) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
-        origin={0,40})));
+        origin={60,20})));
   Modelica.Electrical.MultiPhase.Basic.Star star2(m=m) annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
-        origin={-20,30})));
+        origin={40,10})));
   Modelica.Electrical.Analog.Basic.Capacitor capacitor1(C=2*10E-6, v(
         fixed=true, start=0)) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
-        origin={-40,80})));
+        origin={20,60})));
   Modelica.Electrical.Analog.Basic.Capacitor capacitor2(C=2*10E-6, v(
         fixed=true, start=0)) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
-        origin={-40,40})));
+        origin={20,20})));
   Modelica.Electrical.Analog.Basic.Resistor resistor(R=RLoad) annotation (
      Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
-        origin={-50,60})));
+        origin={0,40})));
   Modelica.Electrical.Analog.Sensors.VoltageSensor voltageSensor
     annotation (Placement(transformation(
-        extent={{-10,10},{10,-10}},
+        extent={{-10,-10},{10,10}},
         rotation=270,
-        origin={-80,60})));
+        origin={-40,40})));
   Modelica.Blocks.Continuous.Filter filter(
     analogFilter=Modelica.Blocks.Types.AnalogFilter.CriticalDamping,
     filterType=Modelica.Blocks.Types.FilterType.LowPass,
@@ -194,39 +194,41 @@ equation
   connect(constantSpeed.y, speed.w_ref) annotation (Line(
       points={{59,-30},{52,-30}}, color={0,0,127}));
   connect(setPointGain.y, voltageController.u_s) annotation (Line(
-      points={{-71,-80},{-80,-80},{-80,-30},{-72,-30}}, color={0,0,127}));
+      points={{-71,-70},{-80,-70},{-80,-30},{-72,-30}}, color={0,0,127}));
   connect(speedSensor.w, setPointGain.u) annotation (Line(
-      points={{30,-61},{30,-80},{-48,-80}}, color={0,0,127}));
+      points={{30,-61},{30,-70},{-48,-70}}, color={0,0,127}));
   connect(voltageController.y, excitationVoltage.v) annotation (Line(
       points={{-49,-30},{-42,-30}}, color={0,0,127}));
   connect(idealDiode1.plug_p, idealDiode2.plug_n) annotation (Line(
-      points={{0,70},{0,50}}, color={0,0,255}));
+      points={{60,50},{60,30}},
+                              color={0,0,255}));
   connect(idealDiode2.plug_p, star2.plug_p) annotation (Line(
-      points={{0,30},{-10,30}}, color={0,0,255}));
+      points={{60,10},{50,10}}, color={0,0,255}));
   connect(idealDiode1.plug_n, star1.plug_p) annotation (Line(
-      points={{0,90},{-10,90}}, color={0,0,255}));
+      points={{60,70},{50,70}}, color={0,0,255}));
   connect(capacitor2.n, star2.pin_n) annotation (Line(
-      points={{-40,30},{-30,30}}, color={0,0,255}));
+      points={{20,10},{30,10}},   color={0,0,255}));
   connect(capacitor1.p, star1.pin_n) annotation (Line(
-      points={{-40,90},{-30,90}}, color={0,0,255}));
+      points={{20,70},{30,70}},   color={0,0,255}));
   connect(capacitor1.n, capacitor2.p) annotation (Line(
-      points={{-40,70},{-40,50}}, color={0,0,255}));
+      points={{20,50},{20,30}},   color={0,0,255}));
   connect(capacitor1.n, ground.p) annotation (Line(
-      points={{-40,70},{-40,60},{-30,60}}, color={0,0,255}));
+      points={{20,50},{20,40},{30,40}},    color={0,0,255}));
   connect(filter.y, voltageController.u_m) annotation (Line(
       points={{-60,-11},{-60,-18}}, color={0,0,127}));
   connect(voltageSensor.v, filter.u) annotation (Line(
-      points={{-69,60},{-60,60},{-60,12}}, color={0,0,127}));
+      points={{-51,40},{-60,40},{-60,12}}, color={0,0,127}));
   connect(terminalBox.plugSupply, idealDiode2.plug_n) annotation (Line(
-      points={{10,-18},{10,60},{0,60},{0,50}}, color={0,0,255}));
+      points={{10,-18},{10,-10},{80,-10},{80,40},{60,40},{60,30}},
+                                               color={0,0,255}));
   connect(resistor.p, capacitor1.p) annotation (Line(
-      points={{-50,70},{-50,90},{-40,90}}, color={0,0,255}));
+      points={{0,50},{0,70},{20,70}},      color={0,0,255}));
   connect(resistor.n, capacitor2.n) annotation (Line(
-      points={{-50,50},{-50,30},{-40,30}}, color={0,0,255}));
+      points={{0,30},{0,10},{20,10}},      color={0,0,255}));
   connect(voltageSensor.n, capacitor2.n) annotation (Line(
-      points={{-80,50},{-80,30},{-40,30}}, color={0,0,255}));
+      points={{-40,30},{-40,10},{20,10}},  color={0,0,255}));
   connect(voltageSensor.p, capacitor1.p) annotation (Line(
-      points={{-80,70},{-80,90},{-40,90}}, color={0,0,255}));
+      points={{-40,50},{-40,70},{20,70}},  color={0,0,255}));
   annotation (experiment(StopTime=1.1, Interval=1E-4, Tolerance=1e-07),
     Documentation(
         info="<html>

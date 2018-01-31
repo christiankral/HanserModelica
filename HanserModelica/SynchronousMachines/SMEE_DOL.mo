@@ -7,6 +7,7 @@ model SMEE_DOL "Electrical excited synchronous machine starting direct on line"
   parameter Modelica.SIunits.Voltage Ve=smeeData.Re*smeeData.IeOpenCircuit "Excitation current";
   parameter Modelica.SIunits.Angle gamma0(displayUnit="deg") = 0 "Initial rotor displacement angle";
   Modelica.SIunits.Current irRMS = sqrt(smee.ir[1]^2+smee.ir[2]^2)/sqrt(2) "Quasi RMS rotor current";
+  Modelica.SIunits.Angle theta = rotorDisplacementAngle.rotorDisplacementAngle "Rotor displacement angle";
   Modelica.Magnetic.FundamentalWave.BasicMachines.SynchronousInductionMachines.SM_ElectricalExcited smee(
     phiMechanical(start=-(Modelica.Constants.pi + gamma0)/smee.p, fixed=true),
     fsNominal=smeeData.fsNominal,

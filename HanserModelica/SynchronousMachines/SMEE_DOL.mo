@@ -120,7 +120,7 @@ model SMEE_DOL "Electrical excited synchronous machine starting direct on line"
   Modelica.Mechanics.Rotational.Sources.TorqueStep torqueStep(
     offsetTorque=0,
     stepTorque=50,
-    startTime=2) annotation (Placement(transformation(extent={{90,-50},{70,-30}})));
+    startTime=1.5) annotation (Placement(transformation(extent={{90,-50},{70,-30}})));
 initial equation
   // sum(smee.is) = 0;
   smee.is[1:2] = zeros(2);
@@ -161,7 +161,7 @@ equation
   connect(electricalSensor.nv, terminalBox.plug_sn) annotation (Line(points={{30,30},{20,30},{20,-20},{-16,-20},{-16,-30}}, color={0,0,255}));
   connect(electricalSensor.nc, currentRMSSensor.plug_p) annotation (Line(points={{40,20},{40,10}}, color={0,0,255}));
   connect(electricalSensor.pv, electricalSensor.pc) annotation (Line(points={{50,30},{50,40},{40,40}}, color={0,0,255}));
-  annotation (experiment(StopTime=3,Interval=0.0001,Tolerance=1e-006),
+  annotation (experiment(StopTime=2.5,Interval=0.0001,Tolerance=1e-006),
     Documentation(info="<html>
 <p>An electrically excited synchronous generator is started direct on line utilizing the damper cage 
 (and the shorted excitation winding) at 0 seconds.</p>

@@ -21,14 +21,14 @@ model SMPM_CurrentSource "Permanent magnet synchronous machine fed by current so
 
   Modelica.Blocks.Sources.Constant iq(k=84.6*3/m)
                                               annotation (Placement(
-        transformation(extent={{-90,50},{-70,70}})));
+        transformation(extent={{-90,40},{-70,60}})));
   Modelica.Blocks.Sources.Constant id(k=-53.5*3/m)
-    annotation (Placement(transformation(extent={{-90,80},{-70,100}})));
+    annotation (Placement(transformation(extent={{-90,70},{-70,90}})));
   parameter
     Modelica.Electrical.Machines.Utilities.ParameterRecords.SM_PermanentMagnetData
     smpmData(useDamperCage=false, effectiveStatorTurns=64,
     TsRef=373.15)                 "Machine data"
-    annotation (Placement(transformation(extent={{70,72},{90,92}})));
+    annotation (Placement(transformation(extent={{70,62},{90,82}})));
   Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.SynchronousMachines.SM_PermanentMagnet
     smpmQS(
     p=smpmData.p,
@@ -58,13 +58,11 @@ model SMPM_CurrentSource "Permanent magnet synchronous machine fed by current so
     TsOperational=373.15,
     alpha20s=smpmData.alpha20s,
     alpha20r=smpmData.alpha20r,
-    TrOperational=373.15) annotation (Placement(transformation(extent={{-10,10},{10,30}})));
+    TrOperational=373.15) annotation (Placement(transformation(extent={{-10,0},{10,20}})));
 
   Modelica.Mechanics.Rotational.Components.Inertia inertiaLoadQS(J=0.29)
-    annotation (Placement(transformation(extent={{50,10},{70,30}})));
-  Modelica.Mechanics.Rotational.Sources.QuadraticSpeedDependentTorque
-    quadraticSpeedDependentTorqueQS(tau_nominal=-TLoad, w_nominal(displayUnit="rpm") = wNominal)
-    annotation (Placement(transformation(extent={{100,10},{80,30}})));
+    annotation (Placement(transformation(extent={{50,0},{70,20}})));
+  Modelica.Mechanics.Rotational.Sources.QuadraticSpeedDependentTorque quadraticTorqueQS(tau_nominal=-TLoad, w_nominal(displayUnit="rpm") = wNominal) annotation (Placement(transformation(extent={{100,0},{80,20}})));
   Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star
     starMachineQS(m=
         Modelica.Electrical.MultiPhase.Functions.numberOfSymmetricBaseSystems(
@@ -72,92 +70,90 @@ model SMPM_CurrentSource "Permanent magnet synchronous machine fed by current so
     annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
-        origin={-30,20})));
+        origin={-30,10})));
   Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground
     groundMQS annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
-        origin={-60,10})));
+        origin={-60,0})));
   Modelica.Magnetic.QuasiStatic.FundamentalWave.Utilities.MultiTerminalBox
     terminalBoxQS(terminalConnection="Y", m=m) annotation (Placement(
-        transformation(extent={{-10,26},{10,46}})));
-  Modelica.Magnetic.QuasiStatic.FundamentalWave.Utilities.CurrentController currentControllerQS(m=m, p=smpmQS.p) annotation (Placement(transformation(extent={{-50,80},{-30,100}})));
+        transformation(extent={{-10,16},{10,36}})));
+  Modelica.Magnetic.QuasiStatic.FundamentalWave.Utilities.CurrentController currentControllerQS(m=m, p=smpmQS.p) annotation (Placement(transformation(extent={{-50,70},{-30,90}})));
   Modelica.Mechanics.Rotational.Sensors.AngleSensor angleSensorQS
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
-        origin={30,60})));
+        origin={30,50})));
   Modelica.Electrical.QuasiStationary.MultiPhase.Sources.ReferenceCurrentSource referenceCurrentSourceQS(m=m) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=90,
-        origin={0,90})));
+        origin={0,80})));
   Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star starQS(m=m)
     annotation (Placement(transformation(
-        origin={50,90},
+        origin={50,80},
         extent={{-10,-10},{10,10}},
         rotation=270)));
   Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground
     groundeQS annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
-        origin={50,70})));
+        origin={50,60})));
   Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Resistor resistorQS(m=m, R_ref=fill(1e5, m)) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
-        origin={20,90})));
+        origin={20,80})));
   Modelica.Magnetic.QuasiStatic.FundamentalWave.Sensors.RotorDisplacementAngle rotorAngleQS(m=m, p=smpmData.p) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=90,
-        origin={30,20})));
+        origin={30,10})));
   Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensorQS(m=m) annotation (Placement(transformation(
         extent={{10,10},{-10,-10}},
         rotation=90,
-        origin={0,60})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.VoltageQuasiRMSSensor voltageQuasiRMSSensorQS(m=m) annotation (Placement(transformation(extent={{-40,60},{-20,40}})));
+        origin={0,50})));
+  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.VoltageQuasiRMSSensor voltageRMSSensorQS(m=m) annotation (Placement(transformation(extent={{-40,50},{-20,30}})));
   Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star starMQS(m=m) annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=270,
-        origin={-50,40})));
+        origin={-50,30})));
 equation
-  connect(quadraticSpeedDependentTorqueQS.flange, inertiaLoadQS.flange_b)
-    annotation (Line(
-      points={{80,20},{70,20}}));
+  connect(quadraticTorqueQS.flange, inertiaLoadQS.flange_b) annotation (Line(points={{80,10},{70,10}}));
   connect(starMachineQS.plug_p, terminalBoxQS.starpoint) annotation (
       Line(
-      points={{-20,20},{-20,32},{-10,32}},
+      points={{-20,10},{-20,22},{-10,22}},
       color={85,170,255}));
   connect(groundMQS.pin, starMachineQS.pin_n) annotation (Line(
-      points={{-60,20},{-40,20}},
+      points={{-60,10},{-40,10}},
       color={85,170,255}));
   connect(terminalBoxQS.plug_sn, smpmQS.plug_sn) annotation (Line(
-      points={{-6,30},{-6,30}},
+      points={{-6,20},{-6,20}},
       color={85,170,255}));
   connect(terminalBoxQS.plug_sp, smpmQS.plug_sp) annotation (Line(
-      points={{6,30},{6,30}},
+      points={{6,20},{6,20}},
       color={85,170,255}));
-  connect(currentControllerQS.I, referenceCurrentSourceQS.I) annotation (Line(points={{-29,94},{-20,94},{-20,96},{-12,96}},
+  connect(currentControllerQS.I, referenceCurrentSourceQS.I) annotation (Line(points={{-29,84},{-20,84},{-20,86},{-12,86}},
                                                                                                           color={85,170,255}));
-  connect(referenceCurrentSourceQS.plug_p, starQS.plug_p) annotation (Line(points={{4.44089e-16,100},{50,100}}, color={85,170,255}));
+  connect(referenceCurrentSourceQS.plug_p, starQS.plug_p) annotation (Line(points={{4.44089e-16,90},{50,90}},   color={85,170,255}));
   connect(starQS.pin_n, groundeQS.pin) annotation (Line(
-      points={{50,80},{50,80}},
+      points={{50,70},{50,70}},
       color={85,170,255}));
   connect(angleSensorQS.flange, smpmQS.flange) annotation (Line(
-      points={{30,50},{30,40},{20,40},{20,20},{10,20}}));
-  connect(referenceCurrentSourceQS.plug_p, resistorQS.plug_p) annotation (Line(points={{4.44089e-16,100},{20,100}}, color={85,170,255}));
-  connect(resistorQS.plug_n, referenceCurrentSourceQS.plug_n) annotation (Line(points={{20,80},{-6.66134e-16,80}}, color={85,170,255}));
-  connect(id.y, currentControllerQS.id_rms) annotation (Line(points={{-69,90},{-56,90},{-56,96},{-52,96}}, color={0,0,127}));
-  connect(iq.y, currentControllerQS.iq_rms) annotation (Line(points={{-69,60},{-56,60},{-56,84},{-52,84}},   color={0,0,127}));
-  connect(currentControllerQS.gamma, referenceCurrentSourceQS.gamma) annotation (Line(points={{-29,86},{-20,86},{-20,84},{-12,84}},
+      points={{30,40},{30,30},{20,30},{20,10},{10,10}}));
+  connect(referenceCurrentSourceQS.plug_p, resistorQS.plug_p) annotation (Line(points={{4.44089e-16,90},{20,90}},   color={85,170,255}));
+  connect(resistorQS.plug_n, referenceCurrentSourceQS.plug_n) annotation (Line(points={{20,70},{-6.66134e-16,70}}, color={85,170,255}));
+  connect(id.y, currentControllerQS.id_rms) annotation (Line(points={{-69,80},{-56,80},{-56,86},{-52,86}}, color={0,0,127}));
+  connect(iq.y, currentControllerQS.iq_rms) annotation (Line(points={{-69,50},{-56,50},{-56,74},{-52,74}},   color={0,0,127}));
+  connect(currentControllerQS.gamma, referenceCurrentSourceQS.gamma) annotation (Line(points={{-29,76},{-20,76},{-20,74},{-12,74}},
                                                                                                                   color={0,0,127}));
-  connect(angleSensorQS.phi, currentControllerQS.phi) annotation (Line(points={{30,71},{30,74},{-40,74},{-40,78}}, color={0,0,127}));
-  connect(smpmQS.flange, rotorAngleQS.flange) annotation (Line(points={{10,20},{20,20}}, color={0,0,0}));
-  connect(terminalBoxQS.plug_sp, rotorAngleQS.plug_p) annotation (Line(points={{6,30},{24,30}}, color={85,170,255}));
-  connect(terminalBoxQS.plugSupply, currentRMSSensorQS.plug_n) annotation (Line(points={{0,32},{0,50}},     color={85,170,255}));
-  connect(currentRMSSensorQS.plug_p, referenceCurrentSourceQS.plug_n) annotation (Line(points={{0,70},{0,80}}, color={85,170,255}));
-  connect(inertiaLoadQS.flange_a, smpmQS.flange) annotation (Line(points={{50,20},{10,20}}, color={0,0,0}));
-  connect(rotorAngleQS.plug_n, terminalBoxQS.plug_sn) annotation (Line(points={{36,30},{36,36},{-6,36},{-6,30}}, color={85,170,255}));
-  connect(voltageQuasiRMSSensorQS.plug_n, currentRMSSensorQS.plug_n) annotation (Line(points={{-20,50},{0,50}}, color={85,170,255}));
-  connect(starMQS.pin_n, starMachineQS.pin_n) annotation (Line(points={{-50,30},{-50,20},{-40,20}}, color={85,170,255}));
-  connect(starMQS.plug_p, voltageQuasiRMSSensorQS.plug_p) annotation (Line(points={{-50,50},{-40,50}}, color={85,170,255}));
+  connect(angleSensorQS.phi, currentControllerQS.phi) annotation (Line(points={{30,61},{30,64},{-40,64},{-40,68}}, color={0,0,127}));
+  connect(smpmQS.flange, rotorAngleQS.flange) annotation (Line(points={{10,10},{20,10}}, color={0,0,0}));
+  connect(terminalBoxQS.plug_sp, rotorAngleQS.plug_p) annotation (Line(points={{6,20},{24,20}}, color={85,170,255}));
+  connect(terminalBoxQS.plugSupply, currentRMSSensorQS.plug_n) annotation (Line(points={{0,22},{0,40}},     color={85,170,255}));
+  connect(currentRMSSensorQS.plug_p, referenceCurrentSourceQS.plug_n) annotation (Line(points={{0,60},{0,70}}, color={85,170,255}));
+  connect(inertiaLoadQS.flange_a, smpmQS.flange) annotation (Line(points={{50,10},{10,10}}, color={0,0,0}));
+  connect(rotorAngleQS.plug_n, terminalBoxQS.plug_sn) annotation (Line(points={{36,20},{36,26},{-6,26},{-6,20}}, color={85,170,255}));
+  connect(voltageRMSSensorQS.plug_n, currentRMSSensorQS.plug_n) annotation (Line(points={{-20,40},{0,40}}, color={85,170,255}));
+  connect(starMQS.pin_n, starMachineQS.pin_n) annotation (Line(points={{-50,20},{-50,10},{-40,10}}, color={85,170,255}));
+  connect(starMQS.plug_p, voltageRMSSensorQS.plug_p) annotation (Line(points={{-50,40},{-40,40}}, color={85,170,255}));
   annotation (
     experiment(StopTime=2.0, Interval=1E-4, Tolerance=1E-6),
     Documentation(info="<html>
@@ -180,7 +176,7 @@ to numerically stabilize the simulation.</p>
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={
         Text(
-          extent={{30,48},{110,40}},
+          extent={{30,38},{110,30}},
                   textStyle={TextStyle.Bold},
           textString="%m phase quasi static",        lineColor={0,0,0})}));
 end SMPM_CurrentSource;

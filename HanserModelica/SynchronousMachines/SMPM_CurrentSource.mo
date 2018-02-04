@@ -140,8 +140,8 @@ equation
       points={{30,40},{30,30},{20,30},{20,10},{10,10}}));
   connect(referenceCurrentSourceQS.plug_p, resistorQS.plug_p) annotation (Line(points={{4.44089e-16,90},{20,90}},   color={85,170,255}));
   connect(resistorQS.plug_n, referenceCurrentSourceQS.plug_n) annotation (Line(points={{20,70},{-6.66134e-16,70}}, color={85,170,255}));
-  connect(id.y, currentControllerQS.id_rms) annotation (Line(points={{-69,80},{-56,80},{-56,86},{-52,86}}, color={0,0,127}));
-  connect(iq.y, currentControllerQS.iq_rms) annotation (Line(points={{-69,50},{-56,50},{-56,74},{-52,74}},   color={0,0,127}));
+  connect(id.y, currentControllerQS.id_rms) annotation (Line(points={{-69,80},{-60,80},{-60,86},{-52,86}}, color={0,0,127}));
+  connect(iq.y, currentControllerQS.iq_rms) annotation (Line(points={{-69,50},{-60,50},{-60,74},{-52,74}},   color={0,0,127}));
   connect(currentControllerQS.gamma, referenceCurrentSourceQS.gamma) annotation (Line(points={{-29,76},{-20,76},{-20,74},{-12,74}},
                                                                                                                   color={0,0,127}));
   connect(angleSensorQS.phi, currentControllerQS.phi) annotation (Line(points={{30,61},{30,64},{-40,64},{-40,68}}, color={0,0,127}));

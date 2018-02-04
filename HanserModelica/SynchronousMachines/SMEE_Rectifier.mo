@@ -113,13 +113,15 @@ model SMEE_Rectifier "Electrical excited synchronous machine with rectifier"
       Placement(transformation(
         origin={-30,-60},
         extent={{-10,-10},{10,10}})));
-  Modelica.Electrical.Analog.Basic.Capacitor capacitor1(C=2*10E-6, v(
-        fixed=true, start=0)) annotation (Placement(transformation(
+  Modelica.Electrical.Analog.Basic.Capacitor capacitor1(           v(
+        fixed=true, start=0), C=20E-6)
+                              annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={20,50})));
-  Modelica.Electrical.Analog.Basic.Capacitor capacitor2(C=2*10E-6, v(
-        fixed=true, start=0)) annotation (Placement(transformation(
+  Modelica.Electrical.Analog.Basic.Capacitor capacitor2(           v(
+        fixed=true, start=0), C=20E-6)
+                              annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={20,10})));

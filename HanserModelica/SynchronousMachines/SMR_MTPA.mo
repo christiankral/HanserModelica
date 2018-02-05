@@ -23,8 +23,9 @@ model SMR_MTPA "Synchronous reluctance machine, investigating maximum torque per
     effectiveStatorTurns=64,
     fsNominal=fNominal,
     Lmd=2.9/(2*pi*fNominal),
-    Lmq=0.35/(2*pi*fNominal),
-    TsRef=373.15) "Machine data" annotation (Placement(transformation(extent={{60,30},{80,50}})));
+    TsRef=373.15,
+    Lmq=0.36/(2*pi*fNominal))
+                  "Machine data" annotation (Placement(transformation(extent={{60,30},{80,50}})));
   Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.SynchronousMachines.SM_ReluctanceRotor smrQS(
     p=smrData.p,
     fsNominal=smrData.fsNominal,

@@ -135,5 +135,5 @@ Simulate for 1 second and plot (versus angle epsilon):
 <p>The resistors connected to the terminals of the windings of the quasi static machine model are necessary 
 to numerically stabilize the simulation.</p>
 </html>"),
-    Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent = {{0, -10}, {80, -18}}, textStyle = {TextStyle.Bold}, textString = "%m phase quasi static", lineColor = {0, 0, 0})}));
+    Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{0, -10}, {80, -18}}, textStyle = {TextStyle.Bold}, textString = "%m phase quasi static", lineColor = {0, 0, 0})}));
 end SMR_MTPA;

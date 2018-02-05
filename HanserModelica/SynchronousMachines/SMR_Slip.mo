@@ -88,5 +88,5 @@ Simulate for 30 seconds and plot versus <code>rotorAngle|rotorAngleQS.rotorDispl
 <li><code>smpmQS.tauElectrical</code>: machine torque</li>
 </ul>
 </html>"),
-    Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent = {{20, 8}, {100, 0}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 170}, fillPattern = FillPattern.Solid, textStyle = {TextStyle.Bold}, textString = "%m phase quasi static")}));
+    Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{20, 8}, {100, 0}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 170}, fillPattern = FillPattern.Solid, textStyle = {TextStyle.Bold}, textString = "%m phase quasi static")}));
 end SMR_Slip;

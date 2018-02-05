@@ -37,7 +37,7 @@ model IMC_Transformer "Induction machine with squirrel cage starting with transf
     effectiveStatorTurns=imcData.effectiveStatorTurns,
     alpha20r=imcData.alpha20r,
     TrOperational=373.15) annotation (Placement(transformation(extent={{80,10},{60,30}})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor iSensorQS(m=m) annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensorQS(m=m) annotation (Placement(transformation(
         origin={-40,80},
         extent={{-10,10},{10,-10}},
         rotation=0)));
@@ -140,7 +140,7 @@ model IMC_Transformer "Induction machine with squirrel cage starting with transf
     effectiveStatorTurns=imcData.effectiveStatorTurns,
     alpha20r=imcData.alpha20r,
     TrOperational=373.15) annotation (Placement(transformation(extent={{80,-90},{60,-70}})));
-  Modelica.Electrical.MultiPhase.Sensors.CurrentQuasiRMSSensor iSensor(m=m) annotation (Placement(transformation(
+  Modelica.Electrical.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensor(m=m) annotation (Placement(transformation(
         origin={-40,-20},
         extent={{-10,10},{10,-10}},
         rotation=0)));
@@ -222,9 +222,9 @@ equation
   connect(transformerQS.starpoint2, ground2QS.pin) annotation (Line(points={{25,70},{24,70},{24,60},{20,60}}, color={85,170,255}));
   connect(idealCommutingSwitchQS.plug_p, terminalBoxQS.plugSupply) annotation (Line(points={{60,80},{70,80},{70,32}}, color={85,170,255}));
   connect(transformerQS.plug2, idealCommutingSwitchQS.plug_n1) annotation (Line(points={{30,80},{36,80},{36,76},{40,76}}, color={85,170,255}));
-  connect(sineVoltageQS.plug_p, iSensorQS.plug_p) annotation (Line(points={{-60,80},{-50,80}}, color={85,170,255}));
+  connect(sineVoltageQS.plug_p, currentRMSSensorQS.plug_p) annotation (Line(points={{-60,80},{-50,80}}, color={85,170,255}));
   connect(booleanStep1QS.y, idealCloserQS.control) annotation (Line(points={{-39,50},{-10,50},{-10,68}}, color={255,0,255}));
-  connect(iSensorQS.plug_n, idealCloserQS.plug_p) annotation (Line(points={{-30,80},{-20,80}}, color={85,170,255}));
+  connect(currentRMSSensorQS.plug_n, idealCloserQS.plug_p) annotation (Line(points={{-30,80},{-20,80}}, color={85,170,255}));
   connect(transformerQS.plug1, idealCloserQS.plug_n) annotation (Line(points={{10,80},{0,80}}, color={85,170,255}));
   connect(idealCloserQS.plug_n, idealCommutingSwitchQS.plug_n2) annotation (Line(points={{0,80},{0,100},{40,100},{40,80}}, color={85,170,255}));
   connect(star.pin_n,ground. p)
@@ -245,11 +245,11 @@ equation
       points={{25,-30},{25,-40},{20,-40}}, color={0,0,255}));
   connect(idealCommutingSwitch.plug_p, terminalBox.plugSupply) annotation (Line(points={{60,-20},{70,-20},{70,-68}}, color={0,0,255}));
   connect(transformer.plug2,idealCommutingSwitch. plug_n1) annotation (Line(points={{30,-20},{36,-20},{36,-24},{40,-24}}, color={0,0,255}));
-  connect(sineVoltage.plug_p, iSensor.plug_p) annotation (Line(points={{-60,-20},{-50,-20}}, color={0,0,255}));
+  connect(sineVoltage.plug_p, currentRMSSensor.plug_p) annotation (Line(points={{-60,-20},{-50,-20}}, color={0,0,255}));
   connect(booleanStep1.y,idealCloser. control) annotation (Line(
       points={{-39,-50},{-10,-50},{-10,-32},{-10,-32}},
                                  color={255,0,255}));
-  connect(iSensor.plug_n, idealCloser.plug_p) annotation (Line(points={{-30,-20},{-20,-20}}, color={0,0,255}));
+  connect(currentRMSSensor.plug_n, idealCloser.plug_p) annotation (Line(points={{-30,-20},{-20,-20}}, color={0,0,255}));
   connect(transformer.plug1,idealCloser. plug_n) annotation (Line(
       points={{10,-20},{0,-20}},color={0,0,255}));
   connect(idealCloser.plug_n,idealCommutingSwitch. plug_n2) annotation (

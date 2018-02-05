@@ -11,7 +11,7 @@ model IMC_Characteristics "Characteristic curves of Induction machine with squir
   parameter Integer p=imcData.p "Number of pole pairs";
   Real speedPerUnit = p*imcQS.wMechanical/(2*pi*fNominal) "Per unit speed";
   Real slip = 1-speedPerUnit "Slip";
-  output Modelica.SIunits.Current Iqs=iSensorQS.I "QS RMS current";
+  output Modelica.SIunits.Current Iqs=currentRMSSensorQS.I "QS RMS current";
   Modelica.Electrical.QuasiStationary.MultiPhase.Sources.VoltageSource vSourceQS(
     m=m,
     f=fNominal,
@@ -30,8 +30,8 @@ model IMC_Characteristics "Characteristic curves of Induction machine with squir
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-90,20})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.PowerSensor pSensorQS(m=m) annotation (Placement(transformation(extent={{-40,70},{-20,90}})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor iSensorQS(m=m) annotation (Placement(transformation(extent={{-10,70},{10,90}})));
+  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.PowerSensor powerSensorQS(m=m) annotation (Placement(transformation(extent={{-40,70},{-20,90}})));
+  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensorQS(m=m) annotation (Placement(transformation(extent={{-10,70},{10,90}})));
   parameter MoveTo_Modelica.Electrical.Machines.Utilities.ParameterRecords.AIM_SquirrelCageData imcData(
     effectiveStatorTurns=64,
     TsRef=373.15,
@@ -80,9 +80,9 @@ equation
   connect(groundQS.pin, starQS.pin_n)
     annotation (Line(points={{-80,20},{-80,20}}, color={85,170,255}));
   connect(starQS.plug_p, vSourceQS.plug_n) annotation (Line(points={{-60,20},{-60,30}}, color={85,170,255}));
-  connect(pSensorQS.currentN, iSensorQS.plug_p) annotation (Line(points={{-20,80},{-10,80}}, color={85,170,255}));
-  connect(pSensorQS.voltageP, pSensorQS.currentP) annotation (Line(points={{-30,90},{-40,90},{-40,80}}, color={85,170,255}));
-  connect(pSensorQS.voltageN, starQS.plug_p) annotation (Line(points={{-30,70},{-30,20},{-60,20}}, color={85,170,255}));
+  connect(powerSensorQS.currentN, currentRMSSensorQS.plug_p) annotation (Line(points={{-20,80},{-10,80}}, color={85,170,255}));
+  connect(powerSensorQS.voltageP, powerSensorQS.currentP) annotation (Line(points={{-30,90},{-40,90},{-40,80}}, color={85,170,255}));
+  connect(powerSensorQS.voltageN, starQS.plug_p) annotation (Line(points={{-30,70},{-30,20},{-60,20}}, color={85,170,255}));
   connect(terminalBoxQS.plug_sn, imcQS.plug_sn) annotation (Line(
       points={{24,50},{24,50}},
       color={85,170,255}));
@@ -93,13 +93,13 @@ equation
       Line(
       points={{-10,40},{-10,52},{20,52}},
       color={85,170,255}));
-  connect(iSensorQS.plug_n, terminalBoxQS.plugSupply) annotation (Line(points={{10,80},{30,80},{30,52}}, color={85,170,255}));
+  connect(currentRMSSensorQS.plug_n, terminalBoxQS.plugSupply) annotation (Line(points={{10,80},{30,80},{30,52}}, color={85,170,255}));
   connect(starMachineQS.pin_n, groundMachineQS.pin) annotation (Line(
       points={{-10,20},{-10,20}},
       color={85,170,255}));
   connect(imcQS.flange, speed.flange) annotation (Line(points={{40,40},{50,40}}, color={0,0,0}));
   connect(ramp.y, speed.w_ref) annotation (Line(points={{79,40},{72,40}}, color={0,0,127}));
-  connect(vSourceQS.plug_p, pSensorQS.currentP) annotation (Line(points={{-60,50},{-60,80},{-40,80}}, color={85,170,255}));
+  connect(vSourceQS.plug_p, powerSensorQS.currentP) annotation (Line(points={{-60,50},{-60,80},{-40,80}}, color={85,170,255}));
   annotation (experiment(StopTime=1, Interval=0.001, Tolerance=1E-6),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics={
         Text(

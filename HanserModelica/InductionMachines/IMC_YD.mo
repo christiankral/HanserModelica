@@ -37,7 +37,7 @@ model IMC_YD "Induction machine with squirrel cage starting Y-D"
     effectiveStatorTurns=imcData.effectiveStatorTurns,
     alpha20r=imcData.alpha20r,
     TrOperational=373.15) annotation (Placement(transformation(extent={{20,10},{40,30}})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor currentQuasiRMSSensorQS(m=m) annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensorQS(m=m) annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=270,
         origin={30,70})));
@@ -98,8 +98,9 @@ model IMC_YD "Induction machine with squirrel cage starting Y-D"
     TsOperational=373.15,
     alpha20r=imcData.alpha20r,
     TrOperational=373.15) annotation (Placement(transformation(extent={{20,-90},{40,-70}})));
-  Modelica.Electrical.Machines.Sensors.CurrentQuasiRMSSensor
-                                                    currentQuasiRMSSensor annotation (Placement(transformation(extent={{-10,10},{10,-10}}, rotation=270,
+  Modelica.Electrical.Machines.Sensors.CurrentQuasiRMSSensor currentRMSSensor annotation (Placement(transformation(
+        extent={{-10,10},{10,-10}},
+        rotation=270,
         origin={30,-30})));
   Modelica.Electrical.MultiPhase.Sources.SineVoltage sineVoltage(
     final m=m,
@@ -147,10 +148,10 @@ equation
   connect(loadInertiaQS.flange_b, quadraticLoadTorqueQS.flange) annotation (Line(points={{70,20},{80,20}}));
   connect(booleanStepQS.y, idealCloserQS.control) annotation (Line(points={{-59,60},{0,60},{0,78}}, color={255,0,255}));
   connect(booleanStepYDQS.y, switchYDQS.control) annotation (Line(points={{-19,40},{18,40}}, color={255,0,255}));
-  connect(idealCloserQS.plug_n, currentQuasiRMSSensorQS.plug_p) annotation (Line(points={{10,90},{10,90},{28,90},{28,90},{30,90},{30,80},{30,80}}, color={85,170,255}));
+  connect(idealCloserQS.plug_n, currentRMSSensorQS.plug_p) annotation (Line(points={{10,90},{10,90},{28,90},{28,90},{30,90},{30,80},{30,80}}, color={85,170,255}));
   connect(switchYDQS.plug_sn, imcQS.plug_sn) annotation (Line(points={{24,30},{24,30}}, color={85,170,255}));
   connect(switchYDQS.plug_sp, imcQS.plug_sp) annotation (Line(points={{36,30},{36,30}}, color={85,170,255}));
-  connect(switchYDQS.plugSupply, currentQuasiRMSSensorQS.plug_n) annotation (Line(points={{30,50},{30,60}}, color={85,170,255}));
+  connect(switchYDQS.plugSupply, currentRMSSensorQS.plug_n) annotation (Line(points={{30,50},{30,60}}, color={85,170,255}));
   connect(imcQS.flange, loadInertiaQS.flange_a) annotation (Line(points={{40,20},{50,20}}));
   connect(star.pin_n,ground. p)
     annotation (Line(points={{-70,-10},{-80,-10}},
@@ -165,14 +166,10 @@ equation
                                           color={255,0,255}));
   connect(booleanStepYD.y,switchYD. control)
     annotation (Line(points={{-19,-60},{18,-60}},  color={255,0,255}));
-  connect(idealCloser.plug_n,currentQuasiRMSSensor. plug_p)
-    annotation (Line(points={{10,-10},{30,-10},{30,-20}},
-                                                    color={0,0,255}));
+  connect(idealCloser.plug_n, currentRMSSensor.plug_p) annotation (Line(points={{10,-10},{30,-10},{30,-20}}, color={0,0,255}));
   connect(switchYD.plug_sn, imc.plug_sn) annotation (Line(points={{24,-70},{24,-70}}, color={0,0,255}));
   connect(switchYD.plug_sp, imc.plug_sp) annotation (Line(points={{36,-70},{36,-70}}, color={0,0,255}));
-  connect(switchYD.plugSupply,currentQuasiRMSSensor. plug_n) annotation (
-      Line(
-      points={{30,-50},{30,-40}}, color={0,0,255}));
+  connect(switchYD.plugSupply, currentRMSSensor.plug_n) annotation (Line(points={{30,-50},{30,-40}}, color={0,0,255}));
   connect(imc.flange, loadInertia.flange_a) annotation (Line(points={{40,-80},{50,-80}}));
   annotation (experiment(StopTime=2.5,Interval=0.0001,Tolerance=1e-06),
     __OpenModelica_simulationFlags(jacobian = "", nls = "newton", s = "dassl", lv = "LOG_STATS"),

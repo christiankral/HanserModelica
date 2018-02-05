@@ -42,7 +42,7 @@ public
   output Modelica.SIunits.Power Ps_measQS=sqrt(3)*VNominal*I_measQS*pf_measQS "Simulated stator power";
   output Modelica.SIunits.Power loss_simQS=Ps_simQS-PmechQS "Simulated total losses";
   output Modelica.SIunits.Power loss_measQS=Ps_measQS-PmechQS "Measured total losses";
-  output Modelica.SIunits.Current I_simQS=currentQuasiRMSSensorQS.I "Simulated current";
+  output Modelica.SIunits.Current I_simQS=currentRMSSensorQS.I "Simulated current";
   output Modelica.SIunits.Current I_measQS=combiTable1DsQS.y[1] "Measured current";
   output Modelica.SIunits.AngularVelocity w_simQS(displayUnit="rev/min") = imcQS.wMechanical "Simulated speed";
   output Modelica.SIunits.AngularVelocity w_measQS(displayUnit="rev/min")=combiTable1DsQS.y[2] "Measured speed";
@@ -82,7 +82,7 @@ public
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-40,90})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor currentQuasiRMSSensorQS(m=m) annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensorQS(m=m) annotation (Placement(transformation(
         origin={-70,90},
         extent={{-10,10},{10,-10}},
         rotation=0)));
@@ -138,9 +138,9 @@ equation
   connect(imcQS.flange, powerSensorQS.flange_a) annotation (Line(points={{0,70},{10,70}}));
   connect(powerSensorQS.flange_b, loadInertiaQS.flange_a) annotation (Line(points={{30,70},{40,70}}));
   connect(torqueQS.flange, loadInertiaQS.flange_b) annotation (Line(points={{70,70},{64,70},{64,70},{68,70},{68,70},{60,70}}));
-  connect(sineVoltageQS.plug_p, currentQuasiRMSSensorQS.plug_p) annotation (Line(points={{-90,80},{-90,90},{-80,90}}, color={85,170,255}));
+  connect(sineVoltageQS.plug_p, currentRMSSensorQS.plug_p) annotation (Line(points={{-90,80},{-90,90},{-80,90}}, color={85,170,255}));
   connect(PIQS.y, gainQS.u) annotation (Line(points={{61,10},{68,10}}, color={85,170,255}));
-  connect(currentQuasiRMSSensorQS.plug_n, electricalPowerSensorQS.currentP) annotation (Line(points={{-60,90},{-50,90}}, color={85,170,255}));
+  connect(currentRMSSensorQS.plug_n, electricalPowerSensorQS.currentP) annotation (Line(points={{-60,90},{-50,90}}, color={85,170,255}));
   connect(electricalPowerSensorQS.currentN, terminalBoxQS.plugSupply) annotation (Line(points={{-30,90},{-10,90},{-10,82}}, color={85,170,255}));
   connect(electricalPowerSensorQS.currentP, electricalPowerSensorQS.voltageP) annotation (Line(points={{-50,90},{-50,90},{-50,98},{-50,98},{-50,100},{-40,100},{-40,100}}, color={85,170,255}));
   connect(electricalPowerSensorQS.voltageN, starQS.plug_p) annotation (Line(points={{-40,80},{-40,50},{-90,50}}, color={85,170,255}));

@@ -181,7 +181,7 @@ At start time tStart three phase voltage is supplied to the asynchronous inducti
 <p>Simulate for 2.5 seconds and plot (versus time):</p>
 
 <ul>
-<li>currentQuasiRMSSensor.I: stator current RMS</li>
+<li>currentRMSSensor.I: stator current RMS</li>
 <li>aimc.wMechanical: motor's speed</li>
 <li>aimc.tauElectrical: motor's torque</li>
 </ul>

@@ -175,5 +175,5 @@ of the machine on the closing switch.
                   fillColor={255,255,170},
                   fillPattern=FillPattern.Solid,
                   textStyle={TextStyle.Bold},
-          textString="%m phase quasi static")}));
+          textString="%m phase")}));
 end SMEE_Synchronization;

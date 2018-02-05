@@ -74,7 +74,7 @@ equation
     experiment(StopTime = 1.5, Interval = 0.0001, Tolerance = 1E-6),
     Documentation(info = "<html>
 
-<p>This example compares a time transient and a quasi static model of a multi phase induction machine.
+<p>This example investigates a transient model of a multi phase induction machine.
 An ideal frequency inverter is modeled by using a <code>VfController</code> and a multi phase <code>SignalVoltage</code>.
 Frequency is raised by a ramp, causing the induction machine with squirrel cage to start,
 and accelerating inertias. At time <code>tStep</code> a load step is applied.</p>
@@ -82,9 +82,9 @@ and accelerating inertias. At time <code>tStep</code> a load step is applied.</p
 <p>Simulate for 1.5 seconds and plot (versus time):</p>
 
 <ul>
-<li><code>currentRMSsensor.I|currentSensorQS.abs_i[1]</code>: (equivalent) RMS stator current</li>
-<li><code>imc|imcQS.wMechanical</code>: machine speed</li>
-<li><code>imc|imcQS.tauElectrical</code>: machine torque</li>
+<li><code>currentRMSsensor.I</code>: (equivalent) RMS stator current</li>
+<li><code>imc.wMechanical</code>: machine speed</li>
+<li><code>imc.tauElectrical</code>: machine torque</li>
 </ul>
 <p>Default machine parameters are used.</p>
 </html>"),

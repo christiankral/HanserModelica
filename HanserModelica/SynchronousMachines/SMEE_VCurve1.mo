@@ -12,11 +12,11 @@ model SMEE_VCurve1 "V curves of electrical excited synchronous machine operated 
   parameter Modelica.SIunits.Current Ie0=10 "No load excitation current";
   parameter Modelica.SIunits.Torque tauMax=smeeData.SNominal/wNominal "Maximum torque at power factor = 1";
   parameter Modelica.SIunits.Angle gamma0(displayUnit="deg") = 0 "Initial rotor displacement angle";
-  output Modelica.SIunits.Power P=powerSensorQS.apparentPowerTotal.re "QS real power";
-  output Modelica.SIunits.ReactivePower Q=powerSensorQS.apparentPowerTotal.im "QS reactive power";
-  Modelica.SIunits.Angle theta=rotorAngleQS.rotorDisplacementAngle "Rotor displacement angle";
+  output Modelica.SIunits.Power P=powerSensor.apparentPowerTotal.re " real power";
+  output Modelica.SIunits.ReactivePower Q=powerSensor.apparentPowerTotal.im " reactive power";
+  Modelica.SIunits.Angle theta=rotorAngle.rotorDisplacementAngle "Rotor displacement angle";
 
- Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.SynchronousMachines.SM_ElectricalExcited smeeQS(
+ Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.SynchronousMachines.SM_ElectricalExcited smee(
     phiMechanical(start=-(pi + gamma0)/p, fixed=true),
     gammar(fixed=true, start=pi/2),
     fsNominal=smeeData.fsNominal,
@@ -51,7 +51,7 @@ model SMEE_VCurve1 "V curves of electrical excited synchronous machine operated 
     useDamperCage=true,
     TrOperational=293.15,
     TeOperational=293.15) annotation (Placement(transformation(extent={{-10,10},{10,30}})));
-  Modelica.Electrical.Analog.Basic.Ground groundrQS annotation (
+  Modelica.Electrical.Analog.Basic.Ground groundr annotation (
       Placement(transformation(
         origin={-50,2},
         extent={{-10,-10},{10,10}},
@@ -62,7 +62,7 @@ model SMEE_VCurve1 "V curves of electrical excited synchronous machine operated 
         extent={{-10,-10},{10,10}},
         rotation=90)));
   Modelica.Electrical.Machines.Sensors.MechanicalPowerSensor
-    mechanicalPowerSensorQS annotation (Placement(transformation(extent={{40,10},{60,30}})));
+    mechanicalPowerSensor annotation (Placement(transformation(extent={{40,10},{60,30}})));
   Modelica.Mechanics.Rotational.Sources.ConstantTorque constantTorque(useSupport=false, tau_constant=0) annotation (Placement(transformation(extent={{90,10},{70,30}})));
   parameter HanserModelica.MoveTo_Modelica.Electrical.Machines.Utilities.SynchronousMachineData smeeData(
     SNominal=30e3,
@@ -91,7 +91,7 @@ model SMEE_VCurve1 "V curves of electrical excited synchronous machine operated 
     TeRef=373.15) "Machine data" annotation (Placement(transformation(extent={{20,72},{40,92}})));
 
   Modelica.Electrical.QuasiStationary.MultiPhase.Sources.VoltageSource
-    voltageSourceQS(
+    voltageSource(
     m=m,
     phi=-Modelica.Electrical.MultiPhase.Functions.symmetricOrientation(
         m),
@@ -100,35 +100,35 @@ model SMEE_VCurve1 "V curves of electrical excited synchronous machine operated 
         origin={-30,80},
         extent={{-10,-10},{10,10}},
         rotation=180)));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star starQS(m=m)
+  Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star star(m=m)
     annotation (Placement(transformation(
         origin={-60,80},
         extent={{-10,-10},{10,10}},
         rotation=180)));
   Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground
-    groundeQS annotation (Placement(transformation(
+    grounde annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-90,80})));
   Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.MultiSensor
-    powerSensorQS(m=m) annotation (Placement(transformation(
+    powerSensor(m=m) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={0,60})));
-  Modelica.Magnetic.QuasiStatic.FundamentalWave.Utilities.MultiTerminalBox terminalBoxQS(m=m, terminalConnection="Y") annotation (Placement(transformation(extent={{-10,26},{10,46}})));
+  Modelica.Magnetic.QuasiStatic.FundamentalWave.Utilities.MultiTerminalBox terminalBox(m=m, terminalConnection="Y") annotation (Placement(transformation(extent={{-10,26},{10,46}})));
   Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star
-    starMachineQS(m=
+    starMachine(m=
         Modelica.Electrical.MultiPhase.Functions.numberOfSymmetricBaseSystems(m))
     annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
         origin={-20,40})));
   Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground
-    groundMachineQS annotation (Placement(transformation(
+    groundMachine annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-50,40})));
-  Modelica.Magnetic.QuasiStatic.FundamentalWave.Sensors.RotorDisplacementAngle rotorAngleQS(m=m, p=smeeQS.p) annotation (Placement(transformation(
+  Modelica.Magnetic.QuasiStatic.FundamentalWave.Sensors.RotorDisplacementAngle rotorAngle(m=m, p=smee.p) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=90,
         origin={30,20})));
@@ -139,59 +139,59 @@ model SMEE_VCurve1 "V curves of electrical excited synchronous machine operated 
     duration=200,
     startTime=0)  annotation (Placement(transformation(extent={{-80,10},{-60,30}})));
 algorithm
-  when rotorAngleQS.rotorDisplacementAngle<-pi/2 then
+  when rotorAngle.rotorDisplacementAngle<-pi/2 then
     terminate("Exit of simulation");
   end when;
 equation
-  connect(mechanicalPowerSensorQS.flange_b, constantTorque.flange) annotation (Line(points={{60,20},{70,20}}));
-  connect(currentSource.p, groundrQS.p) annotation (Line(points={{-28,10},{-28,2},{-40,2}},
+  connect(mechanicalPowerSensor.flange_b, constantTorque.flange) annotation (Line(points={{60,20},{70,20}}));
+  connect(currentSource.p, groundr.p) annotation (Line(points={{-28,10},{-28,2},{-40,2}},
                                            color={0,0,255}));
-  connect(currentSource.p, smeeQS.pin_en) annotation (Line(points={{-28,10},{-20,10},{-20,14},{-10,14}},
+  connect(currentSource.p, smee.pin_en) annotation (Line(points={{-28,10},{-20,10},{-20,14},{-10,14}},
                                            color={0,0,255}));
-  connect(currentSource.n, smeeQS.pin_ep) annotation (Line(points={{-28,30},{-20,30},{-20,26},{-10,26}},
+  connect(currentSource.n, smee.pin_ep) annotation (Line(points={{-28,30},{-20,30},{-20,26},{-10,26}},
                                            color={0,0,255}));
-  connect(groundeQS.pin, starQS.pin_n) annotation (Line(points={{-80,80},
+  connect(grounde.pin, star.pin_n) annotation (Line(points={{-80,80},
           {-80,80},{-70,80}}, color={85,170,255}));
-  connect(starQS.plug_p, voltageSourceQS.plug_n) annotation (Line(
+  connect(star.plug_p, voltageSource.plug_n) annotation (Line(
         points={{-50,80},{-50,80},{-40,80}}, color={85,170,255}));
-  connect(terminalBoxQS.plug_sn, smeeQS.plug_sn) annotation (Line(
+  connect(terminalBox.plug_sn, smee.plug_sn) annotation (Line(
       points={{-6,30},{-6,30}},
       color={85,170,255}));
-  connect(terminalBoxQS.plug_sp, smeeQS.plug_sp) annotation (Line(
+  connect(terminalBox.plug_sp, smee.plug_sp) annotation (Line(
       points={{6,30},{6,30}},
       color={85,170,255}));
-  connect(starMachineQS.pin_n, groundMachineQS.pin) annotation (Line(
+  connect(starMachine.pin_n, groundMachine.pin) annotation (Line(
       points={{-30,40},{-40,40}},
       color={85,170,255}));
-  connect(starMachineQS.plug_p, terminalBoxQS.starpoint) annotation (
+  connect(starMachine.plug_p, terminalBox.starpoint) annotation (
       Line(
       points={{-10,40},{-10,32}},
       color={85,170,255}));
-  connect(terminalBoxQS.plug_sp, rotorAngleQS.plug_p) annotation (Line(points={{6,30},{24,30}}, color={85,170,255}));
-  connect(rotorAngleQS.plug_n, terminalBoxQS.plug_sn) annotation (Line(points={{36,30},{36,36},{-6,36},{-6,30}}, color={85,170,255}));
-  connect(smeeQS.flange, rotorAngleQS.flange) annotation (Line(points={{10,20},{20,20}}, color={0,0,0}));
-  connect(smeeQS.flange, mechanicalPowerSensorQS.flange_a) annotation (Line(points={{10,20},{40,20}}, color={0,0,0}));
-  connect(voltageSourceQS.plug_p, powerSensorQS.pc) annotation (Line(points={{-20,80},{0,80},{0,70}}, color={85,170,255}));
-  connect(powerSensorQS.pv, powerSensorQS.pc) annotation (Line(points={{10,60},{10,70},{0,70}}, color={85,170,255}));
-  connect(powerSensorQS.nv, starQS.plug_p) annotation (Line(points={{-10,60},{-50,60},{-50,80}}, color={85,170,255}));
-  connect(powerSensorQS.nc, terminalBoxQS.plugSupply) annotation (Line(points={{0,50},{0,32}}, color={85,170,255}));
+  connect(terminalBox.plug_sp, rotorAngle.plug_p) annotation (Line(points={{6,30},{24,30}}, color={85,170,255}));
+  connect(rotorAngle.plug_n, terminalBox.plug_sn) annotation (Line(points={{36,30},{36,36},{-6,36},{-6,30}}, color={85,170,255}));
+  connect(smee.flange, rotorAngle.flange) annotation (Line(points={{10,20},{20,20}}, color={0,0,0}));
+  connect(smee.flange, mechanicalPowerSensor.flange_a) annotation (Line(points={{10,20},{40,20}}, color={0,0,0}));
+  connect(voltageSource.plug_p, powerSensor.pc) annotation (Line(points={{-20,80},{0,80},{0,70}}, color={85,170,255}));
+  connect(powerSensor.pv, powerSensor.pc) annotation (Line(points={{10,60},{10,70},{0,70}}, color={85,170,255}));
+  connect(powerSensor.nv, star.plug_p) annotation (Line(points={{-10,60},{-50,60},{-50,80}}, color={85,170,255}));
+  connect(powerSensor.nc, terminalBox.plugSupply) annotation (Line(points={{0,50},{0,32}}, color={85,170,255}));
   connect(ramp.y, currentSource.i) annotation (Line(points={{-59,20},{-40,20}}, color={0,0,127}));
   annotation (
     experiment(StopTime=200,Interval=0.001,Tolerance=1e-06),
     Documentation(info="<html>
 <p>
-This example compares investigates a quasi static model of a electrically excited synchronous machine. 
+This example investigates a quasi static model of a electrically excited synchronous machine. 
 The electrically excited synchronous generators are connected to the grid and driven with constant speed.
 Since speed is slightly smaller than synchronous speed corresponding to mains frequency,
 rotor angle is very slowly increased. This allows to see several characteristics dependent on rotor angle.
 </p>
 
 <p>
-Simulate for 30 seconds and plot versus <code>rotorAngle|rotorAngleQS.rotorDisplacementAngle</code>:
+Simulate for 30 seconds and plot versus <code>rotorAngle|rotorAngle.rotorDisplacementAngle</code>:
 </p>
 
 <ul>
-<li><code>smpmQS.tauElectrical</code>: machine torque</li>
+<li><code>smpm.tauElectrical</code>: machine torque</li>
 </ul>
 </html>"),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,

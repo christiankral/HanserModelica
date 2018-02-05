@@ -105,7 +105,7 @@ partial model SMEE_ShortCircuit "Template for short circuits of electrical excit
   Modelica.Electrical.MultiPhase.Basic.PlugToPin_p pin2(m=m, k=2) annotation (Placement(transformation(extent={{-30,40},{-50,60}})));
   Modelica.Electrical.MultiPhase.Basic.PlugToPin_p pin3(m=m, k=3) annotation (Placement(transformation(extent={{-30,20},{-50,40}})));
   Modelica.Electrical.Machines.Sensors.MechanicalPowerSensor
-    mechanicalPowerSensorQS annotation (Placement(transformation(extent={{40,-40},{60,-20}})));
+    mechanicalPowerSensor annotation (Placement(transformation(extent={{40,-40},{60,-20}})));
   Modelica.Mechanics.Rotational.Sources.ConstantSpeed constantSpeed(useSupport=false, final w_fixed=wNominal) annotation (Placement(transformation(extent={{90,-40},{70,-20}})));
   Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V=Ve)                     annotation (Placement(transformation(
         origin={-10,-30},
@@ -136,8 +136,8 @@ equation
   connect(pin2.plug_p, switch.plug_p) annotation (Line(points={{-38,50},{-20,50}}, color={0,0,255}));
   connect(pin3.plug_p, switch.plug_p) annotation (Line(points={{-38,30},{-30,30},{-30,50},{-20,50}}, color={0,0,255}));
   connect(terminalBox.starpoint, groundMachine.p) annotation (Line(points={{10,-18},{10,-14},{-30,-14},{-30,-50},{-10,-50}}, color={0,0,255}));
-  connect(mechanicalPowerSensorQS.flange_b, constantSpeed.flange) annotation (Line(points={{60,-30},{70,-30}}));
-  connect(smee.flange, mechanicalPowerSensorQS.flange_a) annotation (Line(points={{30,-30},{40,-30}}, color={0,0,0}));
+  connect(mechanicalPowerSensor.flange_b, constantSpeed.flange) annotation (Line(points={{60,-30},{70,-30}}));
+  connect(smee.flange, mechanicalPowerSensor.flange_a) annotation (Line(points={{30,-30},{40,-30}}, color={0,0,0}));
   connect(constantVoltage.p, smee.pin_ep) annotation (Line(points={{-10,-20},{0,-20},{0,-24},{10,-24}}, color={0,0,255}));
   connect(constantVoltage.n, smee.pin_en) annotation (Line(points={{-10,-40},{0,-40},{0,-36},{10,-36}}, color={0,0,255}));
   connect(constantVoltage.n, groundMachine.p) annotation (Line(points={{-10,-40},{-10,-50}}, color={0,0,255}));

@@ -199,5 +199,5 @@ This noise is caused by the interaction of the high resistance of the switch and
                   fillColor={255,255,170},
                   fillPattern=FillPattern.Solid,
                   textStyle={TextStyle.Bold},
-          textString="%m phase quasi static")}));
+          textString="%m phase transient")}));
 end SMEE_DOL;

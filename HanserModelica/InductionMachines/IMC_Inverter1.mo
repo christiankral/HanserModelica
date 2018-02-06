@@ -1,5 +1,5 @@
 within HanserModelica.InductionMachines;
-model IMC_Inverter "Induction machine with squirrel cage and inverter"
+model IMC_Inverter1 "Induction machine with squirrel cage and inverter"
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   parameter Integer m=3 "Number of phases";
@@ -10,7 +10,7 @@ model IMC_Inverter "Induction machine with squirrel cage and inverter"
   Modelica.SIunits.Frequency fActual=ramp.y "Actual frequency";
   parameter Modelica.SIunits.Time tRamp=1 "Frequency ramp";
   parameter Modelica.SIunits.Torque TLoad=161.4 "Nominal load torque";
-  parameter Modelica.SIunits.Time tStep=1.2 "Time of load torque step";
+  parameter Modelica.SIunits.Time tStep=1.5 "Time of load torque step";
   parameter Modelica.SIunits.Inertia JLoad=0.29
     "Load's moment of inertia";
   output Modelica.SIunits.Current I=currentRMSSensor.I "Transient RMS current";
@@ -41,13 +41,13 @@ model IMC_Inverter "Induction machine with squirrel cage and inverter"
     TrOperational=373.15) annotation (Placement(transformation(extent={
             {20,-90},{40,-70}})));
   Modelica.Blocks.Sources.Ramp ramp(          duration=tRamp, height=f)
-    annotation (Placement(transformation(extent={{-90,-30},{-70,-10}})));
+    annotation (Placement(transformation(extent={{-70,-30},{-50,-10}})));
   Modelica.Electrical.Machines.Utilities.VfController vfController(
     final m=m,
     VNominal=VNominal,
     fNominal=fNominal,
     BasePhase=+Modelica.Constants.pi/2) annotation (Placement(
-        transformation(extent={{-60,-30},{-40,-10}})));
+        transformation(extent={{-40,-30},{-20,-10}})));
   Modelica.Electrical.MultiPhase.Sources.SignalVoltage signalVoltage(
       final m=m) annotation (Placement(transformation(
         origin={-10,-50},
@@ -72,7 +72,7 @@ model IMC_Inverter "Induction machine with squirrel cage and inverter"
   parameter MoveTo_Modelica.Electrical.Machines.Utilities.ParameterRecords.AIM_SquirrelCageData imcData(
     TsRef=373.15,
     effectiveStatorTurns=64,
-    TrRef=373.15) "Machine data" annotation (Placement(transformation(extent={{68,-28},{88,-8}})));
+    TrRef=373.15) "Machine data" annotation (Placement(transformation(extent={{70,-28},{90,-8}})));
   Modelica.Electrical.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensor(final m=m) annotation (Placement(transformation(origin={20,-50}, extent={{-10,10},{10,-10}})));
   Modelica.Electrical.MultiPhase.Basic.Star starMachine(final m=Modelica.Electrical.MultiPhase.Functions.numberOfSymmetricBaseSystems(m)) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
@@ -82,6 +82,8 @@ model IMC_Inverter "Induction machine with squirrel cage and inverter"
         origin={-30,-74},
         extent={{-10,-10},{10,10}},
         rotation=270)));
+  Modelica.Electrical.MultiPhase.Sensors.VoltageQuasiRMSSensor voltageRMSSensor(final m=m)   annotation (
+    Placement(transformation(origin={60,-50},    extent={{10,10},{-10,-10}})));
 initial equation
   sum(imc.is) = 0;
   imc.is[1:2] = zeros(2);
@@ -102,14 +104,16 @@ equation
   connect(ground.p, star.pin_n) annotation (Line(
       points={{-50,-50},{-50,-50}},
       color={0,0,255}));
-  connect(ramp.y, vfController.u) annotation (Line(points={{-69,-20},{-62,-20}},                 color={0,0,127}));
-  connect(vfController.y, signalVoltage.v) annotation (Line(points={{-39,-20},{-10,-20},{-10,-38}}, color={0,0,127}));
+  connect(ramp.y, vfController.u) annotation (Line(points={{-49,-20},{-42,-20}},                 color={0,0,127}));
+  connect(vfController.y, signalVoltage.v) annotation (Line(points={{-19,-20},{-10,-20},{-10,-38}}, color={0,0,127}));
   connect(starMachine.plug_p, terminalBox.starpoint) annotation (Line(points={{10,-74},{10,-68},{20,-68}},   color={0,0,255}));
   connect(groundMachine.p,starMachine. pin_n) annotation (Line(points={{-20,-74},{-10,-74}}, color={0,0,255}));
   connect(star.plug_p, signalVoltage.plug_n) annotation (Line(points={{-30,-50},{-20,-50}}, color={0,0,255}));
   connect(signalVoltage.plug_p, currentRMSSensor.plug_p) annotation (Line(points={{0,-50},{10,-50}}, color={0,0,255}));
+  connect(voltageRMSSensor.plug_n, terminalBox.plug_sn) annotation (Line(points={{50,-50},{40,-50},{40,-64},{24,-64},{24,-70}}, color={0,0,255}));
+  connect(terminalBox.plug_sp,voltageRMSSensor. plug_p) annotation (Line(points={{36,-70},{46,-70},{46,-64},{80,-64},{80,-50},{70,-50}}, color={0,0,255}));
   annotation (
-    experiment(StopTime=1.5, Interval=0.0001, Tolerance=1E-8),
+    experiment(StopTime=2, Interval=0.0001, Tolerance=1E-8),
     Documentation(info="<html>
 
 <p>This example compares a time transient and a quasi static model of a multi phase induction machine.
@@ -117,7 +121,7 @@ An ideal frequency inverter is modeled by using a <code>VfController</code> and 
 Frequency is raised by a ramp, causing the induction machine with squirrel cage to start,
 and accelerating inertias. At time <code>tStep</code> a load step is applied.</p>
 
-<p>Simulate for 1.5 seconds and plot (versus time):</p>
+<p>Simulate for 2 seconds and plot (versus time):</p>
 
 <ul>
 <li><code>currentRMSsensor.I|currentSensorQS.abs_i[1]</code>: (equivalent) RMS stator current</li>
@@ -129,10 +133,10 @@ and accelerating inertias. At time <code>tStep</code> a load step is applied.</p
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}),
                          graphics={         Text(
-                  extent={{-60,-92},{20,-100}},
+                  extent={{-100,-86},{-20,-94}},
                   lineColor={0,0,0},
                   fillColor={255,255,170},
                   fillPattern=FillPattern.Solid,
                   textStyle={TextStyle.Bold},
           textString="%m phase transient")}));
-end IMC_Inverter;
+end IMC_Inverter1;

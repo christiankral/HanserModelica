@@ -1,6 +1,7 @@
 within HanserModelica.SynchronousMachines;
 model SMR_CurrentSource "Synchronous reluctance machine fed by current source"
   extends Modelica.Icons.Example;
+  extends Modelica.Icons.UnderConstruction;
   import Modelica.Constants.pi;
   parameter Integer m = 3 "Number of phases";
   parameter Modelica.SIunits.Voltage VNominal = 100 "Nominal RMS voltage per phase";

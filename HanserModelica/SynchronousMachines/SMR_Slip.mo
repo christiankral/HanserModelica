@@ -1,14 +1,15 @@
 within HanserModelica.SynchronousMachines;
 model SMR_Slip "Synchronous reluctance machine operated at small slip"
   extends Modelica.Icons.Example;
+  extends Modelica.Icons.UnderConstruction;
   import Modelica.Constants.pi;
   parameter Integer m = 3 "Number of stator phases";
   parameter Modelica.SIunits.Voltage VsNominal = 100 "Nominal RMS voltage per phase";
   parameter Modelica.SIunits.Frequency fNominal = 50 "Nominal frequency";
   parameter Modelica.SIunits.AngularVelocity w = Modelica.SIunits.Conversions.from_rpm(1499) "Nominal speed";
   parameter Modelica.SIunits.Angle gamma0(displayUnit = "deg") = 0 "Initial rotor displacement angle";
-  output Modelica.SIunits.Power P = powerSensor.apparentPowerTotal.re " real power";
-  output Modelica.SIunits.ReactivePower Q = powerSensor.apparentPowerTotal.im " reactive power";
+  output Modelica.SIunits.Power P=electricalSensor.apparentPowerTotal.re " real power";
+  output Modelica.SIunits.ReactivePower Q=electricalSensor.apparentPowerTotal.im " reactive power";
   Modelica.SIunits.Angle theta = rotorAngle.rotorDisplacementAngle "Rotor displacement angle";
   parameter Boolean positiveRange = false "Use positive range of angles, if true";
   Modelica.SIunits.Angle phi_i = Modelica.Math.wrapAngle(smr.arg_is[1], positiveRange) "Angle of current";
@@ -27,8 +28,10 @@ model SMR_Slip "Synchronous reluctance machine operated at small slip"
     Placement(transformation(origin = {-60, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
   Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground grounde annotation (
     Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-90, 80})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.MultiSensor powerSensor(m = m) annotation (
-    Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {0, 66})));
+  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.MultiSensor electricalSensor(m=m) annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={0,66})));
   Modelica.Magnetic.QuasiStatic.FundamentalWave.Utilities.MultiTerminalBox terminalBox(m = m, terminalConnection = "Y") annotation (
     Placement(transformation(extent = {{-10, 36}, {10, 56}})));
   Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star starMachine(m = Modelica.Electrical.MultiPhase.Functions.numberOfSymmetricBaseSystems(m)) annotation (
@@ -62,14 +65,10 @@ equation
     Line(points = {{10, 30}, {20, 30}}, color = {0, 0, 0}));
   connect(smr.flange, mechanicalPowerSensor.flange_a) annotation (
     Line(points = {{10, 30}, {50, 30}}, color = {0, 0, 0}));
-  connect(voltageSource.plug_p, powerSensor.pc) annotation (
-    Line(points = {{-20, 80}, {0, 80}, {0, 76}}, color = {85, 170, 255}));
-  connect(powerSensor.nc, terminalBox.plugSupply) annotation (
-    Line(points = {{0, 56}, {0, 42}}, color = {85, 170, 255}));
-  connect(powerSensor.pv, powerSensor.pc) annotation (
-    Line(points = {{10, 66}, {10, 76}, {0, 76}}, color = {85, 170, 255}));
-  connect(powerSensor.nv, star.plug_p) annotation (
-    Line(points = {{-10, 66}, {-50, 66}, {-50, 80}}, color = {85, 170, 255}));
+  connect(voltageSource.plug_p, electricalSensor.pc) annotation (Line(points={{-20,80},{0,80},{0,76}}, color={85,170,255}));
+  connect(electricalSensor.nc, terminalBox.plugSupply) annotation (Line(points={{0,56},{0,42}}, color={85,170,255}));
+  connect(electricalSensor.pv, electricalSensor.pc) annotation (Line(points={{10,66},{10,76},{0,76}}, color={85,170,255}));
+  connect(electricalSensor.nv, star.plug_p) annotation (Line(points={{-10,66},{-50,66},{-50,80}}, color={85,170,255}));
   annotation (
     experiment(StopTime = 30, Interval = 1E-3, Tolerance = 1e-06),
     Documentation(info = "<html>

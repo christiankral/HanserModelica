@@ -154,10 +154,8 @@ initial equation
   imc.rotorCage.electroMagneticConverter.V_m = Complex(0, 0);
 
 equation
-  connect(groundQS.pin, starQS.pin_n)
-    annotation (Line(points={{-80,20},{-80,20}}, color={85,170,255}));
-  connect(starQS.plug_p, voltageSourceQS.plug_n)
-    annotation (Line(points={{-60,20},{-60,30}}, color={85,170,255}));
+  connect(groundQS.pin, starQS.pin_n) annotation (Line(points={{-80,20},{-80,20}}, color={85,170,255}));
+  connect(starQS.plug_p, voltageSourceQS.plug_n) annotation (Line(points={{-60,20},{-60,30}}, color={85,170,255}));
   connect(powerSensorQS.currentN, currentRMSSensorQS.plug_p) annotation (Line(points={{-20,80},{-10,80}}, color={85,170,255}));
   connect(powerSensorQS.voltageP, powerSensorQS.currentP) annotation (
       Line(points={{-30,90},{-40,90},{-40,80}}, color={85,170,255}));
@@ -165,13 +163,11 @@ equation
         points={{-30,70},{-30,20},{-60,20}}, color={85,170,255}));
   connect(booleanStepQS.y, idealCloserQS.control) annotation (Line(
       points={{-79,70},{-72,70}}, color={255,0,255}));
-  connect(star.pin_n, ground.p)
-    annotation (Line(points={{-80,-80},{-80,-80}}, color={0,0,255}));
-  connect(cosineVoltage.plug_n, star.plug_p)
-    annotation (Line(points={{-60,-70},{-60,-80}}, color={0,0,255}));
+  connect(star.pin_n, ground.p) annotation (Line(points={{-80,-80},{-80,-80}}, color={0,0,255}));
+  connect(cosineVoltage.plug_n, star.plug_p) annotation (Line(points={{-60,-70},{-60,-80}}, color={0,0,255}));
   connect(imc.flange, loadInertia.flange_a) annotation (Line(points={{40,-60},{50,-60}}));
   connect(loadInertia.flange_b, quadraticLoadTorque.flange)
-    annotation (Line(points={{70,-60},{80,-60}}));
+                                                           annotation (Line(points={{70,-60},{80,-60}}));
   connect(terminalBox.plug_sn, imc.plug_sn) annotation (Line(points={{24,-50},{24,-50}}, color={0,0,255}));
   connect(terminalBox.plug_sp, imc.plug_sp) annotation (Line(points={{36,-50},{36,-50}}, color={0,0,255}));
   connect(booleanStep.y, idealCloser.control) annotation (Line(
@@ -192,8 +188,7 @@ equation
       color={0,0,255}));
   connect(powerSensor.nc, currentRMSSensor.plug_p) annotation (Line(points={{-20,-20},{-10,-20}}, color={0,0,255}));
   connect(currentRMSSensor.plug_n, terminalBox.plugSupply) annotation (Line(points={{10,-20},{30,-20},{30,-48}}, color={0,0,255}));
-  connect(loadInertiaQS.flange_b, quadraticLoadTorqueQS.flange)
-    annotation (Line(points={{70,40},{80,40}}));
+  connect(loadInertiaQS.flange_b, quadraticLoadTorqueQS.flange) annotation (Line(points={{70,40},{80,40}}));
   connect(powerSensor.pv, powerSensor.pc) annotation (Line(
       points={{-30,-10},{-40,-10},{-40,-20}},
       color={0,0,255}));

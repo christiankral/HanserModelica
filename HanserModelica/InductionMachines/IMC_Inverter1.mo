@@ -3,16 +3,15 @@ model IMC_Inverter1 "Induction machine with squirrel cage and inverter"
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   parameter Integer m=3 "Number of phases";
-  parameter Modelica.SIunits.Voltage VNominal=100
-    "Nominal RMS voltage per phase";
-  parameter Modelica.SIunits.Frequency fNominal=imcData.fsNominal "Nominal frequency";
-  parameter Modelica.SIunits.Frequency f=fNominal "Maximum operational frequency";
+  parameter Modelica.SIunits.Voltage VsNominal=100 "Nominal RMS voltage per phase";
+  parameter Modelica.SIunits.Current IsNominal=100 "Nominal RMS current per phase";
+  parameter Modelica.SIunits.Frequency fsNominal=imcData.fsNominal "Nominal frequency";
+  parameter Modelica.SIunits.Frequency f=fsNominal "Maximum operational frequency";
   Modelica.SIunits.Frequency fActual=ramp.y "Actual frequency";
   parameter Modelica.SIunits.Time tRamp=1 "Frequency ramp";
   parameter Modelica.SIunits.Torque TLoad=161.4 "Nominal load torque";
   parameter Modelica.SIunits.Time tStep=1.5 "Time of load torque step";
-  parameter Modelica.SIunits.Inertia JLoad=0.29
-    "Load's moment of inertia";
+  parameter Modelica.SIunits.Inertia JLoad=0.29 "Load's moment of inertia";
   output Modelica.SIunits.Current I=currentRMSSensor.I "Transient RMS current";
   Modelica.Magnetic.FundamentalWave.BasicMachines.AsynchronousInductionMachines.AIM_SquirrelCage
     imc(
@@ -40,13 +39,12 @@ model IMC_Inverter1 "Induction machine with squirrel cage and inverter"
     alpha20r=imcData.alpha20r,
     TrOperational=373.15) annotation (Placement(transformation(extent={
             {20,-90},{40,-70}})));
-  Modelica.Blocks.Sources.Ramp ramp(          duration=tRamp, height=f)
-    annotation (Placement(transformation(extent={{-70,-30},{-50,-10}})));
+  Modelica.Blocks.Sources.Ramp ramp(duration=tRamp, height=f) annotation (Placement(transformation(extent={{-70,-30},{-50,-10}})));
   Modelica.Electrical.Machines.Utilities.VfController vfController(
     final m=m,
-    VNominal=VNominal,
-    fNominal=fNominal,
-    BasePhase=+Modelica.Constants.pi/2) annotation (Placement(
+    BasePhase=+Modelica.Constants.pi/2,
+    fNominal=fsNominal,
+    VNominal=VsNominal)                 annotation (Placement(
         transformation(extent={{-40,-30},{-20,-10}})));
   Modelica.Electrical.MultiPhase.Sources.SignalVoltage signalVoltage(
       final m=m) annotation (Placement(transformation(

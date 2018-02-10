@@ -12,9 +12,9 @@ model IMC_DOL "Induction machine with squirrel cage started directly on line (DO
   parameter Modelica.SIunits.Torque tauLoad=161.4 "Nominal load torque";
   parameter Modelica.SIunits.AngularVelocity
     w_Load(displayUnit="rev/min")=1440.45*2*Modelica.Constants.pi/60 "Nominal load speed";
-  parameter Modelica.SIunits.Inertia J_Load=0.5 "Load inertia";
+  parameter Modelica.SIunits.Inertia JLoad=0.5 "Load inertia";
   parameter Integer p=2 "Number of pole pairs";
-  Modelica.SIunits.Current Itr=currentRMSSensor.I "Transient RMS current";
+  Modelica.SIunits.Current I=currentRMSSensor.I "Transient RMS current";
   Modelica.SIunits.Current Iqs=currentRMSSensorQS.I "QS RMS current";
   Modelica.Electrical.QuasiStationary.MultiPhase.Sources.VoltageSource
     voltageSourceQS(m=m,f=fsNominal,V=fill(VsNominal, m),
@@ -83,7 +83,7 @@ model IMC_DOL "Induction machine with squirrel cage started directly on line (DO
     TsOperational=373.15,
     effectiveStatorTurns=imcData.effectiveStatorTurns,
     TrOperational=373.15) annotation (Placement(transformation(extent={{20,-70},{40,-50}})));
-  Modelica.Mechanics.Rotational.Components.Inertia loadInertia(J=J_Load)
+  Modelica.Mechanics.Rotational.Components.Inertia loadInertia(J=JLoad)
     annotation (Placement(transformation(extent={{50,-70},{70,-50}})));
   Modelica.Mechanics.Rotational.Sources.QuadraticSpeedDependentTorque
     quadraticLoadTorque(
@@ -94,7 +94,7 @@ model IMC_DOL "Induction machine with squirrel cage started directly on line (DO
   Modelica.Electrical.MultiPhase.Sensors.PowerSensor powerSensor(final
       m=m) annotation (Placement(transformation(extent={{-40,-30},{-20,-10}})));
   Modelica.Mechanics.Rotational.Components.Inertia loadInertiaQS(J=
-        J_Load) annotation (Placement(transformation(extent={{50,30},{70,50}})));
+        JLoad) annotation (Placement(transformation(extent={{50,30},{70,50}})));
   Modelica.Mechanics.Rotational.Sources.QuadraticSpeedDependentTorque
     quadraticLoadTorqueQS(
     w_nominal=w_Load,

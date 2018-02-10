@@ -6,19 +6,19 @@ model IMS_Characteristics1 "Characteristic curves of induction machine with slip
   parameter Integer mr=3 "Number of rotor phases";
   parameter Integer mBase=Modelica.Electrical.MultiPhase.Functions.numberOfSymmetricBaseSystems(m)
     "Number of base systems";
-  parameter Modelica.SIunits.Voltage VsNominal=100
-    "Nominal RMS voltage per phase";
-  parameter Modelica.SIunits.Frequency fNominal=imsData.fsNominal "Nominal frequency";
+  parameter Modelica.SIunits.Voltage VsNominal=100 "Nominal RMS voltage per phase";
+  parameter Modelica.SIunits.Current IsNominal=100 "Nominal RMS current per phase";
+  parameter Modelica.SIunits.Frequency fsNominal=imsData.fsNominal "Nominal frequency";
   parameter Modelica.SIunits.Resistance Rr=0/imsData.turnsRatio^2 "Starting resistance";
   parameter Integer p=imsData.p "Number of pole pairs";
   parameter Modelica.SIunits.AngularVelocity w_Load(displayUnit="rev/min")=
        Modelica.SIunits.Conversions.from_rpm(1440.45)
     "Nominal load speed";
-  Real speedPerUnit = p*imsQS.wMechanical/(2*pi*fNominal) "Per unit speed";
+  Real speedPerUnit = p*ims.wMechanical/(2*pi*fsNominal) "Per unit speed";
   Real slip = 1-speedPerUnit "Slip";
-  output Modelica.SIunits.Current Iqs=iSensorQS.I "QS RMS current";
-  Modelica.Magnetic.QuasiStatic.FundamentalWave.Utilities.MultiTerminalBox terminalBoxQS(m=m, terminalConnection="Y") annotation (Placement(transformation(extent={{20,46},{40,66}})));
-  Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.InductionMachines.IM_SlipRing imsQS(
+  output Modelica.SIunits.Current I=currentSensor.I " RMS current";
+  Modelica.Magnetic.QuasiStatic.FundamentalWave.Utilities.MultiTerminalBox terminalBox(m=m, terminalConnection="Y") annotation (Placement(transformation(extent={{20,46},{40,66}})));
+  Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.InductionMachines.IM_SlipRing ims(
     p=imsData.p,
     fsNominal=imsData.fsNominal,
     TsRef=imsData.TsRef,
@@ -51,44 +51,44 @@ model IMS_Characteristics1 "Characteristic curves of induction machine with slip
     effectiveStatorTurns=64,
     TsRef=373.15,
     TrRef=373.15) "Machine data" annotation (Placement(transformation(extent={{70,72},{90,92}})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sources.VoltageSource vSourceQS(
+  Modelica.Electrical.QuasiStationary.MultiPhase.Sources.VoltageSource voltageSource(
     m=m,
     phi=-Modelica.Electrical.MultiPhase.Functions.symmetricOrientation(m),
-    f=fNominal,
+    f=fsNominal,
     V=fill(VsNominal, m)) annotation (Placement(transformation(
         origin={-80,60},
         extent={{-10,-10},{10,10}},
         rotation=270)));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star starQS(m=m)
+  Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star star(m=m)
     annotation (Placement(transformation(
         origin={-80,30},
         extent={{-10,-10},{10,10}},
         rotation=270)));
-  Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground groundQS
+  Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground ground
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-80,10})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.PowerSensor pSensorQS(m=m) annotation (Placement(transformation(extent={{-70,70},{-50,90}})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor iSensorQS(m=m) annotation (Placement(transformation(extent={{-10,70},{10,90}})));
+  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.PowerSensor powerSensor(m=m) annotation (Placement(transformation(extent={{-70,70},{-50,90}})));
+  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor currentSensor(m=m) annotation (Placement(transformation(extent={{-10,70},{10,90}})));
   Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star
-    starMachineQS(m=mBase)
+    starMachine(m=mBase)
     annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=270,
         origin={-40,30})));
   Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground
-    groundMachineQS annotation (Placement(transformation(
+    groundMachine annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         origin={-40,10})));
 
   Modelica.Mechanics.Rotational.Sources.Speed speed(exact=true) annotation (Placement(transformation(extent={{70,30},{50,50}})));
   Modelica.Blocks.Sources.Ramp ramp(
-    height=3*2*pi*fNominal/p,
+    height=3*2*pi*fsNominal/p,
     duration=1,
-    offset=-2*pi*fNominal/p) annotation (Placement(transformation(extent={{100,30},{80,50}})));
-  Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground groundRotorQS annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={-10,10})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star starRotorQS(m=mr) annotation (Placement(transformation(
+    offset=-2*pi*fsNominal/p) annotation (Placement(transformation(extent={{100,30},{80,50}})));
+  Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground groundRotor annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={-10,10})));
+  Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star starRotor(m=mr) annotation (Placement(transformation(
         origin={-10,30},
         extent={{-10,-10},{10,10}},
         rotation=270)));
@@ -97,31 +97,31 @@ model IMS_Characteristics1 "Characteristic curves of induction machine with slip
         rotation=270,
         origin={10,36})));
 equation
-  connect(terminalBoxQS.plug_sn, imsQS.plug_sn)
+  connect(terminalBox.plug_sn, ims.plug_sn)
     annotation (Line(points={{24,50},{24,50}}, color={0,0,255}));
-  connect(terminalBoxQS.plug_sp, imsQS.plug_sp)
+  connect(terminalBox.plug_sp, ims.plug_sp)
     annotation (Line(points={{36,50},{36,50}}, color={0,0,255}));
-  connect(groundQS.pin, starQS.pin_n)
+  connect(ground.pin, star.pin_n)
     annotation (Line(points={{-80,20},{-80,20}}, color={85,170,255}));
-  connect(starQS.plug_p, vSourceQS.plug_n) annotation (Line(points={{-80,40},{-80,50}}, color={85,170,255}));
-  connect(pSensorQS.currentN, iSensorQS.plug_p) annotation (Line(points={{-50,80},{-10,80}}, color={85,170,255}));
-  connect(pSensorQS.voltageP, pSensorQS.currentP) annotation (Line(points={{-60,90},{-70,90},{-70,80}}, color={85,170,255}));
-  connect(pSensorQS.voltageN, starQS.plug_p) annotation (Line(points={{-60,70},{-60,40},{-80,40}}, color={85,170,255}));
-  connect(iSensorQS.plug_n, terminalBoxQS.plugSupply) annotation (Line(points={{10,80},{30,80},{30,52}}, color={85,170,255}));
-  connect(starMachineQS.pin_n, groundMachineQS.pin) annotation (Line(
+  connect(star.plug_p, voltageSource.plug_n) annotation (Line(points={{-80,40},{-80,50}}, color={85,170,255}));
+  connect(powerSensor.currentN, currentSensor.plug_p) annotation (Line(points={{-50,80},{-10,80}}, color={85,170,255}));
+  connect(powerSensor.voltageP, powerSensor.currentP) annotation (Line(points={{-60,90},{-70,90},{-70,80}}, color={85,170,255}));
+  connect(powerSensor.voltageN, star.plug_p) annotation (Line(points={{-60,70},{-60,40},{-80,40}}, color={85,170,255}));
+  connect(currentSensor.plug_n, terminalBox.plugSupply) annotation (Line(points={{10,80},{30,80},{30,52}}, color={85,170,255}));
+  connect(starMachine.pin_n, groundMachine.pin) annotation (Line(
       points={{-40,20},{-40,20}},
       color={85,170,255}));
-  connect(starMachineQS.plug_p, terminalBoxQS.starpoint) annotation (
+  connect(starMachine.plug_p, terminalBox.starpoint) annotation (
       Line(
       points={{-40,40},{-40,52},{20,52}},
       color={85,170,255}));
-  connect(vSourceQS.plug_p, pSensorQS.currentP) annotation (Line(points={{-80,70},{-80,80},{-70,80}}, color={85,170,255}));
+  connect(voltageSource.plug_p, powerSensor.currentP) annotation (Line(points={{-80,70},{-80,80},{-70,80}}, color={85,170,255}));
   connect(ramp.y,speed. w_ref) annotation (Line(points={{79,40},{72,40}}, color={0,0,127}));
-  connect(imsQS.flange, speed.flange) annotation (Line(points={{40,40},{50,40}}, color={0,0,0}));
-  connect(starRotorQS.pin_n, groundRotorQS.pin) annotation (Line(points={{-10,20},{-10,20}}, color={85,170,255}));
-  connect(resistor.plug_n, imsQS.plug_rn) annotation (Line(points={{10,26},{20,26},{20,34}}, color={85,170,255}));
-  connect(imsQS.plug_rp, resistor.plug_p) annotation (Line(points={{20,46},{10,46}}, color={85,170,255}));
-  connect(starRotorQS.plug_p, resistor.plug_n) annotation (Line(points={{-10,40},{-10,46},{2,46},{2,26},{10,26}}, color={85,170,255}));
+  connect(ims.flange, speed.flange) annotation (Line(points={{40,40},{50,40}}, color={0,0,0}));
+  connect(starRotor.pin_n, groundRotor.pin) annotation (Line(points={{-10,20},{-10,20}}, color={85,170,255}));
+  connect(resistor.plug_n, ims.plug_rn) annotation (Line(points={{10,26},{20,26},{20,34}}, color={85,170,255}));
+  connect(ims.plug_rp, resistor.plug_p) annotation (Line(points={{20,46},{10,46}}, color={85,170,255}));
+  connect(starRotor.plug_p, resistor.plug_n) annotation (Line(points={{-10,40},{-10,46},{2,46},{2,26},{10,26}}, color={85,170,255}));
   annotation (
     experiment(Interval=0.001, StopTime=1, Tolerance=1e-06),
     Documentation(info="<html>
@@ -132,14 +132,14 @@ as a function of rotor speed.
 </p>
 
 <p>
-Simulate for 1 second and plot (versus imsQS.wMechanical or perUnitSpeed):
+Simulate for 1 second and plot (versus ims.wMechanical or perUnitSpeed):
 </p>
 
 <ul>
-<li><code>currentSensorQS.abs_i[1]</code>: (equivalent) RMS stator current</li>
-<li><code>imsQS.tauElectrical</code>: machine torque</li>
-<li><code>imscQS.powerBalance.powerStator</code>: stator power</li>
-<li><code>imsQS.powerBalance.powerMechanical</code>: mechanical power</li>
+<li><code>currentSensor.abs_i[1]</code>: (equivalent) RMS stator current</li>
+<li><code>ims.tauElectrical</code>: machine torque</li>
+<li><code>imsc.powerBalance.powerStator</code>: stator power</li>
+<li><code>ims.powerBalance.powerMechanical</code>: mechanical power</li>
 </ul>
 <p>Default machine parameters are used. The rotor resistance may be varied to demonstrate the impact on the characteristic curves</p>
 </html>"),

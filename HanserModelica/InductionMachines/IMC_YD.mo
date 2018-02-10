@@ -3,16 +3,15 @@ model IMC_YD "Induction machine with squirrel cage starting Y-D"
   import Modelica.Constants.pi;
   extends Modelica.Icons.Example;
   constant Integer m=3 "Number of phases";
-  parameter Modelica.SIunits.Voltage VNominal=100
-    "Nominal RMS voltage per phase";
-  parameter Modelica.SIunits.Frequency fNominal=50 "Nominal frequency";
+  parameter Modelica.SIunits.Voltage VsNominal=100     "Nominal RMS voltage per phase";
+  parameter Modelica.SIunits.Current IsNominal=100 "Nominal RMS current per phase";
+  parameter Modelica.SIunits.Frequency fsNominal=50 "Nominal frequency";
   parameter Modelica.SIunits.Time tStart1=0.1 "Start time";
   parameter Modelica.SIunits.Time tStart2=2.0 "Start time from Y to D";
   parameter Modelica.SIunits.Torque TLoad=161.4 "Nominal load torque";
   parameter Modelica.SIunits.AngularVelocity wLoad(displayUnit="rev/min")=
        1440.45*2*Modelica.Constants.pi/60 "Nominal load speed";
-  parameter Modelica.SIunits.Inertia JLoad=0.29
-    "Load's moment of inertia";
+  parameter Modelica.SIunits.Inertia JLoad=0.29 "Load's moment of inertia";
   Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.InductionMachines.IM_SquirrelCage imcQS(
     p=imcData.p,
     fsNominal=imcData.fsNominal,
@@ -43,8 +42,8 @@ model IMC_YD "Induction machine with squirrel cage starting Y-D"
         origin={30,70})));
   Modelica.Electrical.QuasiStationary.MultiPhase.Sources.VoltageSource sineVoltageQS(
     final m=m,
-    f=fNominal,
-    V=fill(VNominal/sqrt(3), m)) annotation (Placement(transformation(
+    f=fsNominal,
+    V=fill(VsNominal/sqrt(3), m)) annotation (Placement(transformation(
         origin={-30,90},
         extent={{10,10},{-10,-10}},
         rotation=0)));
@@ -104,8 +103,8 @@ model IMC_YD "Induction machine with squirrel cage starting Y-D"
         origin={30,-30})));
   Modelica.Electrical.MultiPhase.Sources.SineVoltage sineVoltage(
     final m=m,
-    freqHz=fill(fNominal, m),
-    V=fill(sqrt(2/3)*VNominal, m)) annotation (Placement(transformation(
+    freqHz=fill(fsNominal, m),
+    V=fill(sqrt(2/3)*VsNominal, m)) annotation (Placement(transformation(
         origin={-30,-10},
         extent={{10,10},{-10,-10}},
         rotation=0)));

@@ -5,6 +5,8 @@ IMC_Transformer
 IMC_Inverter1
 IMC_Inverter2
 IMC_withLosses
+IMC_Steinmetz
 IMS_Characteristics1
 IMS_Characteristics2
 IMS_Characteristics3
+IMS_Start

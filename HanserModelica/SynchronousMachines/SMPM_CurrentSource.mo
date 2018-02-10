@@ -14,16 +14,13 @@ model SMPM_CurrentSource "Permanent magnet synchronous machine fed by current so
   parameter Modelica.SIunits.Inertia JLoad=0.29 "Load's moment of inertia";
   Modelica.SIunits.Angle theta=rotorAngle.rotorDisplacementAngle "Rotor displacement angle, quasi stastic";
   parameter Boolean positiveRange = false "Use positive range of angles, if true";
-  Modelica.SIunits.Angle phi_i = Modelica.Math.wrapAngle(smpm.arg_is[1],positiveRange) "Angle of current";
-  Modelica.SIunits.Angle phi_v = Modelica.Math.wrapAngle(smpm.arg_vs[1],positiveRange) "Angle of voltage";
-  Modelica.SIunits.Angle phi = Modelica.Math.wrapAngle(phi_v-phi_i,positiveRange) "Angle between voltage and current";
-  Modelica.SIunits.Angle epsilon = Modelica.Math.wrapAngle(phi-theta,positiveRange) "Current angle";
-
-  Modelica.Blocks.Sources.Constant iq(k=84.6*3/m)
-                                              annotation (Placement(
+  Modelica.SIunits.Angle phii = Modelica.Math.wrapAngle(smpm.arg_is[1],positiveRange) "Angle of current";
+  Modelica.SIunits.Angle phiv = Modelica.Math.wrapAngle(smpm.arg_vs[1],positiveRange) "Angle of voltage";
+  Modelica.SIunits.Angle phis = Modelica.Math.wrapAngle(phiv-phii,positiveRange) "Angle between voltage and current";
+  Modelica.SIunits.Angle epsilon = Modelica.Math.wrapAngle(phis-theta,positiveRange) "Current angle";
+  Modelica.Blocks.Sources.Constant iq(k=84.6*3/m) annotation (Placement(
         transformation(extent={{-90,40},{-70,60}})));
-  Modelica.Blocks.Sources.Constant id(k=-53.5*3/m)
-    annotation (Placement(transformation(extent={{-90,70},{-70,90}})));
+  Modelica.Blocks.Sources.Constant id(k=-53.5*3/m) annotation (Placement(transformation(extent={{-90,70},{-70,90}})));
   parameter
     Modelica.Electrical.Machines.Utilities.ParameterRecords.SM_PermanentMagnetData
     smpmData(useDamperCage=false, effectiveStatorTurns=64,

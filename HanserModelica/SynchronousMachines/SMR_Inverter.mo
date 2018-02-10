@@ -3,12 +3,13 @@ model SMR_Inverter "Synchronous reluctance machine with squirrel cage and invert
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   parameter Integer m = 3 "Number of phases";
-  parameter Modelica.SIunits.Voltage VNominal = 100 "Nominal RMS voltage per phase";
-  parameter Modelica.SIunits.Frequency fNominal = smrData.fsNominal "Nominal frequency";
-  parameter Modelica.SIunits.Frequency f = fNominal "Maximum operational frequency";
+  parameter Modelica.SIunits.Voltage VsNominal = 100 "Nominal RMS voltage per phase";
+  parameter Modelica.SIunits.Current IsNominal = 100 "Nominal current";
+  parameter Modelica.SIunits.Frequency fsNominal = smrData.fsNominal "Nominal frequency";
+  parameter Modelica.SIunits.Frequency f = fsNominal "Maximum operational frequency";
   Modelica.SIunits.Frequency fActual = ramp.y "Actual frequency";
   parameter Modelica.SIunits.Time tRamp = 1 "Frequency ramp";
-  parameter Modelica.SIunits.Torque TLoad = 135.2 "Nominal load torque";
+  parameter Modelica.SIunits.Torque tauLoad = 135.2 "Nominal load torque";
   parameter Modelica.SIunits.Time tStep = 1.5 "Time of load torque step";
   parameter Modelica.SIunits.Inertia JLoad = 0.29 "Load's moment of inertia";
   output Modelica.SIunits.Current I = currentRMSSensor.I "Transient RMS current";
@@ -16,7 +17,7 @@ model SMR_Inverter "Synchronous reluctance machine with squirrel cage and invert
     Placement(transformation(extent = {{20, -90}, {40, -70}})));
   Modelica.Blocks.Sources.Ramp ramp(duration = tRamp, height = f) annotation (
     Placement(transformation(extent={{-70,-30},{-50,-10}})));
-  Modelica.Electrical.Machines.Utilities.VfController vfController(final m = m, VNominal = VNominal, fNominal = fNominal) annotation (
+  Modelica.Electrical.Machines.Utilities.VfController vfController(final m = m, VNominal = VsNominal, fNominal = fsNominal) annotation (
     Placement(transformation(extent={{-40,-30},{-20,-10}})));
   Modelica.Electrical.MultiPhase.Sources.SignalVoltage signalVoltage(final m = m) annotation (
     Placement(transformation(origin={-10,-50},    extent = {{-10, 10}, {10, -10}}, rotation = 180)));
@@ -26,7 +27,7 @@ model SMR_Inverter "Synchronous reluctance machine with squirrel cage and invert
     Placement(transformation(origin={-60,-50},    extent = {{-10, -10}, {10, 10}}, rotation = 270)));
   Modelica.Mechanics.Rotational.Components.Inertia loadInertia(J = JLoad) annotation (
     Placement(transformation(extent = {{48, -90}, {68, -70}})));
-  Modelica.Mechanics.Rotational.Sources.TorqueStep loadTorqueStep(startTime = tStep, stepTorque = -TLoad, useSupport = false, offsetTorque = 0) annotation (
+  Modelica.Mechanics.Rotational.Sources.TorqueStep loadTorqueStep(startTime = tStep, stepTorque = -tauLoad, useSupport = false, offsetTorque = 0) annotation (
     Placement(transformation(extent = {{96, -90}, {76, -70}})));
   Modelica.Electrical.Machines.Utilities.MultiTerminalBox terminalBox(terminalConnection = "Y", m = m) annotation (
     Placement(transformation(extent = {{20, -74}, {40, -54}})));

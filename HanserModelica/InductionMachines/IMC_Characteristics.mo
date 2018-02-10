@@ -3,40 +3,40 @@ model IMC_Characteristics "Characteristic curves of Induction machine with squir
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   parameter Integer m=3 "Number of phases";
-  parameter Modelica.SIunits.Voltage VsNominal=100
-    "Nominal RMS voltage per phase";
-  parameter Modelica.SIunits.Frequency fNominal=imcData.fsNominal "Nominal frequency";
+  parameter Modelica.SIunits.Voltage VsNominal=100 "Nominal RMS voltage per phase";
+  parameter Modelica.SIunits.Current IsNominal=100 "Nominal RMS current per phase";
+  parameter Modelica.SIunits.Frequency fsNominal=imcData.fsNominal "Nominal frequency";
   parameter Modelica.SIunits.AngularVelocity w_Load(displayUnit="rev/min")=
        1440.45*2*Modelica.Constants.pi/60 "Nominal load speed";
   parameter Integer p=imcData.p "Number of pole pairs";
-  Real speedPerUnit = p*imcQS.wMechanical/(2*pi*fNominal) "Per unit speed";
+  Real speedPerUnit = p*imc.wMechanical/(2*pi*fsNominal) "Per unit speed";
   Real slip = 1-speedPerUnit "Slip";
-  output Modelica.SIunits.Current Iqs=currentRMSSensorQS.I "QS RMS current";
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sources.VoltageSource vSourceQS(
+  output Modelica.SIunits.Current I=currentRMSSensor.I " RMS current";
+  Modelica.Electrical.QuasiStationary.MultiPhase.Sources.VoltageSource voltageSource(
     m=m,
-    f=fNominal,
+    f=fsNominal,
     V=fill(VsNominal, m),
     phi=-Modelica.Electrical.MultiPhase.Functions.symmetricOrientation(m)) annotation (Placement(transformation(
         origin={-60,40},
         extent={{-10,-10},{10,10}},
         rotation=270)));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star starQS(m=m)
+  Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star star(m=m)
     annotation (Placement(transformation(
         origin={-70,20},
         extent={{-10,-10},{10,10}},
         rotation=180)));
-  Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground groundQS
+  Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground ground
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-90,20})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.PowerSensor powerSensorQS(m=m) annotation (Placement(transformation(extent={{-40,70},{-20,90}})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensorQS(m=m) annotation (Placement(transformation(extent={{-10,70},{10,90}})));
+  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.PowerSensor powerSensor(m=m) annotation (Placement(transformation(extent={{-40,70},{-20,90}})));
+  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensor(m=m) annotation (Placement(transformation(extent={{-10,70},{10,90}})));
   parameter MoveTo_Modelica.Electrical.Machines.Utilities.ParameterRecords.AIM_SquirrelCageData imcData(
     effectiveStatorTurns=64,
     TsRef=373.15,
     TrRef=373.15) "Machine data" annotation (Placement(transformation(extent={{70,72},{90,92}})));
-  Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.InductionMachines.IM_SquirrelCage imcQS(
+  Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.InductionMachines.IM_SquirrelCage imc(
     Js=imcData.Js,
     p=imcData.p,
     fsNominal=imcData.fsNominal,
@@ -59,47 +59,47 @@ model IMC_Characteristics "Characteristic curves of Induction machine with squir
     effectiveStatorTurns=imcData.effectiveStatorTurns,
     TrOperational=373.15) annotation (Placement(transformation(extent={{20,30},{40,50}})));
   Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground
-    groundMachineQS annotation (Placement(transformation(
+    groundMachine annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         origin={-10,10})));
   Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star
-    starMachineQS(m=
+    starMachine(m=
         Modelica.Electrical.MultiPhase.Functions.numberOfSymmetricBaseSystems(
                                                                      m))
     annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=270,
         origin={-10,30})));
-  Modelica.Magnetic.QuasiStatic.FundamentalWave.Utilities.MultiTerminalBox terminalBoxQS(m=m, terminalConnection="Y") annotation (Placement(transformation(extent={{20,46},{40,66}})));
+  Modelica.Magnetic.QuasiStatic.FundamentalWave.Utilities.MultiTerminalBox terminalBox(m=m, terminalConnection="Y") annotation (Placement(transformation(extent={{20,46},{40,66}})));
   Modelica.Mechanics.Rotational.Sources.Speed speed(exact=true) annotation (Placement(transformation(extent={{70,30},{50,50}})));
   Modelica.Blocks.Sources.Ramp ramp(
-    height=3*2*pi*fNominal/p,
+    height=3*2*pi*fsNominal/p,
     duration=1,
-    offset=-2*pi*fNominal/p) annotation (Placement(transformation(extent={{100,30},{80,50}})));
+    offset=-2*pi*fsNominal/p) annotation (Placement(transformation(extent={{100,30},{80,50}})));
 equation
-  connect(groundQS.pin, starQS.pin_n)
+  connect(ground.pin, star.pin_n)
     annotation (Line(points={{-80,20},{-80,20}}, color={85,170,255}));
-  connect(starQS.plug_p, vSourceQS.plug_n) annotation (Line(points={{-60,20},{-60,30}}, color={85,170,255}));
-  connect(powerSensorQS.currentN, currentRMSSensorQS.plug_p) annotation (Line(points={{-20,80},{-10,80}}, color={85,170,255}));
-  connect(powerSensorQS.voltageP, powerSensorQS.currentP) annotation (Line(points={{-30,90},{-40,90},{-40,80}}, color={85,170,255}));
-  connect(powerSensorQS.voltageN, starQS.plug_p) annotation (Line(points={{-30,70},{-30,20},{-60,20}}, color={85,170,255}));
-  connect(terminalBoxQS.plug_sn, imcQS.plug_sn) annotation (Line(
+  connect(star.plug_p, voltageSource.plug_n) annotation (Line(points={{-60,20},{-60,30}}, color={85,170,255}));
+  connect(powerSensor.currentN, currentRMSSensor.plug_p) annotation (Line(points={{-20,80},{-10,80}}, color={85,170,255}));
+  connect(powerSensor.voltageP, powerSensor.currentP) annotation (Line(points={{-30,90},{-40,90},{-40,80}}, color={85,170,255}));
+  connect(powerSensor.voltageN, star.plug_p) annotation (Line(points={{-30,70},{-30,20},{-60,20}}, color={85,170,255}));
+  connect(terminalBox.plug_sn, imc.plug_sn) annotation (Line(
       points={{24,50},{24,50}},
       color={85,170,255}));
-  connect(terminalBoxQS.plug_sp, imcQS.plug_sp) annotation (Line(
+  connect(terminalBox.plug_sp, imc.plug_sp) annotation (Line(
       points={{36,50},{36,50}},
       color={85,170,255}));
-  connect(starMachineQS.plug_p, terminalBoxQS.starpoint) annotation (
+  connect(starMachine.plug_p, terminalBox.starpoint) annotation (
       Line(
       points={{-10,40},{-10,52},{20,52}},
       color={85,170,255}));
-  connect(currentRMSSensorQS.plug_n, terminalBoxQS.plugSupply) annotation (Line(points={{10,80},{30,80},{30,52}}, color={85,170,255}));
-  connect(starMachineQS.pin_n, groundMachineQS.pin) annotation (Line(
+  connect(currentRMSSensor.plug_n, terminalBox.plugSupply) annotation (Line(points={{10,80},{30,80},{30,52}}, color={85,170,255}));
+  connect(starMachine.pin_n, groundMachine.pin) annotation (Line(
       points={{-10,20},{-10,20}},
       color={85,170,255}));
-  connect(imcQS.flange, speed.flange) annotation (Line(points={{40,40},{50,40}}, color={0,0,0}));
+  connect(imc.flange, speed.flange) annotation (Line(points={{40,40},{50,40}}, color={0,0,0}));
   connect(ramp.y, speed.w_ref) annotation (Line(points={{79,40},{72,40}}, color={0,0,127}));
-  connect(vSourceQS.plug_p, powerSensorQS.currentP) annotation (Line(points={{-60,50},{-60,80},{-40,80}}, color={85,170,255}));
+  connect(voltageSource.plug_p, powerSensor.currentP) annotation (Line(points={{-60,50},{-60,80},{-40,80}}, color={85,170,255}));
   annotation (experiment(StopTime=1, Interval=0.001, Tolerance=1E-6),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics={
         Text(
@@ -115,14 +115,14 @@ as a function of rotor speed.
 </p>
 
 <p>
-Simulate for 1 second and plot (versus imcQS.wMechanical or perUnitSpeed):
+Simulate for 1 second and plot (versus imc.wMechanical or perUnitSpeed):
 </p>
 
 <ul>
-<li><code>currentSensorQS.abs_i[1]</code>: (equivalent) RMS stator current</li>
-<li><code>imcQS.tauElectrical</code>: machine torque</li>
-<li><code>imcQS.powerBalance.powerStator</code>: stator power</li>
-<li><code>imcQS.powerBalance.powerMechanical</code>: mechanical power</li>
+<li><code>currentSensor.abs_i[1]</code>: (equivalent) RMS stator current</li>
+<li><code>imc.tauElectrical</code>: machine torque</li>
+<li><code>imc.powerBalance.powerStator</code>: stator power</li>
+<li><code>imc.powerBalance.powerMechanical</code>: mechanical power</li>
 </ul>
 </html>"));
 end IMC_Characteristics;

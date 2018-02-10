@@ -6,9 +6,10 @@ model IMC_DOL "Induction machine with squirrel cage started directly on line (DO
   parameter Integer mBase=Modelica.Electrical.MultiPhase.Functions.numberOfSymmetricBaseSystems(m)
     "Number of base systems";
   parameter Modelica.SIunits.Voltage VsNominal=100 "Nominal RMS voltage per phase";
-  parameter Modelica.SIunits.Frequency fNominal=imc.fsNominal "Nominal frequency";
+  parameter Modelica.SIunits.Current IsNominal=100 "Nominal RMS current per phase";
+  parameter Modelica.SIunits.Frequency fsNominal=imc.fsNominal "Nominal frequency";
   parameter Modelica.SIunits.Time tOn=0.1 "Start time of machine";
-  parameter Modelica.SIunits.Torque T_Load=161.4 "Nominal load torque";
+  parameter Modelica.SIunits.Torque tauLoad=161.4 "Nominal load torque";
   parameter Modelica.SIunits.AngularVelocity
     w_Load(displayUnit="rev/min")=1440.45*2*Modelica.Constants.pi/60 "Nominal load speed";
   parameter Modelica.SIunits.Inertia J_Load=0.5 "Load inertia";
@@ -16,7 +17,7 @@ model IMC_DOL "Induction machine with squirrel cage started directly on line (DO
   Modelica.SIunits.Current Itr=currentRMSSensor.I "Transient RMS current";
   Modelica.SIunits.Current Iqs=currentRMSSensorQS.I "QS RMS current";
   Modelica.Electrical.QuasiStationary.MultiPhase.Sources.VoltageSource
-    voltageSourceQS(m=m,f=fNominal,V=fill(VsNominal, m),
+    voltageSourceQS(m=m,f=fsNominal,V=fill(VsNominal, m),
     phi=-Modelica.Electrical.MultiPhase.Functions.symmetricOrientation(m))
     annotation (Placement(transformation(origin={-60,40},extent={{-10,-10},{10,10}},rotation=270)));
   Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star starQS(m=m)
@@ -39,7 +40,7 @@ model IMC_DOL "Induction machine with squirrel cage started directly on line (DO
     annotation (Placement(transformation(extent={{-60,-90},{-80,-70}})));
   Modelica.Electrical.MultiPhase.Sources.CosineVoltage cosineVoltage(
     final m=m,
-    freqHz=fill(fNominal, m),
+    freqHz=fill(fsNominal, m),
     V=fill(sqrt(2.0)*VsNominal, m)) annotation (Placement(
         transformation(
         origin={-60,-60},
@@ -87,7 +88,7 @@ model IMC_DOL "Induction machine with squirrel cage started directly on line (DO
   Modelica.Mechanics.Rotational.Sources.QuadraticSpeedDependentTorque
     quadraticLoadTorque(
     w_nominal=w_Load,
-    tau_nominal=-T_Load,
+    tau_nominal=-tauLoad,
     TorqueDirection=false,
     useSupport=false) annotation (Placement(transformation(extent={{100,-70},{80,-50}})));
   Modelica.Electrical.MultiPhase.Sensors.PowerSensor powerSensor(final
@@ -97,7 +98,7 @@ model IMC_DOL "Induction machine with squirrel cage started directly on line (DO
   Modelica.Mechanics.Rotational.Sources.QuadraticSpeedDependentTorque
     quadraticLoadTorqueQS(
     w_nominal=w_Load,
-    tau_nominal=-T_Load,
+    tau_nominal=-tauLoad,
     TorqueDirection=false,
     useSupport=false) annotation (Placement(transformation(extent={{100,30},{80,50}})));
   parameter MoveTo_Modelica.Electrical.Machines.Utilities.ParameterRecords.AIM_SquirrelCageData imcData(

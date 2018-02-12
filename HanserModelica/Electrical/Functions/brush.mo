@@ -1,4 +1,4 @@
-within HanserModelica.Electrical;
+within HanserModelica.Electrical.Functions;
 function brush "Brush voltage as a function of brush current"
   extends Modelica.Icons.Function;
   input Modelica.SIunits.Current i "Brush current";

@@ -1,5 +1,5 @@
 within HanserModelica.VariablesTypes;
-model VectorsMatrices1
+model VectorsMatrices1 "Example 1 on vetors and matrices"
   extends Modelica.Icons.Example;
   parameter Real a[3]={1,2,3};   // a = {1,2,3}
   parameter Real[3] b=3:-1:1;    // b = {3,2,1} alternative syntax

@@ -20,7 +20,7 @@ model QuasiStaticMultiPhase "Quasi static multi phase circuit"
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-70,0})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.MultiSensor sensor annotation (Placement(transformation(extent={{-50,10},{-30,30}})));
+  MoveTo_Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.MultiSensor sensor annotation (Placement(transformation(extent={{-50,10},{-30,30}})));
   Modelica.Blocks.Sources.Ramp ramp[3](
     height=fill(60, 3),
     duration=fill(1, 3),

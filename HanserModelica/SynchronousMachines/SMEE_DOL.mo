@@ -35,13 +35,14 @@ model SMEE_DOL "Electrical excited synchronous machine starting direct on line"
     Lssigma=smeeData.Lssigma*m/3,
     Lmd=smeeData.Lmd*m/3,
     Lmq=smeeData.Lmq*m/3,
-    TsOperational=293.15,
+    sigmae=smeeData.sigmae*m/3,
+    TsOperational=373.15,
     alpha20s=smeeData.alpha20s,
+    effectiveStatorTurns=smeeData.effectiveStatorTurns,
     alpha20r=smeeData.alpha20r,
-    TrOperational=293.15,
-    TeOperational=293.15,
-    alpha20e=smeeData.alpha20e,
-    sigmae=smeeData.sigmae*m/3)
+    TrOperational=373.15,
+    TeOperational=373.15,
+    alpha20e=smeeData.alpha20e)
       annotation (Placement(transformation(extent={{-20,-50},{0,-30}})));
   Modelica.Electrical.Machines.Sensors.RotorDisplacementAngle rotorDisplacementAngle(p=smee.p, m=m) annotation (Placement(transformation(
         origin={20,-40},
@@ -53,7 +54,7 @@ model SMEE_DOL "Electrical excited synchronous machine starting direct on line"
         extent={{-10,-10},{10,10}},
         rotation=0)));
   Modelica.Mechanics.Rotational.Sensors.MultiSensor mechanicalSensor annotation (Placement(transformation(extent={{40,-50},{60,-30}})));
-  Modelica.Electrical.MultiPhase.Sensors.MultiSensor electricalSensor(m=m) annotation (Placement(transformation(
+  MoveTo_Modelica.Electrical.MultiPhase.Sensors.MultiSensor electricalSensor(m=m) annotation (Placement(transformation(
         origin={40,30},
         extent={{-10,-10},{10,10}},
         rotation=270)));
@@ -82,7 +83,7 @@ model SMEE_DOL "Electrical excited synchronous machine starting direct on line"
         extent={{10,-10},{-10,10}},
         rotation=90)));
   Modelica.Electrical.Machines.Utilities.TerminalBox terminalBox(terminalConnection="Y", m=m) annotation (Placement(transformation(extent={{-20,-34},{0,-14}})));
-  parameter Modelica.Electrical.Machines.Utilities.SynchronousMachineData smeeData(
+  parameter MoveTo_Modelica.Electrical.Machines.Utilities.SynchronousMachineData smeeData(
     SNominal=30e3,
     VsNominal=100,
     fsNominal=50,
@@ -101,12 +102,12 @@ model SMEE_DOL "Electrical excited synchronous machine starting direct on line"
     alpha20r(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero,
     alpha20e(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero,
     effectiveStatorTurns=64,
-    TsSpecification=293.15,
-    TsRef=293.15,
-    TrSpecification=293.15,
-    TrRef=293.15,
-    TeSpecification=293.15,
-    TeRef=293.15) annotation (Placement(transformation(extent={{-20,-80},{0,-60}})));
+    TsSpecification=373.15,
+    TsRef=373.15,
+    TrSpecification=373.15,
+    TrRef=373.15,
+    TeSpecification=373.15,
+    TeRef=373.15) annotation (Placement(transformation(extent={{-20,-80},{0,-60}})));
 
   Modelica.Electrical.MultiPhase.Ideal.IdealClosingSwitch switch(
     final m=m,

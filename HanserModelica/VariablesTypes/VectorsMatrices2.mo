@@ -1,5 +1,5 @@
 within HanserModelica.VariablesTypes;
-model VectorsMatrices2
+model VectorsMatrices2 "Example 2 on vetors and matrices"
   extends Modelica.Icons.Example;
   parameter Real A[2,2]={{1,2},{3,4}};
   parameter Real B[3,3]={{cos((i-j)*2*Modelica.Constants.pi/3)

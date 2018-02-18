@@ -1,4 +1,4 @@
 within HanserModelica.Machines;
 package Records "Records"
-extends Icons.RecordsPackage;
+extends MoveTo_Modelica.Icons.RecordsPackage;
 end Records;

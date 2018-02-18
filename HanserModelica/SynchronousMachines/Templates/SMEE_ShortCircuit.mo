@@ -51,7 +51,7 @@ partial model SMEE_ShortCircuit "Template for short circuits of electrical excit
         origin={-10,-60},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  Modelica.Electrical.MultiPhase.Sensors.MultiSensor electricalSensor(m=m) annotation (Placement(transformation(
+  MoveTo_Modelica.Electrical.MultiPhase.Sensors.MultiSensor electricalSensor(m=m) annotation (Placement(transformation(
         origin={20,30},
         extent={{-10,-10},{10,10}},
         rotation=270)));
@@ -60,7 +60,7 @@ partial model SMEE_ShortCircuit "Template for short circuits of electrical excit
         extent={{-10,-10},{10,10}},
         rotation=270)));
   Modelica.Electrical.Machines.Utilities.TerminalBox terminalBox(terminalConnection="Y", m=m) annotation (Placement(transformation(extent={{10,-24},{30,-4}})));
-  parameter Modelica.Electrical.Machines.Utilities.SynchronousMachineData smeeData(
+  parameter MoveTo_Modelica.Electrical.Machines.Utilities.SynchronousMachineData smeeData(
     SNominal=30e3,
     VsNominal=100,
     fsNominal=50,
@@ -124,7 +124,7 @@ equation
   connect(terminalBox.plug_sp, smee.plug_sp) annotation (Line(
       points={{26,-20},{26,-20}},
       color={0,0,255}));
-  connect(booleanReplicator.y, switch.control) annotation (Line(points={{-19,10},{-10,10},{-10,38}},
+  connect(booleanReplicator.y, switch.control) annotation (Line(points={{-19,10},{-10,10},{-10,43}},
                                                                                                  color={255,0,255}));
   connect(booleanStep.y, booleanReplicator.u)
     annotation (Line(points={{-49,10},{-42,10}}, color={255,0,255}));
@@ -135,7 +135,7 @@ equation
   connect(pin1.plug_p, switch.plug_p) annotation (Line(points={{-38,70},{-30,70},{-30,50},{-20,50}}, color={0,0,255}));
   connect(pin2.plug_p, switch.plug_p) annotation (Line(points={{-38,50},{-20,50}}, color={0,0,255}));
   connect(pin3.plug_p, switch.plug_p) annotation (Line(points={{-38,30},{-30,30},{-30,50},{-20,50}}, color={0,0,255}));
-  connect(terminalBox.starpoint, groundMachine.p) annotation (Line(points={{10,-18},{10,-14},{-30,-14},{-30,-50},{-10,-50}}, color={0,0,255}));
+  connect(terminalBox.starpoint, groundMachine.p) annotation (Line(points={{11,-18},{11,-14},{-30,-14},{-30,-50},{-10,-50}}, color={0,0,255}));
   connect(mechanicalPowerSensor.flange_b, constantSpeed.flange) annotation (Line(points={{60,-30},{70,-30}}));
   connect(smee.flange, mechanicalPowerSensor.flange_a) annotation (Line(points={{30,-30},{40,-30}}, color={0,0,0}));
   connect(constantVoltage.p, smee.pin_ep) annotation (Line(points={{-10,-20},{0,-20},{0,-24},{10,-24}}, color={0,0,255}));

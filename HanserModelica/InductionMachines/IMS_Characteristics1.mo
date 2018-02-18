@@ -113,7 +113,7 @@ equation
       color={85,170,255}));
   connect(starMachine.plug_p, terminalBox.starpoint) annotation (
       Line(
-      points={{-40,40},{-40,52},{20,52}},
+      points={{-40,40},{-40,52},{21,52}},
       color={85,170,255}));
   connect(voltageSource.plug_p, powerSensor.currentP) annotation (Line(points={{-80,70},{-80,80},{-70,80}}, color={85,170,255}));
   connect(ramp.y,speed. w_ref) annotation (Line(points={{79,40},{72,40}}, color={0,0,127}));

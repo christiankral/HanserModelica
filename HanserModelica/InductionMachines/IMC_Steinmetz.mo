@@ -34,9 +34,9 @@ model IMC_Steinmetz "Induction machine with squirrel cage and Steinmetz-connecti
     Lrsigma=imcData.Lrsigma*m/3,
     Rr=imcData.Rr*m/3,
     effectiveStatorTurns=imcData.effectiveStatorTurns,
-    TsOperational=293.15,
+    TsOperational=373.15,
     alpha20r=imcData.alpha20r,
-    TrOperational=293.15) annotation (Placement(transformation(extent={{-20,-50},{0,-30}})));
+    TrOperational=373.15) annotation (Placement(transformation(extent={{-20,-50},{0,-30}})));
   Modelica.Electrical.Analog.Sources.SineVoltage sineVoltage(freqHz=fsNominal, V=sqrt(2)*VsNominal) annotation (Placement(
         transformation(extent={{-50,90},{-70,70}})));
   Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(

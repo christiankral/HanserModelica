@@ -16,7 +16,7 @@ model QuasiStatic "Quasi static single phase circuit"
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-70,0})));
-  Modelica.Electrical.QuasiStationary.SinglePhase.Sensors.MultiSensor sensor annotation (Placement(transformation(extent={{-50,10},{-30,30}})));
+  MoveTo_Modelica.Electrical.QuasiStationary.SinglePhase.Sensors.MultiSensor sensor annotation (Placement(transformation(extent={{-50,10},{-30,30}})));
   Modelica.Blocks.Sources.Ramp ramp(duration=1,height=60,offset=-30) annotation (Placement(transformation(extent={{80,-10},{60,10}})));
 equation
   connect(ground.pin, voltageSource.pin_n) annotation (Line(points={{-70,-20},{-70,-10}}, color={85,170,255}));

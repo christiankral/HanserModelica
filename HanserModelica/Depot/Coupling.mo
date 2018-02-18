@@ -1,5 +1,5 @@
 within HanserModelica.Depot;
-model Coupling
+model Coupling "Comparing electromagnetic coupling implementations"
   extends Modelica.Icons.Example;
   parameter Modelica.SIunits.Resistance R = 10 "Resistance";
   parameter Modelica.SIunits.Inductance L = 2 "Inductance";
@@ -43,11 +43,11 @@ equation
   connect(switch1.n, converter1.p) annotation (Line(points={{-10,70},{0,70},{0,56}}, color={0,0,255}));
   connect(constantVoltage1.n, groundElectric1.p) annotation (Line(points={{-80,40},{-80,20}}, color={0,0,255}));
   connect(constantVoltage1.n, converter1.n) annotation (Line(points={{-80,40},{-80,30},{0,30},{0,44}}, color={0,0,255}));
-  connect(booleanStep1.y, switch1.control) annotation (Line(points={{-69,88},{-20,88},{-20,82}}, color={255,0,255}));
+  connect(booleanStep1.y, switch1.control) annotation (Line(points={{-69,88},{-20,88},{-20,77}}, color={255,0,255}));
   connect(constantVoltage2.p, resistor2.p) annotation (Line(points={{-80,-50},{-80,-40},{-60,-40}}, color={0,0,255}));
   connect(resistor2.n, switch2.p) annotation (Line(points={{-40,-40},{-30,-40}}, color={0,0,255}));
   connect(constantVoltage2.n, groundElectric2.p) annotation (Line(points={{-80,-70},{-80,-90}}, color={0,0,255}));
-  connect(booleanStep2.y, switch2.control) annotation (Line(points={{-69,-22},{-20,-22},{-20,-28}}, color={255,0,255}));
+  connect(booleanStep2.y, switch2.control) annotation (Line(points={{-69,-22},{-20,-22},{-20,-33}}, color={255,0,255}));
   connect(switch2.n, inductor2.p) annotation (Line(points={{-10,-40},{0,-40},{0,-50}}, color={0,0,255}));
   connect(inductor2.n, groundElectric2.p) annotation (Line(points={{0,-70},{0,-80},{-80,-80},{-80,-90}}, color={0,0,255}));
   annotation (experiment(StopTime=1, Interval=0.001, Tolerance=1e-06));

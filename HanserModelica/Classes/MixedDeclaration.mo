@@ -1,5 +1,5 @@
 within HanserModelica.Classes;
-model MixedDeclaration
+model MixedDeclaration "Mixed declaration of public and private objects"
   extends Modelica.Icons.Example;
   parameter Integer m = 3 "Public Integer parameter";
 protected

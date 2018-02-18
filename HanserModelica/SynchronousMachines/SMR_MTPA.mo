@@ -13,11 +13,15 @@ model SMR_MTPA "Synchronous reluctance machine, investigating maximum torque per
   parameter Modelica.SIunits.AngularVelocity wNominal = 2 * pi * fNominal / smrData.p "Nominal angular velocity";
   Modelica.SIunits.Angle theta = rotorAngle.rotorDisplacementAngle "Rotor displacement angle, quasi stastic";
   parameter Boolean positiveRange = false "Use positive range of angles, if true";
-  Modelica.SIunits.Angle phii = Modelica.Math.wrapAngle(smr.arg_is[1], positiveRange) "Angle of current";
-  Modelica.SIunits.Angle phiv = Modelica.Math.wrapAngle(smr.arg_vs[1], positiveRange) "Angle of voltage";
-  Modelica.SIunits.Angle phis = Modelica.Math.wrapAngle(phiv - phii, positiveRange) "Angle between voltage and current";
-  Modelica.SIunits.Angle epsilon = Modelica.Math.wrapAngle(phis - theta, positiveRange) "Current angle";
-  parameter Modelica.Electrical.Machines.Utilities.ParameterRecords.SM_ReluctanceRotorData smrData(Lmd = 2.9 / (2 * pi * smrData.fsNominal), Lmq = 0.36 / (2 * pi * smrData.fsNominal), TsRef = 373.15, effectiveStatorTurns = 64, fsNominal = fNominal, useDamperCage = false) "Machine data" annotation (
+  Modelica.SIunits.Angle phii = MoveTo_Modelica.Math.wrapAngle(
+                                                        smr.arg_is[1], positiveRange) "Angle of current";
+  Modelica.SIunits.Angle phiv = MoveTo_Modelica.Math.wrapAngle(
+                                                        smr.arg_vs[1], positiveRange) "Angle of voltage";
+  Modelica.SIunits.Angle phis = MoveTo_Modelica.Math.wrapAngle(
+                                                        phiv - phii, positiveRange) "Angle between voltage and current";
+  Modelica.SIunits.Angle epsilon = MoveTo_Modelica.Math.wrapAngle(
+                                                           phis - theta, positiveRange) "Current angle";
+  parameter MoveTo_Modelica.Electrical.Machines.Utilities.ParameterRecords.SM_ReluctanceRotorData smrData(Lmd = 2.9 / (2 * pi * smrData.fsNominal), Lmq = 0.36 / (2 * pi * smrData.fsNominal), TsRef = 373.15, effectiveStatorTurns = 64, fsNominal = fNominal, useDamperCage = false) "Machine data" annotation (
     Placement(transformation(extent = {{60, 30}, {80, 50}})));
   Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.SynchronousMachines.SM_ReluctanceRotor smr(p = smrData.p, fsNominal = smrData.fsNominal, TsRef = smrData.TsRef, Jr = smrData.Jr, Js = smrData.Js, frictionParameters = smrData.frictionParameters, statorCoreParameters = smrData.statorCoreParameters, strayLoadParameters = smrData.strayLoadParameters, useDamperCage = smrData.useDamperCage, Lrsigmad = smrData.Lrsigmad, Lrsigmaq = smrData.Lrsigmaq, Rrd = smrData.Rrd, Rrq = smrData.Rrq, TrRef = smrData.TrRef, phiMechanical(fixed = true, start = 0), m = m, effectiveStatorTurns = smrData.effectiveStatorTurns, Rs = smrData.Rs * m / 3, Lssigma = smrData.Lssigma * m / 3, Lmd = smrData.Lmd * m / 3, Lmq = smrData.Lmq * m / 3, TsOperational = 373.15, alpha20s = smrData.alpha20s, alpha20r = smrData.alpha20r, TrOperational = 373.15) annotation (
     Placement(transformation(extent = {{0, 0}, {20, 20}})));
@@ -41,8 +45,13 @@ model SMR_MTPA "Synchronous reluctance machine, investigating maximum torque per
     Placement(transformation(extent = {{-10, -10}, {10, 10}}, origin = {60, 60})));
   Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Resistor resistor(m = m, R_ref = fill(1e5, m)) annotation (
     Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {30, 80})));
-  Modelica.Magnetic.QuasiStatic.FundamentalWave.Sensors.RotorDisplacementAngle rotorAngle(m = m, p = smrData.p, positiveRange = positiveRange) annotation (
-    Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation = 90, origin = {40, 10})));
+  MoveTo_Modelica.Magnetic.QuasiStatic.FundamentalWave.Sensors.RotorDisplacementAngle rotorAngle(
+    m=m,
+    p=smrData.p,
+    positiveRange=positiveRange) annotation (Placement(transformation(
+        extent={{10,-10},{-10,10}},
+        rotation=90,
+        origin={40,10})));
   Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensor(m = m) annotation (
     Placement(transformation(extent = {{10, 10}, {-10, -10}}, rotation = 90, origin = {10, 50})));
   Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.VoltageQuasiRMSSensor voltageRMSSensor(m = m) annotation (

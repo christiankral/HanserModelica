@@ -14,13 +14,16 @@ model SMPM_MTPA "Permanent magnet synchronous machine fed by current source"
   parameter Modelica.SIunits.AngularVelocity wNominal = 2*pi*fNominal/smpmData.p "Nominal angular velocity";
   Modelica.SIunits.Angle theta=rotorAngle.rotorDisplacementAngle "Rotor displacement angle, quasi stastic";
   parameter Boolean positiveRange = false "Use positive range of angles, if true";
-  Modelica.SIunits.Angle phii = Modelica.Math.wrapAngle(smpm.arg_is[1],positiveRange) "Angle of current";
-  Modelica.SIunits.Angle phiv = Modelica.Math.wrapAngle(smpm.arg_vs[1],positiveRange) "Angle of voltage";
-  Modelica.SIunits.Angle phis = Modelica.Math.wrapAngle(phiv-phii,positiveRange) "Angle between voltage and current";
-  Modelica.SIunits.Angle epsilon = Modelica.Math.wrapAngle(phis-theta,positiveRange) "Current angle";
+  Modelica.SIunits.Angle phii = MoveTo_Modelica.Math.wrapAngle(
+                                                        smpm.arg_is[1],positiveRange) "Angle of current";
+  Modelica.SIunits.Angle phiv = MoveTo_Modelica.Math.wrapAngle(
+                                                        smpm.arg_vs[1],positiveRange) "Angle of voltage";
+  Modelica.SIunits.Angle phis = MoveTo_Modelica.Math.wrapAngle(
+                                                        phiv-phii,positiveRange) "Angle between voltage and current";
+  Modelica.SIunits.Angle epsilon = MoveTo_Modelica.Math.wrapAngle(
+                                                           phis-theta,positiveRange) "Current angle";
 
-  parameter
-    Modelica.Electrical.Machines.Utilities.ParameterRecords.SM_PermanentMagnetData
+  parameter MoveTo_Modelica.Electrical.Machines.Utilities.ParameterRecords.SM_PermanentMagnetData
     smpmData(useDamperCage=false, effectiveStatorTurns=64,
     fsNominal=fNominal,
     Lmd=0.1/(2*pi*fNominal),
@@ -97,8 +100,10 @@ model SMPM_MTPA "Permanent magnet synchronous machine fed by current source"
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={30,80})));
-  Modelica.Magnetic.QuasiStatic.FundamentalWave.Sensors.RotorDisplacementAngle rotorAngle(m=m, p=smpmData.p,
-    positiveRange=positiveRange)                                                                               annotation (Placement(transformation(
+  MoveTo_Modelica.Magnetic.QuasiStatic.FundamentalWave.Sensors.RotorDisplacementAngle rotorAngle(
+    m=m,
+    p=smpmData.p,
+    positiveRange=positiveRange) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=90,
         origin={40,10})));

@@ -1,8 +1,9 @@
 within HanserModelica.Classes;
-package MyLibrary
+package MyLibrary "Example of sub library"
 
   package Components
     model MyComponent
+
     end MyComponent;
   end Components;
 

@@ -1,5 +1,5 @@
 within HanserModelica.Electrical;
-model TestRLSeries
+model TestRLSeries "Test model of RLSeries"
   extends Modelica.Icons.Example;
   Components.RLSeries rlSeries(R=10, L=2) annotation (Placement(transformation(extent={{-20,10},{0,30}})));
   Modelica.Electrical.Analog.Sources.StepVoltage stepVoltage(V=10, startTime=0.2)

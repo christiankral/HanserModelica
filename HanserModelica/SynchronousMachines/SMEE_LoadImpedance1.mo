@@ -50,10 +50,10 @@ model SMEE_LoadImpedance1 "Electrical excited synchronous machine operating at v
     Lssigma=smeeData.Lssigma*m/3,
     Lmd=smeeData.Lmd*m/3,
     Lmq=smeeData.Lmq*m/3,
-    TsOperational=293.15,
     effectiveStatorTurns=smeeData.effectiveStatorTurns,
+    TsOperational=373.15,
     TrOperational=293.15,
-    TeOperational=293.15) annotation (Placement(transformation(extent={{-10,-20},{10,0}})));
+    TeOperational=373.15) annotation (Placement(transformation(extent={{-10,-20},{10,0}})));
   Modelica.Electrical.Analog.Basic.Ground groundr annotation (
       Placement(transformation(
         origin={-50,-30},
@@ -69,7 +69,7 @@ model SMEE_LoadImpedance1 "Electrical excited synchronous machine operating at v
                        useSupport=false, final w_fixed=w)
                                          annotation (Placement(
         transformation(extent={{100,-20},{80,0}})));
-  parameter HanserModelica.MoveTo_Modelica.Electrical.Machines.Utilities.SynchronousMachineData smeeData(
+  parameter MoveTo_Modelica.Electrical.Machines.Utilities.SynchronousMachineData smeeData(
     SNominal=30e3,
     VsNominal=100,
     fsNominal=50,
@@ -105,8 +105,7 @@ model SMEE_LoadImpedance1 "Electrical excited synchronous machine operating at v
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-70,10})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.MultiSensor
-    powerSensor(m=m) annotation (Placement(transformation(
+  MoveTo_Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.MultiSensor powerSensor(m=m) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={0,26})));
@@ -122,7 +121,7 @@ model SMEE_LoadImpedance1 "Electrical excited synchronous machine operating at v
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-50,10})));
-  Modelica.Magnetic.QuasiStatic.FundamentalWave.Sensors.RotorDisplacementAngle rotorAngle(m=m, p=smee.p) annotation (Placement(transformation(
+  MoveTo_Modelica.Magnetic.QuasiStatic.FundamentalWave.Sensors.RotorDisplacementAngle rotorAngle(m=m, p=smee.p) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=90,
         origin={30,-10})));

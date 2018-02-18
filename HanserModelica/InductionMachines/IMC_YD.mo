@@ -60,7 +60,7 @@ model IMC_YD "Induction machine with squirrel cage starting Y-D"
         origin={0,90},
         extent={{-10,10},{10,-10}},
         rotation=0)));
-  Modelica.Magnetic.QuasiStatic.FundamentalWave.Utilities.SwitchYD switchYDQS(final m=m) annotation (Placement(transformation(extent={{20,30},{40,50}})));
+  MoveTo_Modelica.Magnetic.QuasiStatic.FundamentalWave.Utilities.SwitchYD switchYDQS(final m=m) annotation (Placement(transformation(extent={{20,30},{40,50}})));
   Modelica.Blocks.Sources.BooleanStep booleanStepYDQS[m](each startTime=tStart2) annotation (Placement(transformation(extent={{-40,30},{-20,50}})));
   Modelica.Mechanics.Rotational.Components.Inertia loadInertiaQS(J=JLoad) annotation (Placement(transformation(extent={{50,10},{70,30}})));
   Modelica.Mechanics.Rotational.Sources.QuadraticSpeedDependentTorque quadraticLoadTorqueQS(

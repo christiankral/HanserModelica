@@ -7,17 +7,16 @@ model SMEE_Slip1 "Electrical excited synchronous machine operating at small slip
     "Nominal RMS voltage per phase";
   parameter Modelica.SIunits.Frequency fsNominal=smeeData.fsNominal "Nominal frequency";
   parameter Modelica.SIunits.AngularVelocity w(displayUnit="rev/min")=
-      Modelica.SIunits.Conversions.from_rpm(1499) "Actual speed";
+    Modelica.SIunits.Conversions.from_rpm(1499) "Actual speed";
   parameter Modelica.SIunits.Current IeMax=19 "Maximum excitation current";
   parameter Modelica.SIunits.Current Ie0=10 "Open circuit excitation current for nominal voltage";
   parameter Modelica.SIunits.Current Ie=0 "Actual open circuit current";
-  parameter Modelica.SIunits.Angle gamma0(displayUnit="deg") = 0
-    "Initial rotor displacement angle";
+  parameter Modelica.SIunits.Angle gamma0(displayUnit="deg") = 0 "Initial rotor displacement angle";
   parameter Boolean positiveRange = false "Use positive range of angles, if true";
-  Modelica.SIunits.Angle phi_i=Modelica.Math.wrapAngle(smee.arg_is[1], positiveRange) "Angle of current";
-  Modelica.SIunits.Angle phi_v=Modelica.Math.wrapAngle(smee.arg_vs[1], positiveRange) "Angle of voltage";
-  Modelica.SIunits.Angle phi = Modelica.Math.wrapAngle(phi_v-phi_i,positiveRange) "Angle between voltage and current";
-  Modelica.SIunits.Angle epsilon = Modelica.Math.wrapAngle(phi-theta,positiveRange) "Current angle";
+  Modelica.SIunits.Angle phi_i=MoveTo_Modelica.Math.wrapAngle(smee.arg_is[1], positiveRange) "Angle of current";
+  Modelica.SIunits.Angle phi_v=MoveTo_Modelica.Math.wrapAngle(smee.arg_vs[1], positiveRange) "Angle of voltage";
+  Modelica.SIunits.Angle phi = MoveTo_Modelica.Math.wrapAngle(phi_v-phi_i,positiveRange) "Angle between voltage and current";
+  Modelica.SIunits.Angle epsilon = MoveTo_Modelica.Math.wrapAngle(phi-theta,positiveRange) "Current angle";
   Modelica.SIunits.ComplexCurrent isr[m] = smee.is*Modelica.ComplexMath.exp(Complex(0,theta+pi/2)) "Stator current w.r.t. rotor fixed frame";
   output Modelica.SIunits.Power P=powerSensor.apparentPowerTotal.re " real power";
   output Modelica.SIunits.ReactivePower Q=powerSensor.apparentPowerTotal.im " reactive power";
@@ -53,10 +52,10 @@ model SMEE_Slip1 "Electrical excited synchronous machine operating at small slip
     Lssigma=smeeData.Lssigma*m/3,
     Lmd=smeeData.Lmd*m/3,
     Lmq=smeeData.Lmq*m/3,
-    TsOperational=293.15,
     effectiveStatorTurns=smeeData.effectiveStatorTurns,
+    TsOperational=373.15,
     TrOperational=293.15,
-    TeOperational=293.15) annotation (Placement(transformation(extent={{-10,20},{10,40}})));
+    TeOperational=373.15) annotation (Placement(transformation(extent={{-10,20},{10,40}})));
   Modelica.Electrical.Analog.Basic.Ground groundr annotation (
       Placement(transformation(
         origin={-50,12},
@@ -118,8 +117,7 @@ model SMEE_Slip1 "Electrical excited synchronous machine operating at small slip
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-90,80})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.MultiSensor
-    powerSensor(m=m) annotation (Placement(transformation(
+  MoveTo_Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.MultiSensor powerSensor(m=m) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={0,66})));
@@ -136,7 +134,7 @@ model SMEE_Slip1 "Electrical excited synchronous machine operating at small slip
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-50,50})));
-  Modelica.Magnetic.QuasiStatic.FundamentalWave.Sensors.RotorDisplacementAngle rotorAngle(m=m, p=smee.p) annotation (Placement(transformation(
+  MoveTo_Modelica.Magnetic.QuasiStatic.FundamentalWave.Sensors.RotorDisplacementAngle rotorAngle(m=m, p=smee.p) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=90,
         origin={30,30})));

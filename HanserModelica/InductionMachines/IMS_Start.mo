@@ -73,9 +73,9 @@ model IMS_Start "Starting of induction machine with slip rings"
     Rr=imsData.Rr*mr/3,
     mr=mr,
     m=m,
-    TsOperational=293.15,
     effectiveStatorTurns=imsData.effectiveStatorTurns,
-    TrOperational=293.15) annotation (Placement(transformation(extent={{20,-70},{40,-50}})));
+    TsOperational=373.15,
+    TrOperational=373.15) annotation (Placement(transformation(extent={{20,-70},{40,-50}})));
   Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.InductionMachines.IM_SlipRing imsQS(
     p=imsData.p,
     fsNominal=imsData.fsNominal,
@@ -103,9 +103,10 @@ model IMS_Start "Starting of induction machine with slip rings"
     Rr=imsData.Rr*mr/3,
     mr=mr,
     m=m,
-    TsOperational=566.3,
     effectiveStatorTurns=imsData.effectiveStatorTurns,
-    TrOperational=566.3) annotation (Placement(transformation(extent={{20,30},{40,50}})));
+    TsOperational=373.15,
+    TrOperational=373.15)
+                         annotation (Placement(transformation(extent={{20,30},{40,50}})));
   Modelica.Electrical.Machines.Utilities.SwitchedRheostat rheostatM(
     tStart=tRheostat,
     m=mr,
@@ -127,8 +128,12 @@ model IMS_Start "Starting of induction machine with slip rings"
     TorqueDirection=false,
     useSupport=false,
     w_nominal=w_Load) annotation (Placement(transformation(extent={{100,30},{80,50}})));
-  parameter Modelica.Electrical.Machines.Utilities.ParameterRecords.AIM_SlipRingData
-    imsData "Machine data" annotation (Placement(transformation(extent={{70,72},{90,92}})));
+  parameter MoveTo_Modelica.Electrical.Machines.Utilities.ParameterRecords.AIM_SlipRingData
+    imsData(
+    TsRef=373.15,
+    effectiveStatorTurns=64,
+    TrRef=373.15)
+            "Machine data" annotation (Placement(transformation(extent={{70,72},{90,92}})));
   Modelica.Electrical.QuasiStationary.MultiPhase.Sources.VoltageSource
     voltageSourceQS(
     m=m,

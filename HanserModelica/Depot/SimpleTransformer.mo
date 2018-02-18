@@ -1,5 +1,5 @@
 within HanserModelica.Depot;
-model SimpleTransformer
+model SimpleTransformer "Simple transformer"
   extends Modelica.Icons.Example;
   parameter Integer N1 = 1000;
   parameter Integer N2 = 500;

@@ -47,10 +47,10 @@ model SMEE_VCurve1 "V curves of electrical excited synchronous machine operated 
     Lmq=smeeData.Lmq*m/3,
     effectiveStatorTurns=smeeData.effectiveStatorTurns,
     p=p,
-    TsOperational=293.15,
     useDamperCage=true,
-    TrOperational=293.15,
-    TeOperational=293.15) annotation (Placement(transformation(extent={{-10,10},{10,30}})));
+    TsOperational=373.15,
+    TrOperational=373.15,
+    TeOperational=373.15) annotation (Placement(transformation(extent={{-10,10},{10,30}})));
   Modelica.Electrical.Analog.Basic.Ground groundr annotation (
       Placement(transformation(
         origin={-50,2},
@@ -64,7 +64,7 @@ model SMEE_VCurve1 "V curves of electrical excited synchronous machine operated 
   Modelica.Electrical.Machines.Sensors.MechanicalPowerSensor
     mechanicalPowerSensor annotation (Placement(transformation(extent={{40,10},{60,30}})));
   Modelica.Mechanics.Rotational.Sources.ConstantTorque constantTorque(useSupport=false, tau_constant=0) annotation (Placement(transformation(extent={{90,10},{70,30}})));
-  parameter HanserModelica.MoveTo_Modelica.Electrical.Machines.Utilities.SynchronousMachineData smeeData(
+  parameter MoveTo_Modelica.Electrical.Machines.Utilities.SynchronousMachineData                       smeeData(
     SNominal=30e3,
     VsNominal=100,
     fsNominal=50,
@@ -110,8 +110,7 @@ model SMEE_VCurve1 "V curves of electrical excited synchronous machine operated 
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-90,80})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.MultiSensor
-    powerSensor(m=m) annotation (Placement(transformation(
+  MoveTo_Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.MultiSensor powerSensor(m=m) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={0,60})));
@@ -128,7 +127,7 @@ model SMEE_VCurve1 "V curves of electrical excited synchronous machine operated 
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-50,40})));
-  Modelica.Magnetic.QuasiStatic.FundamentalWave.Sensors.RotorDisplacementAngle rotorAngle(m=m, p=smee.p) annotation (Placement(transformation(
+  MoveTo_Modelica.Magnetic.QuasiStatic.FundamentalWave.Sensors.RotorDisplacementAngle rotorAngle(m=m, p=smee.p) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=90,
         origin={30,20})));

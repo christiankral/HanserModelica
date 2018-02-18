@@ -1,5 +1,5 @@
 within HanserModelica.VariablesTypes;
-model Attributes
+model Attributes "Example on attributes"
   extends Modelica.Icons.Example;
   parameter Real T1(quantity="time", unit="s", displayUnit="h")=7200 "Time constant 1";
   parameter Modelica.SIunits.Time T2(displayUnit="h")=7200 "Time constant 2";

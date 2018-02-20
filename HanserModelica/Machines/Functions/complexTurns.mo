@@ -14,15 +14,15 @@ protected
   Modelica.SIunits.Angle gamma "Orientation of local coil";
   Real xic "Local skewing factor of coil";
 algorithm
-  for i in 1:winding.m loop
-    N[i] := Complex(0, 0) "Initialization of calculation of number of turns";
+  for k in 1:winding.m loop
+    N[k] := Complex(0, 0) "Initialization of calculation of number of turns";
     for j in 1:nCoil loop
-      index := winding.S[i, j] "Local index taken from matrix S";
+      index := winding.S[k, j] "Local index taken from matrix S";
       dgamma := 2*pi*(winding.yce[index] - winding.ycb[index])/slots;
       gamma := 2*pi*(winding.yce[index] + winding.ycb[index])/2/slots + offset;
       xic := sin(dgamma/2);
-      // N[i] := N[i] + xic*nc*exp(j*gamma)
-      N[i] := N[i] + xic*nc*Modelica.ComplexMath.fromPolar(1,gamma);
+      // N[k] := N[i] + xic*nc*exp(j*gamma)
+      N[k] := N[k] + xic*nc*Modelica.ComplexMath.fromPolar(1,gamma);
     end for;
   end for;
 end complexTurns;

@@ -6,5 +6,5 @@ function map "Map slot indices to allowed range"
 protected
   Integer slots = size(y,1) "Length of input vector = number of slots";
 algorithm
-  ymap := {mod(y[i]-1,slots)+1 for i in 1:slots};
+  ymap := {mod(y[k]-1,slots)+1 for k in 1:slots};
 end map;

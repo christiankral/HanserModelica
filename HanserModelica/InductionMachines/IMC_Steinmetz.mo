@@ -88,14 +88,15 @@ model IMC_Steinmetz "Induction machine with squirrel cage and Steinmetz-connecti
         extent={{-10,-10},{10,10}},
         rotation=90)));
   Modelica.Mechanics.Rotational.Sensors.SpeedSensor relSpeedSensor annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={30,-20})));
-  Modelica.Electrical.Machines.Sensors.CurrentQuasiRMSSensor currentRMSSensor annotation (Placement(transformation(
+  Modelica.Electrical.MultiPhase.Sensors.CurrentSensor       currentRMSSensor annotation (Placement(transformation(
         origin={-10,-10},
-        extent={{-10,10},{10,-10}},
+        extent={{-10,-10},{10,10}},
         rotation=270)));
   parameter MoveTo_Modelica.Electrical.Machines.Utilities.ParameterRecords.AIM_SquirrelCageData imcData(
     TsRef=373.15,
     effectiveStatorTurns=64,
     TrRef=373.15) "Machine data" annotation (Placement(transformation(extent={{-60,-48},{-40,-28}})));
+  Modelica.Blocks.Math.RootMeanSquare rmsI[m](f=fill(fsNominal, m)) annotation (Placement(transformation(extent={{-30,-20},{-50,0}})));
 initial equation
   imc.is = zeros(3);
   imc.rotorCage.electroMagneticConverter.V_m = Complex(0, 0);
@@ -104,7 +105,7 @@ initial equation
 equation
   connect(ground.p, sineVoltage.n) annotation (Line(points={{-80,80},{-70,80}}, color={0,0,255}));
   connect(sineVoltage.p, idealCloser.p) annotation (Line(points={{-50,80},{-30,80}}, color={0,0,255}));
-  connect(booleanStep.y, idealCloser.control) annotation (Line(points={{-29,50},{-20,50},{-20,68}},
+  connect(booleanStep.y, idealCloser.control) annotation (Line(points={{-29,50},{-20,50},{-20,73}},
                                   color={255,0,255}));
   connect(pin3.pin_p, sineVoltage.n) annotation (Line(points={{-30,20},{-30,30},{-70,30},{-70,80}}, color={0,0,255}));
   connect(idealCloser.n, pin2.pin_p) annotation (Line(points={{-10,80},{-10,20}}, color={0,0,255}));
@@ -118,7 +119,7 @@ equation
   connect(idealOpener.p, idealCloser.n) annotation (Line(points={{30,80},{-10,80}},
                              color={0,0,255}));
   connect(greaterThreshold.y, idealOpener.control) annotation (Line(
-        points={{60,51},{60,70},{42,70}}, color={255,0,255}));
+        points={{60,51},{60,70},{37,70}}, color={255,0,255}));
   connect(TerminalBox1.plug_sn, imc.plug_sn) annotation (Line(points={{-16,-30},{-16,-30}}, color={0,0,255}));
   connect(TerminalBox1.plug_sp, imc.plug_sp) annotation (Line(points={{-4,-30},{-4,-30}}, color={0,0,255}));
   connect(imc.flange, loadInertia.flange_a) annotation (Line(points={{0,-40},{40,-40}}));
@@ -129,6 +130,7 @@ equation
   connect(pin2.plug_p, currentRMSSensor.plug_p) annotation (Line(points={{-10,16},{-10,0}}, color={0,0,255}));
   connect(pin1.plug_p, currentRMSSensor.plug_p) annotation (Line(points={{10,16},{10,8},{-10,8},{-10,0}}, color={0,0,255}));
   connect(currentRMSSensor.plug_n, TerminalBox1.plugSupply) annotation (Line(points={{-10,-20},{-10,-28}}, color={0,0,255}));
+  connect(rmsI.u, currentRMSSensor.i) annotation (Line(points={{-28,-10},{-21,-10}}, color={0,0,127}));
   annotation (experiment(Interval=0.0001, Tolerance=1e-06, StopTime=1),             Documentation(
         info="<html>
 <p>At start time tStart single phase voltage is supplied to the asynchronous induction machine with squirrel cage;

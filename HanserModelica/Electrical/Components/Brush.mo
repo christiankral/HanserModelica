@@ -4,7 +4,7 @@ model Brush "Electrical brush model"
   parameter Modelica.SIunits.Current ILinear "Current limit of linear range";
   parameter Modelica.SIunits.Voltage V=2 "Brush voltage limit";
 equation
-  v = smooth(0, if i<-ILinear then -V elseif i>ILinear then +V else V*i/ILinear);
+  v = smooth(0,HanserModelica.Electrical.Functions.brush(i,ILinear,V));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-26,12},{26,-12}},

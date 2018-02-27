@@ -100,7 +100,7 @@ equation
   connect(imc.flange, speed.flange) annotation (Line(points={{40,40},{50,40}}, color={0,0,0}));
   connect(ramp.y, speed.w_ref) annotation (Line(points={{79,40},{72,40}}, color={0,0,127}));
   connect(voltageSource.plug_p, powerSensor.currentP) annotation (Line(points={{-60,50},{-60,80},{-40,80}}, color={85,170,255}));
-  annotation (experiment(StopTime=1, Interval=0.001, Tolerance=1E-6),
+  annotation (experiment(Interval=0.0001, Tolerance=1e-06),
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics={
         Text(
           extent={{20,8},{100,0}},

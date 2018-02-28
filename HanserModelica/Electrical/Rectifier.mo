@@ -3,8 +3,7 @@ model Rectifier "Three phase six pulse rectifier with resistive load"
   extends Modelica.Icons.Example;
   Modelica.Electrical.MultiPhase.Sources.SineVoltage sineVoltage(
     phase=-Modelica.Electrical.MultiPhase.Functions.symmetricOrientation(3),
-    freqHz=fill(50, 3),V=fill(sqrt(2)*100, 3))
-                                              annotation (Placement(transformation(
+    freqHz=fill(50, 3),V=fill(sqrt(2)*100, 3)) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-90,40})));

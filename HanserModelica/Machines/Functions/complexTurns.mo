@@ -15,7 +15,7 @@ protected
   Real xic "Local skewing factor of coil";
 algorithm
   for k in 1:winding.m loop
-    N[k] := Complex(0, 0) "Initialization of calculation of number of turns";
+    N[k] := Complex(0, 0) "Initialization of number of turns";
     for j in 1:nCoil loop
       index := winding.S[k, j] "Local index taken from matrix S";
       dgamma := 2*pi*(winding.yce[index] - winding.ycb[index])/slots;

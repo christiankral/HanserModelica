@@ -87,7 +87,7 @@ model IMC_Steinmetz "Induction machine with squirrel cage and Steinmetz-connecti
         origin={60,40},
         extent={{-10,-10},{10,10}},
         rotation=90)));
-  Modelica.Mechanics.Rotational.Sensors.SpeedSensor relSpeedSensor annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={30,-20})));
+  Modelica.Mechanics.Rotational.Sensors.SpeedSensor speedSensor annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={30,-20})));
   Modelica.Electrical.MultiPhase.Sensors.CurrentSensor       currentRMSSensor annotation (Placement(transformation(
         origin={-10,-10},
         extent={{-10,-10},{10,10}},
@@ -105,7 +105,7 @@ initial equation
 equation
   connect(ground.p, sineVoltage.n) annotation (Line(points={{-80,80},{-70,80}}, color={0,0,255}));
   connect(sineVoltage.p, idealCloser.p) annotation (Line(points={{-50,80},{-30,80}}, color={0,0,255}));
-  connect(booleanStep.y, idealCloser.control) annotation (Line(points={{-29,50},{-20,50},{-20,73}},
+  connect(booleanStep.y, idealCloser.control) annotation (Line(points={{-29,50},{-20,50},{-20,68}},
                                   color={255,0,255}));
   connect(pin3.pin_p, sineVoltage.n) annotation (Line(points={{-30,20},{-30,30},{-70,30},{-70,80}}, color={0,0,255}));
   connect(idealCloser.n, pin2.pin_p) annotation (Line(points={{-10,80},{-10,20}}, color={0,0,255}));
@@ -119,13 +119,12 @@ equation
   connect(idealOpener.p, idealCloser.n) annotation (Line(points={{30,80},{-10,80}},
                              color={0,0,255}));
   connect(greaterThreshold.y, idealOpener.control) annotation (Line(
-        points={{60,51},{60,70},{37,70}}, color={255,0,255}));
+        points={{60,51},{60,70},{42,70}}, color={255,0,255}));
   connect(TerminalBox1.plug_sn, imc.plug_sn) annotation (Line(points={{-16,-30},{-16,-30}}, color={0,0,255}));
   connect(TerminalBox1.plug_sp, imc.plug_sp) annotation (Line(points={{-4,-30},{-4,-30}}, color={0,0,255}));
   connect(imc.flange, loadInertia.flange_a) annotation (Line(points={{0,-40},{40,-40}}));
-  connect(relSpeedSensor.flange, imc.flange) annotation (Line(points={{20,-20},{20,-40},{0,-40}}));
-  connect(relSpeedSensor.w, greaterThreshold.u) annotation (Line(
-      points={{41,-20},{60,-20},{60,28}}, color={0,0,127}));
+  connect(speedSensor.flange, imc.flange) annotation (Line(points={{20,-20},{20,-40},{0,-40}}));
+  connect(speedSensor.w, greaterThreshold.u) annotation (Line(points={{41,-20},{60,-20},{60,28}}, color={0,0,127}));
   connect(pin3.plug_p, currentRMSSensor.plug_p) annotation (Line(points={{-30,16},{-30,8},{-10,8},{-10,0}}, color={0,0,255}));
   connect(pin2.plug_p, currentRMSSensor.plug_p) annotation (Line(points={{-10,16},{-10,0}}, color={0,0,255}));
   connect(pin1.plug_p, currentRMSSensor.plug_p) annotation (Line(points={{10,16},{10,8},{-10,8},{-10,0}}, color={0,0,255}));

@@ -23,12 +23,8 @@ model SMPM_MTPA "Permanent magnet synchronous machine fed by current source"
   Modelica.SIunits.Angle epsilon = MoveTo_Modelica.Math.wrapAngle(
                                                            phis-theta,positiveRange) "Current angle";
 
-  parameter MoveTo_Modelica.Electrical.Machines.Utilities.ParameterRecords.SM_PermanentMagnetData
-    smpmData(useDamperCage=false, effectiveStatorTurns=64,
-    fsNominal=fNominal,
-    Lmd=0.1/(2*pi*fNominal),
-    Lmq=0.3/(2*pi*fNominal),
-    TsRef=373.15)                 "Machine data"
+  parameter HanserModelica.SynchronousMachines.ParameterRecords.SMPM_HanserModelica smpmData
+    "Permanent magnet synchronous machine data of HanserModelica library"
     annotation (Placement(transformation(extent={{60,30},{80,50}})));
   Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.SynchronousMachines.SM_PermanentMagnet
     smpm(
@@ -116,7 +112,8 @@ model SMPM_MTPA "Permanent magnet synchronous machine fed by current source"
         extent={{-10,10},{10,-10}},
         rotation=270,
         origin={-40,30})));
-  Modelica.ComplexBlocks.Sources.ComplexRotatingPhasor rotSource(magnitude=100, w=2*pi) annotation (Placement(transformation(
+  Modelica.ComplexBlocks.Sources.ComplexRotatingPhasor rotSource(               w=2*pi, magnitude=100)
+                                                                                        annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-70,20})));
@@ -164,7 +161,7 @@ equation
   connect(toReal.re, currentController.id_rms) annotation (Line(points={{-76,62},{-76,86},{-42,86}}, color={0,0,127}));
   connect(currentController.iq_rms, toReal.im) annotation (Line(points={{-42,74},{-64,74},{-64,62}}, color={0,0,127}));
   annotation (
-    experiment(StopTime=1, Interval=1E-3, Tolerance=1E-6),
+    experiment(Interval=0.001, Tolerance=1e-06),
     Documentation(info="<html>
 <p>
 This example investigates the maximum torque per amps (MTPA) of a quasi static permanent magnet synchronous machine. 

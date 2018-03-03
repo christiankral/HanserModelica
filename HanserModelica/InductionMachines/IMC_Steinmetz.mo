@@ -88,7 +88,7 @@ model IMC_Steinmetz "Induction machine with squirrel cage and Steinmetz-connecti
         extent={{-10,-10},{10,10}},
         rotation=90)));
   Modelica.Mechanics.Rotational.Sensors.SpeedSensor speedSensor annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={30,-20})));
-  Modelica.Electrical.MultiPhase.Sensors.CurrentSensor       currentRMSSensor annotation (Placement(transformation(
+  Modelica.Electrical.MultiPhase.Sensors.CurrentSensor currentSensor annotation (Placement(transformation(
         origin={-10,-10},
         extent={{-10,-10},{10,10}},
         rotation=270)));
@@ -125,11 +125,11 @@ equation
   connect(imc.flange, loadInertia.flange_a) annotation (Line(points={{0,-40},{40,-40}}));
   connect(speedSensor.flange, imc.flange) annotation (Line(points={{20,-20},{20,-40},{0,-40}}));
   connect(speedSensor.w, greaterThreshold.u) annotation (Line(points={{41,-20},{60,-20},{60,28}}, color={0,0,127}));
-  connect(pin3.plug_p, currentRMSSensor.plug_p) annotation (Line(points={{-30,16},{-30,8},{-10,8},{-10,0}}, color={0,0,255}));
-  connect(pin2.plug_p, currentRMSSensor.plug_p) annotation (Line(points={{-10,16},{-10,0}}, color={0,0,255}));
-  connect(pin1.plug_p, currentRMSSensor.plug_p) annotation (Line(points={{10,16},{10,8},{-10,8},{-10,0}}, color={0,0,255}));
-  connect(currentRMSSensor.plug_n, TerminalBox1.plugSupply) annotation (Line(points={{-10,-20},{-10,-28}}, color={0,0,255}));
-  connect(rmsI.u, currentRMSSensor.i) annotation (Line(points={{-28,-10},{-21,-10}}, color={0,0,127}));
+  connect(pin3.plug_p, currentSensor.plug_p) annotation (Line(points={{-30,16},{-30,8},{-10,8},{-10,0}}, color={0,0,255}));
+  connect(pin2.plug_p, currentSensor.plug_p) annotation (Line(points={{-10,16},{-10,0}}, color={0,0,255}));
+  connect(pin1.plug_p, currentSensor.plug_p) annotation (Line(points={{10,16},{10,8},{-10,8},{-10,0}}, color={0,0,255}));
+  connect(currentSensor.plug_n, TerminalBox1.plugSupply) annotation (Line(points={{-10,-20},{-10,-28}}, color={0,0,255}));
+  connect(rmsI.u, currentSensor.i) annotation (Line(points={{-28,-10},{-21,-10}}, color={0,0,127}));
   annotation (experiment(Interval=0.0001, Tolerance=1e-06, StopTime=1),             Documentation(
         info="<html>
 <p>At start time tStart single phase voltage is supplied to the asynchronous induction machine with squirrel cage;

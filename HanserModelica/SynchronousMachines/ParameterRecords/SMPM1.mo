@@ -1,7 +1,7 @@
 within HanserModelica.SynchronousMachines.ParameterRecords;
 record SMPM1 "Permanent magnet synchronous machine parameter set 1"
   import Modelica.Constants.pi;
-  extends Modelica.Electrical.Machines.Utilities.ParameterRecords.SM_PermanentMagnetData(
+  extends MoveTo_Modelica.Electrical.Machines.Utilities.ParameterRecords.SM_PermanentMagnetData(
     useDamperCage=false,
     effectiveStatorTurns=0.925*64,
     fsNominal=50,

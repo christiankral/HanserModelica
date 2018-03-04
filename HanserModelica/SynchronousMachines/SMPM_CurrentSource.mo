@@ -3,18 +3,17 @@ model SMPM_CurrentSource "Permanent magnet synchronous machine fed by current so
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   parameter Integer m=3 "Number of phases";
-  parameter Modelica.SIunits.Voltage VNominal=100
-    "Nominal RMS voltage per phase";
+  parameter Modelica.SIunits.Voltage VNominal=100 "Nominal RMS voltage per phase";
   parameter Modelica.SIunits.Frequency fNominal=smpmData.fsNominal "Nominal frequency";
   parameter Modelica.SIunits.Frequency f=50 "Actual frequency";
   parameter Modelica.SIunits.Time tRamp=1 "Frequency ramp";
   parameter Modelica.SIunits.AngularFrequency wNominal = 2*pi*fNominal/smpmData.p "Nominal angular velocity";
-  parameter Modelica.SIunits.Torque TLoad=181.4 "Nominal load torque";
+  parameter Modelica.SIunits.Torque TLoad=139.3 "Nominal load torque";
   parameter Modelica.SIunits.Time tStep=1.2 "Time of load torque step";
   parameter Modelica.SIunits.Inertia JLoad=0.29 "Load's moment of inertia";
   Modelica.SIunits.Angle theta=rotorAngle.rotorDisplacementAngle "Rotor displacement angle, quasi stastic";
   parameter Modelica.SIunits.Current IsOperation=100 "Operating current";
-  parameter Modelica.SIunits.Angle epsilonOperation = -0.795 "Operation current angle";
+  parameter Modelica.SIunits.Angle epsilonOperation = -0.741 "Operation current angle";
   parameter Boolean positiveRange = false "Use positive range of angles, if true";
   Modelica.SIunits.Angle phii = MoveTo_Modelica.Math.wrapAngle(smpm.arg_is[1],positiveRange) "Angle of current";
   Modelica.SIunits.Angle phiv = MoveTo_Modelica.Math.wrapAngle(smpm.arg_vs[1],positiveRange) "Angle of voltage";
@@ -109,7 +108,7 @@ model SMPM_CurrentSource "Permanent magnet synchronous machine fed by current so
         extent={{-10,10},{10,-10}},
         rotation=270,
         origin={-50,30})));
-  parameter ParameterRecords.SMPM_HanserModelica smpmData annotation (Placement(transformation(extent={{70,58},{90,80}})));
+  parameter ParameterRecords.SMPM2 smpmData annotation (Placement(transformation(extent={{70,60},{90,80}})));
 equation
   connect(quadraticTorque.flange, inertiaLoad.flange_b) annotation (Line(points={{80,10},{70,10}}));
   connect(starMachine.plug_p, terminalBox.starpoint) annotation (

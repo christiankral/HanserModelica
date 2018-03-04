@@ -4,8 +4,7 @@ partial model SMEE_ShortCircuit "Template for short circuits of electrical excit
   import Modelica.Constants.pi;
   parameter Integer m=3 "Number of phases";
   parameter Integer p=2 "Number of poles";
-  parameter Modelica.SIunits.Angle phi=Modelica.SIunits.Conversions.from_deg(0)
-    "Phase angle lag of machine voltages";
+  parameter Modelica.SIunits.Angle phi=Modelica.SIunits.Conversions.from_deg(0) "Phase angle lag of machine voltages";
   parameter Modelica.SIunits.Voltage VNominal=100 "Nominal RMS voltage per phase";
   parameter Modelica.SIunits.Frequency fNominal=50 "Nominal frequency";
   parameter Modelica.SIunits.Voltage Ve=smeeData.Re*smeeData.IeOpenCircuit "Excitation voltage";
@@ -93,8 +92,7 @@ partial model SMEE_ShortCircuit "Template for short circuits of electrical excit
         origin={-10,50},
         extent={{-10,10},{10,-10}},
         rotation=0)));
-  Modelica.Blocks.Sources.BooleanStep booleanStep(startTime=0.02)
-                                                               annotation (Placement(transformation(extent={{-70,0},{-50,20}})));
+  Modelica.Blocks.Sources.BooleanStep booleanStep(startTime=0.02)                                         annotation (Placement(transformation(extent={{-70,0},{-50,20}})));
   Modelica.Blocks.Routing.BooleanReplicator booleanReplicator(nout=m) annotation (Placement(transformation(extent={{-40,20},{-20,0}})));
   Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
         transformation(
@@ -104,8 +102,7 @@ partial model SMEE_ShortCircuit "Template for short circuits of electrical excit
   Modelica.Electrical.MultiPhase.Basic.PlugToPin_p pin1(m=m, k=1) annotation (Placement(transformation(extent={{-30,60},{-50,80}})));
   Modelica.Electrical.MultiPhase.Basic.PlugToPin_p pin2(m=m, k=2) annotation (Placement(transformation(extent={{-30,40},{-50,60}})));
   Modelica.Electrical.MultiPhase.Basic.PlugToPin_p pin3(m=m, k=3) annotation (Placement(transformation(extent={{-30,20},{-50,40}})));
-  Modelica.Electrical.Machines.Sensors.MechanicalPowerSensor
-    mechanicalPowerSensor annotation (Placement(transformation(extent={{40,-40},{60,-20}})));
+  Modelica.Electrical.Machines.Sensors.MechanicalPowerSensor mechanicalPowerSensor annotation (Placement(transformation(extent={{40,-40},{60,-20}})));
   Modelica.Mechanics.Rotational.Sources.ConstantSpeed constantSpeed(useSupport=false, final w_fixed=wNominal) annotation (Placement(transformation(extent={{90,-40},{70,-20}})));
   Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V=Ve)                     annotation (Placement(transformation(
         origin={-10,-30},
@@ -124,7 +121,7 @@ equation
   connect(terminalBox.plug_sp, smee.plug_sp) annotation (Line(
       points={{26,-20},{26,-20}},
       color={0,0,255}));
-  connect(booleanReplicator.y, switch.control) annotation (Line(points={{-19,10},{-10,10},{-10,43}},
+  connect(booleanReplicator.y, switch.control) annotation (Line(points={{-19,10},{-10,10},{-10,38}},
                                                                                                  color={255,0,255}));
   connect(booleanStep.y, booleanReplicator.u)
     annotation (Line(points={{-49,10},{-42,10}}, color={255,0,255}));
@@ -135,7 +132,7 @@ equation
   connect(pin1.plug_p, switch.plug_p) annotation (Line(points={{-38,70},{-30,70},{-30,50},{-20,50}}, color={0,0,255}));
   connect(pin2.plug_p, switch.plug_p) annotation (Line(points={{-38,50},{-20,50}}, color={0,0,255}));
   connect(pin3.plug_p, switch.plug_p) annotation (Line(points={{-38,30},{-30,30},{-30,50},{-20,50}}, color={0,0,255}));
-  connect(terminalBox.starpoint, groundMachine.p) annotation (Line(points={{11,-18},{11,-14},{-30,-14},{-30,-50},{-10,-50}}, color={0,0,255}));
+  connect(terminalBox.starpoint, groundMachine.p) annotation (Line(points={{10,-18},{10,-14},{-30,-14},{-30,-50},{-10,-50}}, color={0,0,255}));
   connect(mechanicalPowerSensor.flange_b, constantSpeed.flange) annotation (Line(points={{60,-30},{70,-30}}));
   connect(smee.flange, mechanicalPowerSensor.flange_a) annotation (Line(points={{30,-30},{40,-30}}, color={0,0,0}));
   connect(constantVoltage.p, smee.pin_ep) annotation (Line(points={{-10,-20},{0,-20},{0,-24},{10,-24}}, color={0,0,255}));

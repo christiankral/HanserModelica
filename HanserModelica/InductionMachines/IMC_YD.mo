@@ -32,10 +32,10 @@ model IMC_YD "Induction machine with squirrel cage starting Y-D"
     Lm=imcData.Lm*m/3,
     Rr=imcData.Rr*m/3,
     m=m,
-    TsOperational=373.15,
+    TsOperational=imcData.TsRef,
     effectiveStatorTurns=imcData.effectiveStatorTurns,
     alpha20r=imcData.alpha20r,
-    TrOperational=373.15) annotation (Placement(transformation(extent={{20,10},{40,30}})));
+    TrOperational=imcData.TrRef) annotation (Placement(transformation(extent={{20,10},{40,30}})));
   Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensorQS(m=m) annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=270,
@@ -68,10 +68,6 @@ model IMC_YD "Induction machine with squirrel cage starting Y-D"
     TorqueDirection=false,
     tau_nominal=-TLoad,
     useSupport=false) annotation (Placement(transformation(extent={{100,10},{80,30}})));
-  parameter MoveTo_Modelica.Electrical.Machines.Utilities.ParameterRecords.AIM_SquirrelCageData imcData(
-    TsRef=373.15,
-    effectiveStatorTurns=64,
-    TrRef=373.15) annotation (Placement(transformation(extent={{70,72},{90,92}})));
 
   Modelica.Magnetic.FundamentalWave.BasicMachines.AsynchronousInductionMachines.AIM_SquirrelCage imc(
     p=imcData.p,
@@ -94,9 +90,9 @@ model IMC_YD "Induction machine with squirrel cage starting Y-D"
     Rr=imcData.Rr*m/3,
     effectiveStatorTurns=imcData.effectiveStatorTurns,
     m=m,
-    TsOperational=373.15,
+    TsOperational=imcData.TsRef,
     alpha20r=imcData.alpha20r,
-    TrOperational=373.15) annotation (Placement(transformation(extent={{20,-90},{40,-70}})));
+    TrOperational=imcData.TrRef) annotation (Placement(transformation(extent={{20,-90},{40,-70}})));
   Modelica.Electrical.Machines.Sensors.CurrentQuasiRMSSensor currentRMSSensor annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=270,
@@ -136,6 +132,7 @@ model IMC_YD "Induction machine with squirrel cage starting Y-D"
     TorqueDirection=false,
     tau_nominal=-TLoad,
     useSupport=false) annotation (Placement(transformation(extent={{100,-90},{80,-70}})));
+  parameter ParameterRecords.IMC imcData annotation (Placement(transformation(extent={{70,70},{90,90}})));
 initial equation
   sum(imc.is) = 0;
   imc.is[1:2] = zeros(2);
@@ -145,7 +142,7 @@ equation
   connect(sineVoltageQS.plug_n, starQS.plug_p) annotation (Line(points={{-40,90},{-50,90}}, color={85,170,255}));
   connect(sineVoltageQS.plug_p, idealCloserQS.plug_p) annotation (Line(points={{-20,90},{-10,90}}, color={85,170,255}));
   connect(loadInertiaQS.flange_b, quadraticLoadTorqueQS.flange) annotation (Line(points={{70,20},{80,20}}));
-  connect(booleanStepQS.y, idealCloserQS.control) annotation (Line(points={{-59,60},{0,60},{0,78}}, color={255,0,255}));
+  connect(booleanStepQS.y, idealCloserQS.control) annotation (Line(points={{-59,60},{0,60},{0,83}}, color={255,0,255}));
   connect(booleanStepYDQS.y, switchYDQS.control) annotation (Line(points={{-19,40},{18,40}}, color={255,0,255}));
   connect(idealCloserQS.plug_n, currentRMSSensorQS.plug_p) annotation (Line(points={{10,90},{10,90},{28,90},{28,90},{30,90},{30,80},{30,80}}, color={85,170,255}));
   connect(switchYDQS.plug_sn, imcQS.plug_sn) annotation (Line(points={{24,30},{24,30}}, color={85,170,255}));
@@ -161,10 +158,10 @@ equation
                                         color={0,0,255}));
   connect(loadInertia.flange_b,quadraticLoadTorque. flange)
     annotation (Line(points={{70,-80},{80,-80}}));
-  connect(booleanStep.y,idealCloser. control) annotation (Line(points={{-59,-40},{0,-40},{0,-22}},
+  connect(booleanStep.y,idealCloser. control) annotation (Line(points={{-59,-40},{0,-40},{0,-17}},
                                           color={255,0,255}));
   connect(booleanStepYD.y,switchYD. control)
-    annotation (Line(points={{-19,-60},{18,-60}},  color={255,0,255}));
+    annotation (Line(points={{-19,-60},{19,-60}},  color={255,0,255}));
   connect(idealCloser.plug_n, currentRMSSensor.plug_p) annotation (Line(points={{10,-10},{30,-10},{30,-20}}, color={0,0,255}));
   connect(switchYD.plug_sn, imc.plug_sn) annotation (Line(points={{24,-70},{24,-70}}, color={0,0,255}));
   connect(switchYD.plug_sp, imc.plug_sp) annotation (Line(points={{36,-70},{36,-70}}, color={0,0,255}));

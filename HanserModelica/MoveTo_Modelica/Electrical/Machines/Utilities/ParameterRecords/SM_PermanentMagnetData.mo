@@ -1,8 +1,7 @@
 within HanserModelica.MoveTo_Modelica.Electrical.Machines.Utilities.ParameterRecords;
 record SM_PermanentMagnetData
   "Common parameters for synchronous induction machines with permanent magnet"
-  extends SM_ReluctanceRotorData(Lmd=0.3/(2*pi*fsNominal), Lmq=0.3/(2*pi*
-        fsNominal));
+  extends SM_ReluctanceRotorData(Lmd=0.3/(2*pi*fsNominal), Lmq=0.3/(2*pi*fsNominal));
   import Modelica.Constants.pi;
   parameter Modelica.SIunits.Voltage VsOpenCircuit=112.3
     "Open circuit RMS voltage per phase @ fsNominal";

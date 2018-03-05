@@ -34,9 +34,9 @@ model IMC_Steinmetz "Induction machine with squirrel cage and Steinmetz-connecti
     Lrsigma=imcData.Lrsigma*m/3,
     Rr=imcData.Rr*m/3,
     effectiveStatorTurns=imcData.effectiveStatorTurns,
-    TsOperational=373.15,
+    TsOperational=imcData.TsRef,
     alpha20r=imcData.alpha20r,
-    TrOperational=373.15) annotation (Placement(transformation(extent={{-20,-50},{0,-30}})));
+    TrOperational=imcData.TrRef) annotation (Placement(transformation(extent={{-20,-50},{0,-30}})));
   Modelica.Electrical.Analog.Sources.SineVoltage sineVoltage(freqHz=fsNominal, V=sqrt(2)*VsNominal) annotation (Placement(
         transformation(extent={{-50,90},{-70,70}})));
   Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
@@ -92,11 +92,8 @@ model IMC_Steinmetz "Induction machine with squirrel cage and Steinmetz-connecti
         origin={-10,-10},
         extent={{-10,-10},{10,10}},
         rotation=270)));
-  parameter MoveTo_Modelica.Electrical.Machines.Utilities.ParameterRecords.AIM_SquirrelCageData imcData(
-    TsRef=373.15,
-    effectiveStatorTurns=64,
-    TrRef=373.15) "Machine data" annotation (Placement(transformation(extent={{-60,-48},{-40,-28}})));
   Modelica.Blocks.Math.RootMeanSquare rmsI[m](f=fill(fsNominal, m)) annotation (Placement(transformation(extent={{-30,-20},{-50,0}})));
+  parameter ParameterRecords.IMC imcData annotation (Placement(transformation(extent={{-50,-50},{-30,-30}})));
 initial equation
   imc.is = zeros(3);
   imc.rotorCage.electroMagneticConverter.V_m = Complex(0, 0);
@@ -105,7 +102,7 @@ initial equation
 equation
   connect(ground.p, sineVoltage.n) annotation (Line(points={{-80,80},{-70,80}}, color={0,0,255}));
   connect(sineVoltage.p, idealCloser.p) annotation (Line(points={{-50,80},{-30,80}}, color={0,0,255}));
-  connect(booleanStep.y, idealCloser.control) annotation (Line(points={{-29,50},{-20,50},{-20,68}},
+  connect(booleanStep.y, idealCloser.control) annotation (Line(points={{-29,50},{-20,50},{-20,73}},
                                   color={255,0,255}));
   connect(pin3.pin_p, sineVoltage.n) annotation (Line(points={{-30,20},{-30,30},{-70,30},{-70,80}}, color={0,0,255}));
   connect(idealCloser.n, pin2.pin_p) annotation (Line(points={{-10,80},{-10,20}}, color={0,0,255}));
@@ -119,7 +116,7 @@ equation
   connect(idealOpener.p, idealCloser.n) annotation (Line(points={{30,80},{-10,80}},
                              color={0,0,255}));
   connect(greaterThreshold.y, idealOpener.control) annotation (Line(
-        points={{60,51},{60,70},{42,70}}, color={255,0,255}));
+        points={{60,51},{60,70},{37,70}}, color={255,0,255}));
   connect(TerminalBox1.plug_sn, imc.plug_sn) annotation (Line(points={{-16,-30},{-16,-30}}, color={0,0,255}));
   connect(TerminalBox1.plug_sp, imc.plug_sp) annotation (Line(points={{-4,-30},{-4,-30}}, color={0,0,255}));
   connect(imc.flange, loadInertia.flange_a) annotation (Line(points={{0,-40},{40,-40}}));

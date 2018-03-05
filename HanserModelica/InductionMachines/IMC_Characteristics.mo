@@ -32,10 +32,6 @@ model IMC_Characteristics "Characteristic curves of Induction machine with squir
         origin={-90,20})));
   Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.PowerSensor powerSensor(m=m) annotation (Placement(transformation(extent={{-40,70},{-20,90}})));
   Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensor(m=m) annotation (Placement(transformation(extent={{-10,70},{10,90}})));
-  parameter MoveTo_Modelica.Electrical.Machines.Utilities.ParameterRecords.AIM_SquirrelCageData imcData(
-    effectiveStatorTurns=64,
-    TsRef=373.15,
-    TrRef=373.15) "Machine data" annotation (Placement(transformation(extent={{70,72},{90,92}})));
   Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.InductionMachines.IM_SquirrelCage imc(
     Js=imcData.Js,
     p=imcData.p,
@@ -55,9 +51,9 @@ model IMC_Characteristics "Characteristic curves of Induction machine with squir
     TrRef=imcData.TrRef,
     m=m,
     Jr=0*imcData.Jr,
-    TsOperational=373.15,
+    TsOperational=imcData.TsRef,
     effectiveStatorTurns=imcData.effectiveStatorTurns,
-    TrOperational=373.15) annotation (Placement(transformation(extent={{20,30},{40,50}})));
+    TrOperational=imcData.TrRef) annotation (Placement(transformation(extent={{20,30},{40,50}})));
   Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground
     groundMachine annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -76,6 +72,7 @@ model IMC_Characteristics "Characteristic curves of Induction machine with squir
     height=3*2*pi*fsNominal/p,
     duration=1,
     offset=-2*pi*fsNominal/p) annotation (Placement(transformation(extent={{100,30},{80,50}})));
+  parameter ParameterRecords.IMC imcData annotation (Placement(transformation(extent={{70,70},{90,90}})));
 equation
   connect(ground.pin, star.pin_n)
     annotation (Line(points={{-80,20},{-80,20}}, color={85,170,255}));

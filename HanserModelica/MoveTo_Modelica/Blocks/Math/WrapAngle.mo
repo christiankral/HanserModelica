@@ -5,7 +5,7 @@ block WrapAngle "Wrap angle to interval ]-pi,pi]"
   parameter Boolean positiveRange=false "Use only positive output range, if true";
 
 equation
-  y =HanserModelica.MoveTo_Modelica.Math.wrapAngle(u, positiveRange);
+  y =MoveTo_Modelica.Math.wrapAngle(u, positiveRange);
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
             100}}), graphics={

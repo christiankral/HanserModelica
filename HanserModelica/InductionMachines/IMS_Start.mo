@@ -74,8 +74,8 @@ model IMS_Start "Starting of induction machine with slip rings"
     mr=mr,
     m=m,
     effectiveStatorTurns=imsData.effectiveStatorTurns,
-    TsOperational=373.15,
-    TrOperational=373.15) annotation (Placement(transformation(extent={{20,-70},{40,-50}})));
+    TsOperational=imsData.TsRef,
+    TrOperational=imsData.TrRef) annotation (Placement(transformation(extent={{20,-70},{40,-50}})));
   Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.InductionMachines.IM_SlipRing imsQS(
     p=imsData.p,
     fsNominal=imsData.fsNominal,
@@ -104,8 +104,8 @@ model IMS_Start "Starting of induction machine with slip rings"
     mr=mr,
     m=m,
     effectiveStatorTurns=imsData.effectiveStatorTurns,
-    TsOperational=373.15,
-    TrOperational=373.15)
+    TsOperational=imsData.TsRef,
+    TrOperational=imsData.TrRef)
                          annotation (Placement(transformation(extent={{20,30},{40,50}})));
   Modelica.Electrical.Machines.Utilities.SwitchedRheostat rheostatM(
     tStart=tRheostat,
@@ -128,12 +128,6 @@ model IMS_Start "Starting of induction machine with slip rings"
     TorqueDirection=false,
     useSupport=false,
     w_nominal=w_Load) annotation (Placement(transformation(extent={{100,30},{80,50}})));
-  parameter MoveTo_Modelica.Electrical.Machines.Utilities.ParameterRecords.AIM_SlipRingData
-    imsData(
-    TsRef=373.15,
-    effectiveStatorTurns=64,
-    TrRef=373.15)
-            "Machine data" annotation (Placement(transformation(extent={{70,72},{90,92}})));
   Modelica.Electrical.QuasiStationary.MultiPhase.Sources.VoltageSource
     voltageSourceQS(
     m=m,
@@ -180,6 +174,7 @@ model IMS_Start "Starting of induction machine with slip rings"
         origin={-12,-90},
         extent={{-10,-10},{10,10}},
         rotation=0)));
+  parameter ParameterRecords.IMS imsData annotation (Placement(transformation(extent={{70,70},{90,90}})));
 initial equation
   sum(ims.is) = 0;
   ims.is[1:2] = zeros(2);
@@ -193,7 +188,7 @@ equation
     annotation (Line(points={{-60,-70},{-60,-80}}, color={0,0,255}));
   connect(loadInertiaQS.flange_b, quadraticLoadTorqueQS.flange) annotation (Line(points={{70,40},{80,40}}));
   connect(imsQS.flange, loadInertiaQS.flange_a) annotation (Line(points={{40,40},{50,40}}));
-  connect(booleanStep.y, idealCloser.control) annotation (Line(points={{-79,-30},{-72,-30}},
+  connect(booleanStep.y, idealCloser.control) annotation (Line(points={{-79,-30},{-67,-30}},
                                           color={255,0,255}));
   connect(terminalBoxQS.plug_sn, imsQS.plug_sn)
     annotation (Line(points={{24,50},{24,50}}, color={0,0,255}));
@@ -228,7 +223,7 @@ equation
   connect(powerSensorQS.voltageN, starQS.plug_p) annotation (Line(
         points={{-30,70},{-30,20},{-60,20}}, color={85,170,255}));
   connect(booleanStepQS.y, idealCloserQS.control) annotation (Line(
-      points={{-79,70},{-72,70}}, color={255,0,255}));
+      points={{-79,70},{-67,70}}, color={255,0,255}));
   connect(idealCloserQS.plug_p, voltageSourceQS.plug_p) annotation (
       Line(
       points={{-60,60},{-60,50}},
@@ -253,10 +248,10 @@ equation
       color={85,170,255}));
   connect(starMachineQS.plug_p, terminalBoxQS.starpoint) annotation (
       Line(
-      points={{-10,40},{-10,52},{20,52}},
+      points={{-10,40},{-10,52},{21,52}},
       color={85,170,255}));
   connect(groundMachine.p,starMachine. pin_n) annotation (Line(points={{-12,-80},{-12,-80}}, color={0,0,255}));
-  connect(terminalBoxM.starpoint, starMachine.plug_p) annotation (Line(points={{20,-48},{-12,-48},{-12,-60}}, color={0,0,255}));
+  connect(terminalBoxM.starpoint, starMachine.plug_p) annotation (Line(points={{21,-48},{-12,-48},{-12,-60}}, color={0,0,255}));
   annotation (
     experiment(
       StopTime=1.5,

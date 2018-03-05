@@ -2,22 +2,7 @@ within HanserModelica.InductionMachines;
 model IMC_withLosses "Induction machine with squirrel cage and losses"
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
-  import Modelica.SIunits.Conversions.from_rpm;
-  import Modelica.SIunits.Conversions.to_rpm;
-  import Modelica.SIunits.Conversions.from_degC;
   constant Integer m=3 "Number of phases";
-  parameter Modelica.SIunits.Power PmNominal=18500 "Nominal mechanical output power";
-  parameter Modelica.SIunits.Voltage VsNominal=400 "Nominal stator RMS voltage per phase";
-  parameter Modelica.SIunits.Current IsNominal=32.85 "Nominal stator RMS current per phase";
-  parameter Real pfsNominal=0.898 "Nominal power factor";
-  parameter Modelica.SIunits.Power PsNominal=sqrt(3)*VsNominal*IsNominal*pfsNominal "Nominal active stator power";
-  parameter Modelica.SIunits.Power lossNominal=PsNominal-PmNominal "Nominal losses";
-  parameter Real effNominal=0.9049 "Nominal efficiency";
-  parameter Modelica.SIunits.Frequency fsNominal=50 "Nominal frequency";
-  parameter Modelica.SIunits.AngularVelocity wNominal(displayUnit="rev/min")=from_rpm(1462.5) "Nominal speed";
-  parameter Modelica.SIunits.AngularVelocity w0(displayUnit="rev/min")=from_rpm(1499.64) "No loads speed";
-  parameter Modelica.SIunits.Torque tauNominal=PmNominal/wNominal "Nominal torque";
-  parameter Modelica.SIunits.Temperature TNominal=from_degC(90) "Nominal temperature";
   Modelica.SIunits.Power Ps=electricalPowerSensor.y.re "Stator active power";
   Modelica.SIunits.ReactivePower Qs=electricalPowerSensor.y.im "Stator reactive power";
   Modelica.SIunits.ApparentPower Ss=sqrt(Ps^2 + Qs^2) "Stator apparent power";
@@ -26,7 +11,7 @@ protected
       14950,16360,18500,18560,20180,22170};
   parameter Real Itable[:]={11.0,11.20,12.27,13.87,16.41,18.78,21.07,
       23.92,27.05,29.40,32.85,32.95,35.92,39.35};
-  parameter Real wtable[:]=from_rpm({1500,1496,1493,1490,1486,1482,1479,1475,1471,
+  parameter Real wtable[:]=Modelica.SIunits.Conversions.from_rpm({1500,1496,1493,1490,1486,1482,1479,1475,1471,
       1467,1462,1462,1458,1453});
   parameter Real ctable[:]={0.085,0.327,0.506,0.636,0.741,0.797,0.831,
       0.857,0.875,0.887,0.896,0.896,0.902,0.906};
@@ -34,8 +19,8 @@ protected
       0.9088,0.9089,0.9070,0.9044,0.9043,0.9008,0.8972};
 public
   output Modelica.SIunits.Power Pm=powerSensor.power "Mechanical output power";
-  output Modelica.SIunits.Power Ps_sim=sqrt(3)*VsNominal*I_sim*pfs_sim "Simulated stator power";
-  output Modelica.SIunits.Power Ps_meas=sqrt(3)*VsNominal*I_meas*pfs_meas "Simulated stator power";
+  output Modelica.SIunits.Power Ps_sim=sqrt(3)*imcData.VsNominal*I_sim*pfs_sim "Simulated stator power";
+  output Modelica.SIunits.Power Ps_meas=sqrt(3)*imcData.VsNominal*I_meas*pfs_meas "Simulated stator power";
   output Modelica.SIunits.Power loss_sim=Ps_sim-Pm "Simulated total losses";
   output Modelica.SIunits.Power loss_meas=Ps_meas-Pm "Measured total losses";
   output Modelica.SIunits.Current I_sim=currentRMSSensor.I "Simulated current";
@@ -60,9 +45,7 @@ public
     statorCoreParameters=imcData.statorCoreParameters,
     strayLoadParameters=imcData.strayLoadParameters,
     TrRef=imcData.TrRef,
-    TsOperational=TNominal,
-    TrOperational=TNominal,
-    wMechanical(fixed=true, start=w0),
+    wMechanical(fixed=true, start=imcData.w0),
     gammar(fixed=true, start=pi/2),
     gamma(fixed=true, start=-pi/2),
     Rs=imcData.Rs*m/3,
@@ -72,7 +55,10 @@ public
     Rr=imcData.Rr*m/3,
     m=m,
     effectiveStatorTurns=imcData.effectiveStatorTurns,
-    alpha20r=imcData.alpha20r) annotation (Placement(transformation(extent={{-20,60},{0,80}})));
+    TsOperational=imcData.TNominal,
+    alpha20r=imcData.alpha20r,
+    TrOperational=imcData.TNominal)
+                               annotation (Placement(transformation(extent={{-20,60},{0,80}})));
   Modelica.Magnetic.QuasiStatic.FundamentalWave.Utilities.MultiTerminalBox terminalBox(terminalConnection="D", m=m) annotation (Placement(transformation(extent={{-20,76},{0,96}})));
   Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.PowerSensor electricalPowerSensor(m=m) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -84,8 +70,9 @@ public
         rotation=0)));
   Modelica.Electrical.QuasiStationary.MultiPhase.Sources.VoltageSource sineVoltage(
     final m=m,
-    f=fsNominal,
-    V=fill(VsNominal/sqrt(3), m)) annotation (Placement(transformation(
+    f=imcData.fsNominal,
+    V=fill(imcData.VsNominal/sqrt(3), m))
+                                  annotation (Placement(transformation(
         origin={-90,70},
         extent={{-10,-10},{10,10}},
         rotation=270)));
@@ -104,27 +91,13 @@ public
     initType=Modelica.Blocks.Types.Init.InitialState) annotation (Placement(transformation(extent={{40,0},{60,20}})));
   Modelica.Blocks.Math.Feedback feedback annotation (Placement(transformation(extent={{10,20},{30,0}})));
   Modelica.Blocks.Sources.Ramp ramp(
-    height=1.2*PmNominal,
     offset=0,
     startTime=4.5,
-    duration=5.5) annotation (Placement(transformation(extent={{-20,0},{0,20}})));
+    duration=5.5,
+    height=1.2*imcData.PmNominal)
+                  annotation (Placement(transformation(extent={{-20,0},{0,20}})));
   Modelica.Blocks.Tables.CombiTable1Ds combiTable1Ds(table={{Ptable[j],Itable[j],wtable[j],ctable[j],etable[j]} for j in 1:size(Ptable, 1)}, smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative) annotation (Placement(transformation(extent={{40,30},{60,50}})));
-  parameter MoveTo_Modelica.Electrical.Machines.Utilities.ParameterRecords.AIM_SquirrelCageData imcData(
-    statorCoreParameters(PRef=410, VRef=387.9),
-    Jr=0.12,
-    Rs=0.56,
-    alpha20s(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Copper,
-    Lssigma=1.52/(2*pi*fsNominal),
-    frictionParameters(PRef=180, wRef=wNominal),
-    strayLoadParameters(
-      PRef=0.005*sqrt(3)*VsNominal*IsNominal*pfsNominal,
-      IRef=IsNominal/sqrt(3),
-      wRef=wNominal),
-    Lm=66.4/(2*pi*fsNominal),
-    Lrsigma=2.31/(2*pi*fsNominal),
-    Rr=0.42,
-    alpha20r(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Aluminium,
-    effectiveStatorTurns=270.1) annotation (Placement(transformation(extent={{-60,12},{-40,32}})));
+  parameter ParameterRecords.IMC_withLosses imcData annotation (Placement(transformation(extent={{-60,0},{-40,20}})));
 equation
   connect(star.pin_n, ground.pin) annotation (Line(points={{-90,30},{-90,20}}, color={85,170,255}));
   connect(sineVoltage.plug_n, star.plug_p) annotation (Line(points={{-90,60},{-90,50}}, color={85,170,255}));

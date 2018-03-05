@@ -17,9 +17,12 @@ model SMR_MTPA "Synchronous reluctance machine, investigating maximum torque per
   Modelica.SIunits.Angle phiv = MoveTo_Modelica.Math.wrapAngle(smr.arg_vs[1], positiveRange) "Angle of voltage";
   Modelica.SIunits.Angle phis = MoveTo_Modelica.Math.wrapAngle(phiv - phii, positiveRange) "Angle between voltage and current";
   Modelica.SIunits.Angle epsilon = MoveTo_Modelica.Math.wrapAngle(phis - theta, positiveRange) "Current angle";
-  parameter MoveTo_Modelica.Electrical.Machines.Utilities.ParameterRecords.SM_ReluctanceRotorData smrData(Lmd = 2.9 / (2 * pi * smrData.fsNominal), Lmq = 0.36 / (2 * pi * smrData.fsNominal), TsRef = 373.15, effectiveStatorTurns = 64, fsNominal = fNominal, useDamperCage = false) "Machine data" annotation (
-    Placement(transformation(extent = {{60, 30}, {80, 50}})));
-  Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.SynchronousMachines.SM_ReluctanceRotor smr(p = smrData.p, fsNominal = smrData.fsNominal, TsRef = smrData.TsRef, Jr = smrData.Jr, Js = smrData.Js, frictionParameters = smrData.frictionParameters, statorCoreParameters = smrData.statorCoreParameters, strayLoadParameters = smrData.strayLoadParameters, useDamperCage = smrData.useDamperCage, Lrsigmad = smrData.Lrsigmad, Lrsigmaq = smrData.Lrsigmaq, Rrd = smrData.Rrd, Rrq = smrData.Rrq, TrRef = smrData.TrRef, phiMechanical(fixed = true, start = 0), m = m, effectiveStatorTurns = smrData.effectiveStatorTurns, Rs = smrData.Rs * m / 3, Lssigma = smrData.Lssigma * m / 3, Lmd = smrData.Lmd * m / 3, Lmq = smrData.Lmq * m / 3, TsOperational = 373.15, alpha20s = smrData.alpha20s, alpha20r = smrData.alpha20r, TrOperational = 373.15) annotation (
+  Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.SynchronousMachines.SM_ReluctanceRotor smr(p = smrData.p, fsNominal = smrData.fsNominal, TsRef = smrData.TsRef, Jr = smrData.Jr, Js = smrData.Js, frictionParameters = smrData.frictionParameters, statorCoreParameters = smrData.statorCoreParameters, strayLoadParameters = smrData.strayLoadParameters,                                        Lrsigmad = smrData.Lrsigmad, Lrsigmaq = smrData.Lrsigmaq, Rrd = smrData.Rrd, Rrq = smrData.Rrq, TrRef = smrData.TrRef, phiMechanical(fixed = true, start = 0), m = m, effectiveStatorTurns = smrData.effectiveStatorTurns, Rs = smrData.Rs * m / 3, Lssigma = smrData.Lssigma * m / 3, Lmd = smrData.Lmd * m / 3, Lmq = smrData.Lmq * m / 3,
+    TsOperational=373.15,
+    alpha20s=smrData.alpha20s,
+    TrOperational=373.15,
+    useDamperCage=false,
+    alpha20r=smrData.alpha20r)                                                                                                                                                                                                         annotation (
     Placement(transformation(extent = {{0, 0}, {20, 20}})));
   Modelica.Mechanics.Rotational.Sources.ConstantSpeed quadraticSpeedDependentTorque(w_fixed = wNominal) annotation (
     Placement(transformation(extent = {{80, 0}, {60, 20}})));
@@ -58,9 +61,10 @@ model SMR_MTPA "Synchronous reluctance machine, investigating maximum torque per
     Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {-70, 20})));
   Modelica.ComplexBlocks.ComplexMath.ComplexToReal toReal annotation (
     Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {-70, 50})));
+  parameter ParameterRecords.SMR smrData annotation (Placement(transformation(extent={{60,30},{80,50}})));
 equation
   connect(starMachine.plug_p, terminalBox.starpoint) annotation (
-    Line(points = {{-10, 10}, {-10, 22}, {0, 22}}, color = {85, 170, 255}));
+    Line(points={{-10,10},{-10,22},{1,22}},        color = {85, 170, 255}));
   connect(groundM.pin, starMachine.pin_n) annotation (
     Line(points = {{-50, 10}, {-30, 10}}, color = {85, 170, 255}));
   connect(terminalBox.plug_sn, smr.plug_sn) annotation (
@@ -68,7 +72,7 @@ equation
   connect(terminalBox.plug_sp, smr.plug_sp) annotation (
     Line(points = {{16, 20}, {16, 20}}, color = {85, 170, 255}));
   connect(currentController.I, referenceCurrentSource.I) annotation (
-    Line(points = {{-19, 84}, {-10, 84}, {-10, 86}, {-2, 86}}, color = {85, 170, 255}));
+    Line(points={{-19,84},{-10,84},{-10,84},{0,84}},           color = {85, 170, 255}));
   connect(referenceCurrentSource.plug_p, star.plug_p) annotation (
     Line(points = {{10, 90}, {60, 90}}, color = {85, 170, 255}));
   connect(star.pin_n, grounde.pin) annotation (
@@ -80,7 +84,7 @@ equation
   connect(resistor.plug_n, referenceCurrentSource.plug_n) annotation (
     Line(points = {{30, 70}, {10, 70}}, color = {85, 170, 255}));
   connect(currentController.gamma, referenceCurrentSource.gamma) annotation (
-    Line(points = {{-19, 76}, {-10, 76}, {-10, 74}, {-2, 74}}, color = {0, 0, 127}));
+    Line(points={{-19,76},{-10,76},{-10,76},{0,76}},           color = {0, 0, 127}));
   connect(angleSensor.phi, currentController.phi) annotation (
     Line(points = {{40, 61}, {40, 64}, {-30, 64}, {-30, 68}}, color = {0, 0, 127}));
   connect(smr.flange, rotorAngle.flange) annotation (

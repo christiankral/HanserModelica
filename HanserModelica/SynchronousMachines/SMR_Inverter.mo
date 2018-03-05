@@ -31,11 +31,6 @@ model SMR_Inverter "Synchronous reluctance machine with squirrel cage and invert
     Placement(transformation(extent = {{96, -90}, {76, -70}})));
   Modelica.Electrical.Machines.Utilities.MultiTerminalBox terminalBox(terminalConnection = "Y", m = m) annotation (
     Placement(transformation(extent = {{20, -74}, {40, -54}})));
-  parameter MoveTo_Modelica.Electrical.Machines.Utilities.ParameterRecords.SM_ReluctanceRotorData smrData(Lmd = 2.9 / (2 * pi * smrData.fsNominal), Lmq = 0.36 / (2 * pi * smrData.fsNominal),
-    TsRef=373.15,
-    effectiveStatorTurns=64,
-    TrRef=373.15)                                                                                                                                                                                                       "Machine data" annotation (
-    Placement(transformation(extent={{70,-28},{90,-8}})));
   Modelica.Electrical.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensor(final m = m) annotation (
     Placement(transformation(origin = {20, -50}, extent = {{-10, 10}, {10, -10}})));
   Modelica.Electrical.MultiPhase.Basic.Star starMachine(final m = Modelica.Electrical.MultiPhase.Functions.numberOfSymmetricBaseSystems(m)) annotation (
@@ -44,6 +39,7 @@ model SMR_Inverter "Synchronous reluctance machine with squirrel cage and invert
     Placement(transformation(origin = {-30, -74}, extent = {{-10, -10}, {10, 10}}, rotation = 270)));
   Modelica.Electrical.MultiPhase.Sensors.VoltageQuasiRMSSensor voltageRMSSensor(final m=m)   annotation (
     Placement(transformation(origin={60,-50},    extent={{10,10},{-10,-10}})));
+  parameter ParameterRecords.SMR smrData annotation (Placement(transformation(extent={{70,-28},{90,-8}})));
 initial equation
   sum(smr.is) = 0;
   smr.is[1:2] = zeros(2);
@@ -64,9 +60,9 @@ equation
   connect(ramp.y, vfController.u) annotation (
     Line(points={{-49,-20},{-42,-20}},                          color = {0, 0, 127}));
   connect(vfController.y, signalVoltage.v) annotation (
-    Line(points={{-19,-20},{-10,-20},{-10,-38}},        color = {0, 0, 127}));
+    Line(points={{-19,-20},{-10,-20},{-10,-43}},        color = {0, 0, 127}));
   connect(starMachine.plug_p, terminalBox.starpoint) annotation (
-    Line(points = {{10, -74}, {10, -68}, {20, -68}}, color = {0, 0, 255}));
+    Line(points={{10,-74},{10,-68},{21,-68}},        color = {0, 0, 255}));
   connect(groundMachine.p, starMachine.pin_n) annotation (
     Line(points = {{-20, -74}, {-10, -74}}, color = {0, 0, 255}));
   connect(star.plug_p, signalVoltage.plug_n) annotation (

@@ -28,6 +28,6 @@ equation
   connect(magetizingInductor.pin_n, ground.pin) annotation (Line(points={{-20,-10},{-20,-20},{-70,-20}}, color={85,170,255}));
   connect(inductor.pin_n, conductor.pin_p) annotation (Line(points={{18,20},{30,20},{30,10}}, color={85,170,255}));
   connect(conductor.pin_n, ground.pin) annotation (Line(points={{30,-10},{30,-20},{-70,-20}}, color={85,170,255}));
-  connect(conductor.G_ref, ramp.y) annotation (Line(points={{41,0},{59,0}}, color={0,0,127}));
+  connect(conductor.G_ref, ramp.y) annotation (Line(points={{42,0},{59,0}}, color={0,0,127}));
   annotation (experiment(Interval=0.001, Tolerance=1e-06));
 end QuasiStatic;

@@ -10,4 +10,5 @@ TestRLSeries
 TestRLSeriesRecord
 StarDelta
 Rectifier
+RLSeriesFrequencySweep
 QuasiStaticMultiPhase

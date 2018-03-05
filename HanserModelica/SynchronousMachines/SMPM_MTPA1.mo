@@ -108,7 +108,7 @@ model SMPM_MTPA1 "Permanent magnet synchronous machine fed by current source, pa
 equation
   connect(starMachine.plug_p, terminalBox.starpoint) annotation (
       Line(
-      points={{-10,10},{-10,22},{1,22}},
+      points={{-10,10},{-10,22},{0,22}},
       color={85,170,255}));
   connect(groundM.pin, starMachine.pin_n) annotation (Line(
       points={{-50,10},{-30,10}},
@@ -119,7 +119,7 @@ equation
   connect(terminalBox.plug_sp, smpm.plug_sp) annotation (Line(
       points={{16,20},{16,20}},
       color={85,170,255}));
-  connect(currentController.I, referenceCurrentSource.I) annotation (Line(points={{-19,84},{-10,84},{-10,84},{0,84}},
+  connect(currentController.I, referenceCurrentSource.I) annotation (Line(points={{-19,84},{-10,84},{-10,86},{-2,86}},
                                                                                                           color={85,170,255}));
   connect(referenceCurrentSource.plug_p, star.plug_p) annotation (Line(points={{10,90},{60,90}},            color={85,170,255}));
   connect(star.pin_n, grounde.pin) annotation (Line(
@@ -129,7 +129,7 @@ equation
       points={{40,40},{40,30},{30,30},{30,10},{20,10}}));
   connect(referenceCurrentSource.plug_p, resistor.plug_p) annotation (Line(points={{10,90},{30,90}},            color={85,170,255}));
   connect(resistor.plug_n, referenceCurrentSource.plug_n) annotation (Line(points={{30,70},{10,70}},           color={85,170,255}));
-  connect(currentController.gamma, referenceCurrentSource.gamma) annotation (Line(points={{-19,76},{-10,76},{-10,76},{0,76}},
+  connect(currentController.gamma, referenceCurrentSource.gamma) annotation (Line(points={{-19,76},{-10,76},{-10,74},{-2,74}},
                                                                                                                   color={0,0,127}));
   connect(angleSensor.phi, currentController.phi) annotation (Line(points={{40,61},{40,64},{-30,64},{-30,68}}, color={0,0,127}));
   connect(smpm.flange, rotorAngle.flange) annotation (Line(points={{20,10},{30,10}}, color={0,0,0}));

@@ -1,5 +1,5 @@
 within HanserModelica.SynchronousMachines;
-model SMPM_MTPA2
+model SMPM_MTPA2 "Permanent magnet synchronous machine fed by current source, parameter record SMPM2"
   extends SMPM_MTPA1(smpm(
       Jr=smpmData2.Jr,
       useSupport=false,

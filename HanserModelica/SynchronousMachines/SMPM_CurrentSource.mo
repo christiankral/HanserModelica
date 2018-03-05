@@ -113,7 +113,7 @@ equation
   connect(quadraticTorque.flange, inertiaLoad.flange_b) annotation (Line(points={{80,10},{70,10}}));
   connect(starMachine.plug_p, terminalBox.starpoint) annotation (
       Line(
-      points={{-20,10},{-20,22},{-9,22}},
+      points={{-20,10},{-20,22},{-10,22}},
       color={85,170,255}));
   connect(groundM.pin, starMachine.pin_n) annotation (Line(
       points={{-60,10},{-40,10}},
@@ -124,7 +124,7 @@ equation
   connect(terminalBox.plug_sp, smpm.plug_sp) annotation (Line(
       points={{6,20},{6,20}},
       color={85,170,255}));
-  connect(currentController.I, referenceCurrentSource.I) annotation (Line(points={{-29,84},{-20,84},{-20,84},{-10,84}},
+  connect(currentController.I, referenceCurrentSource.I) annotation (Line(points={{-29,84},{-20,84},{-20,86},{-12,86}},
                                                                                                           color={85,170,255}));
   connect(referenceCurrentSource.plug_p, star.plug_p) annotation (Line(points={{4.44089e-16,90},{50,90}},   color={85,170,255}));
   connect(star.pin_n, grounde.pin) annotation (Line(
@@ -136,7 +136,7 @@ equation
   connect(resistor.plug_n, referenceCurrentSource.plug_n) annotation (Line(points={{20,70},{-6.66134e-16,70}}, color={85,170,255}));
   connect(id.y, currentController.id_rms) annotation (Line(points={{-69,80},{-60,80},{-60,86},{-52,86}}, color={0,0,127}));
   connect(iq.y, currentController.iq_rms) annotation (Line(points={{-69,50},{-60,50},{-60,74},{-52,74}},   color={0,0,127}));
-  connect(currentController.gamma, referenceCurrentSource.gamma) annotation (Line(points={{-29,76},{-20,76},{-20,76},{-10,76}},
+  connect(currentController.gamma, referenceCurrentSource.gamma) annotation (Line(points={{-29,76},{-20,76},{-20,74},{-12,74}},
                                                                                                                   color={0,0,127}));
   connect(angleSensor.phi, currentController.phi) annotation (Line(points={{30,61},{30,64},{-40,64},{-40,68}}, color={0,0,127}));
   connect(smpm.flange, rotorAngle.flange) annotation (Line(points={{10,10},{20,10}}, color={0,0,0}));

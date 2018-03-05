@@ -6,7 +6,7 @@ class Contact "Contact"
     Documentation(info="<html>
 <p>
 Christian Kral<br>
-<a href=\"http://christiankral.net\">Electric machines and drives</a><br>
+<a href=\"https://christiankral.net\">Electric machines and drives</a><br>
 1060 Vienna, Austria<br>
 email: <a HREF=\"mailto:dr.christian.kral@gmail.com\">dr.christian.kral@gmail.com</a><br>
 </p>

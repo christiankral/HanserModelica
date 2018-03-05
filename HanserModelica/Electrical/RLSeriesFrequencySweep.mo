@@ -1,6 +1,7 @@
 within HanserModelica.Electrical;
 model RLSeriesFrequencySweep "Series circuit with Bodel analysis"
   extends Modelica.Icons.Example;
+  import Modelica.Constants.pi;
   output Real abs_y = bode.abs_y "Magnitude of voltage ratio";
   output Modelica.SIunits.AmplitudeLevelDifference dB_y = bode.dB_y "Log10 of magnitude of voltage ratio in dB";
   output Modelica.SIunits.Angle arg_y = bode.arg_y "Angle of voltage ratio";
@@ -17,7 +18,7 @@ model RLSeriesFrequencySweep "Series circuit with Bodel analysis"
         rotation=270)));
   Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground ground annotation (Placement(transformation(extent={{-40,-60},{-20,-40}})));
   Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Resistor resistor(R_ref=100) annotation (Placement(transformation(extent={{20,-10},{40,10}})));
-  Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Inductor inductor(L=1/(2*Modelica.Constants.pi)) annotation (Placement(transformation(extent={{52,-10},{72,10}})));
+  Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Inductor inductor(L=1/(2*pi)) annotation (Placement(transformation(extent={{52,-10},{72,10}})));
   Modelica.ComplexBlocks.Sources.ComplexConstant complexConst(k=Complex(10, 0)) annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
   Modelica.Electrical.QuasiStationary.SinglePhase.Sensors.CurrentSensor currentSensor annotation (Placement(transformation(
         extent={{10,10},{-10,-10}},

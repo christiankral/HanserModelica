@@ -71,31 +71,6 @@ model SMEE_Slip1 "Electrical excited synchronous machine operating at small slip
                        useSupport=false, final w_fixed=w)
                                          annotation (Placement(
         transformation(extent={{100,20},{80,40}})));
-  parameter MoveTo_Modelica.Electrical.Machines.Utilities.SynchronousMachineData smeeData(
-    SNominal=30e3,
-    VsNominal=100,
-    fsNominal=50,
-    IeOpenCircuit=10,
-    x0=0.1,
-    xd=1.6,
-    xdTransient=0.1375,
-    xdSubtransient=0.121428571,
-    xqSubtransient=0.148387097,
-    Ta=0.014171268,
-    Td0Transient=0.261177343,
-    Td0Subtransient=0.006963029,
-    Tq0Subtransient=0.123345081,
-    alpha20s(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero,
-    alpha20r(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero,
-    alpha20e(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero,
-    xq=1.1,
-    effectiveStatorTurns=64,
-    TsSpecification=373.15,
-    TsRef=373.15,
-    TrSpecification=373.15,
-    TrRef=373.15,
-    TeSpecification=373.15,
-    TeRef=373.15) "Machine data" annotation (Placement(transformation(extent={{70,70},{90,90}})));
 
   Modelica.Electrical.QuasiStationary.MultiPhase.Sources.VoltageSource
     voltageSource(
@@ -139,6 +114,7 @@ model SMEE_Slip1 "Electrical excited synchronous machine operating at small slip
         rotation=90,
         origin={30,30})));
 
+  parameter ParameterRecords.SMEE smeeData annotation (Placement(transformation(extent={{70,70},{90,90}})));
 equation
   connect(mechanicalPowerSensor.flange_b, constantSpeed.flange)
     annotation (Line(points={{70,30},{80,30}}));
@@ -160,7 +136,7 @@ equation
       color={85,170,255}));
   connect(starMachine.plug_p, terminalBox.starpoint) annotation (
       Line(
-      points={{-10,50},{-10,42},{-10,42}},
+      points={{-10,50},{-10,42},{-9,42}},
       color={85,170,255}));
   connect(terminalBox.plug_sp, rotorAngle.plug_p) annotation (Line(points={{6,40},{24,40}}, color={85,170,255}));
   connect(rotorAngle.plug_n, terminalBox.plug_sn) annotation (Line(points={{36,40},{36,46},{-6,46},{-6,40}}, color={85,170,255}));

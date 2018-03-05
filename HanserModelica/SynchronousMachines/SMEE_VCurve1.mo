@@ -64,31 +64,6 @@ model SMEE_VCurve1 "V curves of electrical excited synchronous machine operated 
   Modelica.Electrical.Machines.Sensors.MechanicalPowerSensor
     mechanicalPowerSensor annotation (Placement(transformation(extent={{40,10},{60,30}})));
   Modelica.Mechanics.Rotational.Sources.ConstantTorque constantTorque(useSupport=false, tau_constant=0) annotation (Placement(transformation(extent={{90,10},{70,30}})));
-  parameter MoveTo_Modelica.Electrical.Machines.Utilities.SynchronousMachineData                       smeeData(
-    SNominal=30e3,
-    VsNominal=100,
-    fsNominal=50,
-    IeOpenCircuit=10,
-    x0=0.1,
-    xd=1.6,
-    xdTransient=0.1375,
-    xdSubtransient=0.121428571,
-    xqSubtransient=0.148387097,
-    Ta=0.014171268,
-    Td0Transient=0.261177343,
-    Td0Subtransient=0.006963029,
-    Tq0Subtransient=0.123345081,
-    alpha20s(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero,
-    alpha20r(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero,
-    alpha20e(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero,
-    xq=1.1,
-    effectiveStatorTurns=64,
-    TsSpecification=373.15,
-    TsRef=373.15,
-    TrSpecification=373.15,
-    TrRef=373.15,
-    TeSpecification=373.15,
-    TeRef=373.15) "Machine data" annotation (Placement(transformation(extent={{20,72},{40,92}})));
 
   Modelica.Electrical.QuasiStationary.MultiPhase.Sources.VoltageSource
     voltageSource(
@@ -137,6 +112,7 @@ model SMEE_VCurve1 "V curves of electrical excited synchronous machine operated 
     offset=IeMax,
     duration=200,
     startTime=0)  annotation (Placement(transformation(extent={{-80,10},{-60,30}})));
+  parameter ParameterRecords.SMEE smeeData annotation (Placement(transformation(extent={{20,72},{40,92}})));
 algorithm
   when rotorAngle.rotorDisplacementAngle<-pi/2 then
     terminate("Exit of simulation");
@@ -164,7 +140,7 @@ equation
       color={85,170,255}));
   connect(starMachine.plug_p, terminalBox.starpoint) annotation (
       Line(
-      points={{-10,40},{-10,32}},
+      points={{-10,40},{-10,36},{-10,32},{-9,32}},
       color={85,170,255}));
   connect(terminalBox.plug_sp, rotorAngle.plug_p) annotation (Line(points={{6,30},{24,30}}, color={85,170,255}));
   connect(rotorAngle.plug_n, terminalBox.plug_sn) annotation (Line(points={{36,30},{36,36},{-6,36},{-6,30}}, color={85,170,255}));
@@ -174,7 +150,7 @@ equation
   connect(powerSensor.pv, powerSensor.pc) annotation (Line(points={{10,60},{10,70},{0,70}}, color={85,170,255}));
   connect(powerSensor.nv, star.plug_p) annotation (Line(points={{-10,60},{-50,60},{-50,80}}, color={85,170,255}));
   connect(powerSensor.nc, terminalBox.plugSupply) annotation (Line(points={{0,50},{0,32}}, color={85,170,255}));
-  connect(ramp.y, currentSource.i) annotation (Line(points={{-59,20},{-40,20}}, color={0,0,127}));
+  connect(ramp.y, currentSource.i) annotation (Line(points={{-59,20},{-35,20}}, color={0,0,127}));
   annotation (
     experiment(StopTime=200,Interval=0.001,Tolerance=1e-06),
     Documentation(info="<html>

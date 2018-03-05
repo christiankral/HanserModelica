@@ -83,31 +83,6 @@ model SMEE_DOL "Electrical excited synchronous machine starting direct on line"
         extent={{10,-10},{-10,10}},
         rotation=90)));
   Modelica.Electrical.Machines.Utilities.TerminalBox terminalBox(terminalConnection="Y", m=m) annotation (Placement(transformation(extent={{-20,-34},{0,-14}})));
-  parameter MoveTo_Modelica.Electrical.Machines.Utilities.SynchronousMachineData smeeData(
-    SNominal=30e3,
-    VsNominal=100,
-    fsNominal=50,
-    IeOpenCircuit=10,
-    x0=0.1,
-    xd=1.6,
-    xq=1.6,
-    xdTransient=0.1375,
-    xdSubtransient=0.121428571,
-    xqSubtransient=0.148387097,
-    Ta=0.014171268,
-    Td0Transient=0.261177343,
-    Td0Subtransient=0.006963029,
-    Tq0Subtransient=0.123345081,
-    alpha20s(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero,
-    alpha20r(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero,
-    alpha20e(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero,
-    effectiveStatorTurns=64,
-    TsSpecification=373.15,
-    TsRef=373.15,
-    TrSpecification=373.15,
-    TrRef=373.15,
-    TeSpecification=373.15,
-    TeRef=373.15) annotation (Placement(transformation(extent={{-20,-80},{0,-60}})));
 
   Modelica.Electrical.MultiPhase.Ideal.IdealClosingSwitch switch(
     final m=m,
@@ -122,6 +97,7 @@ model SMEE_DOL "Electrical excited synchronous machine starting direct on line"
     offsetTorque=0,
     stepTorque=50,
     startTime=1.5) annotation (Placement(transformation(extent={{90,-50},{70,-30}})));
+  parameter ParameterRecords.SMEE smeeData annotation (Placement(transformation(extent={{-20,-80},{0,-60}})));
 initial equation
   // sum(smee.is) = 0;
   smee.is[1:2] = zeros(2);
@@ -147,7 +123,7 @@ equation
       points={{0,-40},{10,-40}}));
   connect(smee.flange, mechanicalSensor.flange_a) annotation (Line(points={{0,-40},{40,-40}}));
   connect(sineVoltage.plug_p, switch.plug_p) annotation (Line(points={{-10,50},{0,50}}, color={0,0,255}));
-  connect(booleanReplicator.y, switch.control) annotation (Line(points={{1,10},{10,10},{10,38}}, color={255,0,255}));
+  connect(booleanReplicator.y, switch.control) annotation (Line(points={{1,10},{10,10},{10,43}}, color={255,0,255}));
   connect(booleanStep.y, booleanReplicator.u)
     annotation (Line(points={{-29,10},{-22,10}}, color={255,0,255}));
   connect(groundExcitation.p, rampVoltage.n)

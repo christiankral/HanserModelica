@@ -1,5 +1,5 @@
 within HanserModelica.SynchronousMachines.ParameterRecords;
-record SMR "Permanent magnet synchronous reluctance machine parameters"
+record SMR "Machine parameters of synchronous reluctance machine"
   import Modelica.Constants.pi;
   extends MoveTo_Modelica.Electrical.Machines.Utilities.ParameterRecords.SM_ReluctanceRotorData(
     useDamperCage=true,

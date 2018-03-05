@@ -52,31 +52,6 @@ model SMEE_LoadDump "Electrical excited synchronous machine with voltage control
     TeOperational=373.15,
     alpha20e=smeeData.alpha20e)
                           annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
-  parameter MoveTo_Modelica.Electrical.Machines.Utilities.SynchronousMachineData smeeData(
-    SNominal=30e3,
-    VsNominal=100,
-    fsNominal=50,
-    IeOpenCircuit=10,
-    x0=0.1,
-    xd=1.6,
-    xq=1.6,
-    xdTransient=0.1375,
-    xdSubtransient=0.121428571,
-    xqSubtransient=0.148387097,
-    Ta=0.014171268,
-    Td0Transient=0.261177343,
-    Td0Subtransient=0.006963029,
-    Tq0Subtransient=0.123345081,
-    alpha20s(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero,
-    alpha20r(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero,
-    alpha20e(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero,
-    effectiveStatorTurns=64,
-    TsSpecification=373.15,
-    TsRef=373.15,
-    TrSpecification=373.15,
-    TrRef=373.15,
-    TeSpecification=373.15,
-    TeRef=373.15) annotation (Placement(transformation(extent={{0,-70},{20,-50}})));
 
   Modelica.Electrical.Machines.Utilities.TerminalBox terminalBox(terminalConnection="Y") annotation (Placement(transformation(extent={{0,-24},{20,-4}})));
   Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
@@ -147,6 +122,7 @@ protected
 public
   Modelica.Blocks.Sources.Ramp speedRamp(height=wNominal, duration=1)
     annotation (Placement(transformation(extent={{80,-40},{60,-20}})));
+  parameter ParameterRecords.SMEE smeeData annotation (Placement(transformation(extent={{0,-70},{20,-50}})));
 initial equation
   smee.airGap.V_msr = Complex(0, 0);
   //conditional damper cage currents are defined as fixed start values
@@ -175,7 +151,7 @@ equation
       points={{30,-61},{30,-80},{-48,-80}}, color={0,0,127}));
   connect(voltageRMSSensor.V, voltageController.u_m) annotation (Line(points={{-41,0},{-60,0},{-60,-18}}, color={0,0,127}));
   connect(voltageController.y, excitationVoltage.v) annotation (Line(
-      points={{-49,-30},{-42,-30}}, color={0,0,127}));
+      points={{-49,-30},{-37,-30}}, color={0,0,127}));
   connect(loadInductor.plug_p, loadResistor.plug_n) annotation (Line(
       points={{-60,50},{-50,50}}, color={0,0,255}));
   connect(loadResistor.plug_p, switch.plug_n) annotation (Line(
@@ -184,11 +160,11 @@ equation
   connect(star.plug_p, loadInductor.plug_n) annotation (Line(
       points={{-90,40},{-90,50},{-80,50}}, color={0,0,255}));
   connect(loadControl.y, switch.control[1]) annotation (Line(
-      points={{-49,20},{-10,20},{-10,38}}, color={255,0,255}));
+      points={{-49,20},{-10,20},{-10,43}}, color={255,0,255}));
   connect(loadControl.y, switch.control[2]) annotation (Line(
-      points={{-49,20},{-10,20},{-10,38}}, color={255,0,255}));
+      points={{-49,20},{-10,20},{-10,43}}, color={255,0,255}));
   connect(loadControl.y, switch.control[3]) annotation (Line(
-      points={{-49,20},{-10,20},{-10,38}}, color={255,0,255}));
+      points={{-49,20},{-10,20},{-10,43}}, color={255,0,255}));
   connect(star.pin_n, ground.p) annotation (Line(
       points={{-90,20},{-90,10}}, color={0,0,255}));
   connect(speed.w_ref, speedRamp.y) annotation (Line(points={{52,-30},{59,-30}}, color={0,0,127}));

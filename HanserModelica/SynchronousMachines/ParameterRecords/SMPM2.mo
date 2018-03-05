@@ -1,5 +1,5 @@
 within HanserModelica.SynchronousMachines.ParameterRecords;
-record SMPM2 "Permanent magnet synchronous machine parameter set 2"
+record SMPM2 "Machine parameters of permanent magnet synchronous machine with rotor saliency"
   import Modelica.Constants.pi;
   parameter Real xi = 4 "Saliency of rotor";
   extends MoveTo_Modelica.Electrical.Machines.Utilities.ParameterRecords.SM_PermanentMagnetData(

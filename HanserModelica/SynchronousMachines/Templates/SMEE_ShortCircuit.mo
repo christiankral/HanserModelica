@@ -59,31 +59,6 @@ partial model SMEE_ShortCircuit "Template for short circuits of electrical excit
         extent={{-10,-10},{10,10}},
         rotation=270)));
   Modelica.Electrical.Machines.Utilities.TerminalBox terminalBox(terminalConnection="Y", m=m) annotation (Placement(transformation(extent={{10,-24},{30,-4}})));
-  parameter MoveTo_Modelica.Electrical.Machines.Utilities.SynchronousMachineData smeeData(
-    SNominal=30e3,
-    VsNominal=100,
-    fsNominal=50,
-    IeOpenCircuit=10,
-    x0=0.1,
-    xd=1.6,
-    xq=1.6,
-    xdTransient=0.1375,
-    xdSubtransient=0.121428571,
-    xqSubtransient=0.148387097,
-    Ta=0.014171268,
-    Td0Transient=0.261177343,
-    Td0Subtransient=0.006963029,
-    Tq0Subtransient=0.123345081,
-    alpha20s(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero,
-    alpha20r(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero,
-    alpha20e(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero,
-    effectiveStatorTurns=64,
-    TsSpecification=373.15,
-    TsRef=373.15,
-    TrSpecification=373.15,
-    TrRef=373.15,
-    TeSpecification=373.15,
-    TeRef=373.15) annotation (Placement(transformation(extent={{-72,-40},{-52,-20}})));
 
   Modelica.Electrical.MultiPhase.Ideal.IdealClosingSwitch switch(
     final m=m,
@@ -108,6 +83,7 @@ partial model SMEE_ShortCircuit "Template for short circuits of electrical excit
         origin={-10,-30},
         extent={{10,-10},{-10,10}},
         rotation=90)));
+  parameter ParameterRecords.SMEE smeeData annotation (Placement(transformation(extent={{-70,-40},{-50,-20}})));
 initial equation
   // sum(smee.is) = 0;
   smee.is[1:2] = zeros(2);
@@ -121,7 +97,7 @@ equation
   connect(terminalBox.plug_sp, smee.plug_sp) annotation (Line(
       points={{26,-20},{26,-20}},
       color={0,0,255}));
-  connect(booleanReplicator.y, switch.control) annotation (Line(points={{-19,10},{-10,10},{-10,38}},
+  connect(booleanReplicator.y, switch.control) annotation (Line(points={{-19,10},{-10,10},{-10,43}},
                                                                                                  color={255,0,255}));
   connect(booleanStep.y, booleanReplicator.u)
     annotation (Line(points={{-49,10},{-42,10}}, color={255,0,255}));
@@ -132,7 +108,7 @@ equation
   connect(pin1.plug_p, switch.plug_p) annotation (Line(points={{-38,70},{-30,70},{-30,50},{-20,50}}, color={0,0,255}));
   connect(pin2.plug_p, switch.plug_p) annotation (Line(points={{-38,50},{-20,50}}, color={0,0,255}));
   connect(pin3.plug_p, switch.plug_p) annotation (Line(points={{-38,30},{-30,30},{-30,50},{-20,50}}, color={0,0,255}));
-  connect(terminalBox.starpoint, groundMachine.p) annotation (Line(points={{10,-18},{10,-14},{-30,-14},{-30,-50},{-10,-50}}, color={0,0,255}));
+  connect(terminalBox.starpoint, groundMachine.p) annotation (Line(points={{11,-18},{11,-14},{-30,-14},{-30,-50},{-10,-50}}, color={0,0,255}));
   connect(mechanicalPowerSensor.flange_b, constantSpeed.flange) annotation (Line(points={{60,-30},{70,-30}}));
   connect(smee.flange, mechanicalPowerSensor.flange_a) annotation (Line(points={{30,-30},{40,-30}}, color={0,0,0}));
   connect(constantVoltage.p, smee.pin_ep) annotation (Line(points={{-10,-20},{0,-20},{0,-24},{10,-24}}, color={0,0,255}));

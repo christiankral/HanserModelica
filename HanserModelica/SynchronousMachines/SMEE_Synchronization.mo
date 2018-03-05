@@ -80,31 +80,6 @@ model SMEE_Synchronization "Electrical excited synchronous machine synchronized 
         extent={{-10,-10},{10,10}},
         rotation=90)));
   Modelica.Electrical.Machines.Utilities.TerminalBox terminalBox(terminalConnection="Y", m=m) annotation (Placement(transformation(extent={{30,-24},{50,-4}})));
-  parameter MoveTo_Modelica.Electrical.Machines.Utilities.SynchronousMachineData smeeData(
-    SNominal=30e3,
-    VsNominal=100,
-    fsNominal=50,
-    IeOpenCircuit=10,
-    x0=0.1,
-    xd=1.6,
-    xq=1.6,
-    xdTransient=0.1375,
-    xdSubtransient=0.121428571,
-    xqSubtransient=0.148387097,
-    Ta=0.014171268,
-    Td0Transient=0.261177343,
-    Td0Subtransient=0.006963029,
-    Tq0Subtransient=0.123345081,
-    alpha20s(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero,
-    alpha20r(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero,
-    alpha20e(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero,
-    effectiveStatorTurns=64,
-    TsSpecification=373.15,
-    TsRef=373.15,
-    TrSpecification=373.15,
-    TrRef=373.15,
-    TeSpecification=373.15,
-    TeRef=373.15) annotation (Placement(transformation(extent={{-50,-40},{-30,-20}})));
 
   Modelica.Electrical.MultiPhase.Ideal.IdealClosingSwitch switch(
     final m=m,
@@ -117,6 +92,7 @@ model SMEE_Synchronization "Electrical excited synchronous machine synchronized 
                                                                annotation (Placement(transformation(extent={{-50,0},{-30,20}})));
   Modelica.Blocks.Routing.BooleanReplicator booleanReplicator(nout=m) annotation (Placement(transformation(extent={{-20,20},{0,0}})));
   Modelica.Mechanics.Rotational.Sources.ConstantTorque constantTorque(tau_constant=0) annotation (Placement(transformation(extent={{80,-40},{60,-20}})));
+  parameter ParameterRecords.SMEE smeeData annotation (Placement(transformation(extent={{-50,-40},{-30,-20}})));
 initial equation
   // sum(smee.is) = 0;
   smee.is[1:2] = zeros(2);
@@ -134,7 +110,7 @@ equation
       points={{46,-20},{46,-20}},
       color={0,0,255}));
   connect(sineVoltage.plug_p, switch.plug_p) annotation (Line(points={{-10,50},{0,50}}, color={0,0,255}));
-  connect(booleanReplicator.y, switch.control) annotation (Line(points={{1,10},{10,10},{10,38}}, color={255,0,255}));
+  connect(booleanReplicator.y, switch.control) annotation (Line(points={{1,10},{10,10},{10,43}}, color={255,0,255}));
   connect(booleanStep.y, booleanReplicator.u)
     annotation (Line(points={{-29,10},{-22,10}}, color={255,0,255}));
   connect(switch.plug_n, electricalSensor.pc) annotation (Line(points={{20,50},{40,50},{40,40}}, color={0,0,255}));

@@ -1,5 +1,5 @@
 within HanserModelica.SynchronousMachines.ParameterRecords;
-record SMPM1 "Permanent magnet synchronous machine parameter set 1"
+record SMPM1 "Machine parameters of magnetically symmetric permanent magnet synchronous machine"
   import Modelica.Constants.pi;
   extends MoveTo_Modelica.Electrical.Machines.Utilities.ParameterRecords.SM_PermanentMagnetData(
     useDamperCage=false,

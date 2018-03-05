@@ -1,12 +1,14 @@
-﻿within HanserModelica.SynchronousMachines;
-model SMEE_SynchronizationPhase "Synchronizazion of electrical excited synchronous machine with 10° voltage phase shift"
-  extends SMEE_Synchronization(phi=Modelica.SIunits.Conversions.from_deg(10));
+within HanserModelica.SynchronousMachines;
+model SMEE_Synchronization3 "Synchronizazion of electrical excited synchronous machine with 10% higher excitation current"
+  extends SMEE_Synchronization1(constantCurrent(I=1.15*smeeData.IeOpenCircuit));
   annotation (experiment(StopTime=0.3,Interval=0.0001,Tolerance=1e-08),
     Documentation(info="<html>
 <p>An electrically excited synchronous machine is running with synchrous speed. 
 The RMS values of the open circuit machine voltages and mains voltage are equal. 
-Tha phase shift if the machine and mains voltages are euqal. However, the parameter
-phi = 10° is used to cause lagging phase angles of the mains voltage.</p>
+Tha phase shift if the machine and mains voltages are euqal. However, the excitation current
+is 5 percent greater than in 
+<a href=\"modelica://HanserModelica.SynchronousMachines.SMEE_Synchronization\">SMEE_Synchronization</a>. 
+This causes the stator voltages to be 5 percent greater than the nominal voltage.</p>
 
 <p>After 0.1 seconds the synchronization switch closes. As the machine and mains 
 voltages show an equal phase shift in each phase, there occur electrical, magnetic and mechanical reactions
@@ -27,4 +29,4 @@ machine after the synchronization switch is closd.
 <p>Default machine parameters are used.</p>
 
 </html>"));
-end SMEE_SynchronizationPhase;
+end SMEE_Synchronization3;

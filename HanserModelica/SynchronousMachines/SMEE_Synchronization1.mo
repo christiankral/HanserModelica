@@ -1,5 +1,5 @@
 within HanserModelica.SynchronousMachines;
-model SMEE_Synchronization "Electrical excited synchronous machine synchronized to grid"
+model SMEE_Synchronization1 "Electrical excited synchronous machine synchronized to grid"
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   parameter Integer m=3 "Number of phases";
@@ -153,4 +153,4 @@ of the machine on the closing switch.
                   fillPattern=FillPattern.Solid,
                   textStyle={TextStyle.Bold},
           textString="%m phase")}));
-end SMEE_Synchronization;
+end SMEE_Synchronization1;

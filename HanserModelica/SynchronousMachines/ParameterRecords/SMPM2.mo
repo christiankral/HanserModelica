@@ -2,7 +2,7 @@ within HanserModelica.SynchronousMachines.ParameterRecords;
 record SMPM2 "Permanent magnet synchronous machine parameter set 2"
   import Modelica.Constants.pi;
   parameter Real xi = 4 "Saliency of rotor";
-  extends Modelica.Electrical.Machines.Utilities.ParameterRecords.SM_PermanentMagnetData(
+  extends MoveTo_Modelica.Electrical.Machines.Utilities.ParameterRecords.SM_PermanentMagnetData(
     Rs=0.03,
     Lssigma=0.13/(2*pi*fsNominal),
     Lmd=0.2/(2*pi*fsNominal),

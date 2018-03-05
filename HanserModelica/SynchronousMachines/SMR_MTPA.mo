@@ -4,13 +4,13 @@ model SMR_MTPA "Synchronous reluctance machine, investigating maximum torque per
   import Modelica.Constants.pi;
   parameter Integer m = 3 "Number of phases";
   parameter Modelica.SIunits.Voltage VNominal = 100 "Nominal RMS voltage per phase";
-  parameter Modelica.SIunits.Frequency fNominal = 50 "Nominal frequency";
+  parameter Modelica.SIunits.Frequency fsNominal = 50 "Nominal frequency";
   parameter Modelica.SIunits.Frequency f = 50 "Actual frequency";
   parameter Modelica.SIunits.Time tRamp = 1 "Frequency ramp";
   parameter Modelica.SIunits.Torque TLoad = 88.67 "Nominal load torque";
   parameter Modelica.SIunits.Time tStep = 1.2 "Time of load torque step";
   parameter Modelica.SIunits.Inertia JLoad = 0.29 "Load's moment of inertia";
-  parameter Modelica.SIunits.AngularVelocity wNominal = 2 * pi * fNominal / smrData.p "Nominal angular velocity";
+  parameter Modelica.SIunits.AngularVelocity wNominal = 2 * pi * fsNominal / smrData.p "Nominal angular velocity";
   Modelica.SIunits.Angle theta = rotorAngle.rotorDisplacementAngle "Rotor displacement angle, quasi stastic";
   parameter Boolean positiveRange = false "Use positive range of angles, if true";
   Modelica.SIunits.Angle phii = MoveTo_Modelica.Math.wrapAngle(smr.arg_is[1], positiveRange) "Angle of current";

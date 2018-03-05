@@ -45,11 +45,11 @@ model SMEE_LoadDump "Electrical excited synchronous machine with voltage control
     Lmd=smeeData.Lmd*m/3,
     Lmq=smeeData.Lmq*m/3,
     effectiveStatorTurns=smeeData.effectiveStatorTurns,
-    TsOperational=373.15,
+    TsOperational=smeeData.TsRef,
     alpha20s=smeeData.alpha20s,
     alpha20r=smeeData.alpha20r,
-    TrOperational=373.15,
-    TeOperational=373.15,
+    TrOperational=smeeData.TrRef,
+    TeOperational=smeeData.TeRef,
     alpha20e=smeeData.alpha20e)
                           annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
 

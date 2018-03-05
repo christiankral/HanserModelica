@@ -44,10 +44,10 @@ model SMPM_MTPA1 "Permanent magnet synchronous machine fed by current source, pa
     permanentMagnetLossParameters=smpmData1.permanentMagnetLossParameters,
     phiMechanical(fixed=true, start=0),
     effectiveStatorTurns=smpmData1.effectiveStatorTurns,
-    TsOperational=373.15,
+    TsOperational=smpmData1.TsRef,
     alpha20s=smpmData1.alpha20s,
     alpha20r=smpmData1.alpha20r,
-    TrOperational=373.15) annotation (Placement(transformation(extent={{0,0},{20,20}})));
+    TrOperational=smpmData1.TrRef) annotation (Placement(transformation(extent={{0,0},{20,20}})));
 
   Modelica.Mechanics.Rotational.Sources.ConstantSpeed constantSpeed(w_fixed=wNominal) annotation (Placement(transformation(extent={{80,0},{60,20}})));
   Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star starMachine(m=Modelica.Electrical.MultiPhase.Functions.numberOfSymmetricBaseSystems(m)) annotation (Placement(transformation(

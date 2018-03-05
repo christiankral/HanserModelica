@@ -51,9 +51,9 @@ model SMEE_LoadImpedance1 "Electrical excited synchronous machine operating at v
     Lmd=smeeData.Lmd*m/3,
     Lmq=smeeData.Lmq*m/3,
     effectiveStatorTurns=smeeData.effectiveStatorTurns,
-    TsOperational=373.15,
+    TsOperational=smeeData.TsRef,
     TrOperational=293.15,
-    TeOperational=373.15) annotation (Placement(transformation(extent={{-10,-20},{10,0}})));
+    TeOperational=smeeData.TeRef) annotation (Placement(transformation(extent={{-10,-20},{10,0}})));
   Modelica.Electrical.Analog.Basic.Ground groundr annotation (
       Placement(transformation(
         origin={-50,-30},

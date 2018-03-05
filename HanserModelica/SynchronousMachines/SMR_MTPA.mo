@@ -18,10 +18,10 @@ model SMR_MTPA "Synchronous reluctance machine, investigating maximum torque per
   Modelica.SIunits.Angle phis = MoveTo_Modelica.Math.wrapAngle(phiv - phii, positiveRange) "Angle between voltage and current";
   Modelica.SIunits.Angle epsilon = MoveTo_Modelica.Math.wrapAngle(phis - theta, positiveRange) "Current angle";
   Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.SynchronousMachines.SM_ReluctanceRotor smr(p = smrData.p, fsNominal = smrData.fsNominal, TsRef = smrData.TsRef, Jr = smrData.Jr, Js = smrData.Js, frictionParameters = smrData.frictionParameters, statorCoreParameters = smrData.statorCoreParameters, strayLoadParameters = smrData.strayLoadParameters,                                        Lrsigmad = smrData.Lrsigmad, Lrsigmaq = smrData.Lrsigmaq, Rrd = smrData.Rrd, Rrq = smrData.Rrq, TrRef = smrData.TrRef, phiMechanical(fixed = true, start = 0), m = m, effectiveStatorTurns = smrData.effectiveStatorTurns, Rs = smrData.Rs * m / 3, Lssigma = smrData.Lssigma * m / 3, Lmd = smrData.Lmd * m / 3, Lmq = smrData.Lmq * m / 3,
-    TsOperational=373.15,
-    alpha20s=smrData.alpha20s,
-    TrOperational=373.15,
+    TrOperational=smrData.TrRef,
     useDamperCage=false,
+    TsOperational=smrData.TsRef,
+    alpha20s=smrData.alpha20s,
     alpha20r=smrData.alpha20r)                                                                                                                                                                                                         annotation (
     Placement(transformation(extent = {{0, 0}, {20, 20}})));
   Modelica.Mechanics.Rotational.Sources.ConstantSpeed quadraticSpeedDependentTorque(w_fixed = wNominal) annotation (

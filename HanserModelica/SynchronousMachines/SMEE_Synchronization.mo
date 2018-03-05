@@ -40,12 +40,12 @@ model SMEE_Synchronization "Electrical excited synchronous machine synchronized 
     Lmd=smeeData.Lmd*m/3,
     Lmq=smeeData.Lmq*m/3,
     sigmae=smeeData.sigmae*m/3,
-    TsOperational=373.15,
+    TsOperational=smeeData.TsRef,
     alpha20s=smeeData.alpha20s,
     effectiveStatorTurns=smeeData.effectiveStatorTurns,
     alpha20r=smeeData.alpha20r,
-    TrOperational=373.15,
-    TeOperational=373.15,
+    TrOperational=smeeData.TrRef,
+    TeOperational=smeeData.TeRef,
     alpha20e=smeeData.alpha20e)
       annotation (Placement(transformation(extent={{30,-40},{50,-20}})));
   Modelica.Electrical.Analog.Basic.Ground groundExcitation annotation (

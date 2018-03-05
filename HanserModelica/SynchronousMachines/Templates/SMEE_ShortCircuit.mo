@@ -38,12 +38,12 @@ partial model SMEE_ShortCircuit "Template for short circuits of electrical excit
     Lmd=smeeData.Lmd*m/3,
     Lmq=smeeData.Lmq*m/3,
     sigmae=smeeData.sigmae*m/3,
-    TsOperational=373.15,
+    TsOperational=smeeData.TsRef,
     alpha20s=smeeData.alpha20s,
     effectiveStatorTurns=smeeData.effectiveStatorTurns,
     alpha20r=smeeData.alpha20r,
-    TrOperational=373.15,
-    TeOperational=373.15,
+    TrOperational=smeeData.TrRef,
+    TeOperational=smeeData.TeRef,
     alpha20e=smeeData.alpha20e)
       annotation (Placement(transformation(extent={{10,-40},{30,-20}})));
   Modelica.Electrical.Analog.Basic.Ground groundMachine annotation (Placement(transformation(

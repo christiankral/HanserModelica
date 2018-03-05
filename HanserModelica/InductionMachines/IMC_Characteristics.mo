@@ -91,7 +91,7 @@ equation
       color={85,170,255}));
   connect(starMachine.plug_p, terminalBox.starpoint) annotation (
       Line(
-      points={{-10,40},{-10,52},{20,52}},
+      points={{-10,40},{-10,52},{21,52}},
       color={85,170,255}));
   connect(currentRMSSensor.plug_n, terminalBox.plugSupply) annotation (Line(points={{10,80},{30,80},{30,52}}, color={85,170,255}));
   connect(starMachine.pin_n, groundMachine.pin) annotation (Line(

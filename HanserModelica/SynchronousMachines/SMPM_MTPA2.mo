@@ -24,8 +24,10 @@ model SMPM_MTPA2
       VsOpenCircuit=smpmData2.VsOpenCircuit,
       permanentMagnetLossParameters=smpmData2.permanentMagnetLossParameters,
       Js=smpmData2.Js,
+      TsOperational=smpmData2.TsRef,
       alpha20s=smpmData2.alpha20s,
-      alpha20r=smpmData2.alpha20r));
+      alpha20r=smpmData2.alpha20r,
+      TrOperational=smpmData2.TrRef));
   annotation (
     experiment(Interval=0.0001, Tolerance=1e-06));
 end SMPM_MTPA2;

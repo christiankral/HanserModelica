@@ -48,9 +48,9 @@ model SMEE_VCurve1 "V curves of electrical excited synchronous machine operated 
     effectiveStatorTurns=smeeData.effectiveStatorTurns,
     p=p,
     useDamperCage=true,
-    TsOperational=373.15,
-    TrOperational=373.15,
-    TeOperational=373.15) annotation (Placement(transformation(extent={{-10,10},{10,30}})));
+    TsOperational=smeeData.TsRef,
+    TrOperational=smeeData.TrRef,
+    TeOperational=smeeData.TeRef) annotation (Placement(transformation(extent={{-10,10},{10,30}})));
   Modelica.Electrical.Analog.Basic.Ground groundr annotation (
       Placement(transformation(
         origin={-50,2},

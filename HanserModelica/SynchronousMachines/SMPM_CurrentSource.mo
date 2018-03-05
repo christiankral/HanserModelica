@@ -48,10 +48,10 @@ model SMPM_CurrentSource "Permanent magnet synchronous machine fed by current so
     phiMechanical(fixed=true, start=0),
     m=m,
     effectiveStatorTurns=smpmData.effectiveStatorTurns,
-    TsOperational=373.15,
+    TsOperational=smpmData.TsRef,
     alpha20s=smpmData.alpha20s,
     alpha20r=smpmData.alpha20r,
-    TrOperational=373.15) annotation (Placement(transformation(extent={{-10,0},{10,20}})));
+    TrOperational=smpmData.TrRef) annotation (Placement(transformation(extent={{-10,0},{10,20}})));
 
   Modelica.Mechanics.Rotational.Components.Inertia inertiaLoad(J=0.29)
     annotation (Placement(transformation(extent={{50,0},{70,20}})));

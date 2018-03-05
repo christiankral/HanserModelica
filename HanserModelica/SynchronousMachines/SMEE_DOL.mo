@@ -36,12 +36,12 @@ model SMEE_DOL "Electrical excited synchronous machine starting direct on line"
     Lmd=smeeData.Lmd*m/3,
     Lmq=smeeData.Lmq*m/3,
     sigmae=smeeData.sigmae*m/3,
-    TsOperational=373.15,
-    alpha20s=smeeData.alpha20s,
     effectiveStatorTurns=smeeData.effectiveStatorTurns,
+    TsOperational=smeeData.TsRef,
+    alpha20s=smeeData.alpha20s,
     alpha20r=smeeData.alpha20r,
-    TrOperational=373.15,
-    TeOperational=373.15,
+    TrOperational=smeeData.TrRef,
+    TeOperational=smeeData.TeRef,
     alpha20e=smeeData.alpha20e)
       annotation (Placement(transformation(extent={{-20,-50},{0,-30}})));
   Modelica.Electrical.Machines.Sensors.RotorDisplacementAngle rotorDisplacementAngle(p=smee.p, m=m) annotation (Placement(transformation(

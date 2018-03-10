@@ -10,5 +10,9 @@ Christian Kral<br>
 1060 Vienna, Austria<br>
 email: <a HREF=\"mailto:dr.christian.kral@gmail.com\">dr.christian.kral@gmail.com</a><br>
 </p>
+
+<p>The library HanserModelica is hosted at 
+<a href=\"https://github.com/christiankral/HanserModelica\">https://github.com/christiankral/HanserModelica</a>.
+</p>
 </html>"));
 end Contact;

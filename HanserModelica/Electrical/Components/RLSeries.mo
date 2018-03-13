@@ -30,11 +30,11 @@ equation
           lineColor={0,0,255},
           textString="%name"),
         Text(
-          extent={{-150,-60},{150,-20}},
+          extent={{-150,-60},{150,-30}},
           lineColor={0,0,0},
           textString="R=%R"),
         Text(
-          extent={{-150,-110},{150,-70}},
+          extent={{-150,-100},{150,-70}},
           lineColor={0,0,0},
           textString="L=%L")}));
 end RLSeries;

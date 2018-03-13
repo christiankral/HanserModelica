@@ -6,4 +6,5 @@ model MachineExample "Examples of different instantiations"
   Components.Machine machine3;
   Machines.Components.Machine machine4;
   Components.Machine machine5;
+  // Machine machine6; // is not valid
 end MachineExample;

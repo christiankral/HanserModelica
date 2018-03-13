@@ -1,7 +1,7 @@
 within HanserModelica.Rotational;
 model TestDCPMMachine "Test model of DCPMMachine"
   extends Modelica.Icons.Example;
-  Components.DCPMMachine machine(J=0.2,Ra=0.22,k=2,La=0.004) annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
+  Components.DCPMMachine machine(Jr=0.2,Ra=0.22,k=2,La=0.004) annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
   Modelica.Mechanics.Rotational.Sources.QuadraticSpeedDependentTorque load(
     tau_nominal=-100,TorqueDirection=false,w(displayUnit="rpm"),
     w_nominal(displayUnit="rpm") = 104.71975511966)

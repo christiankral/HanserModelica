@@ -3,7 +3,7 @@ model DCPMMachine "Permanent magnet DC machine"
   parameter Modelica.SIunits.Resistance Ra "Armature resistance";
   parameter Modelica.SIunits.Inductance La "Armature inductance";
   parameter Modelica.SIunits.ElectricalTorqueConstant k "Transformation coefficient";
-  parameter Modelica.SIunits.Inertia J "Rotor inertia";
+  parameter Modelica.SIunits.Inertia Jr "Rotor inertia";
   Modelica.SIunits.Torque tauElectrical = -emf.flange.tau "Electromagnetic tourque";
   Modelica.SIunits.Torque tauShaft = -flange.tau "Shaft torque";
   Modelica.SIunits.AngularVelocity wMechanical = der(flange.phi) "Angular velocity";
@@ -17,7 +17,7 @@ model DCPMMachine "Permanent magnet DC machine"
   Modelica.Electrical.Analog.Basic.Resistor resistor(final R=Ra) annotation (Placement(visible = true, transformation(origin = {-60, 20}, extent = {{-10, -10}, {10, 10}}, rotation = 270)));
   Modelica.Electrical.Analog.Basic.EMF emf(final k=k) annotation (Placement(transformation(extent={{-10,10},{10,-10}})));
   Modelica.Electrical.Analog.Basic.Inductor inductor(final L=La) annotation (Placement(visible = true, transformation(origin = {-60, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 270)));
-  Modelica.Mechanics.Rotational.Components.Inertia inertia(final J=J) annotation (Placement(transformation(extent={{20,-10},{40,10}})));
+  Modelica.Mechanics.Rotational.Components.Inertia inertia(final J=Jr) annotation (Placement(transformation(extent={{20,-10},{40,10}})));
 equation
   connect(emf.n, pin_an) annotation (Line(points={{0,10}, {0, 28}, {60, 28}, {60, 40}}, color={0,0,255}));
   connect(inductor.n, emf.p) annotation (

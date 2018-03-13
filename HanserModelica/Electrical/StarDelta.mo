@@ -25,8 +25,8 @@ model StarDelta "Example of star connected sources and delta connected load"
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={50,0})));
-  Modelica.Electrical.MultiPhase.Sensors.CurrentQuasiRMSSensor iRMSSensor annotation (Placement(transformation(extent={{60,50},{80,30}})));
-  Modelica.Electrical.MultiPhase.Sensors.CurrentSensor iSensor annotation (Placement(transformation(extent={{30,50},{50,30}})));
+  Modelica.Electrical.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensor annotation (Placement(transformation(extent={{60,50},{80,30}})));
+  Modelica.Electrical.MultiPhase.Sensors.CurrentSensor currentSensor annotation (Placement(transformation(extent={{30,50},{50,30}})));
   Modelica.Blocks.Math.RootMeanSquare rootMeanSquare[3](f=fill(50, 3)) annotation (Placement(transformation(extent={{20,50},{0,70}})));
 equation
   connect(ground.p, star.pin_n) annotation (Line(points={{-80,-20},{-70,-20}}, color={0,0,255}));
@@ -37,9 +37,9 @@ equation
   connect(booleanStep.y, switch.control) annotation (Line(points={{-69,60},{-50,60},{-50,52}}, color={255,0,255}));
   connect(inductorLoad.plug_p, delta.plug_p) annotation (Line(points={{50,10},{50,20},{80,20},{80,12}}, color={0,0,255}));
   connect(inductorLoad.plug_n, delta.plug_n) annotation (Line(points={{50,-10},{50,-20},{80,-20},{80,-8}}, color={0,0,255}));
-  connect(iSensor.i, rootMeanSquare.u) annotation (Line(points={{40,51},{40,60},{22,60}}, color={0,0,127}));
-  connect(inductor.plug_n, iSensor.plug_p) annotation (Line(points={{20,40},{30,40}}, color={0,0,255}));
-  connect(iSensor.plug_n, iRMSSensor.plug_p) annotation (Line(points={{50,40},{60,40}}, color={0,0,255}));
-  connect(iRMSSensor.plug_n, delta.plug_p) annotation (Line(points={{80,40},{80,12}}, color={0,0,255}));
+  connect(currentSensor.i, rootMeanSquare.u) annotation (Line(points={{40,51},{40,60},{22,60}}, color={0,0,127}));
+  connect(inductor.plug_n, currentSensor.plug_p) annotation (Line(points={{20,40},{30,40}}, color={0,0,255}));
+  connect(currentSensor.plug_n, currentRMSSensor.plug_p) annotation (Line(points={{50,40},{60,40}}, color={0,0,255}));
+  connect(currentRMSSensor.plug_n, delta.plug_p) annotation (Line(points={{80,40},{80,12}}, color={0,0,255}));
   annotation (experiment(StopTime=0.2,Interval=0.0001,Tolerance=1e-06));
 end StarDelta;

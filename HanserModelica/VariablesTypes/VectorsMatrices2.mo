@@ -10,6 +10,6 @@ model VectorsMatrices2 "Example 2 on vetors and matrices"
   parameter Real E[:,:]=ones(2,2);       // = {{1,1},{1,1}}
   parameter Real F[2,2]=fill(4,2,2);     // = {{4,4},{4,4}}
   parameter Real G[:,:]=diagonal({1,2}); // = {{1,0},{0,2}}
-  parameter Real S=sum(D);               // = 4
+  parameter Real S=sum(E);               // = 4
   parameter Real Y=A[1,1]*4+A[2,2];      // = 8
 end VectorsMatrices2;

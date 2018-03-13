@@ -1,4 +1,4 @@
 within HanserModelica.Classes;
-package Machines "Example of machines sub package"
+package Machines "Example of sub package"
 
 end Machines;

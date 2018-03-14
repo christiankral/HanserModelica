@@ -1,7 +1,12 @@
 within HanserModelica.Machines.Records;
 record Winding7over9 "Winding example with skewing of 7/9"
+  import Modelica.Constants.pi;
   extends Winding(
     final m=3,
+    final p=2,
+    final a=1,
+    final nc=10,
+    final offset=-110*pi/180,
     final S={{1,2,3,4,5,6},{7,8,9,10,11,12},{13,14,15,16,17,18}},
     final ycb=HanserModelica.Machines.Functions.map(
              { 1,    2,    3,   17,   18,    1,

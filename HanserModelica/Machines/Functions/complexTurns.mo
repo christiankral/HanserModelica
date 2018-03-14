@@ -3,8 +3,6 @@ function complexTurns "Calculation of complex number of turns of winding records
   extends Modelica.Icons.Function;
   import Modelica.Constants.pi;
   input HanserModelica.Machines.Records.Winding winding "Input winding record";
-  input Integer nc = 1 "Number of turns of one coil";
-  input Modelica.SIunits.Angle offset = 0 "Angle offset";
   output Complex N[winding.m] "Complex numbers of turn";
 protected
   Integer nCoil = size(winding.S,2) "Number of coils";
@@ -19,10 +17,10 @@ algorithm
     for j in 1:nCoil loop
       index := winding.S[k, j] "Local index taken from matrix S";
       dgamma := 2*pi*(winding.yce[index] - winding.ycb[index])/slots;
-      gamma := 2*pi*(winding.yce[index] + winding.ycb[index])/2/slots + offset;
+      gamma := 2*pi*(winding.yce[index] + winding.ycb[index])/2/slots + winding.offset;
       xic := sin(dgamma/2);
       // N[k] := N[i] + xic*nc*exp(j*gamma)
-      N[k] := N[k] + xic*nc*Modelica.ComplexMath.fromPolar(1,gamma);
+      N[k] := N[k] + winding.p/winding.a*xic*winding.nc*Modelica.ComplexMath.fromPolar(1,gamma);
     end for;
   end for;
 end complexTurns;

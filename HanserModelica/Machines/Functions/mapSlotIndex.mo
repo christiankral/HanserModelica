@@ -1,10 +1,9 @@
 within HanserModelica.Machines.Functions;
-function mapSlotIndex "Map slot indices to allowed range"
+function mapSlotIndex "Map slot index to allowed range"
   extends Modelica.Icons.Function;
-  input Integer y[:] "Input vector";
-  output Integer ymap[size(y,1)] "Mapped output vector";
-protected
-  Integer slots = size(y,1) "Length of input vector = number of slots";
+  input Integer y "Input vector";
+  input Integer Sprime "Number of slots per pole pair";
+  output Integer ymap "Mapped output vector";
 algorithm
-  ymap := {mod(y[k]-1,slots)+1 for k in 1:slots};
+  ymap := mod(y-1,Sprime)+1;
 end mapSlotIndex;

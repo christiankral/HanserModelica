@@ -11,7 +11,7 @@ protected
   Integer Sprime = div(winding.S, winding.p) "Number of slots per pole pair";
   Integer Sg = if winding.doubleLayer then div(Sprime,2) else Sprime "Number of slots per coil group";
   Integer yShift = div(Sprime, winding.m) "Slot displacement between two adjacent windings";
-  Integer coilSideCounter[Sg]=zeros(Sg) "Coil side counter to check valid winding";
+  Integer coilSideCounter[Sg]=zeros(Sg) "Coil side counter to validate winding";
   Modelica.SIunits.Angle dgamma "Local coil width";
   Modelica.SIunits.Angle gamma "Local orientation of coil";
   Real xic "Local skewing factor of coil";
@@ -63,8 +63,6 @@ algorithm
      dgamma := 2*pi*(yce[j,k] - ycb[j,k])/Sprime;
      gamma := 2*pi*(yce[j,k] + ycb[j,k])/2/Sprime + winding.offset;
      xic := sin(dgamma/2);
-     Modelica.Utilities.Streams.print(String(j)+","+String(k)+": "+String(ycb[j,k])+" "+String(yce[j,k]));
-     Modelica.Utilities.Streams.print("Nc="+String(2*winding.p/winding.a*winding.nc)+",xic="+String(xic)+",gamma="+String(gamma*180/pi)+",dgamma="+String(dgamma*180/pi));
      // N[j] := N[k] + (p/a)*xic*nc*exp(j*gamma)
      if winding.doubleLayer then
        N[j] := N[j] + 2*winding.p/winding.a*xic*winding.nc*Modelica.ComplexMath.fromPolar(1,gamma);

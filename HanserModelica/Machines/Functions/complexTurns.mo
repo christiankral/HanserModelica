@@ -32,7 +32,7 @@ algorithm
   assert(size(winding.ycb,1)==size(winding.yce,1),"Lengh of begin and end index vectors is not equal");
   // Assemble windings of all phases, 1 <= j <= m
   for j in 1:winding.m loop
-    // Assemble windings for all coils
+    // Assemble windings for all phases
     for k in 1:size(winding.ycb,1) loop
       ycb[j,k] :=HanserModelica.Machines.Functions.mapSlotIndex(winding.ycb[k] + (j - 1)*yShift, Sprime);
       yce[j,k] :=HanserModelica.Machines.Functions.mapSlotIndex(winding.yce[k] + (j - 1)*yShift, Sprime);

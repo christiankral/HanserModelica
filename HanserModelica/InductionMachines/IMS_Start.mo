@@ -146,7 +146,7 @@ model IMS_Start "Starting of induction machine with slip rings"
         rotation=270,
         origin={-90,20})));
   Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.PowerSensor powerSensorQS(m=m) annotation (Placement(transformation(extent={{-40,70},{-20,90}})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensorQS(m=m) annotation (Placement(transformation(extent={{-10,70},{10,90}})));
+  MoveTo_Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensorQS(m=m) annotation (Placement(transformation(extent={{-10,70},{10,90}})));
   Modelica.Electrical.QuasiStationary.MultiPhase.Ideal.IdealClosingSwitch
     idealCloserQS(
     final m=m,

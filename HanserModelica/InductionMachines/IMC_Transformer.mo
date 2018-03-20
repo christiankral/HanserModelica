@@ -35,7 +35,7 @@ model IMC_Transformer "Induction machine with squirrel cage starting with transf
     effectiveStatorTurns=imcData.effectiveStatorTurns,
     alpha20r=imcData.alpha20r,
     TrOperational=imcData.TrRef) annotation (Placement(transformation(extent={{80,10},{60,30}})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensorQS(m=m) annotation (Placement(transformation(
+  MoveTo_Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensorQS(m=m) annotation (Placement(transformation(
         origin={-40,80},
         extent={{-10,10},{10,-10}},
         rotation=0)));

@@ -1,5 +1,5 @@
 within HanserModelica.SynchronousMachines;
-model SMEE_Slip1 "Electrical excited synchronous machine operating at small slip and Ie = 0"
+model SMEE_Slip1 "Electrical excited synchronous machine operating at small slip and ie = 0"
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   parameter Integer m=3 "Number of stator phases";
@@ -10,7 +10,7 @@ model SMEE_Slip1 "Electrical excited synchronous machine operating at small slip
     Modelica.SIunits.Conversions.from_rpm(1499) "Actual speed";
   parameter Modelica.SIunits.Current IeMax=19 "Maximum excitation current";
   parameter Modelica.SIunits.Current Ie0=10 "Open circuit excitation current for nominal voltage";
-  parameter Modelica.SIunits.Current Ie=0 "Actual open circuit current";
+  parameter Modelica.SIunits.Current ie=0 "Actual open circuit current";
   parameter Modelica.SIunits.Angle gamma0(displayUnit="deg") = 0 "Initial rotor displacement angle";
   parameter Boolean positiveRange = false "Use positive range of angles, if true";
   Modelica.SIunits.Angle phi_i=MoveTo_Modelica.Math.wrapAngle(smee.arg_is[1], positiveRange) "Angle of current";
@@ -61,7 +61,7 @@ model SMEE_Slip1 "Electrical excited synchronous machine operating at small slip
         origin={-50,12},
         extent={{-10,-10},{10,10}},
         rotation=270)));
-  Modelica.Electrical.Analog.Sources.ConstantCurrent constantCurrent(I=Ie) annotation (Placement(transformation(
+  Modelica.Electrical.Analog.Sources.ConstantCurrent constantCurrent(I=ie) annotation (Placement(transformation(
         origin={-28,30},
         extent={{-10,-10},{10,10}},
         rotation=90)));

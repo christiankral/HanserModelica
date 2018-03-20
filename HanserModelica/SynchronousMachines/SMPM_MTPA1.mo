@@ -87,7 +87,7 @@ model SMPM_MTPA1 "Permanent magnet synchronous machine fed by current source, pa
         extent={{10,-10},{-10,10}},
         rotation=90,
         origin={40,10})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensor(m=m) annotation (Placement(transformation(
+  MoveTo_Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensor(m=m) annotation (Placement(transformation(
         extent={{10,10},{-10,-10}},
         rotation=90,
         origin={10,50})));

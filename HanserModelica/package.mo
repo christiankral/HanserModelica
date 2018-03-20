@@ -5,9 +5,9 @@ package HanserModelica
 
   annotation (
     preferredView="info",
-    version="0.9.1",
+    version="X.X.X",
     versionBuild=1,
-    versionDate="2018-03-10",
+    versionDate="2018-XX-XX",
     uses(Complex(version="3.2.2"), Modelica(version="3.2.2")),
   Documentation(info="<html>
 <p>This is an educational library on <strong>object oriented modeling of induction machines by Modelica</strong></p>

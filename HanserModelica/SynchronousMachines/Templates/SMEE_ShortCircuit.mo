@@ -83,7 +83,7 @@ partial model SMEE_ShortCircuit "Template for short circuits of electrical excit
         origin={-10,-30},
         extent={{10,-10},{-10,10}},
         rotation=90)));
-  parameter ParameterRecords.SMEE smeeData annotation (Placement(transformation(extent={{-70,-40},{-50,-20}})));
+  parameter ParameterRecords.SMEE1 smeeData annotation (Placement(transformation(extent={{-70,-40},{-50,-20}})));
 initial equation
   // sum(smee.is) = 0;
   smee.is[1:2] = zeros(2);

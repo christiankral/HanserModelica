@@ -9,6 +9,7 @@ TestRLSeriesRecord
 TestBrush
 ConditionalComponents
 StarDelta
+StarPolygon
 Rectifier
 RLSeriesFrequencySweep
 QuasiStaticMultiPhase

@@ -6,7 +6,7 @@ record DoubleLayer7over9 "Winding example with skewing of 7/9"
     final m=3,
     final p=2,
     final a=1,
-    final S=36,
+    final Sprime=18,
     final ycb={1,2,3},
     final yce={8,9,10},
     final nc=10,

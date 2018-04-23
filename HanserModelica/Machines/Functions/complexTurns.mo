@@ -8,9 +8,8 @@ protected
   Integer ycb[winding.m,size(winding.ycb,1)] "Coil begin index";
   Integer yce[winding.m,size(winding.yce,1)] "Coil begin index";
   Integer index "Local index";
-  Integer Sprime = div(winding.S, winding.p) "Number of slots per pole pair";
-  Integer Sg = if winding.doubleLayer then div(Sprime,2) else Sprime "Number of slots per coil group";
-  Integer yShift = div(Sprime, winding.m) "Slot displacement between two adjacent windings";
+  Integer Sg = if winding.doubleLayer then div(winding.Sprime,2) else winding.Sprime "Number of slots per coil group";
+  Integer yShift = div(winding.Sprime, winding.m) "Slot displacement between two adjacent windings";
   Integer coilSideCounter[Sg]=zeros(Sg) "Coil side counter to validate winding";
   Modelica.SIunits.Angle dgamma "Local coil width";
   Modelica.SIunits.Angle gamma "Local orientation of coil";
@@ -27,15 +26,15 @@ algorithm
     assert(rem(winding.p,winding.a)==0,"p/a is not an integer number");
   end if;
   // Check valid integral slot winding
-  assert(rem(winding.S,2*winding.m*winding.p)==0,"Not an integral slot winding");
+  assert(rem(winding.Sprime,2*winding.m)==0,"Not an integral slot winding");
   // Check if length of begin and end index vectors is equal
   assert(size(winding.ycb,1)==size(winding.yce,1),"Lengh of begin and end index vectors is not equal");
   // Assemble windings of all phases, 1 <= j <= m
   for j in 1:winding.m loop
     // Assemble windings for all phases
     for k in 1:size(winding.ycb,1) loop
-      ycb[j,k] :=HanserModelica.Machines.Functions.mapSlotIndex(winding.ycb[k] + (j - 1)*yShift, Sprime);
-      yce[j,k] :=HanserModelica.Machines.Functions.mapSlotIndex(winding.yce[k] + (j - 1)*yShift, Sprime);
+      ycb[j,k] :=HanserModelica.Machines.Functions.mapSlotIndex(winding.ycb[k] + (j - 1)*yShift, winding.Sprime);
+      yce[j,k] :=HanserModelica.Machines.Functions.mapSlotIndex(winding.yce[k] + (j - 1)*yShift, winding.Sprime);
     end for;
   end for;
   // Determine number of all windings sides of each slot
@@ -60,8 +59,8 @@ algorithm
   for j in 1:winding.m loop
     N[j] := Complex(0, 0) "Initialization of number of turns";
     for k in 1:size(winding.ycb,1) loop
-     dgamma := 2*pi*(yce[j,k] - ycb[j,k])/Sprime;
-     gamma := 2*pi*(yce[j,k] + ycb[j,k])/2/Sprime + winding.offset;
+     dgamma := 2*pi*(yce[j,k] - ycb[j,k])/winding.Sprime;
+     gamma := 2*pi*(yce[j,k] + ycb[j,k])/2/winding.Sprime + winding.offset;
      xic := sin(dgamma/2);
      // N[j] := N[k] + (p/a)*xic*nc*exp(j*gamma)
      if winding.doubleLayer then

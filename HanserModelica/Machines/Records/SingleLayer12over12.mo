@@ -6,7 +6,7 @@ record SingleLayer12over12 "Single layer winding example with skewing of 12/12"
     final m=3,
     final p=2,
     final a=2,
-    final S=48,
+    final Sprime=24,
     final ycb={ 1, 2, 3, 4},
     final yce={13,14,15,16},
     final nc=16,

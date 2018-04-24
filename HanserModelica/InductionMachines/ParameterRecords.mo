@@ -4,7 +4,7 @@ package ParameterRecords "Parameter records of induction machines"
   record IMC "Machine parameters of indutction maschine with squirrel cage"
     import Modelica.Constants.pi;
     extends MoveTo_Modelica.Electrical.Machines.Utilities.ParameterRecords.AIM_SquirrelCageData(
-      effectiveStatorTurns=0.925*64,
+      effectiveStatorTurns=59.2,
       TsRef=373.15,
       TrRef=373.15);
 
@@ -52,7 +52,7 @@ package ParameterRecords "Parameter records of induction machines"
   record IMS "Machine parameters of indutction maschine with slip ring rotor"
     import Modelica.Constants.pi;
     extends MoveTo_Modelica.Electrical.Machines.Utilities.ParameterRecords.AIM_SlipRingData(
-      effectiveStatorTurns=0.925*64,
+      effectiveStatorTurns=59.2,
       TsRef=373.15,
       TrRef=373.15);
 

@@ -10,7 +10,7 @@ record SMPM2 "Machine parameters of permanent magnet synchronous machine with ro
     p=2,
     fsNominal=50,
     VsOpenCircuit=32,
-    effectiveStatorTurns=0.925*64,
+    effectiveStatorTurns=59.2,
     Jr=0.29,
     useDamperCage=false,
     TsRef=373.15,

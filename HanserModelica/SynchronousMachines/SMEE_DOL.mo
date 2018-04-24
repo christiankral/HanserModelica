@@ -123,7 +123,7 @@ equation
       points={{0,-40},{10,-40}}));
   connect(smee.flange, mechanicalSensor.flange_a) annotation (Line(points={{0,-40},{40,-40}}));
   connect(sineVoltage.plug_p, switch.plug_p) annotation (Line(points={{-10,50},{0,50}}, color={0,0,255}));
-  connect(booleanReplicator.y, switch.control) annotation (Line(points={{1,10},{10,10},{10,38}}, color={255,0,255}));
+  connect(booleanReplicator.y, switch.control) annotation (Line(points={{1,10},{10,10},{10,43}}, color={255,0,255}));
   connect(booleanStep.y, booleanReplicator.u)
     annotation (Line(points={{-29,10},{-22,10}}, color={255,0,255}));
   connect(groundExcitation.p, rampVoltage.n)

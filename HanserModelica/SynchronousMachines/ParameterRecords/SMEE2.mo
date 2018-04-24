@@ -19,7 +19,7 @@ record SMEE2 "Machine parameters of electrical excited synchronous machine with 
     alpha20s(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero,
     alpha20r(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero,
     alpha20e(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero,
-    effectiveStatorTurns=0.925*64,
+    effectiveStatorTurns=59.2,
     TsSpecification=373.15,
     TsRef=373.15,
     TrSpecification=373.15,

@@ -6,7 +6,7 @@ function complexTurns "Calculation of complex number of turns of winding records
   output Complex N[winding.m] "Complex numbers of turn";
 protected
   Integer ycb[winding.m,size(winding.ycb,1)] "Coil begin index";
-  Integer yce[winding.m,size(winding.yce,1)] "Coil begin index";
+  Integer yce[winding.m,size(winding.yce,1)] "Coil end index";
   Integer index "Local index";
   Integer Sg = if winding.doubleLayer then div(winding.Sprime,2) else winding.Sprime "Number of slots per coil group";
   Integer yShift = div(winding.Sprime, winding.m) "Slot displacement between two adjacent windings";

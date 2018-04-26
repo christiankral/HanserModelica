@@ -7,10 +7,11 @@ class ReleaseNotes "Release Notes"
 
 <h5>Version X.X.X, 2018-XX-XX</h5>
 <ul>
+<li>Removed <code>versionBuild</code> from library annotation</li>
+<li>Added multi phase example <a href=\"modelica://HanserModelica.Electrical.StarPolygon\">StarPolygon</a>
 <li>Improved 
     <a href=\"modelica://HanserModelica.Machines.Records.Winding\">winding record</a> and 
     <a href=\"modelica://HanserModelica.Machines.Functions.complexTurns\">calculation of complex number of turns</a></li>
-<li>Added multi phase example <a href=\"modelica://HanserModelica.Electrical.StarPolygon\">StarPolygon</a>
 <li>Updated parameters
     <a href=\"modelica://HanserModelica.SynchronousMachines.ParameterRecords.SMEE2\">SMEE1</a> and
     <a href=\"modelica://HanserModelica.SynchronousMachines.ParameterRecords.SMEE2\">SMEE2</a></li>

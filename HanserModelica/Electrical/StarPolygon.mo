@@ -50,7 +50,7 @@ equation
   connect(sineVoltage.plug_p, switch.plug_p) annotation (Line(points={{-70,30},{-70,40},{-60,40}}, color={0,0,255}));
   connect(switch.plug_n, resistor.plug_p) annotation (Line(points={{-40,40},{-30,40}}, color={0,0,255}));
   connect(resistor.plug_n, inductor.plug_p) annotation (Line(points={{-10,40},{0,40}}, color={0,0,255}));
-  connect(booleanStep.y, switch.control) annotation (Line(points={{-69,60},{-50,60},{-50,47}}, color={255,0,255}));
+  connect(booleanStep.y, switch.control) annotation (Line(points={{-69,60},{-50,60},{-50,52}}, color={255,0,255}));
   connect(inductorLoad.plug_p, delta.plug_p) annotation (Line(points={{50,10},{50,20},{80,20},{80,12}}, color={0,0,255}));
   connect(inductorLoad.plug_n, delta.plug_n) annotation (Line(points={{50,-10},{50,-20},{80,-20},{80,-8}}, color={0,0,255}));
   connect(currentSensor.i, rootMeanSquare.u) annotation (Line(points={{40,51},{40,60},{22,60}}, color={0,0,127}));

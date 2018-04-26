@@ -10,6 +10,10 @@ class ReleaseNotes "Release Notes"
 <li>Improved 
     <a href=\"modelica://HanserModelica.Machines.Records.Winding\">winding record</a> and 
     <a href=\"modelica://HanserModelica.Machines.Functions.complexTurns\">calculation of complex number of turns</a></li>
+<li>Added multi phase example <a href=\"modelica://HanserModelica.Electrical.StarPolygon\">StarPolygon</a>
+<li>Updated parameters
+    <a href=\"modelica://HanserModelica.SynchronousMachines.ParameterRecords.SMEE2\">SMEE1</a> and
+    <a href=\"modelica://HanserModelica.SynchronousMachines.ParameterRecords.SMEE2\">SMEE2</a></li>
 </ul>
 
 <h5>Version 0.9.1, 2018-03-10</h5>

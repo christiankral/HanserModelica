@@ -6,7 +6,6 @@ package HanserModelica
   annotation (
     preferredView="info",
     version="X.X.X",
-    versionBuild=1,
     versionDate="2018-XX-XX",
     uses(Complex(version="3.2.2"), Modelica(version="3.2.2")),
   Documentation(info="<html>

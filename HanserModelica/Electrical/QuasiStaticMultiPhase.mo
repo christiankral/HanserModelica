@@ -36,7 +36,7 @@ equation
   connect(mainInductor.plug_p, inductor.plug_p) annotation (Line(points={{-20,10},{-20,20},{-2,20}}, color={85,170,255}));
   connect(sensor.pv, sensor.pc) annotation (Line(points={{-40,30},{-50,30},{-50,20}}, color={85,170,255}));
   connect(inductor.plug_n, conductor.plug_p) annotation (Line(points={{18,20},{30,20},{30,10}}, color={85,170,255}));
-  connect(conductor.G_ref, ramp.y) annotation (Line(points={{42,0},{59,0}}, color={0,0,127}));
+  connect(conductor.G_ref, ramp.y) annotation (Line(points={{41,0},{59,0}}, color={0,0,127}));
   connect(star.plug_p, voltageSource.plug_n) annotation (Line(points={{-70,-20},{-70,-10}}, color={85,170,255}));
   connect(star.plug_p, conductor.plug_n) annotation (Line(points={{-70,-20},{30,-20},{30,-10}}, color={85,170,255}));
   connect(mainInductor.plug_n, conductor.plug_n) annotation (Line(points={{-20,-10},{-20,-20},{30,-20},{30,-10}}, color={85,170,255}));

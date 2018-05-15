@@ -42,7 +42,7 @@ equation
   connect(capacitor1.p, conductorLoad.p) annotation (Line(points={{50,50},{70,50},{70,40}}, color={0,0,255}));
   connect(capacitor2.n, conductorLoad.n) annotation (Line(points={{50,10},{70,10},{70,20}}, color={0,0,255}));
   connect(star.plug_p, sineVoltage.plug_n) annotation (Line(points={{-90,20},{-90,30}}, color={0,0,255}));
-  connect(ramp.y, conductorLoad.G) annotation (Line(points={{81,70},{90,70},{90,30},{82,30}}, color={0,0,127}));
+  connect(ramp.y, conductorLoad.G) annotation (Line(points={{81,70},{90,70},{90,30},{81,30}}, color={0,0,127}));
   connect(sineVoltage.plug_p, inductor.plug_p) annotation (Line(points={{-90,50},{-70,50}}, color={0,0,255}));
   connect(inductor.plug_n, resistor.plug_p) annotation (Line(points={{-50,50},{-40,50}}, color={0,0,255}));
   connect(resistor.plug_n, rectifier.ac) annotation (Line(points={{-20,50},{-20,30},{-10,30}}, color={0,0,255}));

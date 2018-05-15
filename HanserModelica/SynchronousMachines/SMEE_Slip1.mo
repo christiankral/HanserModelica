@@ -90,8 +90,8 @@ model SMEE_Slip1 "Electrical excited synchronous machine operating at small slip
   Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground
     grounde annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
-        rotation=270,
-        origin={-90,80})));
+        rotation=0,
+        origin={-70,50})));
   MoveTo_Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.MultiSensor powerSensor(m=m) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
@@ -121,8 +121,8 @@ equation
   connect(constantCurrent.p, groundr.p) annotation (Line(points={{-28,20},{-34,20},{-34,12},{-40,12}}, color={0,0,255}));
   connect(constantCurrent.p, smee.pin_en) annotation (Line(points={{-28,20},{-20,20},{-20,24},{-10,24}}, color={0,0,255}));
   connect(constantCurrent.n, smee.pin_ep) annotation (Line(points={{-28,40},{-20,40},{-20,36},{-10,36}}, color={0,0,255}));
-  connect(grounde.pin, star.pin_n) annotation (Line(points={{-80,80},
-          {-80,80},{-70,80}}, color={85,170,255}));
+  connect(grounde.pin, star.pin_n) annotation (Line(points={{-70,60},{-70,80}},
+                              color={85,170,255}));
   connect(star.plug_p, voltageSource.plug_n) annotation (Line(
         points={{-50,80},{-50,80},{-40,80}}, color={85,170,255}));
   connect(terminalBox.plug_sn, smee.plug_sn) annotation (Line(

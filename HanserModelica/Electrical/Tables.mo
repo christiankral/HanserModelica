@@ -16,6 +16,6 @@ equation
   connect(inductor.p, constantVoltage.p) annotation (Line(points={{-20,40},{-40,40},{-40,30}}, color={0,0,255}));
   connect(variableResistor.p, inductor.n) annotation (Line(points={{20,30},{20,40},{0,40}}, color={0,0,255}));
   connect(ground.p, variableResistor.n) annotation (Line(points={{-40,0},{20,0},{20,10}}, color={0,0,255}));
-  connect(table.y[1], variableResistor.R) annotation (Line(points={{49,20},{32,20}}, color={0,0,127}));
+  connect(table.y[1], variableResistor.R) annotation (Line(points={{49,20},{31,20}}, color={0,0,127}));
   annotation (experiment(StopTime=4,Interval=0.001,Tolerance=1e-06));
 end Tables;

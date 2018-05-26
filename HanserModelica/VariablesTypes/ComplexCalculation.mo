@@ -1,7 +1,6 @@
 within HanserModelica.VariablesTypes;
 model ComplexCalculation "Complex calculation"
   extends Modelica.Icons.Example;
-  // Access complex functions of Modelica.ComplexMath directly
   parameter Modelica.SIunits.ComplexImpedance Z1 = Complex(10,2) "Impedance Z1 = (10+j*2) Ohm";
   parameter Modelica.SIunits.Impedance Z2abs = 50 "Magnitude of complex impedance Z2";
   Modelica.SIunits.ComplexImpedance Z2 "Complex impedance with varying angle";

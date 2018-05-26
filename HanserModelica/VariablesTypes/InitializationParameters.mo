@@ -13,7 +13,7 @@ model InitializationParameters "Initialization of parameters"
 initial equation
   c=0;
   d^2-10*d+9=0;                          // Quadratic equation
-  e=cos(e);                              // Non-linear equation
+  e=cos(e);                              // Non-linear, implicit equation
   A*Ainv=identity(size(A,1));            // Implicit calculation
 initial algorithm
   for i in 1:a loop                      // i in 1:a = {1,2,...,a}

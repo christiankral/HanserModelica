@@ -6,9 +6,10 @@ model DCPMMachine "Permanent magnet DC machine"
   parameter Modelica.SIunits.Inertia Jr "Rotor inertia";
   Modelica.SIunits.Torque tauElectrical = -emf.flange.tau "Electromagnetic tourque";
   Modelica.SIunits.Torque tauShaft = -flange.tau "Shaft torque";
-  Modelica.SIunits.AngularVelocity wMechanical = der(flange.phi) "Angular velocity";
+  Modelica.SIunits.Angle phiMechanical(start=0) = flange.phi "Angle";
+  Modelica.SIunits.AngularVelocity wMechanical(start=0) = der(flange.phi) "Angular velocity";
   Modelica.SIunits.Voltage va = pin_ap.v-pin_an.v "Armature voltage";
-  Modelica.SIunits.Current ia = pin_ap.i "Armature current";
+  Modelica.SIunits.Current ia(start=0) = pin_ap.i "Armature current";
 
   Modelica.Electrical.Analog.Interfaces.PositivePin pin_ap "Positive armature pin" annotation (Placement(visible = true,transformation(extent = {{-70, 30}, {-50, 50}}, rotation = 0), iconTransformation(extent = {{-70, 90}, {-50, 110}}, rotation = 0)));
   Modelica.Electrical.Analog.Interfaces.NegativePin pin_an "Negative armature pin" annotation (Placement(visible = true,transformation(extent = {{50, 30}, {70, 50}}, rotation = 0), iconTransformation(extent = {{50, 92}, {70, 112}}, rotation = 0)));

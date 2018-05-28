@@ -1,5 +1,5 @@
 within ;
-package HanserModelica
+package HanserModelica "Educational libray on Modelica and electric machines"
 
   extends Modelica.Icons.ExamplesPackage;
 

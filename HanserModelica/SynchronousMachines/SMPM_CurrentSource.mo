@@ -11,7 +11,7 @@ model SMPM_CurrentSource "Permanent magnet synchronous machine fed by current so
   parameter Modelica.SIunits.Torque TLoad=139.3 "Nominal load torque";
   parameter Modelica.SIunits.Time tStep=1.2 "Time of load torque step";
   parameter Modelica.SIunits.Inertia JLoad=0.29 "Load's moment of inertia";
-  Modelica.SIunits.Angle theta=rotorAngle.rotorDisplacementAngle "Rotor displacement angle, quasi stastic";
+  Modelica.SIunits.Angle theta=rotorDisplacementAngle.rotorDisplacementAngle "Rotor displacement angle, quasi stastic";
   parameter Modelica.SIunits.Current IsOperation=100 "Operating current";
   parameter Modelica.SIunits.Angle epsilonOperation = -0.741 "Operation current angle";
   parameter Boolean positiveRange = false "Use positive range of angles, if true";
@@ -95,7 +95,7 @@ model SMPM_CurrentSource "Permanent magnet synchronous machine fed by current so
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={20,80})));
-  MoveTo_Modelica.Magnetic.QuasiStatic.FundamentalWave.Sensors.RotorDisplacementAngle rotorAngle(m=m, p=smpmData.p) annotation (Placement(transformation(
+  MoveTo_Modelica.Magnetic.QuasiStatic.FundamentalWave.Sensors.RotorDisplacementAngle rotorDisplacementAngle(m=m, p=smpmData.p) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=90,
         origin={30,10})));
@@ -139,12 +139,12 @@ equation
   connect(currentController.gamma, referenceCurrentSource.gamma) annotation (Line(points={{-29,76},{-20,76},{-20,74},{-12,74}},
                                                                                                                   color={0,0,127}));
   connect(angleSensor.phi, currentController.phi) annotation (Line(points={{30,61},{30,64},{-40,64},{-40,68}}, color={0,0,127}));
-  connect(smpm.flange, rotorAngle.flange) annotation (Line(points={{10,10},{20,10}}, color={0,0,0}));
-  connect(terminalBox.plug_sp, rotorAngle.plug_p) annotation (Line(points={{6,20},{24,20}}, color={85,170,255}));
+  connect(smpm.flange, rotorDisplacementAngle.flange) annotation (Line(points={{10,10},{20,10}}, color={0,0,0}));
+  connect(terminalBox.plug_sp, rotorDisplacementAngle.plug_p) annotation (Line(points={{6,20},{24,20}}, color={85,170,255}));
   connect(terminalBox.plugSupply, currentRMSSensor.plug_n) annotation (Line(points={{0,22},{0,40}},     color={85,170,255}));
   connect(currentRMSSensor.plug_p, referenceCurrentSource.plug_n) annotation (Line(points={{0,60},{0,70}}, color={85,170,255}));
   connect(inertiaLoad.flange_a, smpm.flange) annotation (Line(points={{50,10},{10,10}}, color={0,0,0}));
-  connect(rotorAngle.plug_n, terminalBox.plug_sn) annotation (Line(points={{36,20},{36,26},{-6,26},{-6,20}}, color={85,170,255}));
+  connect(rotorDisplacementAngle.plug_n, terminalBox.plug_sn) annotation (Line(points={{36,20},{36,26},{-6,26},{-6,20}}, color={85,170,255}));
   connect(voltageRMSSensor.plug_n, currentRMSSensor.plug_n) annotation (Line(points={{-20,40},{0,40}}, color={85,170,255}));
   connect(starM.pin_n, starMachine.pin_n) annotation (Line(points={{-50,20},{-50,10},{-40,10}}, color={85,170,255}));
   connect(starM.plug_p, voltageRMSSensor.plug_p) annotation (Line(points={{-50,40},{-40,40}}, color={85,170,255}));

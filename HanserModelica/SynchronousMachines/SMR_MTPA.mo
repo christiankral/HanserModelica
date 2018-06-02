@@ -11,7 +11,7 @@ model SMR_MTPA "Synchronous reluctance machine, investigating maximum torque per
    parameter Modelica.SIunits.Time tStep = 1.2 "Time of load torque step";
    parameter Modelica.SIunits.Inertia JLoad = 0.29 "Load's moment of inertia";
    parameter Modelica.SIunits.AngularVelocity wNominal = 2 * pi * fsNominal / smrData.p "Nominal angular velocity";
-   Modelica.SIunits.Angle theta = rotorAngle.rotorDisplacementAngle "Rotor displacement angle, quasi stastic";
+   Modelica.SIunits.Angle theta = rotorDisplacementAngle.rotorDisplacementAngle "Rotor displacement angle, quasi stastic";
    parameter Boolean positiveRange = false "Use positive range of angles, if true";
    Modelica.SIunits.Angle phii = MoveTo_Modelica.Math.wrapAngle(smr.arg_is[1], positiveRange) "Angle of current";
    Modelica.SIunits.Angle phiv = MoveTo_Modelica.Math.wrapAngle(smr.arg_vs[1], positiveRange) "Angle of voltage";
@@ -44,7 +44,7 @@ model SMR_MTPA "Synchronous reluctance machine, investigating maximum torque per
      Placement(transformation(extent = {{-10, -10}, {10, 10}}, origin = {60, 60})));
    Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Resistor resistor(m = m, R_ref = fill(1e5, m)) annotation (
      Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {30, 80})));
-   MoveTo_Modelica.Magnetic.QuasiStatic.FundamentalWave.Sensors.RotorDisplacementAngle rotorAngle(
+   MoveTo_Modelica.Magnetic.QuasiStatic.FundamentalWave.Sensors.RotorDisplacementAngle rotorDisplacementAngle(
      m=m,
      p=smrData.p,
      positiveRange=positiveRange) annotation (Placement(transformation(
@@ -87,15 +87,15 @@ equation
      Line(points={{-19,76},{-10,76},{-10,76},{0,76}},           color = {0, 0, 127}));
    connect(angleSensor.phi, currentController.phi) annotation (
      Line(points = {{40, 61}, {40, 64}, {-30, 64}, {-30, 68}}, color = {0, 0, 127}));
-   connect(smr.flange, rotorAngle.flange) annotation (
+   connect(smr.flange, rotorDisplacementAngle.flange) annotation (
      Line(points = {{20, 10}, {30, 10}}, color = {0, 0, 0}));
-   connect(terminalBox.plug_sp, rotorAngle.plug_p) annotation (
+   connect(terminalBox.plug_sp, rotorDisplacementAngle.plug_p) annotation (
      Line(points = {{16, 20}, {34, 20}}, color = {85, 170, 255}));
    connect(terminalBox.plugSupply, currentRMSSensor.plug_n) annotation (
      Line(points = {{10, 22}, {10, 40}}, color = {85, 170, 255}));
    connect(currentRMSSensor.plug_p, referenceCurrentSource.plug_n) annotation (
      Line(points = {{10, 60}, {10, 70}}, color = {85, 170, 255}));
-   connect(rotorAngle.plug_n, terminalBox.plug_sn) annotation (
+   connect(rotorDisplacementAngle.plug_n, terminalBox.plug_sn) annotation (
      Line(points = {{46, 20}, {46, 26}, {4, 26}, {4, 20}}, color = {85, 170, 255}));
    connect(voltageRMSSensor.plug_n, currentRMSSensor.plug_n) annotation (
      Line(points = {{-10, 40}, {10, 40}}, color = {85, 170, 255}));
@@ -103,7 +103,7 @@ equation
      Line(points = {{-40, 20}, {-40, 10}, {-30, 10}}, color = {85, 170, 255}));
    connect(starM.plug_p, voltageRMSSensor.plug_p) annotation (
      Line(points = {{-40, 40}, {-30, 40}}, color = {85, 170, 255}));
-   connect(quadraticSpeedDependentTorque.flange, rotorAngle.flange) annotation (
+   connect(quadraticSpeedDependentTorque.flange, rotorDisplacementAngle.flange) annotation (
      Line(points = {{60, 10}, {30, 10}}, color = {0, 0, 0}));
    connect(toReal.u, rotSource.y) annotation (
      Line(points = {{-70, 38}, {-70, 31}}, color = {85, 170, 255}));

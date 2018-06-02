@@ -21,7 +21,7 @@ model SMEE_Slip1 "Electrical excited synchronous machine operating at small slip
   output Modelica.SIunits.Power P=powerSensor.apparentPowerTotal.re " real power";
   output Modelica.SIunits.ReactivePower Q=powerSensor.apparentPowerTotal.im " reactive power";
   output Modelica.SIunits.ApparentPower S=sqrt(P^2+Q^2) " apparent power";
-  Modelica.SIunits.Angle theta=rotorAngle.rotorDisplacementAngle "Rotor displacement angle";
+  Modelica.SIunits.Angle theta=rotorDisplacementAngle.rotorDisplacementAngle "Rotor displacement angle";
   Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.SynchronousMachines.SM_ElectricalExcited smee(
     p=2,
     fsNominal=smeeData.fsNominal,
@@ -109,7 +109,7 @@ model SMEE_Slip1 "Electrical excited synchronous machine operating at small slip
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-50,50})));
-  MoveTo_Modelica.Magnetic.QuasiStatic.FundamentalWave.Sensors.RotorDisplacementAngle rotorAngle(m=m, p=smee.p) annotation (Placement(transformation(
+  MoveTo_Modelica.Magnetic.QuasiStatic.FundamentalWave.Sensors.RotorDisplacementAngle rotorDisplacementAngle(m=m, p=smee.p) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=90,
         origin={30,30})));
@@ -138,9 +138,9 @@ equation
       Line(
       points={{-10,50},{-10,42},{-9,42}},
       color={85,170,255}));
-  connect(terminalBox.plug_sp, rotorAngle.plug_p) annotation (Line(points={{6,40},{24,40}}, color={85,170,255}));
-  connect(rotorAngle.plug_n, terminalBox.plug_sn) annotation (Line(points={{36,40},{36,46},{-6,46},{-6,40}}, color={85,170,255}));
-  connect(smee.flange, rotorAngle.flange) annotation (Line(points={{10,30},{20,30}}, color={0,0,0}));
+  connect(terminalBox.plug_sp, rotorDisplacementAngle.plug_p) annotation (Line(points={{6,40},{24,40}}, color={85,170,255}));
+  connect(rotorDisplacementAngle.plug_n, terminalBox.plug_sn) annotation (Line(points={{36,40},{36,46},{-6,46},{-6,40}}, color={85,170,255}));
+  connect(smee.flange, rotorDisplacementAngle.flange) annotation (Line(points={{10,30},{20,30}}, color={0,0,0}));
   connect(smee.flange, mechanicalPowerSensor.flange_a) annotation (Line(points={{10,30},{50,30}}, color={0,0,0}));
   connect(voltageSource.plug_p, powerSensor.pc) annotation (Line(points={{-20,80},{0,80},{0,76}}, color={85,170,255}));
   connect(powerSensor.nc, terminalBox.plugSupply) annotation (Line(points={{0,56},{0,42}}, color={85,170,255}));
@@ -156,7 +156,7 @@ rotor angle is very slowly increased. This allows to see several characteristics
 </p>
 
 <p>
-Simulate for 30 seconds and plot versus <code>rotorAngle|rotorAngle.rotorDisplacementAngle</code>:
+Simulate for 30 seconds and plot versus <code>rotorDisplacementAngle|rotorDisplacementAngle.rotorDisplacementAngle</code>:
 </p>
 
 <ul>

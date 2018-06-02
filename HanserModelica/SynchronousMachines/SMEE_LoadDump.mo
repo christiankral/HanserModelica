@@ -20,6 +20,7 @@ model SMEE_LoadDump "Electrical excited synchronous machine with voltage control
   parameter Modelica.SIunits.Time Ti=smeeData.Td0Transient/2
     "Voltage controller: integral time constant";
   output Real controlError=(setPointGain.y - voltageRMSSensor.V)/smeeData.VsNominal;
+  output Modelica.SIunits.Current ie = smee.ie "Excitation current";
   Modelica.Magnetic.FundamentalWave.BasicMachines.SynchronousInductionMachines.SM_ElectricalExcited smee(
     fsNominal=smeeData.fsNominal,
     TsRef=smeeData.TsRef,

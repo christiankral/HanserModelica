@@ -19,6 +19,7 @@ model SMEE_Rectifier "Electrical excited synchronous machine with rectifier"
   parameter Real k=2*Ve0/smeeData.VsNominal "Voltage controller: gain";
   parameter Modelica.SIunits.Time Ti=smeeData.Td0Transient/2
     "Voltage controller: integral time constant";
+  output Modelica.SIunits.Current ie = smee.ie "Excitation current";
   Modelica.Magnetic.FundamentalWave.BasicMachines.SynchronousInductionMachines.SM_ElectricalExcited smee(
     fsNominal=smeeData.fsNominal,
     TsRef=smeeData.TsRef,
@@ -176,7 +177,7 @@ equation
   connect(speedSensor.w, setPointGain.u) annotation (Line(
       points={{30,-61},{30,-70},{-48,-70}}, color={0,0,127}));
   connect(voltageController.y, excitationVoltage.v) annotation (Line(
-      points={{-49,-30},{-42,-30}}, color={0,0,127}));
+      points={{-49,-30},{-37,-30}}, color={0,0,127}));
   connect(capacitor1.n, capacitor2.p) annotation (Line(
       points={{20,40},{20,20}},   color={0,0,255}));
   connect(capacitor1.n, ground.p) annotation (Line(
@@ -184,7 +185,7 @@ equation
   connect(filter.y, voltageController.u_m) annotation (Line(
       points={{-60,-11},{-60,-18}}, color={0,0,127}));
   connect(voltageSensor.v, filter.u) annotation (Line(
-      points={{-51,30},{-60,30},{-60,12}}, color={0,0,127}));
+      points={{-50,30},{-60,30},{-60,12}}, color={0,0,127}));
   connect(resistor.p, capacitor1.p) annotation (Line(
       points={{0,40},{0,60},{20,60}},      color={0,0,255}));
   connect(resistor.n, capacitor2.n) annotation (Line(

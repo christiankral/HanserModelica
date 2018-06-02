@@ -12,8 +12,10 @@ model SMEE_VCurve1 "V curves of electrical excited synchronous machine operated 
   parameter Modelica.SIunits.Current Ie0=10 "No load excitation current";
   parameter Modelica.SIunits.Torque tauMax=smeeData.SNominal/wNominal "Maximum torque at power factor = 1";
   parameter Modelica.SIunits.Angle gamma0(displayUnit="deg") = 0 "Initial rotor displacement angle";
-  output Modelica.SIunits.Power P=powerSensor.apparentPowerTotal.re " real power";
-  output Modelica.SIunits.ReactivePower Q=powerSensor.apparentPowerTotal.im " reactive power";
+  output Modelica.SIunits.Power P=powerSensor.apparentPowerTotal.re "Active power";
+  output Modelica.SIunits.Power Pm=mechanicalPowerSensor.P "Mechanical power";
+  output Modelica.SIunits.ReactivePower Q=powerSensor.apparentPowerTotal.im "Reactive power";
+  output Modelica.SIunits.Current ie = smee.ie "Excitation current";
   Modelica.SIunits.Angle theta=rotorDisplacementAngle.rotorDisplacementAngle "Rotor displacement angle";
 
  Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.SynchronousMachines.SM_ElectricalExcited smee(

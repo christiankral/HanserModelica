@@ -12,6 +12,7 @@ model SMEE_Synchronization1 "Electrical excited synchronous machine synchronized
   parameter Modelica.SIunits.Angle gamma0(displayUnit="deg") = 0 "Initial rotor displacement angle";
   parameter Modelica.SIunits.AngularVelocity wNominal=2*pi*smeeData.fsNominal/p "Nominal angular velocity";
   Modelica.SIunits.Current irRMS = sqrt(smee.ir[1]^2+smee.ir[2]^2)/sqrt(2) "Quasi RMS rotor current";
+  output Modelica.SIunits.Current ie = smee.ie "Excitation current";
   Modelica.Magnetic.FundamentalWave.BasicMachines.SynchronousInductionMachines.SM_ElectricalExcited smee(
     phiMechanical(start=-(pi + gamma0)/smee.p, fixed=true),
     fsNominal=smeeData.fsNominal,

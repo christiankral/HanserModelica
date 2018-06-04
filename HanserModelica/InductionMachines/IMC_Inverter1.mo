@@ -39,23 +39,23 @@ model IMC_Inverter1 "Induction machine with squirrel cage and inverter"
     alpha20r=imcData.alpha20r,
     TrOperational=imcData.TrRef) annotation (Placement(transformation(extent={
             {20,-90},{40,-70}})));
-  Modelica.Blocks.Sources.Ramp ramp(duration=tRamp, height=f) annotation (Placement(transformation(extent={{-70,-30},{-50,-10}})));
+  Modelica.Blocks.Sources.Ramp ramp(duration=tRamp, height=f) annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
   Modelica.Electrical.Machines.Utilities.VfController vfController(
     final m=m,
     BasePhase=+Modelica.Constants.pi/2,
     fNominal=fsNominal,
     VNominal=VsNominal)                 annotation (Placement(
-        transformation(extent={{-40,-30},{-20,-10}})));
+        transformation(extent={{-40,-10},{-20,10}})));
   Modelica.Electrical.MultiPhase.Sources.SignalVoltage signalVoltage(
       final m=m) annotation (Placement(transformation(
-        origin={-10,-50},
+        origin={-10,-30},
         extent={{-10,10},{10,-10}},
         rotation=180)));
   Modelica.Electrical.MultiPhase.Basic.Star star(final m=m) annotation (
-     Placement(transformation(extent={{-30,-60},{-50,-40}})));
+     Placement(transformation(extent={{-30,-40},{-50,-20}})));
   Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
         transformation(
-        origin={-60,-50},
+        origin={-60,-30},
         extent={{-10,-10},{10,10}},
         rotation=270)));
   Modelica.Mechanics.Rotational.Components.Inertia loadInertia(J=JLoad)
@@ -67,7 +67,7 @@ model IMC_Inverter1 "Induction machine with squirrel cage and inverter"
     offsetTorque=0) annotation (Placement(transformation(extent={{96,-90},
             {76,-70}})));
   Modelica.Electrical.Machines.Utilities.MultiTerminalBox terminalBox(terminalConnection="Y", m=m) annotation (Placement(transformation(extent={{20,-74},{40,-54}})));
-  Modelica.Electrical.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensor(final m=m) annotation (Placement(transformation(origin={20,-50}, extent={{-10,10},{10,-10}})));
+  Modelica.Electrical.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensor(final m=m) annotation (Placement(transformation(origin={20,-30}, extent={{-10,10},{10,-10}})));
   Modelica.Electrical.MultiPhase.Basic.Star starMachine(final m=Modelica.Electrical.MultiPhase.Functions.numberOfSymmetricBaseSystems(m)) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
@@ -77,8 +77,9 @@ model IMC_Inverter1 "Induction machine with squirrel cage and inverter"
         extent={{-10,-10},{10,10}},
         rotation=270)));
   Modelica.Electrical.MultiPhase.Sensors.VoltageQuasiRMSSensor voltageRMSSensor(final m=m)   annotation (
-    Placement(transformation(origin={60,-50},    extent={{10,10},{-10,-10}})));
-  parameter ParameterRecords.IMC imcData annotation (Placement(transformation(extent={{50,-30},{70,-10}})));
+    Placement(transformation(origin={54,-54},    extent={{10,10},{-10,-10}},
+        rotation=270)));
+  parameter ParameterRecords.IMC imcData annotation (Placement(transformation(extent={{50,-10},{70,10}})));
 initial equation
   sum(imc.is) = 0;
   imc.is[1:2] = zeros(2);
@@ -95,18 +96,18 @@ equation
       color={0,0,255}));
   connect(imc.flange, loadInertia.flange_a) annotation (Line(
       points={{40,-80},{48,-80}}));
-  connect(currentRMSSensor.plug_n, terminalBox.plugSupply) annotation (Line(points={{30,-50},{30,-68}}, color={0,0,255}));
+  connect(currentRMSSensor.plug_n, terminalBox.plugSupply) annotation (Line(points={{30,-30},{30,-68}}, color={0,0,255}));
   connect(ground.p, star.pin_n) annotation (Line(
-      points={{-50,-50},{-50,-50}},
+      points={{-50,-30},{-50,-30}},
       color={0,0,255}));
-  connect(ramp.y, vfController.u) annotation (Line(points={{-49,-20},{-42,-20}},                 color={0,0,127}));
-  connect(vfController.y, signalVoltage.v) annotation (Line(points={{-19,-20},{-10,-20},{-10,-43}}, color={0,0,127}));
-  connect(starMachine.plug_p, terminalBox.starpoint) annotation (Line(points={{10,-74},{10,-68},{21,-68}},   color={0,0,255}));
+  connect(ramp.y, vfController.u) annotation (Line(points={{-49,0},{-42,0}},                     color={0,0,127}));
+  connect(vfController.y, signalVoltage.v) annotation (Line(points={{-19,0},{-10,0},{-10,-18}},     color={0,0,127}));
+  connect(starMachine.plug_p, terminalBox.starpoint) annotation (Line(points={{10,-74},{10,-68},{20,-68}},   color={0,0,255}));
   connect(groundMachine.p,starMachine. pin_n) annotation (Line(points={{-20,-74},{-10,-74}}, color={0,0,255}));
-  connect(star.plug_p, signalVoltage.plug_n) annotation (Line(points={{-30,-50},{-20,-50}}, color={0,0,255}));
-  connect(signalVoltage.plug_p, currentRMSSensor.plug_p) annotation (Line(points={{0,-50},{10,-50}}, color={0,0,255}));
-  connect(voltageRMSSensor.plug_n, terminalBox.plug_sn) annotation (Line(points={{50,-50},{40,-50},{40,-64},{24,-64},{24,-70}}, color={0,0,255}));
-  connect(terminalBox.plug_sp,voltageRMSSensor. plug_p) annotation (Line(points={{36,-70},{46,-70},{46,-64},{80,-64},{80,-50},{70,-50}}, color={0,0,255}));
+  connect(star.plug_p, signalVoltage.plug_n) annotation (Line(points={{-30,-30},{-20,-30}}, color={0,0,255}));
+  connect(signalVoltage.plug_p, currentRMSSensor.plug_p) annotation (Line(points={{0,-30},{10,-30}}, color={0,0,255}));
+  connect(voltageRMSSensor.plug_n, terminalBox.plug_sn) annotation (Line(points={{54,-44},{24,-44},{24,-70}},                   color={0,0,255}));
+  connect(terminalBox.plug_sp,voltageRMSSensor. plug_p) annotation (Line(points={{36,-70},{36,-64},{54,-64}},                            color={0,0,255}));
   annotation (
     experiment(StopTime=2, Interval=0.0001, Tolerance=1E-8),
     Documentation(info="<html>

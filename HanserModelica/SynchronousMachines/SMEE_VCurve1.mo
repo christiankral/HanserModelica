@@ -154,7 +154,7 @@ equation
   connect(powerSensor.nc, terminalBox.plugSupply) annotation (Line(points={{0,50},{0,32}}, color={85,170,255}));
   connect(ramp.y, currentSource.i) annotation (Line(points={{-59,20},{-35,20}}, color={0,0,127}));
   annotation (
-    experiment(StopTime=200,Interval=0.001,Tolerance=1e-06),
+    experiment(StopTime=200,Interval=0.1,Tolerance=1e-06),
     Documentation(info="<html>
 <p>
 This example investigates a quasi static model of a electrically excited synchronous machine. 

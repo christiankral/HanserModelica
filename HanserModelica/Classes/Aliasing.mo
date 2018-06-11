@@ -2,8 +2,8 @@ within HanserModelica.Classes;
 model Aliasing "Demonstrating the aliasing effect"
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
-  parameter Modelica.SIunits.Frequency f=10;
-  Real x;
+  parameter Modelica.SIunits.Frequency f=10 "Frequency of sine wave";
+  Real x "Sine wave";
 equation
   x = cos(2*pi*f*time);
   annotation (experiment(Interval=0.002, Tolerance=1e-06), Documentation(info= "<html>

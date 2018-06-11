@@ -108,7 +108,6 @@ equation
   connect(powerSensor.flange_b, loadInertia.flange_a) annotation (Line(points={{30,70},{40,70}}));
   connect(torque.flange, loadInertia.flange_b) annotation (Line(points={{70,70},{64,70},{64,70},{68,70},{68,70},{60,70}}));
   connect(sineVoltage.plug_p, currentRMSSensor.plug_p) annotation (Line(points={{-90,80},{-90,90},{-80,90}}, color={85,170,255}));
-  connect(PI.y, gain.u) annotation (Line(points={{61,10},{68,10}}, color={85,170,255}));
   connect(currentRMSSensor.plug_n, electricalPowerSensor.currentP) annotation (Line(points={{-60,90},{-50,90}}, color={85,170,255}));
   connect(electricalPowerSensor.currentN, terminalBox.plugSupply) annotation (Line(points={{-30,90},{-10,90},{-10,82}}, color={85,170,255}));
   connect(electricalPowerSensor.currentP, electricalPowerSensor.voltageP) annotation (Line(points={{-50,90},{-50,90},{-50,98},{-50,98},{-50,100},{-40,100},{-40,100}}, color={85,170,255}));
@@ -118,6 +117,7 @@ equation
   connect(gain.y, torque.tau) annotation (Line(points={{91,10},{100,10},{100,70},{92,70}}, color={0,0,127}));
   connect(ramp.y, feedback.u1) annotation (Line(points={{1,10},{12,10}}, color={0,0,127}));
   connect(feedback.y, PI.u) annotation (Line(points={{29,10},{38,10}}, color={0,0,127}));
+  connect(PI.y, gain.u) annotation (Line(points={{61,10},{68,10}}, color={0,0,127}));
   annotation (
     experiment(StopTime=10, Interval=0.0001, Tolerance=1e-06),
     Documentation(info="<html>

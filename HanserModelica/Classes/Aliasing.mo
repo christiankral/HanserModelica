@@ -1,5 +1,5 @@
 within HanserModelica.Classes;
-model Aliasing "Demonstrating aliasing effect"
+model Aliasing "Demonstrating the aliasing effect"
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   parameter Modelica.SIunits.Frequency f=10;

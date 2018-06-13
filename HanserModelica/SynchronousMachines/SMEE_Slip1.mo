@@ -13,10 +13,10 @@ model SMEE_Slip1 "Electrical excited synchronous machine operating at small slip
   parameter Modelica.SIunits.Current ie=0 "Actual open circuit current";
   parameter Modelica.SIunits.Angle gamma0(displayUnit="deg") = 0 "Initial rotor displacement angle";
   parameter Boolean positiveRange = false "Use positive range of angles, if true";
-  Modelica.SIunits.Angle phi_i=MoveTo_Modelica.Math.wrapAngle(smee.arg_is[1], positiveRange) "Angle of current";
-  Modelica.SIunits.Angle phi_v=MoveTo_Modelica.Math.wrapAngle(smee.arg_vs[1], positiveRange) "Angle of voltage";
-  Modelica.SIunits.Angle phi = MoveTo_Modelica.Math.wrapAngle(phi_v-phi_i,positiveRange) "Angle between voltage and current";
-  Modelica.SIunits.Angle epsilon = MoveTo_Modelica.Math.wrapAngle(phi-theta,positiveRange) "Current angle";
+  Modelica.SIunits.Angle phii=MoveTo_Modelica.Math.wrapAngle(smee.arg_is[1], positiveRange) "Angle of current";
+  Modelica.SIunits.Angle phiv=MoveTo_Modelica.Math.wrapAngle(smee.arg_vs[1], positiveRange) "Angle of voltage";
+  Modelica.SIunits.Angle phis = MoveTo_Modelica.Math.wrapAngle(phiv-phii,positiveRange) "Angle between voltage and current";
+  Modelica.SIunits.Angle epsilon = MoveTo_Modelica.Math.wrapAngle(phis-theta,positiveRange) "Current angle";
   Modelica.SIunits.ComplexCurrent isr[m] = smee.is*Modelica.ComplexMath.exp(Complex(0,theta+pi/2)) "Stator current w.r.t. rotor fixed frame";
   output Modelica.SIunits.Power P=powerSensor.apparentPowerTotal.re " real power";
   output Modelica.SIunits.ReactivePower Q=powerSensor.apparentPowerTotal.im " reactive power";

@@ -17,8 +17,13 @@ model SMEE_VCurve1 "V curves of electrical excited synchronous machine operated 
   output Modelica.SIunits.ReactivePower Q=powerSensor.apparentPowerTotal.im "Reactive power";
   output Modelica.SIunits.Current ie = smee.ie "Excitation current";
   Modelica.SIunits.Angle theta=rotorDisplacementAngle.rotorDisplacementAngle "Rotor displacement angle";
+  parameter Boolean positiveRange = false "Use positive range of angles, if true";
+  Modelica.SIunits.Angle phii = MoveTo_Modelica.Math.wrapAngle(smee.arg_is[1],positiveRange) "Angle of current";
+  Modelica.SIunits.Angle phiv = MoveTo_Modelica.Math.wrapAngle(smee.arg_vs[1],positiveRange) "Angle of voltage";
+  Modelica.SIunits.Angle phis = MoveTo_Modelica.Math.wrapAngle(phiv-phii,positiveRange) "Angle between voltage and current";
+  Modelica.SIunits.Angle epsilon = MoveTo_Modelica.Math.wrapAngle(phis-theta,positiveRange) "Current angle";
 
- Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.SynchronousMachines.SM_ElectricalExcited smee(
+  Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.SynchronousMachines.SM_ElectricalExcited smee(
     phiMechanical(start=-(pi + gamma0)/p, fixed=true),
     gammar(fixed=true, start=pi/2),
     fsNominal=smeeData.fsNominal,

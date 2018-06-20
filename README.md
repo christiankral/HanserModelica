@@ -22,7 +22,7 @@ HanserModelica is an open source educational library on object oriented modeling
 - GitHub tutorial 
   - Tutorial based on the Modelica library [FirstSteps](https://github.com/christiankral/FirstSteps)
 
-## Inhaltsverzeichnis des Buchs
+## Inhaltsverzeichnis des Buchs (German)
 
 - Grundlagen
 - Modelica 

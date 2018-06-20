@@ -24,7 +24,7 @@ moved from or to the <a href=\"modelica://Modelica\">Modelica Standard Library</
 Other examples may be added or removed depending on the actual edition of the associated book. 
 </p>
 
-<h4>Content of the book (translation to English)</h4>
+<h4>Content of the book (translated to English)</h4>
 
 <ul>
 <li>Fundemantals</li>
@@ -51,7 +51,7 @@ Other examples may be added or removed depending on the actual edition of the as
     </ul>    
 </ul>
 
-<h4>Inhaltsverzeichnis des Buchs</h4>
+<h4>Inhaltsverzeichnis des Buchs (German)</h4>
 
 <ul>
 <li>Grundlagen</li>
@@ -64,8 +64,8 @@ Other examples may be added or removed depending on the actual edition of the as
 <li>Modellierungskonzepte</li>
     <ul>
     <li><a href=\"modelica://HanserModelica.Electrical\">Allgemeine Konzepte und elektrische Systeme</a></li>
-    <li><a href=\"modelica://HanserModelica.Magnetic\">Mechanische Systeme</a></li>
-    <li><a href=\"modelica://HanserModelica.Thermal\">Magnetische Systeme</a></li>
+    <li><a href=\"modelica://HanserModelica.Magnetic\">Magnetische Systeme</a></li>
+    <li><a href=\"modelica://HanserModelica.Thermal\">Thermische Systeme</a></li>
     <li><a href=\"modelica://HanserModelica.Rotational\">Rotierende mechanische Systeme</a></li>
     </ul>
 <li><a href=\"modelica://HanserModelica.Machines\">Drehfeldmaschinen</a></li>

@@ -13,6 +13,8 @@ email: <a HREF=\"mailto:dr.christian.kral@gmail.com\">dr.christian.kral@gmail.co
 
 <p>The library HanserModelica is hosted at 
 <a href=\"https://github.com/christiankral/HanserModelica\">https://github.com/christiankral/HanserModelica</a>.
+If you have any questions on the library or want to report issues, please contact the author through 
+<a href=\"https://github.com/christiankral/HanserModelica\">GitHub</a>.
 </p>
 </html>"));
 end Contact;

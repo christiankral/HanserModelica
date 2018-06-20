@@ -21,7 +21,7 @@ based on a book published in German by
 <p>
 The examples of this library are subject to change and may be
 moved from or to the <a href=\"modelica://Modelica\">Modelica Standard Library</a> in a future version. 
-Other examples may be added or removed in a future version depending on the actual edition of the associated book. 
+Other examples may be added or removed depending on the actual edition of the associated book. 
 </p>
 
 <h4>Content of the book (translation to English)</h4>
@@ -29,27 +29,53 @@ Other examples may be added or removed in a future version depending on the actu
 <ul>
 <li>Fundemantals</li>
 <li>Modelica</li>
+    <ul>
+    <li><a href=\"modelica://HanserModelica.FirstSteps\">First steps</a></li>
+    <li><a href=\"modelica://HanserModelica.VariablesTypes\">Variables and types</a></li>
+    <li><a href=\"modelica://HanserModelica.Classes\">Modelica classes and concepts</a></li>
+    </ul>
 <li>Modeling concepts</li>
     <ul>
     <li><a href=\"modelica://HanserModelica.Electrical\">General concepts and electrical systems</a></li>
     <li><a href=\"modelica://HanserModelica.Magnetic\">Magnetic systems</a></li>
+    <li><a href=\"modelica://HanserModelica.Thermal\">Thermal systems</a></li>
+    <li><a href=\"modelica://HanserModelica.Rotational\">Rotational systems</a></li>
     </ul>
-<li>Polyphase electrical machines</li>
-<li>Induction machines</li>
-<li>Synchronous machines</li>
+<li><a href=\"modelica://HanserModelica.Machines\">Polyphase electrical machines</a></li>
+<li><a href=\"modelica://HanserModelica.InductionMachines\">Induction machines</a></li>
+<li><a href=\"modelica://HanserModelica.SynchronousMachines\">Synchronous machines</a></li>
 <li>GitHub tutorial</li>
+    <ul>
+    <li>Tutorial based on the Modelica library 
+        <a href=\"https://github.com/christiankral/FirstSteps\">FirstSteps</a></li>
+    </ul>    
 </ul>
 
-<h4>Inhaltsverzeichnis</h4>
+<h4>Inhaltsverzeichnis des Buchs</h4>
 
 <ul>
 <li>Grundlagen</li>
 <li>Modelica</li>
-<li>Modellierungskonzete</li>
-<li>Drehfeldmaschinen</li>
-<li>Asynchronmaschinen</li>
-<li>Synchronmaschinen</li>
+    <ul>
+    <li><a href=\"modelica://HanserModelica.FirstSteps\">Erste Schritte</a></li>
+    <li><a href=\"modelica://HanserModelica.VariablesTypes\">Variablen und Datentypen</a></li>
+    <li><a href=\"modelica://HanserModelica.Classes\">Klassen und Konzepte</a></li>
+    </ul>
+<li>Modellierungskonzepte</li>
+    <ul>
+    <li><a href=\"modelica://HanserModelica.Electrical\">Allgemeine Konzepte und elektrische Systeme</a></li>
+    <li><a href=\"modelica://HanserModelica.Magnetic\">Mechanische Systeme</a></li>
+    <li><a href=\"modelica://HanserModelica.Thermal\">Magnetische Systeme</a></li>
+    <li><a href=\"modelica://HanserModelica.Rotational\">Rotierende mechanische Systeme</a></li>
+    </ul>
+<li><a href=\"modelica://HanserModelica.Machines\">Drehfeldmaschinen</a></li>
+<li><a href=\"modelica://HanserModelica.InductionMachines\">Asynchronmaschinen</a></li>
+<li><a href=\"modelica://HanserModelica.SynchronousMachines\">Synchronmaschinen</a></li>
 <li>GitHub Tutorial</li>
+    <ul>
+    <li>Tutorial basierend auf der Modelica-Library 
+        <a href=\"https://github.com/christiankral/FirstSteps\">FirstSteps</a></li>
+    </ul>    
 </ul>
 </html>"));
 end UsersGuide;

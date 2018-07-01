@@ -92,7 +92,7 @@ model IMS_Characteristics1 "Characteristic curves of induction machine with slip
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={10,36})));
-  parameter ParameterRecords.IMS imsData annotation (Placement(transformation(extent={{70,70},{90,90}})));
+  parameter ParameterRecords.IMS imsData "Induction machine parameters" annotation (Placement(transformation(extent={{70,70},{90,90}})));
 equation
   connect(terminalBox.plug_sn, ims.plug_sn)
     annotation (Line(points={{24,50},{24,50}}, color={0,0,255}));

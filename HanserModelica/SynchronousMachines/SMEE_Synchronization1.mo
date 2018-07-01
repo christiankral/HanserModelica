@@ -93,7 +93,7 @@ model SMEE_Synchronization1 "Electrical excited synchronous machine synchronized
                                                                annotation (Placement(transformation(extent={{-50,0},{-30,20}})));
   Modelica.Blocks.Routing.BooleanReplicator booleanReplicator(nout=m) annotation (Placement(transformation(extent={{-20,20},{0,0}})));
   Modelica.Mechanics.Rotational.Sources.ConstantTorque constantTorque(tau_constant=0) annotation (Placement(transformation(extent={{80,-40},{60,-20}})));
-  parameter ParameterRecords.SMEE1 smeeData annotation (Placement(transformation(extent={{-50,-40},{-30,-20}})));
+  parameter ParameterRecords.SMEE1 smeeData "Synchronous machine data" annotation (Placement(transformation(extent={{-50,-40},{-30,-20}})));
 initial equation
   // sum(smee.is) = 0;
   smee.is[1:2] = zeros(2);

@@ -123,7 +123,7 @@ protected
 public
   Modelica.Blocks.Sources.Ramp speedRamp(height=wNominal, duration=1)
     annotation (Placement(transformation(extent={{80,-40},{60,-20}})));
-  parameter ParameterRecords.SMEE1 smeeData annotation (Placement(transformation(extent={{0,-70},{20,-50}})));
+  parameter ParameterRecords.SMEE1 smeeData "Synchronous machine data" annotation (Placement(transformation(extent={{0,-70},{20,-50}})));
 initial equation
   smee.airGap.V_msr = Complex(0, 0);
   //conditional damper cage currents are defined as fixed start values

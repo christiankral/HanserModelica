@@ -61,7 +61,7 @@ model SMR_MTPA "Synchronous reluctance machine, investigating maximum torque per
      Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {-70, 20})));
    Modelica.ComplexBlocks.ComplexMath.ComplexToReal toReal annotation (
      Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {-70, 50})));
-   parameter ParameterRecords.SMR smrData annotation (Placement(transformation(extent={{60,30},{80,50}})));
+   parameter ParameterRecords.SMR smrData "Synchronous machine data" annotation (Placement(transformation(extent={{60,30},{80,50}})));
 equation
    connect(starMachine.plug_p, terminalBox.starpoint) annotation (
      Line(points={{-10,10},{-10,22},{1,22}},        color = {85, 170, 255}));

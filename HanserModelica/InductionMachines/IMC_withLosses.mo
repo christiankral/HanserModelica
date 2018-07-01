@@ -8,15 +8,15 @@ model IMC_withLosses "Induction machine with squirrel cage and losses"
   Modelica.SIunits.ApparentPower Ss=sqrt(Ps^2 + Qs^2) "Stator apparent power";
 protected
   parameter Real Ptable[:]={1E-6,1845,3549,5325,7521,9372,11010,12930,
-      14950,16360,18500,18560,20180,22170};
+      14950,16360,18500,18560,20180,22170} "Table of measured power data";
   parameter Real Itable[:]={11.0,11.20,12.27,13.87,16.41,18.78,21.07,
-      23.92,27.05,29.40,32.85,32.95,35.92,39.35};
+      23.92,27.05,29.40,32.85,32.95,35.92,39.35} "Table of measured current data";
   parameter Real wtable[:]=Modelica.SIunits.Conversions.from_rpm({1500,1496,1493,1490,1486,1482,1479,1475,1471,
-      1467,1462,1462,1458,1453});
+      1467,1462,1462,1458,1453}) "Table of measured speed data";
   parameter Real ctable[:]={0.085,0.327,0.506,0.636,0.741,0.797,0.831,
-      0.857,0.875,0.887,0.896,0.896,0.902,0.906};
+      0.857,0.875,0.887,0.896,0.896,0.902,0.906} "Table of measured power factor data";
   parameter Real etable[:]={0,0.7250,0.8268,0.8698,0.8929,0.9028,0.9064,
-      0.9088,0.9089,0.9070,0.9044,0.9043,0.9008,0.8972};
+      0.9088,0.9089,0.9070,0.9044,0.9043,0.9008,0.8972} "Table of measured efficiency data";
 public
   output Modelica.SIunits.Power Pm=powerSensor.power "Mechanical output power";
   output Modelica.SIunits.Power Ps_sim=sqrt(3)*imcData.VsNominal*I_sim*pfs_sim "Simulated stator power";
@@ -97,7 +97,7 @@ public
     height=1.2*imcData.PmNominal)
                   annotation (Placement(transformation(extent={{-20,0},{0,20}})));
   Modelica.Blocks.Tables.CombiTable1Ds combiTable1Ds(table={{Ptable[j],Itable[j],wtable[j],ctable[j],etable[j]} for j in 1:size(Ptable, 1)}, smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative) annotation (Placement(transformation(extent={{40,30},{60,50}})));
-  parameter ParameterRecords.IMC_withLosses imcData annotation (Placement(transformation(extent={{-60,0},{-40,20}})));
+  parameter ParameterRecords.IMC_withLosses imcData "Induction machine parameters" annotation (Placement(transformation(extent={{-60,0},{-40,20}})));
 equation
   connect(star.pin_n, ground.pin) annotation (Line(points={{-90,30},{-90,20}}, color={85,170,255}));
   connect(sineVoltage.plug_n, star.plug_p) annotation (Line(points={{-90,60},{-90,50}}, color={85,170,255}));

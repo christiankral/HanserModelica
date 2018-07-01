@@ -43,7 +43,7 @@ model SMR_Inverter "Synchronous reluctance machine with squirrel cage and invert
     Placement(transformation(origin = {-30, -74}, extent = {{-10, -10}, {10, 10}}, rotation = 270)));
   Modelica.Electrical.MultiPhase.Sensors.VoltageQuasiRMSSensor voltageRMSSensor(final m=m)   annotation (
     Placement(transformation(origin={60,-50},    extent={{10,10},{-10,-10}})));
-  parameter ParameterRecords.SMR smrData annotation (Placement(transformation(extent={{70,-28},{90,-8}})));
+  parameter ParameterRecords.SMR smrData "Synchronous machine data" annotation (Placement(transformation(extent={{70,-28},{90,-8}})));
 initial equation
   sum(smr.is) = 0;
   smr.is[1:2] = zeros(2);
@@ -92,5 +92,6 @@ and accelerating inertias. At time <code>tStep</code> a load step is applied.</p
 </ul>
 <p>Default machine parameters are used.</p>
 </html>"),
-    Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-60, -92}, {20, -100}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 170}, fillPattern = FillPattern.Solid, textStyle = {TextStyle.Bold}, textString = "%m phase transient")}));
+    Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-60, -92}, {20, -100}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 170},
+            fillPattern =                                                                                                                                                                                             FillPattern.Solid, textStyle = {TextStyle.Bold}, textString = "%m phase transient")}));
 end SMR_Inverter;

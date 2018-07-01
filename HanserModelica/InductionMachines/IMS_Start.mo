@@ -174,7 +174,7 @@ model IMS_Start "Starting of induction machine with slip rings"
         origin={-12,-90},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  parameter ParameterRecords.IMS imsData annotation (Placement(transformation(extent={{70,70},{90,90}})));
+  parameter ParameterRecords.IMS imsData "Induction machine parameters" annotation (Placement(transformation(extent={{70,70},{90,90}})));
 initial equation
   sum(ims.is) = 0;
   ims.is[1:2] = zeros(2);

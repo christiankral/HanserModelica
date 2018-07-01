@@ -93,7 +93,7 @@ model IMC_Transformer "Induction machine with squirrel cage starting with transf
         2),
     SNominal=50E3,
     v_sc=0.06,
-    P_sc=500) annotation (Placement(transformation(extent={{80,80},{100,100}})));
+    P_sc=500) "Transformer parameters" annotation (Placement(transformation(extent={{80,80},{100,100}})));
   Modelica.Blocks.Sources.BooleanStep booleanStep2QS[m](each startTime=tStart2) annotation (Placement(transformation(extent={{-60,10},{-40,30}})));
   Modelica.Electrical.QuasiStationary.MultiPhase.Ideal.IdealCommutingSwitch idealCommutingSwitchQS(
     final m=m,
@@ -200,7 +200,7 @@ model IMC_Transformer "Induction machine with squirrel cage starting with transf
     tau_nominal=-TLoad,
     useSupport=false) annotation (Placement(transformation(extent={{0,-90},{20,-70}})));
   Modelica.Electrical.Machines.Utilities.TerminalBox terminalBox(terminalConnection="D") annotation (Placement(transformation(extent={{80,-74},{60,-54}})));
-  parameter ParameterRecords.IMC imcData annotation (Placement(transformation(extent={{80,50},{100,70}})));
+  parameter ParameterRecords.IMC imcData "Induction machine parameters" annotation (Placement(transformation(extent={{80,50},{100,70}})));
 initial equation
   sum(imc.is) = 0;
   imc.is[1:2] = zeros(2);

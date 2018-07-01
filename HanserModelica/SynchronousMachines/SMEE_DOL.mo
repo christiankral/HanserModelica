@@ -97,7 +97,7 @@ model SMEE_DOL "Electrical excited synchronous machine starting direct on line"
     offsetTorque=0,
     stepTorque=50,
     startTime=1.5) annotation (Placement(transformation(extent={{90,-50},{70,-30}})));
-  parameter ParameterRecords.SMEE1 smeeData annotation (Placement(transformation(extent={{-20,-80},{0,-60}})));
+  parameter ParameterRecords.SMEE1 smeeData "Synchronous machine data" annotation (Placement(transformation(extent={{-20,-80},{0,-60}})));
 initial equation
   // sum(smee.is) = 0;
   smee.is[1:2] = zeros(2);

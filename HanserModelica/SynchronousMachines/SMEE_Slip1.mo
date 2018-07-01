@@ -114,7 +114,7 @@ model SMEE_Slip1 "Electrical excited synchronous machine operating at small slip
         rotation=90,
         origin={30,30})));
 
-  parameter ParameterRecords.SMEE1 smeeData annotation (Placement(transformation(extent={{70,70},{90,90}})));
+  parameter ParameterRecords.SMEE1 smeeData "Synchronous machine data" annotation (Placement(transformation(extent={{70,70},{90,90}})));
 equation
   connect(mechanicalPowerSensor.flange_b, constantSpeed.flange)
     annotation (Line(points={{70,30},{80,30}}));

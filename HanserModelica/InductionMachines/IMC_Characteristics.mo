@@ -72,7 +72,7 @@ model IMC_Characteristics "Characteristic curves of Induction machine with squir
     height=3*2*pi*fsNominal/p,
     duration=1,
     offset=-2*pi*fsNominal/p) annotation (Placement(transformation(extent={{100,30},{80,50}})));
-  parameter ParameterRecords.IMC imcData annotation (Placement(transformation(extent={{70,70},{90,90}})));
+  parameter ParameterRecords.IMC imcData "Induction machine parameters" annotation (Placement(transformation(extent={{70,70},{90,90}})));
 equation
   connect(ground.pin, star.pin_n)
     annotation (Line(points={{-80,20},{-80,20}}, color={85,170,255}));

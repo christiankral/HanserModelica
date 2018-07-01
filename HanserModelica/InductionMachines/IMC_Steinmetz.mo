@@ -93,7 +93,7 @@ model IMC_Steinmetz "Induction machine with squirrel cage and Steinmetz-connecti
         extent={{-10,-10},{10,10}},
         rotation=270)));
   Modelica.Blocks.Math.RootMeanSquare rmsI[m](f=fill(fsNominal, m)) annotation (Placement(transformation(extent={{-30,-20},{-50,0}})));
-  parameter ParameterRecords.IMC imcData annotation (Placement(transformation(extent={{-50,-50},{-30,-30}})));
+  parameter ParameterRecords.IMC imcData "Induction machine parameters" annotation (Placement(transformation(extent={{-50,-50},{-30,-30}})));
 initial equation
   imc.is = zeros(3);
   imc.rotorCage.electroMagneticConverter.V_m = Complex(0, 0);

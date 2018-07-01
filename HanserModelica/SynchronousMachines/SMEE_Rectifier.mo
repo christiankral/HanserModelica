@@ -77,7 +77,7 @@ model SMEE_Rectifier "Electrical excited synchronous machine with rectifier"
     TrSpecification=373.15,
     TrRef=373.15,
     TeSpecification=373.15,
-    TeRef=373.15) annotation (Placement(transformation(extent={{-70,42},{-50,62}})));
+    TeRef=373.15) "Synchronous machine data" annotation (Placement(transformation(extent={{-70,42},{-50,62}})));
 
   Modelica.Electrical.Machines.Utilities.TerminalBox terminalBox(terminalConnection="Y") annotation (Placement(transformation(extent={{0,-24},{20,-4}})));
   Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(

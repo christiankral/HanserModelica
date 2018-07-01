@@ -132,7 +132,7 @@ model IMC_YD "Induction machine with squirrel cage starting Y-D"
     TorqueDirection=false,
     tau_nominal=-TLoad,
     useSupport=false) annotation (Placement(transformation(extent={{100,-90},{80,-70}})));
-  parameter ParameterRecords.IMC imcData annotation (Placement(transformation(extent={{70,70},{90,90}})));
+  parameter ParameterRecords.IMC imcData "Induction machine parameters" annotation (Placement(transformation(extent={{70,70},{90,90}})));
 initial equation
   sum(imc.is) = 0;
   imc.is[1:2] = zeros(2);

@@ -110,7 +110,7 @@ model SMEE_LoadImpedance1 "Electrical excited synchronous machine operating at v
     phi=fill(phi, m),
     magnitude1=fill(ZsNominal/1000, m),
     magnitude2=fill(ZsNominal*1000, m)) annotation (Placement(transformation(extent={{38,50},{18,70}})));
-  parameter ParameterRecords.SMEE1 smeeData annotation (Placement(transformation(extent={{70,30},{90,50}})));
+  parameter ParameterRecords.SMEE1 smeeData "Synchronous machine data" annotation (Placement(transformation(extent={{70,30},{90,50}})));
 equation
   connect(mechanicalPowerSensor.flange_b, constantSpeed.flange)
     annotation (Line(points={{70,-10},{80,-10}}));

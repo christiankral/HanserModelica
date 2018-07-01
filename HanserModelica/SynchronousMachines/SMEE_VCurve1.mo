@@ -119,7 +119,7 @@ model SMEE_VCurve1 "V curves of electrical excited synchronous machine operated 
     offset=IeMax,
     duration=200,
     startTime=0)  annotation (Placement(transformation(extent={{-80,10},{-60,30}})));
-  parameter ParameterRecords.SMEE1 smeeData annotation (Placement(transformation(extent={{20,72},{40,92}})));
+  parameter ParameterRecords.SMEE1 smeeData "Synchronous machine data" annotation (Placement(transformation(extent={{20,72},{40,92}})));
 algorithm
   when rotorDisplacementAngle.rotorDisplacementAngle<-pi/2 then
     terminate("Exit of simulation");

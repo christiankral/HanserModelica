@@ -145,7 +145,7 @@ model IMC_DOL "Induction machine with squirrel cage started directly on line (DO
         origin={-12,-90},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  parameter ParameterRecords.IMC imcData annotation (Placement(transformation(extent={{70,72},{90,92}})));
+  parameter ParameterRecords.IMC imcData "Induction machine parameters" annotation (Placement(transformation(extent={{70,72},{90,92}})));
 initial equation
   sum(imc.is) = 0;
   imc.is[1:2] = zeros(2);
@@ -160,7 +160,7 @@ equation
   connect(powerSensorQS.voltageN, starQS.plug_p) annotation (Line(
         points={{-30,70},{-30,20},{-60,20}}, color={85,170,255}));
   connect(booleanStepQS.y, idealCloserQS.control) annotation (Line(
-      points={{-79,70},{-72,70}}, color={255,0,255}));
+      points={{-79,70},{-67,70}}, color={255,0,255}));
   connect(star.pin_n, ground.p) annotation (Line(points={{-80,-80},{-80,-80}}, color={0,0,255}));
   connect(cosineVoltage.plug_n, star.plug_p) annotation (Line(points={{-60,-70},{-60,-80}}, color={0,0,255}));
   connect(imc.flange, loadInertia.flange_a) annotation (Line(points={{40,-60},{50,-60}}));
@@ -169,7 +169,7 @@ equation
   connect(terminalBox.plug_sn, imc.plug_sn) annotation (Line(points={{24,-50},{24,-50}}, color={0,0,255}));
   connect(terminalBox.plug_sp, imc.plug_sp) annotation (Line(points={{36,-50},{36,-50}}, color={0,0,255}));
   connect(booleanStep.y, idealCloser.control) annotation (Line(
-      points={{-79,-30},{-72,-30}}, color={255,0,255}));
+      points={{-79,-30},{-67,-30}}, color={255,0,255}));
   connect(idealCloser.plug_p, cosineVoltage.plug_p) annotation (Line(
       points={{-60,-40},{-60,-50}},
       color={0,0,255}));
@@ -203,13 +203,14 @@ equation
       color={85,170,255}));
   connect(starMachineQS.plug_p, terminalBoxQS.starpoint) annotation (
       Line(
-      points={{-10,40},{-10,52},{20,52}},
+      points={{-10,40},{-10,52},{21,52}},
       color={85,170,255}));
   connect(currentRMSSensorQS.plug_n, terminalBoxQS.plugSupply) annotation (Line(points={{10,80},{30,80},{30,52}}, color={85,170,255}));
   connect(starMachineQS.pin_n, groundMachineQS.pin) annotation (Line(
       points={{-10,20},{-10,20}},
       color={85,170,255}));
-  connect(starMachine.plug_p, terminalBox.starpoint) annotation (Line(points={{-12,-60},{-12,-48},{20,-48}}, color={0,0,255}));
+  connect(starMachine.plug_p, terminalBox.starpoint) annotation (Line(points={{-12,-60},
+          {-12,-48},{21,-48}},                                                                               color={0,0,255}));
   connect(groundMachine.p, starMachine.pin_n) annotation (Line(points={{-12,-80},{-12,-80}}, color={0,0,255}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,100}}), graphics={

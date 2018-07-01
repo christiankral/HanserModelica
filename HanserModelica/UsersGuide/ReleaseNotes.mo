@@ -5,8 +5,9 @@ class ReleaseNotes "Release Notes"
     preferredView = "info",
     Documentation(info="<html>
 
-<h5>Version 0.10.0, 2018-06-19</h5>
+<h5>Version 0.10.0, 2018-07-01</h5>
 <ul>
+<li>Updated documentation</li>
 <li>Removed <code>versionBuild</code> from library annotation</li>
 <li>Added multi phase example <a href=\"modelica://HanserModelica.Electrical.StarPolygon\">StarPolygon</a>
 <li>Improved 

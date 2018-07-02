@@ -13,7 +13,7 @@ package UsersGuide "User's Guide"
 HanserModelica
 </h4>
 
-<p><a href=\"https://github.com/christiankral/HanserModelica\">HanserModelica</a> is an open source educational library on object oriented modeling of polyphase electrical machines by Modelica, 
+<p><a href=\"https://github.com/christiankral/HanserModelica\">HanserModelica</a> is a Modelica open source educational library on object oriented modeling of polyphase electrical machines, 
 based on a book published in German by 
 <a href=\"https://www.hanser-fachbuch.de/buch/Modelica+Objektorientierte+Modellbildung+von+Drehfeldmaschinen/9783446455511\">Hanser Fachbuchverlag</a>.</p>
 <p><img src=\"modelica://HanserModelica/Resources/Images/45551_Kral_165x240_3D_Soft.png\"></p>

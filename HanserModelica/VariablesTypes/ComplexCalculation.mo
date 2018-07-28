@@ -15,5 +15,13 @@ equation
   I = V/(Z1+Z2);
   // Total apparent power
   S = V*Modelica.ComplexMath.conj(I);
-  annotation (experiment(StopTime=1, Interval=0.001, Tolerance=1e-06));
+  annotation (experiment(StopTime=1, Interval=0.001, Tolerance=1e-06),
+      Documentation(info="<html>
+<h5>Plot the following variable(s)</h5>
+
+<ul>
+<li><code>I.im</code> versus <code>I.re</code>: locus of complex current</li>
+<li><code>S.im</code> versus <code>S.re</code>: locus of complex appranet power</li>
+</ul>
+</html>"));
 end ComplexCalculation;

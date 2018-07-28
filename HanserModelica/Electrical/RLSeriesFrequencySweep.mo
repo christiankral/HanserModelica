@@ -49,12 +49,15 @@ equation
   connect(currentSensor.pin_n, resistor.pin_p) annotation (Line(points={{0,0},{20,0}}, color={85,170,255}));
   annotation (Documentation(info="<html>
 <p>
-The frequency of the voltage source is varied by a logaithmic ramp, the supply voltage magnitude is constant.</p>
-<p>Plot versus <code>voltageSource.f</code> on a logarithmic scale in order to determine the Bode diagrams of the ratio of 
-the voltage of the resistor divided by the supply voltage:</p>
+The frequency of the voltage source is varied by a logaithmic ramp, the supply voltage magnitude is constant.
+</p>
+
+<h5>Plot the following variable(s)</h5>
+
 <ul>
-<li>Gain response: <code>dB_y</code></li>
-<li>Phase response: <code>arg_y</code></li>
+<li><code>dB_y</code> versus <code>voltageSource.f</code> (logarithmic scale): gain response</li>
+<li><code>arg_y</code> versus <code>voltageSource.f</code> (logarithmic scale): phase response</li>
+<li><code>voltageSensor.y.im</code> versus <code>voltageSensor.y.re</code>: locus of resistor voltage</li>
 </ul>
 </html>"),
        experiment(StopTime=1.0, Interval=0.001));

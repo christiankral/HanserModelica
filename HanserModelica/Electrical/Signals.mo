@@ -23,7 +23,14 @@ equation
   connect(currentSensor.p, inductor.n) annotation (Line(points={{50,-20},{90,-20},{90,20},{80,20}}, color={0,0,255}));
   connect(step.y, feedback.u1) annotation (Line(points={{-69,0},{-58,0}}, color={0,0,127}));
   connect(feedback.y, integrator.u) annotation (Line(points={{-41,0},{-32,0}}, color={0,0,127}));
-  connect(integrator.y, signalVoltage.v) annotation (Line(points={{-9,0},{-2,0}}, color={0,0,127}));
-  connect(feedback.u2, currentSensor.i) annotation (Line(points={{-50,-8},{-50,-40},{40,-40},{40,-31}}, color={0,0,127}));
-  annotation (experiment(StopTime=3,Interval=0.001,Tolerance=1e-06));
+  connect(integrator.y, signalVoltage.v) annotation (Line(points={{-9,0},{3,0}},  color={0,0,127}));
+  connect(feedback.u2, currentSensor.i) annotation (Line(points={{-50,-8},{-50,-40},{40,-40},{40,-30}}, color={0,0,127}));
+  annotation (experiment(StopTime=3,Interval=0.001,Tolerance=1e-06),
+      Documentation(info="<html>
+<h5>Plot the following variable(s)</h5>
+
+<ul>
+<li><code>currentSensor.i</code>: current of cirucit</li>
+</ul>
+</html>"));
 end Signals;

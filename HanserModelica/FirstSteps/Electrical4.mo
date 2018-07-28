@@ -20,4 +20,12 @@ equation
   connect(constantVoltage.p, resistor.p) annotation (Line(points={{-40,30},{-40,40},{-20,40}}, color={0,0,255}));
   connect(resistor.n, inductor.p) annotation (Line(points={{0,40},{20,40}}, color={0,0,255}));
   connect(inductor.n, ground.p) annotation (Line(points={{40,40},{60,40},{60,0},{-40,0}}, color={0,0,255}));
+  annotation (Documentation(info="<html>
+<h5>Plot the following variable(s)</h5>
+
+<ul>
+<li><code>vR</code>: voltage drop of resistor</li>
+<li><code>vL</code>: voltage drop of inductor</li>
+</ul>
+</html>"));
 end Electrical4;

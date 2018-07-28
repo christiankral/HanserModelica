@@ -42,5 +42,15 @@ equation
   connect(mainInductor.plug_n, conductor.plug_n) annotation (Line(points={{-20,-10},{-20,-20},{30,-20},{30,-10}}, color={85,170,255}));
   connect(sensor.nv, star.plug_p) annotation (Line(points={{-40,10},{-40,-20},{-70,-20}}, color={85,170,255}));
   connect(star.pin_n, ground.pin) annotation (Line(points={{-70,-40},{-70,-52}}, color={85,170,255}));
-  annotation (experiment(Interval=0.001, Tolerance=1e-06));
+  annotation (experiment(Interval=0.001, Tolerance=1e-06), Documentation(info="<html>
+<h5>Plot the following variable(s)</h5>
+
+<ul>
+<li><code>sensor.apparentPowerTotal.re</code> versus <code>conductor.G_ref[1]</code>: 
+total active power as a function of the variable conductance</li>
+<li><code>sensor.abs_i[1]</code> versus <code>conductor.G_ref[1]</code>: 
+RMS current of phase 1 as a function of the variable conductance</li>
+<li><code>sensor.i[1].im</code> versus <code>sensor.i[1].re</code>: locus of phase current 1</li>
+</ul>
+</html>"));
 end QuasiStaticMultiPhase;

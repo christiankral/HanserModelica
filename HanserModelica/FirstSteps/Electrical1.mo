@@ -18,4 +18,12 @@ equation
   v = vR + vL;
   vR = R*i;
   vL = L*der(i);
+  annotation (Documentation(info="<html>
+<h5>Plot the following variable(s)</h5>
+
+<ul>
+<li><code>vR</code>: voltage drop of resistor</li>
+<li><code>vL</code>: voltage drop of inductor</li>
+</ul>
+</html>"));
 end Electrical1;

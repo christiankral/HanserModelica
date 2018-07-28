@@ -50,5 +50,17 @@ equation
     experiment(
       StopTime=0.08,
       Interval=0.0001,
-      Tolerance=1e-06));
+      Tolerance=1e-06),
+    Documentation(info="<html>
+<h5>Plot the following variable(s)</h5>
+
+<ul>
+<li><code>conductorLoad.G</code>: conductance of DC load circuit</li>
+<li><code>conductorLoad.i</code>: DC load current</li>
+<li><code>resistor.i[1]</code>, <code>resistor.i[2]</code>, <code>resistor.i[3]</code>: supply currents</li>
+<li><code>rectifier.ac.pin[1].v</code>, <code>rectifier.ac.pin[2].v</code>, <code>rectifier.ac.pin[3].v</code>: 
+    rectifier voltages</li>
+<li><code>star.pin_n.v</code>: potential of star point</li>
+</ul>
+</html>"));
 end Rectifier;

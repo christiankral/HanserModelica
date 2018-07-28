@@ -6,5 +6,13 @@ model TablesFromFile "Application of tables read from file"
       tableOnFile=true,
       tableName="resistor",
       fileName=fileName));
-  annotation(experiment(StopTime=4,Interval=0.001,Tolerance=1e-06));
+  annotation(experiment(StopTime=4,Interval=0.001,Tolerance=1e-06),
+      Documentation(info="<html>
+<h5>Plot the following variable(s)</h5>
+
+<ul>
+<li><code>table.y[1]</code>: output of table</li>
+<li><code>variableResistor.R_actual</code>: actual resistance</li>
+</ul>
+</html>"));
 end TablesFromFile;

@@ -5,6 +5,11 @@ class ReleaseNotes "Release Notes"
     preferredView = "info",
     Documentation(info="<html>
 
+<h5>Version 1.0.0, 2018-08-XX</h5>
+<ul>
+<li>Updated documentation</li>
+</ul>
+
 <h5>Version 0.10.0, 2018-07-01</h5>
 <ul>
 <li>Updated documentation</li>

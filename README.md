@@ -1,17 +1,17 @@
 # HanserModelica
 
-HanserModelica is a Modelica open source educational library on object oriented modeling in electrical engineering with particular focus on polyphase electrical machines, based on a book published in German by [Hanser Fachbuchverlag](https://www.hanser-fachbuch.de/buch/Modelica+Objektorientierte+Modellbildung+von+Drehfeldmaschinen/9783446455511). 
+HanserModelica is a Modelica open source educational library on object oriented modeling on electrical engineering with a particular focus on polyphase electric machines. This library is based on a book published in German by [Hanser Fachbuchverlag](https://www.hanser-fachbuch.de/buch/Modelica+Objektorientierte+Modellbildung+von+Drehfeldmaschinen/9783446455511). 
 
 ![Modelica - Objektorientierte Modellerung von Drehfeldmaschinen](https://github.com/christiankral/HanserModelica/blob/master/HanserModelica/Resources/Images/45551_Kral_165x240_3D_Soft.png?raw=true)
 
 ## Content of the book (translated to English)
 
 - Fundemantals
-- Modelica 
+- Modelica
   - [First steps](https://github.com/christiankral/HanserModelica/tree/master/HanserModelica/FirstSteps)
   - [Variables and types](https://github.com/christiankral/HanserModelica/tree/master/HanserModelica/VariablesTypes)
   - [Modelica classes and concepts](https://github.com/christiankral/HanserModelica/tree/master/HanserModelica/Classes)
-- Modeling concepts 
+- Modeling concepts
   - [General concepts and electrical systems](https://github.com/christiankral/HanserModelica/tree/master/HanserModelica/Electrical)
   - [Magnetic systems](https://github.com/christiankral/HanserModelica/tree/master/HanserModelica/Magnetic)
   - [Thermal systems](https://github.com/christiankral/HanserModelica/tree/master/HanserModelica/Thermal)
@@ -19,13 +19,13 @@ HanserModelica is a Modelica open source educational library on object oriented 
 - [Polyphase electrical machines](https://github.com/christiankral/HanserModelica/tree/master/HanserModelica/Machines)
 - [Induction machines](https://github.com/christiankral/HanserModelica/tree/master/HanserModelica/InductionMachines)
 - [Synchronous machines](https://github.com/christiankral/HanserModelica/tree/master/HanserModelica/SynchronousMachines)
-- GitHub tutorial 
+- GitHub tutorial
   - Tutorial based on the Modelica library [FirstSteps](https://github.com/christiankral/FirstSteps)
 
 ## Inhaltsverzeichnis des Buchs (German)
 
 - Grundlagen
-- Modelica 
+- Modelica
   - [Erste Schritte](https://github.com/christiankral/HanserModelica/tree/master/HanserModelica/FirstSteps)
   - [Variablen und Datentypen](https://github.com/christiankral/HanserModelica/tree/master/HanserModelica/VariablesTypes)
   - [Klassen und Konzepte](https://github.com/christiankral/HanserModelica/tree/master/HanserModelica/Classes)
@@ -37,5 +37,5 @@ HanserModelica is a Modelica open source educational library on object oriented 
 - [Drehfeldmaschinen](https://github.com/christiankral/HanserModelica/tree/master/HanserModelica/Machines)
 - [Asynchronmaschinen](https://github.com/christiankral/HanserModelica/tree/master/HanserModelica/InductionMachines)
 - [Synchronmaschinen](https://github.com/christiankral/HanserModelica/tree/master/HanserModelica/SynchronousMachines)
-- GitHub Tutorial 
+- GitHub Tutorial
   - Tutorial basierend auf der Modelica-Library [FirstSteps](https://github.com/christiankral/FirstSteps)

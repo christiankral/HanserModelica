@@ -108,8 +108,23 @@ equation
   connect(stray_m.port_n, converter_m.port_n) annotation (Line(points={{60,-40},{20,-40}}, color={255,170,85}));
   annotation (experiment(StopTime=1, Interval=0.1, Tolerance=1E-6),
     Documentation(info="<html>
+<h4>Description</h4>
 <p>
-In this example the eddy current losses are implemented in two different ways. Compare the core losses <code>coreLoss_e</code> and <code>coreLoss_m</code>.</p>
+In this example the eddy current losses are implemented in two different ways:
+</p>
+
+<ul>
+<li>Electric circuit</li>
+<li>Magentic circuit coupled to an electric circuit</li>
+</ul>
+
+<h4>Plot the following variable(s)</h4>
+
+<ul>
+<li><code>coreLoss_e</code>: core loss of electric circuit</li>
+<li><code>coreLoss_m</code>: core loss of magentic circuit</li>
+</ul>
+
 </html>"),
     Diagram(coordinateSystem(extent={{-100,-100},{100,100}}, initialScale=0.1)),
     Icon(coordinateSystem(                                initialScale=0.1)));

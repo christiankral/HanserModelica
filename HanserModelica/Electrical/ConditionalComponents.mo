@@ -30,7 +30,7 @@ equation
           40},{-10,27}},                                                                       color={255,0,255}));
   annotation (experiment(Interval=0.001, Tolerance=1e-06), Documentation(info=
          "<html>
-<h5>Plot the following variable(s)</h5>
+<h4>Plot the following variable(s)</h4>
 
 <ul>
 <li><code>resistor.i</code>: current of circuit; investigate <code>useInductor = true</code> and <code>useInductor = false</code></li>

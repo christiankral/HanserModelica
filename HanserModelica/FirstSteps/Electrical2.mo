@@ -16,7 +16,7 @@ equation
   vR = R*i;
   vL = L*der(i);
   annotation (Documentation(info="<html>
-<h5>Plot the following variable(s)</h5>
+<h4>Plot the following variable(s)</h4>
 
 <ul>
 <li><code>vR</code>: voltage drop of resistor</li>

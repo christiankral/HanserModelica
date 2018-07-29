@@ -20,7 +20,7 @@ equation
   connect(ground.p, brush.n) annotation (Line(points={{-60,0},{-30,0},{-30,10}}, color={0,0,255}));
   connect(rampCurrent.n, brush.p) annotation (Line(points={{-60,10},{-60,40},{-30,40},{-30,30}}, color={0,0,255}));
   annotation (Documentation(info="<html>
-<h5>Plot the following variable(s)</h5>
+<h4>Plot the following variable(s)</h4>
 
 <ul>
 <li><code>brush.v</code> as a function of <code>brush.i</code>: brush characteristic</li>

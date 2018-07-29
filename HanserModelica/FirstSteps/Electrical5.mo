@@ -5,7 +5,7 @@ model Electrical5 "R-L series circuit, implementation by extends"
     R=15,
     L=1.5);
   annotation (Documentation(info="<html>
-<h5>Plot the following variable(s)</h5>
+<h4>Plot the following variable(s)</h4>
 
 <ul>
 <li><code>vR</code>: voltage drop of resistor</li>

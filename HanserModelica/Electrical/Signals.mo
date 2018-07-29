@@ -27,7 +27,7 @@ equation
   connect(feedback.u2, currentSensor.i) annotation (Line(points={{-50,-8},{-50,-40},{40,-40},{40,-30}}, color={0,0,127}));
   annotation (experiment(StopTime=3,Interval=0.001,Tolerance=1e-06),
       Documentation(info="<html>
-<h5>Plot the following variable(s)</h5>
+<h4>Plot the following variable(s)</h4>
 
 <ul>
 <li><code>currentSensor.i</code>: current of cirucit</li>

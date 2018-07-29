@@ -52,7 +52,7 @@ equation
 The frequency of the voltage source is varied by a logaithmic ramp, the supply voltage magnitude is constant.
 </p>
 
-<h5>Plot the following variable(s)</h5>
+<h4>Plot the following variable(s)</h4>
 
 <ul>
 <li><code>dB_y</code> as a function of <code>voltageSource.f</code> (logarithmic scale): gain response</li>

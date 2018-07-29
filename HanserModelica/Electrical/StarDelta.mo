@@ -45,7 +45,7 @@ equation
   connect(currentRMSSensor.plug_n, delta.plug_p) annotation (Line(points={{80,40},{80,12}}, color={0,0,255}));
   annotation (experiment(StopTime=0.2,Interval=0.0001,Tolerance=1e-06),
       Documentation(info="<html>
-<h5>Plot the following variable(s)</h5>
+<h4>Plot the following variable(s)</h4>
 
 <ul>
 <li><code>currentSensor.i[1]</code>: instantaneous current of phase 1</li>

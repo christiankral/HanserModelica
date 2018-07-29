@@ -52,7 +52,7 @@ equation
       Interval=0.0001,
       Tolerance=1e-06),
     Documentation(info="<html>
-<h5>Plot the following variable(s)</h5>
+<h4>Plot the following variable(s)</h4>
 
 <ul>
 <li><code>conductorLoad.G</code>: conductance of DC load circuit</li>

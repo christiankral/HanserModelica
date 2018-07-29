@@ -17,7 +17,7 @@ equation
   connect(rlSeries.n, ground.p) annotation (Line(points={{0,20},{10,20},{10,-20},{-30,-20}}, color={0,0,255}));
   annotation (experiment(Interval=0.001, Tolerance=1e-06), Documentation(info=
          "<html>
-<h5>Plot the following variable(s)</h5>
+<h4>Plot the following variable(s)</h4>
 
 <ul>
 <li><code>rlSeries.i</code>: current of circuit</li>

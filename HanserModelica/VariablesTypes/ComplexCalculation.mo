@@ -17,7 +17,7 @@ equation
   S = V*Modelica.ComplexMath.conj(I);
   annotation (experiment(StopTime=1, Interval=0.001, Tolerance=1e-06),
       Documentation(info="<html>
-<h5>Plot the following variable(s)</h5>
+<h4>Plot the following variable(s)</h4>
 
 <ul>
 <li><code>I.im</code> versus <code>I.re</code>: locus of complex current</li>

@@ -22,18 +22,25 @@ model Coupling "Electro-magnetic coupling"
         origin={-80,0})));
   Modelica.Blocks.Sources.BooleanStep booleanStep(startTime=0.2) annotation (Placement(transformation(extent={{-90,30},{-70,50}})));
 equation
-  connect(converter.port_p, fluxSensor.port_p) annotation (Line(points={{20,6},{20,20},{40,20}}, color={255,127,0}));
+  connect(converter.port_p, fluxSensor.port_p) annotation (Line(points={{20,6},{
+          20,20},{40,20}},                                                                       color={255,127,0}));
   connect(fluxSensor.port_n, permeance.port_p) annotation (Line(points={{60,20},{80,20},{80,10}}, color={255,127,0}));
-  connect(converter.port_n, permeance.port_n) annotation (Line(points={{20,-6},{20,-20},{80,-20},{80,-10}}, color={255,127,0}));
-  connect(groundMagnetic.port, converter.port_n) annotation (Line(points={{20,-30},{20,-6}}, color={255,127,0}));
+  connect(converter.port_n, permeance.port_n) annotation (Line(points={{20,-6},
+          {20,-20},{80,-20},{80,-10}},                                                                      color={255,127,0}));
+  connect(groundMagnetic.port, converter.port_n) annotation (Line(points={{20,-30},
+          {20,-6}},                                                                          color={255,127,0}));
   connect(constantVoltage.p, resistor.p) annotation (Line(points={{-80,10},{-80,20},{-60,20}}, color={0,0,255}));
   connect(resistor.n, switch.p) annotation (Line(points={{-40,20},{-30,20}}, color={0,0,255}));
-  connect(switch.n, converter.p) annotation (Line(points={{-10,20},{0,20},{0,6}}, color={0,0,255}));
+  connect(switch.n, converter.p) annotation (Line(points={{-10,20},{0,20},{0,
+          6}},                                                                    color={0,0,255}));
   connect(constantVoltage.n, groundElectric.p) annotation (Line(points={{-80,-10},{-80,-30}}, color={0,0,255}));
-  connect(constantVoltage.n, converter.n) annotation (Line(points={{-80,-10},{-80,-20},{0,-20},{0,-6}}, color={0,0,255}));
-  connect(booleanStep.y, switch.control) annotation (Line(points={{-69,40},{-20,40},{-20,27}}, color={255,0,255}));
-  annotation (experiment(StopTime=1, Interval=0.001, Tolerance=1e-06), Documentation(info="<html>
-<h5>Plot the following variable(s)</h5>
+  connect(constantVoltage.n, converter.n) annotation (Line(points={{-80,-10},
+          {-80,-20},{0,-20},{0,-6}},                                                                    color={0,0,255}));
+  connect(booleanStep.y, switch.control) annotation (Line(points={{-69,40},{
+          -20,40},{-20,27}},                                                                   color={255,0,255}));
+  annotation (experiment(StopTime=1, Interval=0.001, Tolerance=1e-06),
+      Documentation(info="<html>
+<h4>Plot the following variable(s)</h4>
 
 <ul>
 <li><code>fluxSensor.Phi</code>: flux of the magnetic circuit</li>

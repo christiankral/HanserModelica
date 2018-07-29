@@ -44,7 +44,7 @@ equation
   connect(star.pin_n, ground.pin) annotation (Line(points={{-70,-40},{-70,-52}}, color={85,170,255}));
   annotation (experiment(Interval=0.001, Tolerance=1e-06), Documentation(info=
          "<html>
-<h5>Plot the following variable(s)</h5>
+<h4>Plot the following variable(s)</h4>
 
 <ul>
 <li><code>sensor.apparentPowerTotal.re</code> as a function of <code>conductor.G_ref[1]</code>: 

@@ -8,7 +8,7 @@ model TablesFromFile "Application of tables read from file"
       fileName=fileName));
   annotation(experiment(StopTime=4,Interval=0.001,Tolerance=1e-06),
       Documentation(info="<html>
-<h5>Plot the following variable(s)</h5>
+<h4>Plot the following variable(s)</h4>
 
 <ul>
 <li><code>table.y[1]</code>: output of table</li>

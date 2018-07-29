@@ -31,12 +31,13 @@ equation
   connect(ground2.p, loadResistor.n) annotation (Line(points={{-20,-12},{40,-12},{40,0}}, color={0,0,255}));
   connect(sineVoltage.p, transformer.p1) annotation (Line(points={{-72,20},{-72,30},{-40,30},{-40,20}}, color={0,0,255}));
   connect(sineVoltage.n, ground1.p) annotation (Line(points={{-72,0},{-72,-12},{-40,-12}}, color={0,0,255}));
-  connect(booleanStep.y, switch.control) annotation (Line(points={{-59,50},{10,50},{10,37}}, color={255,0,255}));
+  connect(booleanStep.y, switch.control) annotation (Line(points={{-59,50},{
+          10,50},{10,37}},                                                                   color={255,0,255}));
   annotation (experiment(
       StopTime=0.08,
       Interval=0.0001,
       Tolerance=1e-06), Documentation(info="<html>
-<h5>Plot the following variable(s)</h5>
+<h4>Plot the following variable(s)</h4>
 
 <ul>
 <li><code>transformer.i1</code>: supply current of transformer</li>

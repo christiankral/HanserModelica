@@ -14,7 +14,7 @@ equation
 <li><code>Interval = 0.0909091</code></li>
 </ul>
 
-<h5>Plot the following variable(s)</h5>
+<h4>Plot the following variable(s)</h4>
 
 <ul>
 <li><code>x</code>: sine wave</li>

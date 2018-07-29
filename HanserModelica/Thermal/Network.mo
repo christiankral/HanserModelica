@@ -16,8 +16,9 @@ equation
   connect(thermalResistor2.port_b, fixedTemperature.port) annotation (Line(points={{50,20},{70,20}}, color={191,0,0}));
   connect(heatCapacitor.port, thermalResistor2.port_a) annotation (Line(points={{10,0},{10,20},{30,20}}, color={191,0,0}));
   connect(temperatureSensor.port, thermalResistor1.port_a) annotation (Line(points={{-50,10},{-50,20},{-30,20}}, color={191,0,0}));
-  annotation (experiment(StopTime=400,Interval=0.1,Tolerance=1e-06), Documentation(info="<html>
-<h5>Plot the following variable(s)</h5>
+  annotation (experiment(StopTime=400,Interval=0.1,Tolerance=1e-06),
+      Documentation(info="<html>
+<h4>Plot the following variable(s)</h4>
 
 <ul>
 <li><code>temperatureSensor.T</code>: temperature of heat source</li>

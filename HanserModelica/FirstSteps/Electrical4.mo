@@ -21,7 +21,7 @@ equation
   connect(resistor.n, inductor.p) annotation (Line(points={{0,40},{20,40}}, color={0,0,255}));
   connect(inductor.n, ground.p) annotation (Line(points={{40,40},{60,40},{60,0},{-40,0}}, color={0,0,255}));
   annotation (Documentation(info="<html>
-<h5>Plot the following variable(s)</h5>
+<h4>Plot the following variable(s)</h4>
 
 <ul>
 <li><code>vR</code>: voltage drop of resistor</li>

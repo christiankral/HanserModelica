@@ -55,9 +55,9 @@ The frequency of the voltage source is varied by a logaithmic ramp, the supply v
 <h5>Plot the following variable(s)</h5>
 
 <ul>
-<li><code>dB_y</code> versus <code>voltageSource.f</code> (logarithmic scale): gain response</li>
-<li><code>arg_y</code> versus <code>voltageSource.f</code> (logarithmic scale): phase response</li>
-<li><code>voltageSensor.y.im</code> versus <code>voltageSensor.y.re</code>: locus of resistor voltage</li>
+<li><code>dB_y</code> as a function of <code>voltageSource.f</code> (logarithmic scale): gain response</li>
+<li><code>arg_y</code> as a function of <code>voltageSource.f</code> (logarithmic scale): phase response</li>
+<li><code>voltageSensor.y.im</code> as a function of <code>voltageSensor.y.re</code>: locus of resistor voltage</li>
 </ul>
 </html>"),
        experiment(StopTime=1.0, Interval=0.001));

@@ -43,7 +43,8 @@ equation
   connect(inductor.plug_n, currentSensor.plug_p) annotation (Line(points={{20,40},{30,40}}, color={0,0,255}));
   connect(currentSensor.plug_n, currentRMSSensor.plug_p) annotation (Line(points={{50,40},{60,40}}, color={0,0,255}));
   connect(currentRMSSensor.plug_n, delta.plug_p) annotation (Line(points={{80,40},{80,12}}, color={0,0,255}));
-  annotation (experiment(StopTime=0.2,Interval=0.0001,Tolerance=1e-06), Documentation(info="<html>
+  annotation (experiment(StopTime=0.2,Interval=0.0001,Tolerance=1e-06),
+      Documentation(info="<html>
 <h5>Plot the following variable(s)</h5>
 
 <ul>

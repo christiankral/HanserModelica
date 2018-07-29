@@ -59,10 +59,20 @@ equation
       smooth=Smooth.None));
   connect(constantVoltage.p, switch.p) annotation (Line(points={{-70,-1.77636e-15},{-70,10},{-50,10}}, color={0,0,255}));
   connect(switch.n, resistor.p) annotation (Line(points={{-30,10},{-10,10},{-10,-1.77636e-15}}, color={0,0,255}));
-  connect(booleanPulse.y, switch.control) annotation (Line(points={{-59,30},{-40,30},{-40,22}}, color={255,0,255}));
+  connect(booleanPulse.y, switch.control) annotation (Line(points={{-59,30},{-40,30},{-40,17}}, color={255,0,255}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})), experiment(
       StopTime=400,
       Interval=0.1,
-      Tolerance=1e-06));
+      Tolerance=1e-06),
+    Documentation(info="<html>
+<h5>Plot the following variable(s)</h5>
+
+<ul>
+<li><code>resistor.T_heatPort</code>: temperature of resistor</li>
+<li><code>resistor.R_actual</code>: (temperature dependent) resistance</li>
+<li><code>resistor.LossPower</code>: loss power of resistor</li>
+</ul>
+
+</html>"));
 end Coupling;

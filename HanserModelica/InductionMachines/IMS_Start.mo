@@ -259,21 +259,24 @@ equation
       Tolerance=1e-06),
     Documentation(info="<html>
 
+<h4>Description</h4>
+
 <p>
 This example compares a time transient and a quasi static model of a multi phase induction machine.
-At start time <code>tOn</code> a transient and a quasi static multi phase voltage source are connected to induction machine with sliprings. The machine starts from standstill, accelerating inertias against load torque quadratic dependent on speed,
-using a starting resistance. At time <code>tRheostat</code> external rotor resistance is shortened, finally reaching nominal speed.</p>
+At start time <code>tOn</code> a transient and a quasi static multi phase voltage source are connected 
+to induction machine with sliprings. The machine starts from standstill, accelerating inertias against 
+load torque quadratic dependent on speed,
+using a starting resistance. At time <code>tRheostat</code> external rotor resistance is shortened, 
+finally reaching nominal speed.</p>
 
-<p>
-Simulate for 1.5 seconds and plot (versus time):
-</p>
+<h4>Plot the following variable(s)</h4>
 
 <ul>
-<li><code>currentRMSsensor.I|currentSensorQS.abs_i[1]</code>: (equivalent) RMS stator current</li>
-<li><code>ims|imsQS.wMechanical</code>: machine speed</li>
-<li><code>ims|imsQS.tauElectrical</code>: machine torque</li>
+<li><code>currentSensor.I</code> and <code>currentSensorQS.I</code>: 
+    (quasi) RMS stator current of transient and quasi static machine</li>
+<li><code>ims.tauElectrical</code> and <code>imsQS.tauElectrical</code>: torque of transient and quasi static machine</li>
+<li><code>ims.wMechanical</code> and <code>imsQS.wMechanical</code>: speed of transient and quasi static machine</li>
 </ul>
-<p>Default machine parameters are used.</p>
 </html>"),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}),

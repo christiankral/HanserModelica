@@ -123,22 +123,24 @@ equation
     experiment(Interval=0.001, StopTime=1, Tolerance=1e-06),
     Documentation(info="<html>
 
+<h4>Description</h4>
+
 <p>
 This examples allows the investigation of characteristic curves of quasi static multi phase induction machines with slip ring rotor
-against rotor speed.
-</p>
+against rotor speed. The intention is to compare the results of the simulation models 
+IMS_Characteristic1, 
+<a href=\"modelica://HanserModelica.InductionMachines.IMS_Characteristics2\">IMS_Characteristics2</a> and
+<a href=\"modelica://HanserModelica.InductionMachines.IMS_Characteristics3\">IMS_Characteristics3</a> in one plot.</p>
 
-<p>
-Simulate for 1 second and plot (versus ims.wMechanical or perUnitSpeed):
-</p>
+<h4>Plot the following variable(s)</h4>
 
 <ul>
-<li><code>currentSensor.abs_i[1]</code>: (equivalent) RMS stator current</li>
 <li><code>ims.tauElectrical</code>: machine torque</li>
-<li><code>imsc.powerBalance.powerStator</code>: stator power</li>
+<li><code>currentSensor.I</code>: RMS stator current</li>
+<li><code>ims.powerBalance.lossPower</code>: total loss</li>
+<li><code>ims.powerBalance.powerStator</code>: stator power</li>
 <li><code>ims.powerBalance.powerMechanical</code>: mechanical power</li>
 </ul>
-<p>Default machine parameters are used. The rotor resistance may be varied to demonstrate the impact on the characteristic curves</p>
 </html>"),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}),

@@ -145,6 +145,6 @@ finally reaching nominal speed.</p>
 <li><code>idealCloser.i</code>: current of main switch</li>
 <li><code>imc.tauElectrical</code>: electromagnetic tourque</li>
 <li><code>imc.stator.electroMagneticConverter.abs_Phi</code>: magnitude of stator flux</li>
-
+</ul>
 </html>"));
 end IMC_Steinmetz;

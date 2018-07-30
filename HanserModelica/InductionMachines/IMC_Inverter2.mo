@@ -6,7 +6,7 @@ model IMC_Inverter2 "Induction machine with squirrel cage and inverter, operated
 <h4>Description</h4>
 
 <p>Compared to 
-<a href=\"\">IMC_Inverter1</a> in this example frequency is raised by a ramp up to double the nominal frequency in double the time. 
+<a href=\"modelica://HanserModelica.InductionMachines.IMC_Inverter1\">IMC_Inverter1</a> in this example frequency is raised by a ramp up to double the nominal frequency in double the time. 
 At time <code>tStep</code> a load step is applied.</p>
 
 <h4>Plot the following variable(s)</h4>

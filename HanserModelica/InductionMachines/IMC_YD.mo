@@ -171,18 +171,28 @@ equation
     __OpenModelica_simulationFlags(jacobian = "", nls = "newton", s = "dassl", lv = "LOG_STATS"),
     Documentation(
         info="<html>
-<p>
-At start time tStart three phase voltage is supplied to the asynchronous induction machine with squirrel cage, first star-connected, then delta-connected; the machine starts from standstill, accelerating inertias against load torque quadratic dependent on speed, finally reaching nominal speed.</p>
 
-<p>Simulate for 2.5 seconds and plot (versus time):</p>
+<h4>Description</h4>
+
+<p>
+At start time <code>tStart</code> a transient and a quasis static three phase voltage 
+are supplied to a transient and a quasi static the asynchronous induction machine with squirrel cage. 
+First the machines are star-connected, then delta-connected. The machines starts from standstill, 
+accelerating inertias against load torque quadratic dependent on speed, finally reaching nominal speed.</p>
+
+<h4>Plot the following variable(s)</h4>
 
 <ul>
-<li>currentRMSSensor.I: stator current RMS</li>
-<li>aimc.wMechanical: motor's speed</li>
-<li>aimc.tauElectrical: motor's torque</li>
+<li><code>imc.tauElectrical</code> against <code>imc.wMechanical</code>: transient torque speed characteristic</li>
+<li><code>imcQS.tauElectrical</code> against <code>imcQS.wMechanical</code>: quasi static torque speed characteristic</li>
+<li><code>currentRMSsensor.I</code>: quasi RMS stator current of transient machine</li>
+<li><code>currentRMSSensorQS.I</code>: RMS line current of phase 1 of quasi static machine</li>
+<li><code>imcQS.abs_i[1]</code>: RMS stator current of phase 1 of quasi static machine</li>
+<li><code>imc.stator.electroMagneticConverter.abs_Phi</code>: magnitude of stator flux of transient machine</li>
+<li><code>imcQS.stator.electroMagneticConverter.abs_Phi</code>: magnitude of stator flux of quasi static machine</li>
+<li><code>imcQS.arg_vs[1]</code>: phase angle of stator phase voltage 1, quasi static machine</li>
+<li><code>imcQS.arg_is[1]</code>: phase angle of stator phase current 1, quasi static machine</li>
 </ul>
-<p>
-Default machine parameters are used.</p>
 </html>"),
     Diagram(graphics={
         Text(

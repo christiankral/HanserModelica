@@ -114,19 +114,26 @@ equation
     experiment(StopTime=2, Interval=0.0001, Tolerance=1E-8),
     Documentation(info="<html>
 
-<p>This example compares a time transient and a quasi static model of a multi phase induction machine.
-An ideal frequency inverter is modeled by using a <code>VfController</code> and a multi phase <code>SignalVoltage</code>.
-Frequency is raised by a ramp, causing the induction machine with squirrel cage to start,
+<h4>Description</h4>
+
+<p>This example investigates a time transient polyphase induction machine.
+An ideal frequency inverter is modeled by using a simple 
+<a href=\"Modelica.Electrical.Machines.Utilities.VfController\">voltage frequency controller</a> 
+and a polyphase voltage source with signal input.
+Frequency is raised by a ramp up to nominal frequency, causing the induction machine with squirrel cage to start,
 and accelerating inertias. At time <code>tStep</code> a load step is applied.</p>
 
-<p>Simulate for 2 seconds and plot (versus time):</p>
+<h4>Plot the following variable(s)</h4>
 
 <ul>
-<li><code>currentRMSsensor.I|currentSensorQS.abs_i[1]</code>: (equivalent) RMS stator current</li>
-<li><code>imc|imcQS.wMechanical</code>: machine speed</li>
-<li><code>imc|imcQS.tauElectrical</code>: machine torque</li>
+<li><code>fActual</code>: actual supply frequency</li>
+<li><code>voltageRMSSensor.V</code>: quasi RMS stator voltage</li>
+<li><code>imc.stator.abs_Phi</code>: magnitude of stator flux</li>
+<li><code>imc.tauElectrical</code>: electromagnetic torque</li>
+<li><code>imc.wMechanical</code>: speed</li>
+<li><code>currentRMSSensor.I</code>: quasi RMS stator current</li>
 </ul>
-<p>Default machine parameters are used.</p>
+
 </html>"),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}),

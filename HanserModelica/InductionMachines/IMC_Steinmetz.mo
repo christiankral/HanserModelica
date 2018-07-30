@@ -56,7 +56,7 @@ model IMC_Steinmetz "Induction machine with squirrel cage and Steinmetz-connecti
     TorqueDirection=false,
     tau_nominal=-tauLoad,
     useSupport=false) annotation (Placement(transformation(extent={{90,-50},{70,-30}})));
-  Modelica.Electrical.Machines.Utilities.TerminalBox TerminalBox1(terminalConnection="D") annotation (Placement(transformation(extent={{-20,-34},{0,-14}})));
+  Modelica.Electrical.Machines.Utilities.TerminalBox terminalBox(terminalConnection="D") annotation (Placement(transformation(extent={{-20,-34},{0,-14}})));
   Modelica.Electrical.MultiPhase.Basic.PlugToPin_p pin3(m=m, k=3) annotation (Placement(transformation(
         origin={-30,18},
         extent={{-10,-10},{10,10}},
@@ -117,22 +117,34 @@ equation
                              color={0,0,255}));
   connect(greaterThreshold.y, idealOpener.control) annotation (Line(
         points={{60,51},{60,70},{37,70}}, color={255,0,255}));
-  connect(TerminalBox1.plug_sn, imc.plug_sn) annotation (Line(points={{-16,-30},{-16,-30}}, color={0,0,255}));
-  connect(TerminalBox1.plug_sp, imc.plug_sp) annotation (Line(points={{-4,-30},{-4,-30}}, color={0,0,255}));
+  connect(terminalBox.plug_sn, imc.plug_sn) annotation (Line(points={{-16,-30},{-16,-30}}, color={0,0,255}));
+  connect(terminalBox.plug_sp, imc.plug_sp) annotation (Line(points={{-4,-30},{-4,-30}}, color={0,0,255}));
   connect(imc.flange, loadInertia.flange_a) annotation (Line(points={{0,-40},{40,-40}}));
   connect(speedSensor.flange, imc.flange) annotation (Line(points={{20,-20},{20,-40},{0,-40}}));
   connect(speedSensor.w, greaterThreshold.u) annotation (Line(points={{41,-20},{60,-20},{60,28}}, color={0,0,127}));
   connect(pin3.plug_p, currentSensor.plug_p) annotation (Line(points={{-30,16},{-30,8},{-10,8},{-10,0}}, color={0,0,255}));
   connect(pin2.plug_p, currentSensor.plug_p) annotation (Line(points={{-10,16},{-10,0}}, color={0,0,255}));
   connect(pin1.plug_p, currentSensor.plug_p) annotation (Line(points={{10,16},{10,8},{-10,8},{-10,0}}, color={0,0,255}));
-  connect(currentSensor.plug_n, TerminalBox1.plugSupply) annotation (Line(points={{-10,-20},{-10,-28}}, color={0,0,255}));
+  connect(currentSensor.plug_n, terminalBox.plugSupply) annotation (Line(points={{-10,-20},{-10,-28}}, color={0,0,255}));
   connect(rmsI.u, currentSensor.i) annotation (Line(points={{-28,-10},{-21,-10}}, color={0,0,127}));
   annotation (experiment(Interval=0.0001, Tolerance=1e-06, StopTime=1),             Documentation(
         info="<html>
-<p>At start time tStart single phase voltage is supplied to the asynchronous induction machine with squirrel cage;
-the machine starts from standstill, accelerating inertias against load torque quadratic dependent on speed,
+
+<h4>Description</h4>
+
+<p>At start time <code>tStart</code> single phase voltage is supplied to an induction machine with squirrel cage.
+The machine starts from standstill, accelerating inertias against load torque quadratic dependent on speed,
 finally reaching nominal speed.</p>
 
-<p>Default machine parameters are used.</p>
+<h4>Plot the following variable(s)</h4>
+
+<ul>
+<li><code>imc.wMechanical</code> and <code>wSwitch</code>: 
+    mechanical speed and speed limit of disconnecting the starting capacitor<li>
+<li><code>rmsI[1].y</code>, <code>rmsI[2].y</code>, <code>rmsI[2].y</code>: RMS currents of stator phases 1, 2, 3</li>
+<li><code>idealCloser.i</code>: current of main switch</li>
+<li><code>imc.tauElectrical</code>: electromagnetic tourque</li>
+<li><code>imc.stator.electroMagneticConverter.abs_Phi</code>: magnitude of stator flux</li>
+
 </html>"));
 end IMC_Steinmetz;

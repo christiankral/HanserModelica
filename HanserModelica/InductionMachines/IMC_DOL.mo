@@ -226,20 +226,28 @@ equation
           textString="%m phase quasi static",        lineColor={0,0,0})}),
         experiment(StopTime=1, Interval=0.0001, Tolerance=1E-6),
     Documentation(info="<html>
+
+<h4>Description</h4>
+
 <p>
 This example compares a time transient and a quasi static model of a multi phase induction machine. 
 At start time <code>tOn</code> a transient and a quasi static multi phase voltage source are 
-connected to an induction machine. The machine starts from standstill, accelerating inertias 
+connected to an induction machine. The machines starts from standstill, accelerating inertias 
 against load torque quadratic dependent on speed, finally reaching nominal speed.</p>
 
-<p>
-Simulate for 1 second and plot (versus time):
-</p>
+<h4>Plot the following variable(s)</h4>
 
 <ul>
-<li><code>currentRMSsensor.I|currentSensorQS.abs_i[1]</code>: (equivalent) RMS stator current</li>
-<li><code>imc|imcQS.wMechanical</code>: machine speed</li>
-<li><code>imc|imcQS.tauElectrical</code>: machine torque</li>
+<li><code>imc.tauElectrical</code>: transient torque</li>
+<li><code>imc.wMechanical</code>: transient speed</li>
+<li><code>imc.tauElectrical</code> against <code>imc.wMechanical</code>: transient torque speed characteristic</li>
+<li><code>imcQS.tauElectrical</code>: quasi static torque</li>
+<li><code>imcQS.wMechanical</code>: quasi static speed</li>
+<li><code>imcQS.tauElectrical</code> against <code>imcQS.wMechanical</code>: quasi static torque speed characteristic</li>
+<li><code>currentRMSsensor.I</code>: quasi RMS stator current of transient machine</li>
+<li><code>currentSensorQS.abs_i[1]</code>: RMS stator current of phase 1 of quasi static machine</li>
+<li><code>imc.stator.electroMagneticConverter.abs_Phi</code>: magnitude of stator flux of transient machine</li>
+<li><code>imcQS.stator.electroMagneticConverter.abs_Phi</code>: magnitude of stator flux of quasi static machine</li>
 </ul>
 </html>"));
 end IMC_DOL;

@@ -121,17 +121,22 @@ equation
   annotation (
     experiment(StopTime=10, Interval=0.0001, Tolerance=1e-06),
     Documentation(info="<html>
-<ul>
-<li>Simulate for 10 seconds: The machine is started at nominal speed, subsequently a load ramp is applied.</li>
-<li>Compare by plotting versus mechanical power Pm:</li>
-</ul>
-<table>
-<tr><td>Current      </td><td>I_sim   </td><td>I_meas  </td></tr>
-<tr><td>Speed        </td><td>w_sim   </td><td>w_meas  </td></tr>
-<tr><td>Power factor </td><td>pfs_sim  </td><td>pfs_meas </td></tr>
-<tr><td>Efficiency   </td><td>eff_sim </td><td>eff_meas</td></tr>
-</table>
+
+<h4>Description</h4>
+
+<p>This example is intended to complare simulation and measurement results of a squirrel cage induction machine.</p>
+
+<h4>Nominal machine data</h4>
+
 <p>Machine parameters are taken from a standard 18.5 kW 400 V 50 Hz motor, simulation results are compared with measurements.</p>
+<p>See:
+Anton Haumer, Christian Kral, Hansj&ouml;rg Kapeller, Thomas B&auml;uml, Johannes V. Gragger
+<a href=\"https://www.modelica.org/events/modelica2009/Proceedings/memorystick/pages/papers/0103/0103.pdf\">
+The AdvancedMachines Library: Loss Models for Electric Machines</a>
+Modelica 2009, 7<sup>th</sup> International Modelica Conference</p>
+
+<br>
+
 <table>
 <tr><td>Nominal stator current            </td><td>     32.85  </td><td>A      </td></tr>
 <tr><td>Power factor                      </td><td>      0.898 </td><td>       </td></tr>
@@ -146,7 +151,11 @@ equation
 <tr><td>Efficiency                        </td><td>     90.49  </td><td>%      </td></tr>
 <tr><td>Nominal torque                    </td><td>    120.79  </td><td>Nm     </td></tr>
 </table>
-<br>
+
+<h4>Machine parameter</h4>
+
+<p>In the simulation model the following machine parameters are used:</p>
+
 <table>
 <tr><td>Stator resistance per phase       </td><td>  0.56     </td><td>&Omega;</td></tr>
 <tr><td>Temperature coefficient           </td><td> copper    </td><td>       </td></tr>
@@ -161,11 +170,21 @@ equation
 <tr><td>Operation temperature             </td><td> 90        </td><td>&deg;C </td></tr>
 <tr><td>Effective number of stator turns  </td><td>270.1      </td><td>       </td></tr>
 </table>
-<p>See:<br>
-Anton Haumer, Christian Kral, Hansj&ouml;rg Kapeller, Thomas B&auml;uml, Johannes V. Gragger<br>
-<a href=\"https://www.modelica.org/events/modelica2009/Proceedings/memorystick/pages/papers/0103/0103.pdf\">
-The AdvancedMachines Library: Loss Models for Electric Machines</a><br>
-Modelica 2009, 7<sup>th</sup> International Modelica Conference</p>
+
+<h4>Plot the following variable(s)</h4>
+
+<ul>
+<li><code>I_sim</code> and <code>I_meas</code> against <code>Pm</code>: 
+    simulated and measured RMS current against mechanical power</li>
+<li><code>w_sim</code> and <code>w_meas</code> against <code>Pm</code>: 
+    simulated and measured speed against mechanical power</li>
+<li><code>pfs_sim</code> and <code>pfs_meas</code> against <code>Pm</code>: 
+    simulated and measured power factor against mechanical power</li>
+<li><code>loss_sim/code> and <code>loss_meas</code> against <code>Pm</code>: 
+    simulated and measured total loss against mechanical power</li>
+<li><code>eff_sim/code> and <code>eff_meas</code> against <code>Pm</code>: 
+    simulated and measured efficiency against mechanical power</li>
+</ul>
 </html>"),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,100}}), graphics={

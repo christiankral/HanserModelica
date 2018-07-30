@@ -106,7 +106,7 @@ equation
           lineColor={0,0,0})}),
     Documentation(info="<html>
 
-<h5>Description</h5>
+<h4>Description</h4>
 
 <p>
 This examples allows the investigation of characteristic curves of quasi static multi phase induction machines with squirrel cage rotor 

@@ -256,18 +256,20 @@ equation
     __OpenModelica_simulationFlags(jacobian = "", nls = "newton", s = "dassl", lv = "LOG_STATS"),
     Documentation(
         info="<html>
-<p>At start time tStart1 three phase voltage is supplied to the asynchronous induction machine with squirrel cage via the transformer;
-the machine starts from standstill, accelerating inertias against load torque quadratic dependent on speed;
-at start time tStart2 the machine is fed directly from the voltage source, finally reaching nominal speed.</p>
+<h4>Description</h4>
+
 <p>
-Simulate for 2.5 seconds and plot (versus time):</p>
+At start time <code>tStart1</code> a transient and a quasi static three phase voltage 
+are supplied to a transient and a quasi static asynchronous induction machine with squirrel cage 
+via a transformer. The machines starts from standstill, accelerating inertias against load torque quadratic dependent on speed.
+At start time <code>tStart2</code> the machines are fed directly from the voltage sources, finally reaching nominal speed.</p>
+
+<h4>Plot the following variable(s)</h4>
 
 <ul>
-<li>currentRMSSensor.I: stator current RMS</li>
-<li>aimc.wMechanical: motor's speed</li>
-<li>aimc.tauElectrical: motor's torque</li>
+<li><code>currentRMSsensor.I</code>: quasi RMS stator current of transient machine</li>
+<li><code>currentRMSSensorQS.I</code>: RMS stator current of quasi static machine</li>
 </ul>
-<p>Default machine parameters are used.</p>
 </html>"),
     Diagram(graphics={
         Text(

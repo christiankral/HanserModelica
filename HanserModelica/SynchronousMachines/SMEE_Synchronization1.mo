@@ -1,4 +1,4 @@
-within HanserModelica.SynchronousMachines;
+﻿within HanserModelica.SynchronousMachines;
 model SMEE_Synchronization1 "Electrical excited synchronous machine synchronized to grid"
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
@@ -124,28 +124,38 @@ equation
   connect(smee.flange, constantTorque.flange) annotation (Line(points={{50,-30},{60,-30}}, color={0,0,0}));
   annotation (experiment(StopTime=0.3,Interval=0.0001,Tolerance=1e-08),
     Documentation(info="<html>
-<p>An electrically excited synchronous machine is running with synchrous speed. 
+
+<h4>Description</h4>
+
+<p>
+n electrically excited synchronous machine is running with synchrous speed. 
 The RMS values of the open circuit machine voltages and mains voltage are equal. 
-Tha phase shift if the machine and mains voltages are euqal. However, the parameter
-phi can be used to cause lagging phase angles of the mains voltage.</p>
+Tha phase shift if the machine and mains voltages are euqal. 
+The intention is to compare the results of the following simulation models in one plot:</p>
+
+<ul>
+<li>SMEE_Synchronization1: all synchronization conditions are fulfilled</li>
+<li><a href=\"HanserModelica.SynchronousMachines.SMEE_Synchronization2\">SMEE_Synchronization2</a>:
+    phi = 10° is used to cause lagging phase angles of the mains voltage</li>
+<li><a href=\"HanserModelica.SynchronousMachines.SMEE_Synchronization3\">SMEE_Synchronization3</a>:
+    excitation current is 5 percent greater than in 
+    <a href=\"modelica://HanserModelica.SynchronousMachines.SMEE_Synchronization1\">SMEE_Synchronization1</a>; 
+    this causes the stator voltages to be 5 percent greater than the nominal voltage</li>
+</ul>
 
 <p>After 0.1 seconds the synchronization switch closes. The shaft of the synchronous
-machine is not connected, such that neither mechanical speed nor torque are fixed. As the machine and mains 
+machine is mechanically not connected, such that neither mechanical speed nor torque are fixed. As the machine and mains 
 voltages are equal for each phase, there are neither electrical nor mechanical reactions
 of the machine on the closing switch.
 </p>
 
-<p>Simulate for 0.5 seconds and plot:</p>
+<h4>Plot the following variable(s)</h4>
 
 <ul>
-<li><code>smee.tauElectrical</code>: electric torque</li>
-<li><code>smee.wMechanical</code>: mechanical speed</li>
-<li><code>smee.is[1]</code>: stator phase current 1</li>
-<li><code>smee.stator.abs_Phi</code>: magnitude of stator flux</li>
+<li><code>currentRMSSensor.I</code>: quasi RMS stator current</li>
+<li><code>smee.tauElectrical</code>: electromagnetic torque</li>
+<li><code>smee.wMechanical</code>: speed</li>
 </ul>
-
-<p>Default machine parameters are used.</p>
-
 </html>"),
     Diagram(graphics={                      Text(
                   extent={{-60,-8},{20,-16}},

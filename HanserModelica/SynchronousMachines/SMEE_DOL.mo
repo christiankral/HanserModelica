@@ -140,35 +140,36 @@ equation
   connect(electricalSensor.pv, electricalSensor.pc) annotation (Line(points={{50,30},{50,40},{40,40}}, color={0,0,255}));
   annotation (experiment(StopTime=2.5,Interval=0.0001,Tolerance=1e-006),
     Documentation(info="<html>
+
+<h4>Description</h4>
+
 <p>An electrically excited synchronous generator is started direct on line utilizing the damper cage 
-(and the shorted excitation winding) at 0 seconds.</p>
-<p>At t = 0.5 seconds, the excitation voltage is raised to achieve the no-load excitation current. 
-Note, that reactive power of the stator goes to zero.</p>
-<p>At t = 2 second, a driving torque step is applied to the shaft (i.e. the turbine is activated). 
+(and the shorted excitation winding) at 0 seconds. 
+At t = 0.5 seconds, the excitation voltage is raised to achieve the no-load excitation current. 
+Note, that reactive power of the stator goes to zero.
+At t = 2 second, a driving torque step is applied to the shaft (i.e. the turbine is activated). 
 Note, that the active (and the reactive) power of the stator change. 
 To drive at higher torque, i.e., produce more electric power, excitation has to be adapted.
 </p>
-
-<p>Simulate for 3 seconds and plot:</p>
-
-<ul>
-<li><code>smee.tauElectrical</code>: electric torque</li>
-<li><code>smee.wMechanical</code>: mechanical speed</li>
-<li><code>currentRMSSensor.I</code>: quasi RMS stator current</li>
-<li><code>irRMS</code>: quasi RMS rotor current</li>
-<li><code>smee.ie</code>: excitation current</li>
-<li><code>rotorDisplacementAngle.rotorDisplacementAngle</code>: rotor displacement angle</li>
-<li><code>electricalSensor.powerTotal</code>: total electric real power</li>
-<li><code>mechanicalSensor.power</code>: mechanical power</li>
-</ul>
-
-<p>Default machine parameters are used.</p>
 
 <h5>Note</h5>
 <p>The mains switch is closed at time = 0 in order to avoid non physical noise calculated by the <code>rotorDisplacementAngle</code>. 
 This noise is caused by the interaction of the high resistance of the switch and the machine, see 
 <a href=\"https://github.com/modelica/Modelica/issues/2388\">#2388</a>. 
 </p>
+
+<h4>Plot the following variable(s)</h4>
+
+<ul>
+<li><code>smee.wMechanical</code>: mechanical speed</li>
+<li><code>smee.ie</code>: excitation current</li>
+<li><code>smee.tauElectrical</code>: electromagnetic torque</li>
+<li><code>currentRMSSensor.I</code>: quasi RMS stator current</li>
+<li><code>irRMS</code>: quasi RMS rotor current</li>
+<li><code>theta</code>: rotor displacement angle</li>
+<li><code>electricalSensor.powerTotal</code>: total electric real power</li>
+</ul>
+
 </html>"),
     Diagram(graphics={                      Text(
                   extent={{10,-72},{90,-80}},

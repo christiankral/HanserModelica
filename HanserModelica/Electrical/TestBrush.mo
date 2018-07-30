@@ -23,7 +23,7 @@ equation
 <h4>Plot the following variable(s)</h4>
 
 <ul>
-<li><code>brush.v</code> as a function of <code>brush.i</code>: brush characteristic</li>
+<li><code>brush.v</code> against <code>brush.i</code>: brush characteristic</li>
 </ul>
 </html>"));
 end TestBrush;

@@ -14,14 +14,15 @@ equation
   connect(multiSensor.flange_b, inertia.flange_a) annotation (Line(points = {{10, 0}, {20, 0}}));
   connect(combiTimeTable.y[1], torque.tau) annotation (Line(points={{-49,0},{-42,0}}, color={0,0,127}));
   connect(inertia.flange_b, load.flange) annotation (Line(points={{40,0},{50,0}}, color={0,0,0}));
-  annotation (experiment(StopTime=10, Interval=0.001, Tolerance=1e-06), Documentation(info="<html>
+  annotation (experiment(StopTime=10, Interval=0.001, Tolerance=1e-06),
+      Documentation(info="<html>
 <h4>Plot the following variable(s)</h4>
 
 <ul>
 <li><code>torque.tau</code>: drive torque</li>
 <li><code>load.tau</code>: torque of load</li>
 <li><code>load.w</code>: speed of load</li>
-<li><code>load.tau</code> as a function of <code>load.w</code>: quardaritc load torque characteristic</li>
+<li><code>load.tau</code> against <code>load.w</code>: quardaritc load torque characteristic</li>
 </ul>
 </html>"));
 end Drive;

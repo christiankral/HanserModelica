@@ -22,7 +22,8 @@ equation
   connect(machine.pin_an, ground.p) annotation (Line(points={{-44,10.2},{-30,10.2},{-30,30},{-10,30}},
                                                                                                    color={0,0,255}));
   connect(rampVoltage.p, machine.pin_ap) annotation (Line(points={{-60,30},{-70,30},{-70,10},{-56,10}}, color={0,0,255}));
-  annotation (experiment(StopTime=1, Interval=0.001, Tolerance=1e-06), Documentation(info="<html>
+  annotation (experiment(StopTime=1, Interval=0.001, Tolerance=1e-06),
+      Documentation(info="<html>
 <h4>Plot the following variable(s)</h4>
 
 <ul>

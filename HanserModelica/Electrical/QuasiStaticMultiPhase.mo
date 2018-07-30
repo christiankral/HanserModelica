@@ -47,11 +47,11 @@ equation
 <h4>Plot the following variable(s)</h4>
 
 <ul>
-<li><code>sensor.apparentPowerTotal.re</code> as a function of <code>conductor.G_ref[1]</code>: 
-total active power as a function of the variable conductance</li>
-<li><code>sensor.abs_i[1]</code> as a function of <code>conductor.G_ref[1]</code>: 
-RMS current of phase 1 as a function of the variable conductance</li>
-<li><code>sensor.i[1].im</code> as a function of <code>sensor.i[1].re</code>: locus of phase current 1</li>
+<li><code>sensor.apparentPowerTotal.re</code> against <code>conductor.G_ref[1]</code>: 
+total active power against the variable conductance</li>
+<li><code>sensor.abs_i[1]</code> against <code>conductor.G_ref[1]</code>: 
+RMS current of phase 1 against the variable conductance</li>
+<li><code>sensor.i[1].im</code> against <code>sensor.i[1].re</code>: locus of phase current 1</li>
 </ul>
 </html>"));
 end QuasiStaticMultiPhase;

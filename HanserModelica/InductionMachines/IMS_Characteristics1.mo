@@ -125,7 +125,7 @@ equation
 
 <p>
 This examples allows the investigation of characteristic curves of quasi static multi phase induction machines with slip ring rotor
-as a function of rotor speed.
+against rotor speed.
 </p>
 
 <p>

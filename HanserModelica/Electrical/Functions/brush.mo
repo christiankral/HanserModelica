@@ -1,5 +1,5 @@
 within HanserModelica.Electrical.Functions;
-function brush "Brush voltage as a function of brush current"
+function brush "Brush voltage against brush current"
   extends Modelica.Icons.Function;
   input Modelica.SIunits.Current i "Brush current";
   input Modelica.SIunits.Current ILinear "Current limit of linear range";

@@ -106,20 +106,30 @@ equation
           lineColor={0,0,0})}),
     Documentation(info="<html>
 
-<p>
-This examples allows the investigation of characteristic curves of quasi static multi phase induction machines with ssquirrel cage rotor 
-as a function of rotor speed.
-</p>
+<h5>Description</h5>
 
 <p>
-Simulate for 1 second and plot (versus imc.wMechanical or perUnitSpeed):
+This examples allows the investigation of characteristic curves of quasi static multi phase induction machines with squirrel cage rotor 
+against per unit rotor speed.
 </p>
+
+<h4>Plot the following variable(s)</h4>
 
 <ul>
-<li><code>currentSensor.abs_i[1]</code>: (equivalent) RMS stator current</li>
-<li><code>imc.tauElectrical</code>: machine torque</li>
-<li><code>imc.powerBalance.powerStator</code>: stator power</li>
-<li><code>imc.powerBalance.powerMechanical</code>: mechanical power</li>
+<li><code>imc.powerBalance.powerStator</code> against <code>perUnitSpeed</code>: active electrical stator power</li>
+<li><code>imc.powerBalance.powerMechanical</code> against <code>perUnitSpeed</code>: mechanical power</li>
+<li><code>imc.powerBalance.lossPowerTotal</code> as a f unction of <code>perUnitSpeed</code>: total loss power</li>
+<li><code>imc.tauElectrical</code> against <code>perUnitSpeed</code>: electromagnetic torque</li>
+<li><code>imc.abs_is[1]</code> against <code>perUnitSpeed</code>: RMS stator current of phase 1</li>
+<li><code>imc.abs_ir[1]</code> against <code>perUnitSpeed</code>: RMS rotor current of phase 1 (equivalent rotor cage with <code>m</code> phases)</li>
+<li><code>imc.is[1].im</code> against <code>imc.is[1].re</code>: stator current locus of phase 1</li>
+<li><code>imc.ir[1].im</code> against <code>imc.ir[1].re</code>: rotor current locus of phase 1</li>
+<li><code>imc.stator.electroMagneticConverter.Phi.im</code> against <code>imc.stator.electroMagneticConverter.Phi.re</code>: stator flux locus</li>
+<li><code>imc.airGap.Phi_s.im</code> against <code>imc.airGap.Phi_s.re</code>: main (air gap) flux locus</li>
+<li><code>imc.rotorCage.electroMagneticConverter.Phi.im</code> against <code>imc.rotorCage.electroMagneticConverter.Phi.re</code>: rotor flux locus</li>
+
+
+
 </ul>
 </html>"));
 end IMC_Characteristics;

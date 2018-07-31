@@ -42,8 +42,12 @@ equation
   connect(mainInductor.plug_n, conductor.plug_n) annotation (Line(points={{-20,-10},{-20,-20},{30,-20},{30,-10}}, color={85,170,255}));
   connect(sensor.nv, star.plug_p) annotation (Line(points={{-40,10},{-40,-20},{-70,-20}}, color={85,170,255}));
   connect(star.pin_n, ground.pin) annotation (Line(points={{-70,-40},{-70,-52}}, color={85,170,255}));
-  annotation (experiment(Interval=0.001, Tolerance=1e-06), Documentation(info=
-         "<html>
+  annotation (experiment(Interval=0.001, Tolerance=1e-06), Documentation(info="<html>
+<h4>Description</h4>
+
+<p>This example shows a three-phase system consisting of 
+<a href=\"modelica://Modelica.Electrical.QuasiStationary.UsersGuide.Overview\">quasi static</a> compoments.</p>
+
 <h4>Plot the following variable(s)</h4>
 
 <ul>

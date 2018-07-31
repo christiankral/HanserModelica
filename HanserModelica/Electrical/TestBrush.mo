@@ -20,6 +20,11 @@ equation
   connect(ground.p, brush.n) annotation (Line(points={{-60,0},{-30,0},{-30,10}}, color={0,0,255}));
   connect(rampCurrent.n, brush.p) annotation (Line(points={{-60,10},{-60,40},{-30,40},{-30,30}}, color={0,0,255}));
   annotation (Documentation(info="<html>
+<h4>Description</h4>
+
+<p>This examples demonstrates the application of a 
+<a href=\"modelica://HanserModelica.Electrical.Components.Brush\">brush</a> model.</p>
+
 <h4>Plot the following variable(s)</h4>
 
 <ul>

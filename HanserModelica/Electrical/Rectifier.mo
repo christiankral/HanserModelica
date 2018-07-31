@@ -52,6 +52,13 @@ equation
       Interval=0.0001,
       Tolerance=1e-06),
     Documentation(info="<html>
+<html>
+<h4>Description</h4>
+
+<p>In this example a six pulse diode rectifier is supplied by star connected voltage source and a cable,
+represented by an R-L series connection. The DC circuit consists of two series connected capacitors and a 
+variable resistor. </p>
+
 <h4>Plot the following variable(s)</h4>
 
 <ul>

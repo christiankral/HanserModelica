@@ -48,6 +48,9 @@ equation
   connect(currentSensor.pin_p, voltageSource.pin_p) annotation (Line(points={{-20,0},{-30,0},{-30,-10}}, color={85,170,255}));
   connect(currentSensor.pin_n, resistor.pin_p) annotation (Line(points={{0,0},{20,0}}, color={85,170,255}));
   annotation (Documentation(info="<html>
+
+<h4>Description</h4>
+
 <p>
 The frequency of the voltage source is varied by a logaithmic ramp, the supply voltage magnitude is constant.
 </p>

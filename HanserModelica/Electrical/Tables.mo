@@ -19,6 +19,11 @@ equation
   connect(table.y[1], variableResistor.R) annotation (Line(points={{49,20},{31,20}}, color={0,0,127}));
   annotation (experiment(StopTime=4,Interval=0.001,Tolerance=1e-06),
       Documentation(info="<html>
+<h4>Description</h4>
+
+<p>This examples demonstrates how the variable resistance of an electric circuit can be set by means of a table.
+Table data are taken from matrix parameter <code>table.table</code>.</p>
+
 <h4>Plot the following variable(s)</h4>
 
 <ul>

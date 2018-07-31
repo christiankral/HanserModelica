@@ -45,6 +45,12 @@ equation
   connect(currentRMSSensor.plug_n, delta.plug_p) annotation (Line(points={{80,40},{80,12}}, color={0,0,255}));
   annotation (experiment(StopTime=0.2,Interval=0.0001,Tolerance=1e-06),
       Documentation(info="<html>
+<h4>Description</h4>
+
+<p>This examples shows an application of three-phase system. 
+A star-connected voltage source supplies a delta connected load thorugh
+a cable, represented by an R-L series connection.</p>
+
 <h4>Plot the following variable(s)</h4>
 
 <ul>

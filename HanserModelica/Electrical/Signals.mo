@@ -27,6 +27,11 @@ equation
   connect(feedback.u2, currentSensor.i) annotation (Line(points={{-50,-8},{-50,-40},{40,-40},{40,-30}}, color={0,0,127}));
   annotation (experiment(StopTime=3,Interval=0.001,Tolerance=1e-06),
       Documentation(info="<html>
+<h4>Description</h4>
+
+<p>This examples shows how the current in an electric circuit can be controlled using 
+a sensor, a controller and a voltage source with signal input.</p>
+
 <h4>Plot the following variable(s)</h4>
 
 <ul>

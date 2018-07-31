@@ -21,5 +21,10 @@ equation
         Text(
           extent={{-150,30},{150,70}},
           lineColor={0,0,255},
-          textString="%name")}),                                 Diagram(coordinateSystem(preserveAspectRatio=false)));
+          textString="%name")}),                                 Diagram(coordinateSystem(preserveAspectRatio=false)),
+    Documentation(info="<html>
+<h4>Description</h4>
+
+<p>This component models the behavior of an electric brush.</p>
+</html>"));
 end Brush;

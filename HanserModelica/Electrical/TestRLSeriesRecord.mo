@@ -15,8 +15,12 @@ equation
       smooth=Smooth.Bezier));
   connect(stepVoltage.p, rlSeries.p) annotation (Line(points={{-30,10},{-30,10},{-30,20},{-20,20}}, color={0,0,255}));
   connect(rlSeries.n, ground.p) annotation (Line(points={{0,20},{10,20},{10,-20},{-30,-20}}, color={0,0,255}));
-  annotation (experiment(Interval=0.001, Tolerance=1e-06), Documentation(info=
-         "<html>
+  annotation (experiment(Interval=0.001, Tolerance=1e-06), Documentation(info="<html>
+<h4>Description</h4>
+
+<p>This examples demonstrates the application of an electric 
+<a href=\"modelica://HanserModelica.Electrical.Components.RLSeriesRecord\">component with record</a>, consisting of an resistor and inductor in series connection.</p>
+
 <h4>Plot the following variable(s)</h4>
 
 <ul>

@@ -38,5 +38,12 @@ model RLSeriesRecord "R-L series circuit with parameter record"
           color={64,64,64}),
         Line(
           points={{-80,-76},{80,-76}},
-          color={64,64,64})}));
+          color={64,64,64})}), Documentation(info="<html>
+<h4>Description</h4>
+
+<p>Electric component consisting of a series connection of a resistor and an inductor. 
+The parameter of this component is a record.</p>
+
+
+</html>"));
 end RLSeriesRecord;

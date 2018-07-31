@@ -8,6 +8,11 @@ model TablesFromFile "Application of tables read from file"
       fileName=fileName));
   annotation(experiment(StopTime=4,Interval=0.001,Tolerance=1e-06),
       Documentation(info="<html>
+<h4>Description</h4>
+
+<p>This examples demonstrates how the variable resistance of an electric circuit can be set by means of a table. 
+The table data are read from a Modelica specific file.</p>
+
 <h4>Plot the following variable(s)</h4>
 
 <ul>

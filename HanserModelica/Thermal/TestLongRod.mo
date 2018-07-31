@@ -11,6 +11,11 @@ equation
   connect(step.y, heatFlow.Q_flow) annotation (Line(points={{-49,0},{-40,0}}, color={0,0,127}));
   annotation (experiment(StopTime=400,Interval=0.1,Tolerance=1e-06),
       Documentation(info="<html>
+<h4>Description</h4>
+
+<p>This example demonstrates the application of the 
+<a href=\"modelica://HanserModelica.Thermal.Components.LongRod\">long rod</a> model.</p>
+
 <h4>Plot the following variable(s)</h4>
 
 <ul>

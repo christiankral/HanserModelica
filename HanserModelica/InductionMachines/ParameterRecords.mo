@@ -63,4 +63,7 @@ package ParameterRecords "Parameter records of induction machines"
       defaultComponentName="imsData",
       defaultComponentPrefixes="parameter");
   end IMS;
+  annotation (Documentation(info="<html>
+<p>This package contains parameter records of induction machines.</p>
+</html>"));
 end ParameterRecords;

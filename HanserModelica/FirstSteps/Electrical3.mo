@@ -16,6 +16,10 @@ equation
   vR = R*i;
   vL = L*der(i);
   annotation (Documentation(info="<html>
+<h4>Description</h4>
+
+<p>This is the third implementation of an R-L series circuit in Modelica.</p>
+
 <h4>Plot the following variable(s)</h4>
 
 <ul>

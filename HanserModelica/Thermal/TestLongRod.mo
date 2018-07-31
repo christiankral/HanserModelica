@@ -1,7 +1,8 @@
 within HanserModelica.Thermal;
 model TestLongRod "Test experiment of LongRod"
   extends Modelica.Icons.Example;
-  Components.LongRod longRod(n=3,C=1500,R=0.08,T0=293.15) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+  parameter Integer n=3 "Number of rod elements";
+  Components.LongRod longRod(n=n,C=1500,R=0.08,T0=293.15) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heatFlow annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T=293.15) annotation (Placement(transformation(extent={{40,-10},{20,10}})));
   Modelica.Blocks.Sources.Step step(height=1000) annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));

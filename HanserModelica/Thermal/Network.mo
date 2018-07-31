@@ -3,7 +3,8 @@ model Network "Thermal network"
   extends Modelica.Icons.Example;
   Modelica.Thermal.HeatTransfer.Components.ThermalResistor thermalResistor1(R=0.04) annotation (Placement(transformation(extent={{-30,10},{-10,30}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalResistor thermalResistor2(R=0.04) annotation (Placement(transformation(extent={{30,10},{50,30}})));
-  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor(C=1500, T(start=293.15)) annotation (Placement(transformation(extent={{0,0},{20,-20}})));
+  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor(C=1500, T(start=293.15, fixed=true))
+                                                                                                annotation (Placement(transformation(extent={{0,0},{20,-20}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T(displayUnit="degC") = 293.15) annotation (Placement(transformation(extent={{90,10},{70,30}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow fixedHeatFlow(Q_flow=1000) annotation (Placement(transformation(extent={{-90,10},{-70,30}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor annotation (Placement(transformation(

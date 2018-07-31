@@ -12,9 +12,8 @@ model LongRod "Long rod consisting of n short rods"
 equation
   connect(port_a, shortRod[1].port_a) annotation (Line(points={{-100,0},{-60,0},{-10,0}}, color={191,0,0}));
   connect(shortRod[n].port_b, port_b) annotation (Line(points={{10,0},{100,0}},         color={191,0,0}));
-  // Create interconnections
   for i in 1:n-1 loop
-    connect(shortRod[i].port_b,shortRod[i+1].port_a);
+    connect(shortRod[i].port_b,shortRod[i+1].port_a) "Interconnections";
   end for;
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Line(points={{-90,0},{90,0}}, color={0,0,0}),

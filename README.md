@@ -1,6 +1,6 @@
 # HanserModelica
 
-HanserModelica is a Modelica open source educational library on object oriented modeling on electrical engineering with a particular focus on polyphase electric machines. This library is based on a book published in German by [Hanser Fachbuchverlag](https://www.hanser-fachbuch.de/buch/Modelica+Objektorientierte+Modellbildung+von+Drehfeldmaschinen/9783446455511). 
+HanserModelica is a Modelica open source educational library on object oriented modeling applied to electrical engineering and a particular focus on polyphase electric machines. This library is based on a book published in German by [Hanser Fachbuchverlag](https://www.hanser-fachbuch.de/buch/Modelica+Objektorientierte+Modellbildung+von+Drehfeldmaschinen/9783446455511). 
 
 ![Modelica - Objektorientierte Modellerung von Drehfeldmaschinen](https://github.com/christiankral/HanserModelica/blob/master/HanserModelica/Resources/Images/45551_Kral_165x240_3D_Soft.png?raw=true)
 

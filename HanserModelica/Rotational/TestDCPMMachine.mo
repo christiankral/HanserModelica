@@ -24,6 +24,11 @@ equation
   connect(rampVoltage.p, machine.pin_ap) annotation (Line(points={{-60,30},{-70,30},{-70,10},{-56,10}}, color={0,0,255}));
   annotation (experiment(StopTime=1, Interval=0.001, Tolerance=1e-06),
       Documentation(info="<html>
+<h4>Description</h4>
+
+<p>This examples tests the 
+<a href=\"modelica://HanserModelica.Rotational.Components.DCPMMachine\">DC machine</a> model with mechanical load.</p>
+
 <h4>Plot the following variable(s)</h4>
 
 <ul>

@@ -16,6 +16,10 @@ equation
   connect(inertia.flange_b, load.flange) annotation (Line(points={{40,0},{50,0}}, color={0,0,0}));
   annotation (experiment(StopTime=10, Interval=0.001, Tolerance=1e-06),
       Documentation(info="<html>
+<h4>Description</h4>
+
+<p>This examples demonstrates a drive torque operated on an inertia and quadratic speed dependent load.</p>
+
 <h4>Plot the following variable(s)</h4>
 
 <ul>

@@ -66,5 +66,16 @@ equation
           lineColor={0,0,255},
           fillPattern=FillPattern.HorizontalCylinder,
           fillColor={215,215,215},
-          textString="%name")}), Diagram(coordinateSystem(preserveAspectRatio=false)));
+          textString="%name")}), Diagram(coordinateSystem(preserveAspectRatio=false)),
+    Documentation(info="<html>
+<h4>Description</h4>
+
+<p>This DC machine model considers the following effects:</p>
+
+<ul>
+<li>Armature winding resistance</li>
+<li>Armature leakage inductance</li>
+<li>Rotor inertia</li>
+</ul>
+</html>"));
 end DCPMMachine;

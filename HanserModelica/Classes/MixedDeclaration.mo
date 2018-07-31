@@ -8,5 +8,10 @@ public
   parameter Real y = 1 "Public Real parameter";
 protected
   Modelica.Electrical.Analog.Basic.Ground ground "Protected ground";
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(coordinateSystem(preserveAspectRatio=false)));
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(coordinateSystem(preserveAspectRatio=false)),
+    Documentation(info="<html>
+<h4>Description</h4>
+
+<p>This example demonstrates the declaration of public and protected Modelica instances.</p>
+</html>"));
 end MixedDeclaration;

@@ -40,7 +40,5 @@ equation
 <h4>Description</h4>
 
 <p>Electric component consisting of a series connection of a resistor and an inductor.</p>
-
-
 </html>"));
 end RLSeries;

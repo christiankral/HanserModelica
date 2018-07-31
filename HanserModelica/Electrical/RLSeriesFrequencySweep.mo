@@ -1,5 +1,5 @@
 within HanserModelica.Electrical;
-model RLSeriesFrequencySweep "Series circuit with Bodel analysis"
+model RLSeriesFrequencySweep "Series circuit with Bode analysis"
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   output Real abs_y = bode.abs_y "Magnitude of voltage ratio";
@@ -52,7 +52,8 @@ equation
 <h4>Description</h4>
 
 <p>
-The frequency of the voltage source is varied by a logaithmic ramp, the supply voltage magnitude is constant.
+The frequency of the voltage source of an R-L series circuit is varied by a logaithmic ramp. 
+The supply voltage magnitude is constant.
 </p>
 
 <h4>Plot the following variable(s)</h4>

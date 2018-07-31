@@ -43,7 +43,5 @@ model RLSeriesRecord "R-L series circuit with parameter record"
 
 <p>Electric component consisting of a series connection of a resistor and an inductor. 
 The parameter of this component is a record.</p>
-
-
 </html>"));
 end RLSeriesRecord;

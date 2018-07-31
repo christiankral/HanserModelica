@@ -1,5 +1,5 @@
 within HanserModelica.Electrical;
-model StarPolygon "Example of multiphase star connected sources and polygon connected load"
+model StarPolygon "Example of polyphase star connected sources and polygon connected load"
   extends Modelica.Icons.Example;
   parameter Integer m = 5 "Number of phases";
   parameter Modelica.SIunits.Frequency f = 50 "Suppyl frequency";

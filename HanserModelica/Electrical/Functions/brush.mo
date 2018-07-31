@@ -7,4 +7,7 @@ function brush "Brush voltage against brush current"
   output Modelica.SIunits.Voltage v "Brush voltage";
 algorithm
   v := if i<-ILinear then -V elseif i>ILinear then +V else V*i/ILinear;
+  annotation (Documentation(info="<html>
+<p>This function calculates the voltage as a function of the current.</p>
+</html>"));
 end brush;

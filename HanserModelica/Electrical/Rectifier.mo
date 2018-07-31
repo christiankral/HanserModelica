@@ -1,5 +1,5 @@
 within HanserModelica.Electrical;
-model Rectifier "Three phase six pulse rectifier with resistive load"
+model Rectifier "Three-phase six-pulse rectifier with resistive load"
   extends Modelica.Icons.Example;
   Modelica.Electrical.MultiPhase.Sources.SineVoltage sineVoltage(
     phase=-Modelica.Electrical.MultiPhase.Functions.symmetricOrientation(3),

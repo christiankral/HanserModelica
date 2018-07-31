@@ -19,4 +19,9 @@ initial algorithm
   for i in 1:a loop                      // i in 1:a = {1,2,...,a}
     f:=f*i;
   end for;
+  annotation (Documentation(info="<html>
+<h4>Description</h4>
+
+<p>This simulation model shows different initialization methods of parameters.</p>
+</html>"));
 end InitializationParameters;

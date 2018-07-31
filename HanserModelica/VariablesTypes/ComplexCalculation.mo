@@ -17,6 +17,10 @@ equation
   S = V*Modelica.ComplexMath.conj(I);
   annotation (experiment(StopTime=1, Interval=0.001, Tolerance=1e-06),
       Documentation(info="<html>
+<h4>Descriptiomn</h4>
+
+<p>This example investigates a series connection of a complex electrical circuit based on equations.</p>
+
 <h4>Plot the following variable(s)</h4>
 
 <ul>

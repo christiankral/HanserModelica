@@ -8,4 +8,9 @@ model Attributes "Example on attributes"
 equation
   x^2-10*x+9=0;
   y^2-10*y+9=0;
+  annotation (Documentation(info="<html>
+<h4>Description</h4>
+
+<p>This example demonstrates the application of different Modelica attributes.</p>
+</html>"));
 end Attributes;

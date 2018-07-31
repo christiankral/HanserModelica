@@ -20,4 +20,9 @@ model VectorsMatrices1 "Example 1 on vetors and matrices"
 equation
   z[1:2]={sin(2*Modelica.Constants.pi*time),cos(2*Modelica.Constants.pi*time)};
   z[3]=sqrt(z[1]^2+z[2]^2);
+  annotation (Documentation(info="<html>
+<h4>Description</h4>
+
+<p>This is the first example of this package, providing different declarations of vectors and matrices.</p>
+</html>"));
 end VectorsMatrices1;

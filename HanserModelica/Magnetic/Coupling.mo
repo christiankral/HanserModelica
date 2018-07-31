@@ -40,6 +40,10 @@ equation
           -20,40},{-20,27}},                                                                   color={255,0,255}));
   annotation (experiment(StopTime=1, Interval=0.001, Tolerance=1e-06),
       Documentation(info="<html>
+<h4>Description</h4>
+
+<p>This examples demonstrates electro-magnetic coupling.</p>
+
 <h4>Plot the following variable(s)</h4>
 
 <ul>

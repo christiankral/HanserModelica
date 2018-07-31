@@ -45,36 +45,36 @@ model Transformer "Transformer model"
     Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {20, 0})));
 equation
   connect(converter1.n, n1) annotation (
-    Line(points={{-90,-12},{-90,-30},{-98,-30}},       color = {0, 0, 255}));
+    Line(points={{-90,-8},{-90,-30},{-98,-30}},        color = {0, 0, 255}));
   connect(resistor2.p, p2) annotation (
     Line(points = {{90, 40}, {90, 50}, {100, 50}}, color = {0, 0, 255}));
   connect(converter2.n, n2) annotation (
-    Line(points={{90,-10},{90,-30},{100,-30}},       color = {0, 0, 255}));
+    Line(points={{90,-6},{90,-30},{100,-30}},        color = {0, 0, 255}));
   connect(resistor1.p, p1) annotation (
     Line(points = {{-90, 40}, {-90, 46}, {-90, 46}, {-90, 50}, {-100, 50}}, color = {0, 0, 255}));
   connect(resistor1.n, converter1.p) annotation (
-    Line(points={{-90,20},{-90,8}},      color = {0, 0, 255}));
+    Line(points={{-90,20},{-90,4}},      color = {0, 0, 255}));
   connect(resistor2.n, converter2.p) annotation (
-    Line(points={{90,20},{90,10}},     color = {0, 0, 255}));
+    Line(points={{90,20},{90,6}},      color = {0, 0, 255}));
   connect(converter1.port_p, eddyCurrent.port_p) annotation (
-    Line(points={{-70,8},{-70,20},{-70,20},{-70,20},{-60,20},{-60,20}},              color = {255, 127, 0}));
+    Line(points={{-70,4},{-70,20},{-70,20},{-70,20},{-60,20},{-60,20}},              color = {255, 127, 0}));
   connect(eddyCurrent.port_n, strayPermeanc1.port_p) annotation (
     Line(points = {{-40, 20}, {-30, 20}, {-30, 8}}, color = {255, 127, 0}));
   connect(eddyCurrent.port_n, mainReluctance.port_p) annotation (Line(points={{-40,20},{-20,20}}, color={255,127,0}));
   connect(strayPermeanc2.port_p, converter2.port_p) annotation (
-    Line(points={{50,8},{50,20},{70,20},{70,10}},         color = {255, 127, 0}));
+    Line(points={{50,8},{50,20},{70,20},{70,6}},          color = {255, 127, 0}));
   connect(converter2.port_n, strayPermeanc2.port_n) annotation (
-    Line(points={{70,-10},{70,-20},{50,-20},{50,-12}},         color = {255, 127, 0}));
+    Line(points={{70,-6},{70,-20},{50,-20},{50,-12}},          color = {255, 127, 0}));
   connect(crossing.port_p1, converter2.port_p) annotation (
-    Line(points={{30,10},{30,20},{70,20},{70,10}},         color = {255, 127, 0}));
+    Line(points={{30,10},{30,20},{70,20},{70,6}},          color = {255, 127, 0}));
   connect(crossing.port_n2, converter2.port_n) annotation (
-    Line(points={{30,-10},{30,-20},{70,-20},{70,-10}},         color = {255, 127, 0}));
+    Line(points={{30,-10},{30,-20},{70,-20},{70,-6}},          color = {255, 127, 0}));
   connect(crossing.port_p2, converter1.port_n) annotation (
-    Line(points={{10,-10},{10,-20},{-70,-20},{-70,-12}},         color = {255, 127, 0}));
+    Line(points={{10,-10},{10,-20},{-70,-20},{-70,-8}},          color = {255, 127, 0}));
   connect(strayPermeanc1.port_n, converter1.port_n) annotation (
-    Line(points={{-30,-12},{-30,-20},{-70,-20},{-70,-12}},         color = {255, 127, 0}));
+    Line(points={{-30,-12},{-30,-20},{-70,-20},{-70,-8}},          color = {255, 127, 0}));
   connect(ground.port, converter1.port_n) annotation (
-    Line(points={{0,-30},{0,-20},{-70,-20},{-70,-12}},         color = {255, 127, 0}));
+    Line(points={{0,-30},{0,-20},{-70,-20},{-70,-8}},          color = {255, 127, 0}));
   connect(mainReluctance.port_n, crossing.port_n1) annotation (Line(points={{0,20},{10,20},{10,10}}, color={255,127,0}));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio = false), graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, fillColor = {244, 125, 35},
@@ -87,5 +87,18 @@ equation
             fillPattern =                                                                                                                                                                                                        FillPattern.Solid), Ellipse(extent = {{10, 46}, {18, 38}}, lineColor = {28, 108, 200}, fillColor = {0, 0, 255},
             fillPattern =                                                                                                                                                                                                        FillPattern.Solid)}),
     Diagram(coordinateSystem(preserveAspectRatio = false)),
-    experiment(Interval = 0.0001, Tolerance = 1e-06));
+    experiment(Interval = 0.0001, Tolerance = 1e-06),
+    Documentation(info="<html>
+<h4>Description</h4>
+
+<p>This transformer model considers the following effects:</p>
+
+<ul>
+<li>Winding resistances</li>
+<li>Leakage inductances</li>
+<li>Number of turns of windings</li>
+<li>Main reluctance of the core</li>
+<li>Eddy current core loss</li>
+</ul>
+</html>"));
 end Transformer;

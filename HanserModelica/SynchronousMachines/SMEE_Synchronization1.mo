@@ -54,7 +54,7 @@ model SMEE_Synchronization1 "Electrical excited synchronous machine synchronized
         origin={10,-60},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  MoveTo_Modelica.Electrical.MultiPhase.Sensors.MultiSensor electricalSensor(m=m) annotation (Placement(transformation(
+  MoveTo_Modelica.Electrical.MultiPhase.Sensors.MultiSensor multiSensor(m=m) annotation (Placement(transformation(
         origin={40,30},
         extent={{-10,-10},{10,10}},
         rotation=270)));
@@ -114,10 +114,10 @@ equation
   connect(booleanReplicator.y, switch.control) annotation (Line(points={{1,10},{10,10},{10,43}}, color={255,0,255}));
   connect(booleanStep.y, booleanReplicator.u)
     annotation (Line(points={{-29,10},{-22,10}}, color={255,0,255}));
-  connect(switch.plug_n, electricalSensor.pc) annotation (Line(points={{20,50},{40,50},{40,40}}, color={0,0,255}));
-  connect(electricalSensor.nv, terminalBox.plug_sn) annotation (Line(points={{30,30},{20,30},{20,-8},{34,-8},{34,-20}},     color={0,0,255}));
-  connect(electricalSensor.nc, currentRMSSensor.plug_p) annotation (Line(points={{40,20},{40,10}}, color={0,0,255}));
-  connect(electricalSensor.pv, electricalSensor.pc) annotation (Line(points={{50,30},{50,40},{40,40}}, color={0,0,255}));
+  connect(switch.plug_n, multiSensor.pc) annotation (Line(points={{20,50},{40,50},{40,40}}, color={0,0,255}));
+  connect(multiSensor.nv, terminalBox.plug_sn) annotation (Line(points={{30,30},{20,30},{20,-8},{34,-8},{34,-20}}, color={0,0,255}));
+  connect(multiSensor.nc, currentRMSSensor.plug_p) annotation (Line(points={{40,20},{40,10}}, color={0,0,255}));
+  connect(multiSensor.pv, multiSensor.pc) annotation (Line(points={{50,30},{50,40},{40,40}}, color={0,0,255}));
   connect(constantCurrent.p, groundExcitation.p) annotation (Line(points={{10,-40},{10,-50}},   color={0,0,255}));
   connect(constantCurrent.p, smee.pin_en) annotation (Line(points={{10,-40},{20,-40},{20,-36},{30,-36}},     color={0,0,255}));
   connect(smee.pin_ep, constantCurrent.n) annotation (Line(points={{30,-24},{20,-24},{20,-20},{10,-20}},     color={0,0,255}));
@@ -130,8 +130,15 @@ equation
 <p>
 n electrically excited synchronous machine is running with synchrous speed. 
 The RMS values of the open circuit machine voltages and mains voltage are equal. 
-Tha phase shift if the machine and mains voltages are euqal. 
-The intention is to compare the results of the following simulation models in one plot:</p>
+Tha phase shift if the machine and mains voltages are euqal.</p>
+
+<p>After 0.1 seconds the synchronization switch closes. The shaft of the synchronous
+machine is mechanically not connected, such that neither mechanical speed nor torque are fixed. As the machine and mains 
+voltages are equal for each phase, there are neither electrical nor mechanical reactions
+of the machine on the closing switch.
+</p>
+
+<p>The intention is to compare the results of the following simulation models in one plot:</p>
 
 <ul>
 <li>SMEE_Synchronization1: all synchronization conditions are fulfilled</li>
@@ -143,13 +150,8 @@ The intention is to compare the results of the following simulation models in on
     this causes the stator voltages to be 5 percent greater than the nominal voltage</li>
 </ul>
 
-<p>After 0.1 seconds the synchronization switch closes. The shaft of the synchronous
-machine is mechanically not connected, such that neither mechanical speed nor torque are fixed. As the machine and mains 
-voltages are equal for each phase, there are neither electrical nor mechanical reactions
-of the machine on the closing switch.
-</p>
-
 <h4>Plot the following variable(s)</h4>
+
 
 <ul>
 <li><code>currentRMSSensor.I</code>: quasi RMS stator current</li>

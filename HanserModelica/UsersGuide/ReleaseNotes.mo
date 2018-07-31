@@ -8,6 +8,7 @@ class ReleaseNotes "Release Notes"
 <h5>Version 1.0.0, 2018-08-XX</h5>
 <ul>
 <li>Updated documentation</li>
+<li>Unification of sensor instance names</li>
 </ul>
 
 <h5>Version 0.10.0, 2018-07-01</h5>

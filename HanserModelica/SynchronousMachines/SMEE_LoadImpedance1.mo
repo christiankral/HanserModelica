@@ -16,8 +16,8 @@ model SMEE_LoadImpedance1 "Electrical excited synchronous machine operating at v
     "Initial rotor displacement angle";
   parameter Boolean positiveRange = false "Use positive range of angles, if true";
   Modelica.SIunits.ComplexCurrent isr[m] = smee.is*Modelica.ComplexMath.exp(Complex(0,theta+pi/2)) "Stator current w.r.t. rotor fixed frame";
-  output Modelica.SIunits.Power P=powerSensor.apparentPowerTotal.re " real power";
-  output Modelica.SIunits.ReactivePower Q=powerSensor.apparentPowerTotal.im " reactive power";
+  output Modelica.SIunits.Power P=multiSensor.apparentPowerTotal.re " real power";
+  output Modelica.SIunits.ReactivePower Q=multiSensor.apparentPowerTotal.im " reactive power";
   output Modelica.SIunits.ApparentPower S=sqrt(P^2+Q^2) " apparent power";
   Modelica.SIunits.Angle theta=rotorDisplacementAngle.rotorDisplacementAngle "Rotor displacement angle";
   Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.SynchronousMachines.SM_ElectricalExcited smee(
@@ -80,7 +80,7 @@ model SMEE_LoadImpedance1 "Electrical excited synchronous machine operating at v
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-70,10})));
-  MoveTo_Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.MultiSensor powerSensor(m=m) annotation (Placement(transformation(
+  MoveTo_Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.MultiSensor multiSensor(m=m) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={0,26})));
@@ -138,11 +138,11 @@ equation
   connect(rotorDisplacementAngle.plug_n, terminalBox.plug_sn) annotation (Line(points={{36,0},{36,6},{-6,6},{-6,0}},     color={85,170,255}));
   connect(smee.flange, rotorDisplacementAngle.flange) annotation (Line(points={{10,-10},{20,-10}},   color={0,0,0}));
   connect(smee.flange, mechanicalPowerSensor.flange_a) annotation (Line(points={{10,-10},{50,-10}},   color={0,0,0}));
-  connect(powerSensor.nc, terminalBox.plugSupply) annotation (Line(points={{0,16},{0,2}},  color={85,170,255}));
-  connect(powerSensor.pv, powerSensor.pc) annotation (Line(points={{10,26},{10,36},{0,36}}, color={85,170,255}));
-  connect(powerSensor.nv, star.plug_p) annotation (Line(points={{-10,26},{-50,26},{-50,40}}, color={85,170,255}));
+  connect(multiSensor.nc, terminalBox.plugSupply) annotation (Line(points={{0,16},{0,2}},  color={85,170,255}));
+  connect(multiSensor.pv,multiSensor. pc) annotation (Line(points={{10,26},{10,36},{0,36}}, color={85,170,255}));
+  connect(multiSensor.nv, star.plug_p) annotation (Line(points={{-10,26},{-50,26},{-50,40}}, color={85,170,255}));
   connect(star.plug_p, impedance.plug_n) annotation (Line(points={{-50,40},{-40,40}}, color={85,170,255}));
-  connect(impedance.plug_p, powerSensor.pc) annotation (Line(points={{-20,40},{0,40},{0,36}}, color={85,170,255}));
+  connect(impedance.plug_p,multiSensor. pc) annotation (Line(points={{-20,40},{0,40},{0,36}}, color={85,170,255}));
   connect(complexRamp.y, impedance.Z_ref) annotation (Line(points={{17,60},{-30,60},{-30,51}}, color={85,170,255}));
   annotation (experiment(__Dymola_NumberOfIntervals=10000, Tolerance=1e-06));
 end SMEE_LoadImpedance1;

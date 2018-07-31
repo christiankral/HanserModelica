@@ -12,9 +12,9 @@ model SMEE_VCurve1 "V curves of electrical excited synchronous machine operated 
   parameter Modelica.SIunits.Current Ie0=10 "No load excitation current";
   parameter Modelica.SIunits.Torque tauMax=smeeData.SNominal/wNominal "Maximum torque at power factor = 1";
   parameter Modelica.SIunits.Angle gamma0(displayUnit="deg") = 0 "Initial rotor displacement angle";
-  output Modelica.SIunits.Power P=powerSensor.apparentPowerTotal.re "Active power";
+  output Modelica.SIunits.Power P=multiSensor.apparentPowerTotal.re "Active power";
   output Modelica.SIunits.Power Pm=mechanicalPowerSensor.P "Mechanical power";
-  output Modelica.SIunits.ReactivePower Q=powerSensor.apparentPowerTotal.im "Reactive power";
+  output Modelica.SIunits.ReactivePower Q=multiSensor.apparentPowerTotal.im "Reactive power";
   output Modelica.SIunits.Current ie = smee.ie "Excitation current";
   Modelica.SIunits.Angle theta=rotorDisplacementAngle.rotorDisplacementAngle "Rotor displacement angle";
   parameter Boolean positiveRange = false "Use positive range of angles, if true";
@@ -92,7 +92,7 @@ model SMEE_VCurve1 "V curves of electrical excited synchronous machine operated 
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-90,80})));
-  MoveTo_Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.MultiSensor powerSensor(m=m) annotation (Placement(transformation(
+  MoveTo_Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.MultiSensor multiSensor(m=m) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={0,60})));
@@ -153,10 +153,10 @@ equation
   connect(rotorDisplacementAngle.plug_n, terminalBox.plug_sn) annotation (Line(points={{36,30},{36,36},{-6,36},{-6,30}}, color={85,170,255}));
   connect(smee.flange, rotorDisplacementAngle.flange) annotation (Line(points={{10,20},{20,20}}, color={0,0,0}));
   connect(smee.flange, mechanicalPowerSensor.flange_a) annotation (Line(points={{10,20},{40,20}}, color={0,0,0}));
-  connect(voltageSource.plug_p, powerSensor.pc) annotation (Line(points={{-20,80},{0,80},{0,70}}, color={85,170,255}));
-  connect(powerSensor.pv, powerSensor.pc) annotation (Line(points={{10,60},{10,70},{0,70}}, color={85,170,255}));
-  connect(powerSensor.nv, star.plug_p) annotation (Line(points={{-10,60},{-50,60},{-50,80}}, color={85,170,255}));
-  connect(powerSensor.nc, terminalBox.plugSupply) annotation (Line(points={{0,50},{0,32}}, color={85,170,255}));
+  connect(voltageSource.plug_p, multiSensor.pc) annotation (Line(points={{-20,80},{0,80},{0,70}}, color={85,170,255}));
+  connect(multiSensor.pv, multiSensor.pc) annotation (Line(points={{10,60},{10,70},{0,70}}, color={85,170,255}));
+  connect(multiSensor.nv, star.plug_p) annotation (Line(points={{-10,60},{-50,60},{-50,80}}, color={85,170,255}));
+  connect(multiSensor.nc, terminalBox.plugSupply) annotation (Line(points={{0,50},{0,32}}, color={85,170,255}));
   connect(ramp.y, currentSource.i) annotation (Line(points={{-59,20},{-35,20}}, color={0,0,127}));
   annotation (
     experiment(StopTime=200,Interval=0.1,Tolerance=1e-06),

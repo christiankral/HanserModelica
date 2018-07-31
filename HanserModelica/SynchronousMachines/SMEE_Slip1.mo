@@ -18,8 +18,8 @@ model SMEE_Slip1 "Electrical excited synchronous machine operating at small slip
   Modelica.SIunits.Angle phis = MoveTo_Modelica.Math.wrapAngle(phiv-phii,positiveRange) "Angle between voltage and current";
   Modelica.SIunits.Angle epsilon = MoveTo_Modelica.Math.wrapAngle(phis-theta,positiveRange) "Current angle";
   Modelica.SIunits.ComplexCurrent isr[m] = smee.is*Modelica.ComplexMath.exp(Complex(0,theta+pi/2)) "Stator current w.r.t. rotor fixed frame";
-  output Modelica.SIunits.Power P=powerSensor.apparentPowerTotal.re " real power";
-  output Modelica.SIunits.ReactivePower Q=powerSensor.apparentPowerTotal.im " reactive power";
+  output Modelica.SIunits.Power P=multiSensor.apparentPowerTotal.re " real power";
+  output Modelica.SIunits.ReactivePower Q=multiSensor.apparentPowerTotal.im " reactive power";
   output Modelica.SIunits.ApparentPower S=sqrt(P^2+Q^2) " apparent power";
   Modelica.SIunits.Angle theta=rotorDisplacementAngle.rotorDisplacementAngle "Rotor displacement angle";
   Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.SynchronousMachines.SM_ElectricalExcited smee(
@@ -92,7 +92,7 @@ model SMEE_Slip1 "Electrical excited synchronous machine operating at small slip
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-70,50})));
-  MoveTo_Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.MultiSensor powerSensor(m=m) annotation (Placement(transformation(
+  MoveTo_Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.MultiSensor multiSensor(m=m) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={0,66})));
@@ -142,12 +142,15 @@ equation
   connect(rotorDisplacementAngle.plug_n, terminalBox.plug_sn) annotation (Line(points={{36,40},{36,46},{-6,46},{-6,40}}, color={85,170,255}));
   connect(smee.flange, rotorDisplacementAngle.flange) annotation (Line(points={{10,30},{20,30}}, color={0,0,0}));
   connect(smee.flange, mechanicalPowerSensor.flange_a) annotation (Line(points={{10,30},{50,30}}, color={0,0,0}));
-  connect(voltageSource.plug_p, powerSensor.pc) annotation (Line(points={{-20,80},{0,80},{0,76}}, color={85,170,255}));
-  connect(powerSensor.nc, terminalBox.plugSupply) annotation (Line(points={{0,56},{0,42}}, color={85,170,255}));
-  connect(powerSensor.pv, powerSensor.pc) annotation (Line(points={{10,66},{10,76},{0,76}}, color={85,170,255}));
-  connect(powerSensor.nv, star.plug_p) annotation (Line(points={{-10,66},{-50,66},{-50,80}}, color={85,170,255}));
+  connect(voltageSource.plug_p, multiSensor.pc) annotation (Line(points={{-20,80},{0,80},{0,76}}, color={85,170,255}));
+  connect(multiSensor.nc, terminalBox.plugSupply) annotation (Line(points={{0,56},{0,42}}, color={85,170,255}));
+  connect(multiSensor.pv, multiSensor.pc) annotation (Line(points={{10,66},{10,76},{0,76}}, color={85,170,255}));
+  connect(multiSensor.nv, star.plug_p) annotation (Line(points={{-10,66},{-50,66},{-50,80}}, color={85,170,255}));
   annotation (experiment(StopTime=30,Interval=1E-3,Tolerance=1e-06),
     Documentation(info="<html>
+
+<h4>Description</h4>
+
 <p>
 This example investigates a quasi static model of a electrically excited synchronous machine. 
 The electrically excited synchronous generators are connected to the grid and driven with constant speed.
@@ -155,12 +158,23 @@ Since speed is slightly smaller than synchronous speed corresponding to mains fr
 rotor angle is very slowly increased. This allows to see several characteristics dependent on rotor angle.
 </p>
 
-<p>
-Simulate for 30 seconds and plot versus <code>rotorDisplacementAngle|rotorDisplacementAngle.rotorDisplacementAngle</code>:
-</p>
+<p>The intention is to compare the results of the following simulation models in one plot:</p>
 
 <ul>
-<li><code>smpm.tauElectrical</code>: machine torque</li>
+<li>SMEE_Slip1: excitation current <code>ie = 0</code></li>
+<li><a href=\"modelica://HanserModelica.SynchronousMachines.SMEE_Slip2\">SMEE_Slip2</a>:
+    excitation current <code>ie = 2 A</code></li>
+<li><a href=\"modelica://HanserModelica.SynchronousMachines.SMEE_Slip3\">SMEE_Slip3</a>:
+    excitation current <code>ie = 10 A</code></li>
+<li><a href=\"modelica://HanserModelica.SynchronousMachines.SMEE_Slip4\">SMEE_Slip4</a>:
+    excitation current <code>ie = 19 A</code></li>
+</ul>
+
+<h4>Plot the following variable(s)</h4>
+
+<ul>
+<li><code>smee.tauElectrical</code> against <code>theta</code>: electromagnetic torque against rotor displacement angle</li>
+<li><code>smee.abs_ie[1]</code> against <code>theta</code>: RMS stator current (of phase 1) against rotor displacement angle</li>
 </ul>
 </html>"),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,

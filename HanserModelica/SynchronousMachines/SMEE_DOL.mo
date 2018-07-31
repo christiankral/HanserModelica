@@ -54,7 +54,7 @@ model SMEE_DOL "Electrical excited synchronous machine starting direct on line"
         extent={{-10,-10},{10,10}},
         rotation=0)));
   Modelica.Mechanics.Rotational.Sensors.MultiSensor mechanicalSensor annotation (Placement(transformation(extent={{40,-50},{60,-30}})));
-  MoveTo_Modelica.Electrical.MultiPhase.Sensors.MultiSensor electricalSensor(m=m) annotation (Placement(transformation(
+  MoveTo_Modelica.Electrical.MultiPhase.Sensors.MultiSensor multiSensor(m=m) annotation (Placement(transformation(
         origin={40,30},
         extent={{-10,-10},{10,10}},
         rotation=270)));
@@ -134,10 +134,10 @@ equation
   connect(rampVoltage.p, smee.pin_ep) annotation (Line(points={{-40,-30},{-30,-30},{-30,-34},{-20,-34}},
                                           color={0,0,255}));
   connect(mechanicalSensor.flange_b, torqueStep.flange) annotation (Line(points={{60,-40},{70,-40}}, color={0,0,0}));
-  connect(switch.plug_n, electricalSensor.pc) annotation (Line(points={{20,50},{40,50},{40,40}}, color={0,0,255}));
-  connect(electricalSensor.nv, terminalBox.plug_sn) annotation (Line(points={{30,30},{20,30},{20,-20},{-16,-20},{-16,-30}}, color={0,0,255}));
-  connect(electricalSensor.nc, currentRMSSensor.plug_p) annotation (Line(points={{40,20},{40,10}}, color={0,0,255}));
-  connect(electricalSensor.pv, electricalSensor.pc) annotation (Line(points={{50,30},{50,40},{40,40}}, color={0,0,255}));
+  connect(switch.plug_n, multiSensor.pc) annotation (Line(points={{20,50},{40,50},{40,40}}, color={0,0,255}));
+  connect(multiSensor.nv, terminalBox.plug_sn) annotation (Line(points={{30,30},{20,30},{20,-20},{-16,-20},{-16,-30}}, color={0,0,255}));
+  connect(multiSensor.nc, currentRMSSensor.plug_p) annotation (Line(points={{40,20},{40,10}}, color={0,0,255}));
+  connect(multiSensor.pv, multiSensor.pc) annotation (Line(points={{50,30},{50,40},{40,40}}, color={0,0,255}));
   annotation (experiment(StopTime=2.5,Interval=0.0001,Tolerance=1e-006),
     Documentation(info="<html>
 

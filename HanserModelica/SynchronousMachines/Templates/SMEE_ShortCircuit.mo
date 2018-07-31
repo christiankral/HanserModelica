@@ -51,7 +51,7 @@ partial model SMEE_ShortCircuit "Template for short circuits of electrical excit
         origin={-10,-60},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  MoveTo_Modelica.Electrical.MultiPhase.Sensors.MultiSensor electricalSensor(m=m) annotation (Placement(transformation(
+  MoveTo_Modelica.Electrical.MultiPhase.Sensors.MultiSensor multiSensor(m=m) annotation (Placement(transformation(
         origin={20,30},
         extent={{-10,-10},{10,10}},
         rotation=270)));
@@ -102,10 +102,10 @@ equation
                                                                                                  color={255,0,255}));
   connect(booleanStep.y, booleanReplicator.u)
     annotation (Line(points={{-49,10},{-42,10}}, color={255,0,255}));
-  connect(switch.plug_n, electricalSensor.pc) annotation (Line(points={{0,50},{20,50},{20,40}},  color={0,0,255}));
-  connect(electricalSensor.nv, terminalBox.plug_sn) annotation (Line(points={{10,30},{0,30},{0,-8},{14,-8},{14,-20}},       color={0,0,255}));
-  connect(electricalSensor.nc, currentRMSSensor.plug_p) annotation (Line(points={{20,20},{20,10}}, color={0,0,255}));
-  connect(electricalSensor.pv, electricalSensor.pc) annotation (Line(points={{30,30},{30,40},{20,40}}, color={0,0,255}));
+  connect(switch.plug_n, multiSensor.pc) annotation (Line(points={{0,50},{20,50},{20,40}}, color={0,0,255}));
+  connect(multiSensor.nv, terminalBox.plug_sn) annotation (Line(points={{10,30},{0,30},{0,-8},{14,-8},{14,-20}}, color={0,0,255}));
+  connect(multiSensor.nc, currentRMSSensor.plug_p) annotation (Line(points={{20,20},{20,10}}, color={0,0,255}));
+  connect(multiSensor.pv, multiSensor.pc) annotation (Line(points={{30,30},{30,40},{20,40}}, color={0,0,255}));
   connect(pin1.plug_p, switch.plug_p) annotation (Line(points={{-38,70},{-30,70},{-30,50},{-20,50}}, color={0,0,255}));
   connect(pin2.plug_p, switch.plug_p) annotation (Line(points={{-38,50},{-20,50}}, color={0,0,255}));
   connect(pin3.plug_p, switch.plug_p) annotation (Line(points={{-38,30},{-30,30},{-30,50},{-20,50}}, color={0,0,255}));

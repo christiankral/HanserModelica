@@ -107,5 +107,10 @@ equation
           lineColor={0,0,255},
           fillColor={160,160,164},
           fillPattern=FillPattern.Solid,
-          textString="%name")}),                                 Diagram(coordinateSystem(preserveAspectRatio=false)));
+          textString="%name")}),                                 Diagram(coordinateSystem(preserveAspectRatio=false)),
+    Documentation(info="<html>
+<h4>Description</h4>
+
+<p>This model of a log rod consists of a vector short rods which a series connected.</p>
+</html>"));
 end LongRod;

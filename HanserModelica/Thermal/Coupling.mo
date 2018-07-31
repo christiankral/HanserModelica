@@ -67,6 +67,10 @@ equation
       Interval=0.1,
       Tolerance=1e-06),
     Documentation(info="<html>
+<h4>Description</h4>
+
+<p>This model shows a temperature dependent resistor model including electric and thermal circuits.</p>
+
 <h4>Plot the following variable(s)</h4>
 
 <ul>

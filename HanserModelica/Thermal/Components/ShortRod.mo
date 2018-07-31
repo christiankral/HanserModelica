@@ -54,5 +54,10 @@ equation
           fillColor={160,160,164},
           fillPattern=FillPattern.Solid,
           textString="%name")}),
-                            Diagram(coordinateSystem(preserveAspectRatio=false)));
+                            Diagram(coordinateSystem(preserveAspectRatio=false)),
+    Documentation(info="<html>
+<h4>Description</h4>
+
+<p>This model of a short rod consists of two thermal resistors and one magnetic capacitor.</p>
+</html>"));
 end ShortRod;

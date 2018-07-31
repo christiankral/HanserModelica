@@ -1,5 +1,5 @@
 ﻿within HanserModelica.SynchronousMachines;
-model SMEE_LoadImpedance1 "Electrical excited synchronous machine operating at variable load impedance with angle 60° ind."
+model SMEE_LoadImpedance1 "Electrical excited synchronous machine operating at variable load impedance with angle 45° cap."
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   parameter Integer m=3 "Number of stator phases";
@@ -144,5 +144,36 @@ equation
   connect(star.plug_p, impedance.plug_n) annotation (Line(points={{-50,40},{-40,40}}, color={85,170,255}));
   connect(impedance.plug_p,multiSensor. pc) annotation (Line(points={{-20,40},{0,40},{0,36}}, color={85,170,255}));
   connect(complexRamp.y, impedance.Z_ref) annotation (Line(points={{17,60},{-30,60},{-30,51}}, color={85,170,255}));
-  annotation (experiment(__Dymola_NumberOfIntervals=10000, Tolerance=1e-06));
+  annotation (experiment(__Dymola_NumberOfIntervals=10000, Tolerance=1e-06), Documentation(info="<html>
+
+<h4>Description</h4>
+
+<p>
+This example investigates the voltage versus current characteristic of an uncontrolled 
+electrically excited synchronous generator operated at different loads. 
+In each load case the phase angle <code>phi</code> of the load impedance is kept constant, 
+but the magnitude of the impedance is varied logarithmic.
+The generator is driven with constant speed. 
+</p>
+
+<p>The intention is to compare the results of the following simulation models in one plot:</p>
+
+<ul>
+<li>SMEE_LoadImpedance1: phase angle of load, <code>phi = -45° (capacitive)</code></li>
+<li><a href=\"modelica://HanserModelica.SynchronousMachines.SMEE_LoadImpedance2\">SMEE_LoadImpedance2</a>:
+    phase angle of load, <code>phi = -30° (capacitive)</code></li>
+<li><a href=\"modelica://HanserModelica.SynchronousMachines.SMEE_LoadImpedance2\">SMEE_LoadImpedance2</a>:
+    phase angle of load, <code>phi = 0° (ohmic)</code></li>
+<li><a href=\"modelica://HanserModelica.SynchronousMachines.SMEE_LoadImpedance2\">SMEE_LoadImpedance2</a>:
+    phase angle of load, <code>phi = +30° (inductive)</code></li>
+<li><a href=\"modelica://HanserModelica.SynchronousMachines.SMEE_LoadImpedance2\">SMEE_LoadImpedance2</a>:
+    phase angle of load, <code>phi = +45° (inductive)</code></li>
+</ul>
+
+<h4>Plot the following variable(s)</h4>
+
+<ul>
+<li><code>smee.abs_vs[1]</code> against <code>smee.abs_is[1]</code>: RMS stator voltage against RMS stator current (of phase 1)</li>
+</ul>
+</html>"));
 end SMEE_LoadImpedance1;

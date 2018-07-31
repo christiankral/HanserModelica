@@ -161,6 +161,9 @@ equation
   annotation (
     experiment(StopTime=200,Interval=0.1,Tolerance=1e-06),
     Documentation(info="<html>
+
+<h4>Description</h4>
+
 <p>
 This example investigates a quasi static model of a electrically excited synchronous machine. 
 The electrically excited synchronous generators are connected to the grid and driven with constant speed.
@@ -168,12 +171,24 @@ Since speed is slightly smaller than synchronous speed corresponding to mains fr
 rotor angle is very slowly increased. This allows to see several characteristics dependent on rotor angle.
 </p>
 
-<p>
-Simulate for 30 seconds and plot versus <code>rotorDisplacementAngle|rotorDisplacementAngle.rotorDisplacementAngle</code>:
-</p>
+<p>The intention is to compare the results of the following simulation models in one plot:</p>
 
 <ul>
-<li><code>smpm.tauElectrical</code>: machine torque</li>
+<li>SMEE_VCurve1: mechanical power <code>Pm = 0</code></li>
+<li><a href=\"modelica://HanserModelica.SynchronousMachines.SMEE_VCurve2\">SMEE_VCurve2</a>:
+    mechanical power <code>Pm = -10 kW</code></li>
+<li><a href=\"modelica://HanserModelica.SynchronousMachines.SMEE_VCurve3\">SMEE_VCurve3</a>:
+    mechanical power <code>Pm = -20 kW</code></li>
+<li><a href=\"modelica://HanserModelica.SynchronousMachines.SMEE_VCurve4\">SMEE_VCurve4</a>:
+    mechanical power <code>Pm = -30 kW</code></li>
+</ul>
+
+<h4>Plot the following variable(s)</h4>
+
+<ul>
+<li><code>smee.abs_is[1]</code> against <code>smee.ie</code>: RMS stator current against excitation current</li>
+<li><code>P</code> against <code>smee.ie</code>: active power against excitation current</li>
+<li><code>Q</code> against <code>smee.ie</code>: reactive power against excitation current</li>
 </ul>
 </html>"),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,

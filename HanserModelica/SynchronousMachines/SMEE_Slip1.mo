@@ -174,7 +174,11 @@ rotor angle is very slowly increased. This allows to see several characteristics
 
 <ul>
 <li><code>smee.tauElectrical</code> against <code>theta</code>: electromagnetic torque against rotor displacement angle</li>
-<li><code>smee.abs_ie[1]</code> against <code>theta</code>: RMS stator current (of phase 1) against rotor displacement angle</li>
+<li><code>smee.abs_is[1]</code> against <code>theta</code>: RMS stator current (of phase 1) against rotor displacement angle</li>
+<li><code>Q</code> against <code>theta</code>: reactive power against rotor displacement angle</li>
+<li><code>smee.is[1].im</code> against <code>smee.is[1].im</code>: locus of stator fixed stator current</li>
+<li><code>isr[1].im</code> against <code>isr[1].re</code>: locus of rotor fixed stator current</li>
+
 </ul>
 </html>"),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,

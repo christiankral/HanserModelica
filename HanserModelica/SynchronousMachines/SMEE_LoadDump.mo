@@ -173,17 +173,20 @@ equation
       StopTime=6,
       Interval=0.0001,
       Tolerance=1e-06),                                                Documentation(info="<html>
+
+<h4>Description</h4>
+
 <p>An electrically excited synchronous generator is started with a speed ramp, then driven with constant speed.
 Voltage is controlled, the set point depends on speed. After start-up the generator is loaded, the load is rejected.</p>
 
-<p>Simulate for 10 seconds and plot:</p>
+<h4>Plot the following variable(s)</h4>
 
 <ul>
-<li>voltageQuasiRMSSensor.V</li>
-<li>smee.tauElectrical</li>
-<li>smee.ie</li>
+<li><code>smee.wMechanical</code>: speed</li>
+<li><code>voltageRMSSensor.V</code>: RMS stator voltage</li>
+<li><code>currentRMSSensor.I</code>: RMS stator current</li>
+<li><code>smee.ve</code>: excitation voltage</li>
+<li><code>smee.ie</code>: excitation current</li>
 </ul>
-
-<p>Default machine parameters are used</p>
 </html>"));
 end SMEE_LoadDump;

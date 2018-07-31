@@ -200,10 +200,25 @@ equation
   annotation (experiment(StopTime=1.1, Interval=1E-4, Tolerance=1e-07),
     Documentation(
         info="<html>
+
+<h4>Description</h4>
+
 <p>An electrically excited synchronous generator is driven with constant speed. 
 Voltage is controlled, the set point depends on speed. The generator is loaded with a rectifier.</p>
 
-<p>Default machine parameters are used.</p>
+<h4>Plot the following variable(s)</h4>
+
+<ul>
+<li><code>voltageSensor.v</code>: DC voltage</li>
+<li><code>filter.y</code>: filtered DC voltage, multiplied by <code>1/sqrt(2*3)</code></li>
+<li><code>setPointGain.y</code>: reference voltage (set-point)</li>
+<li><code>smee.ve</code>: excitation voltage</li>
+<li><code>smee.vs[1]</code>, <code>smee.vs[2]</code>, <code>smee.vs[3]</code>: 
+    stator phase voltages of phases 1, 2 and 3</li>
+<li><code>smee.is[1]</code>, <code>smee.is[2]</code>, <code>smee.is[3]</code>: 
+    stator phase currents of phases 1, 2 and 3</li>
+<li><code>terminalBox.starpoint.v</code>: potential of star point</li>
+</ul>
 
 </html>"));
 end SMEE_Rectifier;

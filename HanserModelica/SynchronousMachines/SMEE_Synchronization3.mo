@@ -1,5 +1,5 @@
 within HanserModelica.SynchronousMachines;
-model SMEE_Synchronization3 "Synchronizazion of electrical excited synchronous machine with 10% higher excitation current"
+model SMEE_Synchronization3 "Synchronizazion of electrical excited synchronous machine with 15% higher excitation current"
   extends SMEE_Synchronization1(constantCurrent(I=1.15*smeeData.IeOpenCircuit));
   annotation (experiment(StopTime=0.3,Interval=0.0001,Tolerance=1e-08),
     Documentation(info="<html>

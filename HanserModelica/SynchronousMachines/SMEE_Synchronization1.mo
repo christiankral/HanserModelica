@@ -135,9 +135,9 @@ The intention is to compare the results of the following simulation models in on
 
 <ul>
 <li>SMEE_Synchronization1: all synchronization conditions are fulfilled</li>
-<li><a href=\"HanserModelica.SynchronousMachines.SMEE_Synchronization2\">SMEE_Synchronization2</a>:
+<li><a href=\"modelica://HanserModelica.SynchronousMachines.SMEE_Synchronization2\">SMEE_Synchronization2</a>:
     phi = 10° is used to cause lagging phase angles of the mains voltage</li>
-<li><a href=\"HanserModelica.SynchronousMachines.SMEE_Synchronization3\">SMEE_Synchronization3</a>:
+<li><a href=\"modelica://HanserModelica.SynchronousMachines.SMEE_Synchronization3\">SMEE_Synchronization3</a>:
     excitation current is 5 percent greater than in 
     <a href=\"modelica://HanserModelica.SynchronousMachines.SMEE_Synchronization1\">SMEE_Synchronization1</a>; 
     this causes the stator voltages to be 5 percent greater than the nominal voltage</li>

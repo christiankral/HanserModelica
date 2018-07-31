@@ -37,6 +37,11 @@ equation
       StopTime=0.08,
       Interval=0.0001,
       Tolerance=1e-06), Documentation(info="<html>
+<h4>Description</h4>
+
+<p>This examples tests the 
+<a href=\"modelica://HanserModelica.Magnetic.Components.Transformer\">transformer</a> model with resistive load.</p>
+
 <h4>Plot the following variable(s)</h4>
 
 <ul>

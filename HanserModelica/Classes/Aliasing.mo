@@ -7,6 +7,8 @@ model Aliasing "Demonstrating the aliasing effect"
 equation
   x = cos(2*pi*f*time);
   annotation (experiment(Interval=0.002, Tolerance=1e-06), Documentation(info="<html>
+<h4>Description</h4>
+
 <p>Investigate simulation, using three different <code>Interval</code> simulation settings:</p>
 <ul>
 <li><code>Interval = 0.002</code></li>

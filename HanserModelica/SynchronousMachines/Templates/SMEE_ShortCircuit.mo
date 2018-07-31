@@ -117,9 +117,21 @@ equation
   connect(constantVoltage.n, groundMachine.p) annotation (Line(points={{-10,-40},{-10,-50}}, color={0,0,255}));
   annotation (
     Documentation(info="<html>
-<p>This is a partial model of one, two and three phase short circuits of electrical
+
+<h4>Description</h4>
+
+<p>This is a partial model to model different short circuits of an electrical
 excited synchronous machines. The template is requires, since the grounding conditions
 are different for the three different short circuit conditions.</p>
+
+<ul>
+<li><a href=\"modelica://HanserModelica.SynchronousMachines.SMEE_ShortCircuit1\">SMEE_ShortCircuit1</a>: 
+    single-phase short circuit</li>
+<li><a href=\"modelica://HanserModelica.SynchronousMachines.SMEE_ShortCircuit2\">SMEE_ShortCircuit2</a>: 
+    two-phase short circuit</li>
+<li><a href=\"modelica://HanserModelica.SynchronousMachines.SMEE_ShortCircuit3\">SMEE_ShortCircuit3</a>: 
+    tree-phase short circuit</li>
+</ul>
 </html>"),
     Diagram(graphics={                      Text(
                   extent={{0,68},{80,60}},

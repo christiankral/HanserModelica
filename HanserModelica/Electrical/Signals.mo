@@ -6,7 +6,7 @@ model Signals "Application of signals, sources, sesors"
   parameter Modelica.SIunits.Current IRef = 0.25 "Reference current";
   Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
   Modelica.Electrical.Analog.Basic.Resistor resistor(R=R) annotation (Placement(transformation(extent={{30,10},{50,30}})));
-  Modelica.Electrical.Analog.Basic.Inductor inductor(L=L, i(start=0)) annotation (Placement(transformation(extent={{60,10},{80,30}})));
+  Modelica.Electrical.Analog.Basic.Inductor inductor(L=L, i(start=0, fixed=true)) annotation (Placement(transformation(extent={{60,10},{80,30}})));
   Modelica.Electrical.Analog.Sources.SignalVoltage signalVoltage annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=270,

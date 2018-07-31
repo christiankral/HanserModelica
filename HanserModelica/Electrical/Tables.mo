@@ -8,7 +8,7 @@ model Tables "Application of tables"
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-40,20})));
-  Modelica.Electrical.Analog.Basic.Inductor inductor(L=L, i(start=0)) annotation (Placement(transformation(extent={{-20,30},{0,50}})));
+  Modelica.Electrical.Analog.Basic.Inductor inductor(L=L, i(start=0,fixed=true)) annotation (Placement(transformation(extent={{-20,30},{0,50}})));
   Modelica.Electrical.Analog.Basic.VariableResistor variableResistor annotation (Placement(transformation(extent={{-10,-10},{10,10}},rotation=270,origin={20,20})));
   Modelica.Blocks.Sources.CombiTimeTable table(table=[0,10; 1,10; 1,20; 2,20; 3,10; 4,10]) annotation (Placement(transformation(extent={{70,10},{50,30}})));
 equation

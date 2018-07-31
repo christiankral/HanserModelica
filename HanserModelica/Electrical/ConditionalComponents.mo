@@ -9,7 +9,8 @@ model ConditionalComponents "Conditional components"
     annotation (Placement(transformation(extent={{-40,-40},{-20,-20}})));
   Modelica.Electrical.Analog.Basic.Resistor resistor(R=R)
     annotation (Placement(transformation(extent={{10,10},{30,30}})));
-  Modelica.Electrical.Analog.Basic.Inductor inductor(L=L, i(start=0)) if useInductor
+  Modelica.Electrical.Analog.Basic.Inductor inductor(L=L, i(start=0, fixed=true)) if
+                                                                         useInductor
     annotation (Placement(transformation(extent={{52,-4},{72,16}})));
   Modelica.Electrical.Analog.Ideal.Short short if not useInductor
     annotation (Placement(transformation(extent={{52,20},{72,40}})));

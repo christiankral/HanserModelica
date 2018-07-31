@@ -34,6 +34,10 @@ model Rectifier "Three-phase six-pulse rectifier with resistive load"
         rotation=270,
         origin={70,30})));
   Modelica.Blocks.Sources.Ramp ramp(height=0.5, duration=0.06) annotation (Placement(transformation(extent={{60,60},{80,80}})));
+initial equation
+  inductor.i[1:2] = zeros(2);
+  capacitor1.v = 0;
+  capacitor2.v = 0;
 equation
   connect(rectifier.dc_p, capacitor1.p) annotation (Line(points={{10,36},{10,36},{20,36},{20,50},{50,50},{50,50},{50,50}}, color={0,0,255}));
   connect(rectifier.dc_n, capacitor2.n) annotation (Line(points={{10,24},{10,24},{20,24},{20,10},{50,10}}, color={0,0,255}));

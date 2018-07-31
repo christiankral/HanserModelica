@@ -1,7 +1,8 @@
 within HanserModelica.Electrical;
 model TestRLSeriesRecord "Testing component RLSeriesRecord"
   extends Modelica.Icons.Example;
-  Components.RLSeriesRecord rlSeries(rlData=rlData) annotation (Placement(transformation(extent={{-20,10},{0,30}})));
+  Components.RLSeriesRecord rlSeries(rlData=rlData, i(fixed=true, start=0))
+                                                    annotation (Placement(transformation(extent={{-20,10},{0,30}})));
   Modelica.Electrical.Analog.Sources.StepVoltage stepVoltage(V=10, startTime=0.2) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,

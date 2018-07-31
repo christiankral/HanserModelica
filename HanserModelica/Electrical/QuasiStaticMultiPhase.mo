@@ -15,7 +15,8 @@ model QuasiStaticMultiPhase "Quasi static multi phase circuit"
   Modelica.Electrical.QuasiStationary.MultiPhase.Sources.VoltageSource voltageSource(
     f=50,
     V=fill(100, 3),
-    phi=-Modelica.Electrical.MultiPhase.Functions.symmetricOrientation(3))
+    phi=-Modelica.Electrical.MultiPhase.Functions.symmetricOrientation(3),
+    gamma(fixed=true, start=0))
                       annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,

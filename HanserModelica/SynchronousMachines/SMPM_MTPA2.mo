@@ -29,5 +29,8 @@ model SMPM_MTPA2 "Permanent magnet synchronous machine fed by current source, pa
       alpha20r=smpmData2.alpha20r,
       TrOperational=smpmData2.TrRef));
   annotation (
-    experiment(Interval=0.0001, Tolerance=1e-06));
+    experiment(Interval=0.0001, Tolerance=1e-06), Documentation(info="<html>
+<p>Compare the simulation results of this simulation model with results calculated by 
+<a href=\"modelica://HanserModelica.SynchronousMachines.SMPM_MTPA1\">SMPM_MTPA1</a>.</p>
+</html>"));
 end SMPM_MTPA2;

@@ -151,21 +151,42 @@ equation
   annotation (
     experiment(StopTime=2.0, Interval=1E-4, Tolerance=1E-6),
     Documentation(info="<html>
-<p>
-This example investigates a quasi static model of a permanent magnet synchronous machine. The machines are fed by a current source. The current components are oriented at the magnetic field orientation and transformed to the stator fixed reference frame. This way the machines are operated at constant torque. The machines start to accelerate from standstill.</p>
+
+<h4>Description</h4>
 
 <p>
-Simulate for 2 seconds and plot (versus time):
-</p>
+This example investigates a quasi static model of a permanent magnet synchronous machine. 
+The machine is fed by a current source. The current components are oriented at the magnetic field orientation and transformed 
+to the stator fixed reference frame. This way the machines are operated at constant torque. 
+The machines start to accelerate from standstill.</p>
+
+<p>
+In this simulation the angle is the following angles are calculated:</p> 
 
 <ul>
-<li><code>smpm.wMechanical</code>: machine speed</li>
-<li><code>smpm.tauElectrical</code>: machine torque</li>
+<li><code>phiv</code> = angle of voltage phasor</li>
+<li><code>phii</code> = angle of current phasor</li>
+<li><code>phis = phiv - phii</code> = angle between voltage and current phasor</li>
+<li><code>theta</code> = rotor displacement angle</li>
+<li><code>epsilon = phis - theta</code> = current angle</li>
 </ul>
 
 <h5>Note</h5>
 <p>The resistors connected to the terminals of the windings of the quasi static machine model are necessary 
 to numerically stabilize the simulation.</p>
+
+<h4>Plot the following variable(s)</h4>
+
+<ul>
+<li><code>smpm.wMechanical</code>: speed</li>
+<li><code>smpm.abs_vs[1]</code>: RMS stator voltage of phase 1</li>
+<li><code>smpm.abs_vs[1]</code> against <code>smpm.wMechanical</code>: voltage versus speed characteristic of machine</li>
+<li><code>phis</code>against <code>smpm.wMechanical</code>: phase angle between voltage and current phasor against speed</li>
+<li><code>epsilon</code> against <code>smpm.wMechanical</code>: current angle against speed</li>
+<li><code>theta</code> against <code>smpm.wMechanical</code>: rotor displacement angle against speed</li>
+</ul>
+</ul>
+
 </html>"),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={

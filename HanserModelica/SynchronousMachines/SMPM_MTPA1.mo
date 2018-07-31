@@ -19,7 +19,8 @@ model SMPM_MTPA1 "Permanent magnet synchronous machine fed by current source, pa
   Modelica.SIunits.Angle phis = MoveTo_Modelica.Math.wrapAngle(phiv-phii,positiveRange) "Angle between voltage and current";
   Modelica.SIunits.Angle epsilon = MoveTo_Modelica.Math.wrapAngle(phis-theta,positiveRange) "Current angle";
 
-  parameter HanserModelica.SynchronousMachines.ParameterRecords.SMPM1 smpmData1 "Synchronous machine data" annotation (Placement(transformation(extent={{50,32},{70,52}})));
+  parameter HanserModelica.SynchronousMachines.ParameterRecords.SMPM1 smpmData1 "Data of synchronous machine SMPM_MTPA1"
+                                                                                                           annotation (Placement(transformation(extent={{50,32},{70,52}})));
   Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.SynchronousMachines.SM_PermanentMagnet smpm(
     m=m,
     p=smpmData1.p,
@@ -104,7 +105,8 @@ model SMPM_MTPA1 "Permanent magnet synchronous machine fed by current source, pa
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-70,50})));
-  parameter ParameterRecords.SMPM2 smpmData2 annotation (Placement(transformation(extent={{80,32},{100,52}})));
+  parameter ParameterRecords.SMPM2 smpmData2 "Data of synchronous machine SMPM_MTPA2"
+                                             annotation (Placement(transformation(extent={{80,32},{100,52}})));
 equation
   connect(starMachine.plug_p, terminalBox.starpoint) annotation (
       Line(
@@ -147,35 +149,47 @@ equation
   annotation (
     experiment(Interval=0.0001, Tolerance=1e-06),
     Documentation(info="<html>
+
+<h4>Description</h4>
+
 <p>
 This example investigates the maximum torque per amps (MTPA) of a quasi static permanent magnet synchronous machine. 
 The machines is operated at constant speed. The current magnitude is kept constant and the current angle is
-rotated from 0 to 360 degrees with the simulation period of one second.</p>
+rotated from 0 to 360 degrees within the simulation period of one second.</p>
 
 <p>
 In this simulation the angle is the following angles are calculated:</p> 
 
 <ul>
-<li><code>phi_v<code> = angle of voltage phasor</li>
-<li><code>phi_i<code> = angle of current phasor</li>
-<li><code>phiphi_v - phi_i</code> = angle between voltage and current phasor</li>
+<li><code>phiv</code> = angle of voltage phasor</li>
+<li><code>phii</code> = angle of current phasor</li>
+<li><code>phis = phiv - phii</code> = angle between voltage and current phasor</li>
 <li><code>theta</code> = rotor displacement angle</li>
-<li><code>epsilon = phi - theta</code> = current angle</li>
+<li><code>epsilon = phis - theta</code> = current angle</li>
 </ul>
 
-<p>
-Simulate for 1 second and plot (versus angle epsilon):
-</p>
+<p>The intention is to compare the results of the following simulation models in one plot:</p>
 
 <ul>
-<li><code>smpm.tauElectrical</code>: machine torque</li>
-<li><code>smpm.abs_vs[1]</code>: machine phase voltage magnitude</li>
-<li><code>phi</code>: phase angle between voltage and current phasor</li>
+<li>SMPM_MTPA1: machine data 
+    <a href=\"modelica://HanserModelica.SynchronousMachines.ParameterRecords.SMPM1\">smpmData1</a\"></li>
+<li><a href=\"modelica://HanserModelica.SynchronousMachines.SMPM_MTPA2\">SMPM_MTPA2</a>: machine data
+    <a href=\"modelica://HanserModelica.SynchronousMachines.ParameterRecords.SMPM2\">smpmData2</a\"></li>
 </ul>
 
 <h5>Note</h5>
 <p>The resistors connected to the terminals of the windings of the quasi static machine model are necessary 
 to numerically stabilize the simulation.</p>
+
+<h4>Plot the following variable(s)</h4>
+
+<ul>
+<li><code>smpm.abs_vs[1]</code> against <code>epsilon</code>: RMS phase voltage against current angle</li>
+<li><code>smpm.tauElectrical</code> against <code>epsilon</code>: electromagnetic torque against current angle</li>
+<li><code>phis</code> against <code>epsilon</code>: phase angle between voltage and current phasor against current angle</li>
+<li><code>theta</code> against <code>epsilon</code>: rotor displacement angle against current angle</li>
+</ul>
+
 </html>"),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={

@@ -9,7 +9,9 @@ model TestTransformer "Test of transformer model"
     G_m1sigma=1.84E-8,
     G_m2sigma=1.84E-8,
     R_m=1770,
-    Gc=6.56) annotation (Placement(transformation(extent={{-40,0},{-20,20}})));
+    Gc=6.56,
+    i1(start=0, fixed=true),
+    i2(start=0, fixed=true)) annotation (Placement(transformation(extent={{-40,0},{-20,20}})));
   Modelica.Electrical.Analog.Basic.Ground ground1 annotation (Placement(transformation(extent={{-50,-32},{-30,-12}})));
   Modelica.Electrical.Analog.Basic.Ground ground2 annotation (Placement(transformation(extent={{-30,-32},{-10,-12}})));
   Modelica.Electrical.Analog.Basic.Resistor loadResistor(R=2) annotation (Placement(transformation(

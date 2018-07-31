@@ -8,8 +8,8 @@ model Transformer "Transformer model"
   parameter Modelica.SIunits.Permeance G_m2sigma "Secondary stray inductance";
   parameter Modelica.SIunits.Reluctance R_m "Main field reluctance";
   parameter Modelica.SIunits.Conductance Gc "Eddy current loss conductance";
-  Modelica.SIunits.Current i1 = p1.i "Primary current";
-  Modelica.SIunits.Current i2 = p2.i "Secondary current";
+  Modelica.SIunits.Current i1(start=0) = p1.i "Primary current";
+  Modelica.SIunits.Current i2(start=0) = p2.i "Secondary current";
   Modelica.SIunits.Voltage v1 = p1.v - n1.v "Primary voltage";
   Modelica.SIunits.Voltage v2 = p2.v - n2.v "Secondary voltage";
   Modelica.Electrical.Analog.Interfaces.PositivePin p1 annotation (
@@ -20,10 +20,9 @@ model Transformer "Transformer model"
     Placement(visible = true, transformation(origin = {-98, -30}, extent = {{10, -10}, {-10, 10}}, rotation = 0), iconTransformation(origin = {-100, -100}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
   Modelica.Electrical.Analog.Interfaces.NegativePin n2 annotation (
     Placement(visible = true, transformation(origin = {100, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {100, -100}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Magnetic.FluxTubes.Basic.ElectroMagneticConverter converter1(final N = N1, i(start=0))
-                                                                                      annotation (
+  Modelica.Magnetic.FluxTubes.Basic.ElectroMagneticConverter converter1(final N = N1) annotation (
     Placement(visible = true, transformation(extent = {{-90, -12}, {-70, 8}}, rotation = 0)));
-  Modelica.Magnetic.FluxTubes.Basic.ElectroMagneticConverter converter2(final N = N2, i(start=0)) annotation (
+  Modelica.Magnetic.FluxTubes.Basic.ElectroMagneticConverter converter2(final N = N2) annotation (
     Placement(transformation(extent = {{90, -10}, {70, 10}})));
   Modelica.Magnetic.FluxTubes.Basic.Ground ground annotation (
     Placement(visible = true, transformation(extent = {{-10, -50}, {10, -30}}, rotation = 0)));

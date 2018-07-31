@@ -6,7 +6,8 @@ model Coupling "Electro-magnetic coupling"
   parameter Integer N=1000 "Number of turns";
   parameter Modelica.SIunits.Permeance G_m = L/N^2 "Permeance of the magnetic circuit";
   parameter Modelica.SIunits.Voltage v = 20 "Total DC voltage";
-  Modelica.Magnetic.FluxTubes.Basic.ElectroMagneticConverter converter(N=N) annotation (Placement(transformation(extent={{0,-10},{20,10}})));
+  Modelica.Magnetic.FluxTubes.Basic.ElectroMagneticConverter converter(N=N, i(fixed=true, start=0))
+                                                                            annotation (Placement(transformation(extent={{0,-10},{20,10}})));
   Modelica.Magnetic.FluxTubes.Basic.ConstantPermeance permeance(G_m=G_m) annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=270,

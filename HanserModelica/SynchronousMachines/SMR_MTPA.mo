@@ -113,7 +113,10 @@ equation
      Line(points = {{-42, 74}, {-64, 74}, {-64, 62}}, color = {0, 0, 127}));
    annotation (
      experiment(StopTime = 1, Interval = 1E-3, Tolerance = 1E-6),
-     Documentation(info = "<html>
+     Documentation(info="<html>
+
+<h4>Description</h4>
+
 <p>
 This example investigates the maximum torque per amps (MTPA) of a quasi static permanent magnet synchronous machine. 
 The machines is operated at constant speed. The current magnitude is kept constant and the current angle is
@@ -123,26 +126,26 @@ rotated from 0 to 360 degrees with the simulation period of one second.</p>
 In this simulation the angle is the following angles are calculated:</p> 
 
 <ul>
-<li><code>phi_v<code> = angle of voltage phasor</li>
-<li><code>phi_i<code> = angle of current phasor</li>
-<li><code>phiphi_v - phi_i</code> = angle between voltage and current phasor</li>
+<li><code>phiv</code> = angle of voltage phasor</li>
+<li><code>phii</code> = angle of current phasor</li>
+<li><code>phis = phiv - phii</code> = angle between voltage and current phasor</li>
 <li><code>theta</code> = rotor displacement angle</li>
-<li><code>epsilon = phi - theta</code> = current angle</li>
-</ul>
-
-<p>
-Simulate for 1 second and plot (versus angle epsilon):
-</p>
-
-<ul>
-<li><code>smpm.tauElectrical</code>: machine torque</li>
-<li><code>smpm.abs_vs[1]</code>: machine phase voltage magnitude</li>
-<li><code>phi</code>: phase angle between voltage and current phasor</li>
+<li><code>epsilon = phis - theta</code> = current angle</li>
 </ul>
 
 <h5>Note</h5>
 <p>The resistors connected to the terminals of the windings of the quasi static machine model are necessary 
 to numerically stabilize the simulation.</p>
+
+<h4>Plot the following variable(s)</h4>
+
+<ul>
+<li><code>smr.abs_vs[1]</code> against <code>epsilon</code>: RMS phase voltage against current angle</li>
+<li><code>smr.tauElectrical</code> against <code>epsilon</code>: electromagnetic torque against current angle</li>
+<li><code>phi</code> against <code>epsilon</code>: phase angle between voltage and current phasor against current angle</li>
+<li><code>theta</code> against <code>epsilon</code>: rotor displacement angle against current angle</li>
+</ul>
+
 </html>"),
      Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{0, -10}, {80, -18}}, textStyle={TextStyle.Bold},                            lineColor={0,0,0},
            textString="%m phase quasi static")}));

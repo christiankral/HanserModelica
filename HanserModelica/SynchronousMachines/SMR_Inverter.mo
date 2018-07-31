@@ -76,21 +76,24 @@ equation
   connect(signalVoltage.plug_p, currentRMSSensor.plug_p) annotation (Line(points={{0,-50},{10,-50}}, color={0,0,255}));
   annotation (
     experiment(StopTime = 2, Interval = 0.0001, Tolerance = 1E-6),
-    Documentation(info = "<html>
+    Documentation(info="<html>
+
+<h4>Description</h4>
 
 <p>This example investigates a transient model of a multi phase induction machine.
-An ideal frequency inverter is modeled by using a <code>VfController</code> and a multi phase <code>SignalVoltage</code>.
+An ideal frequency inverter is modeled by using a simple 
+<a href=\"Modelica.Electrical.Machines.Utilities.VfController\">voltage frequency controller</a> 
+and a polyphase voltage source with signal input.
 Frequency is raised by a ramp, causing the induction machine with squirrel cage to start,
 and accelerating inertias. At time <code>tStep</code> a load step is applied.</p>
 
-<p>Simulate for 2 seconds and plot (versus time):</p>
+<h4>Plot the following variable(s)</h4>
 
 <ul>
-<li><code>currentRMSsensor.I</code>: (equivalent) RMS stator current</li>
-<li><code>imc.wMechanical</code>: machine speed</li>
-<li><code>imc.tauElectrical</code>: machine torque</li>
+<li><code>smr.tauElectrical</code>: electromagnetic torque</li>
+<li><code>smr.wMechanical</code>: speed</li>
+<li><code>currentRMSSensor.I</code>: quasi RMS stator current</li>
 </ul>
-<p>Default machine parameters are used.</p>
 </html>"),
     Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-60, -92}, {20, -100}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 170},
             fillPattern =                                                                                                                                                                                             FillPattern.Solid, textStyle = {TextStyle.Bold}, textString = "%m phase transient")}));

@@ -70,4 +70,8 @@ algorithm
      end if;
     end for;
   end for;
+  annotation (Documentation(info="<html>
+<p>This function calculates the complex number of turns of a polyphas winding based on 
+<a href=\"modelica://HanserModelica.Machines.Records.Winding\">the input record</a>.</p>
+</html>"));
 end complexTurns;

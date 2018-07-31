@@ -10,4 +10,7 @@ record Winding "Integral slot winding record of one group of windings"
   parameter Integer yce[:] "Slot indices of end of coils";
   parameter Integer nc(final min=1) "Number of turns per coil";
   parameter Modelica.SIunits.Angle offset "Offset of winding layout";
+  annotation (Documentation(info="<html>
+<p>This record defines the topology of a polyphase integer slot winding.</p>
+</html>"));
 end Winding;

@@ -11,4 +11,6 @@ record SingleLayer12over12 "Single layer winding example with skewing of 12/12"
     final yce={13,14,15,16},
     final nc=16,
     final offset=-127.5*pi/180);
+  annotation (Documentation(info="<html>
+</html>"));
 end SingleLayer12over12;

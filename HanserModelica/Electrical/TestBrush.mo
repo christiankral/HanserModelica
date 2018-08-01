@@ -19,7 +19,8 @@ equation
   connect(rampCurrent.p, ground.p) annotation (Line(points={{-60,30},{-60,0}}, color={0,0,255}));
   connect(ground.p, brush.n) annotation (Line(points={{-60,0},{-30,0},{-30,10}}, color={0,0,255}));
   connect(rampCurrent.n, brush.p) annotation (Line(points={{-60,10},{-60,40},{-30,40},{-30,30}}, color={0,0,255}));
-  annotation (Documentation(info="<html>
+  annotation (experiment(StopTime=1, Interval=0.001, Tolerance=1e-06),
+    Documentation(info="<html>
 <h4>Description</h4>
 
 <p>This examples demonstrates the application of a 

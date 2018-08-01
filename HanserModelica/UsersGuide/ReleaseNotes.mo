@@ -9,6 +9,7 @@ class ReleaseNotes "Release Notes"
 <ul>
 <li>Updated documentation</li>
 <li>Unification of sensor instance names</li>
+<li>Fully specify initial condition of simulation models</li>
 </ul>
 
 <h5>Version 0.10.0, 2018-07-01</h5>

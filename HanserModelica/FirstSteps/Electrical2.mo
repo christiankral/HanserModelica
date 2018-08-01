@@ -15,7 +15,8 @@ equation
   v = vR + vL;
   vR = R*i;
   vL = L*der(i);
-  annotation (Documentation(info="<html>
+  annotation (experiment(StopTime=1, Interval=0.001, Tolerance=1e-06),
+    Documentation(info="<html>
 <h4>Description</h4>
 
 <p>This is the second implementation of an R-L series circuit in Modelica.</p>

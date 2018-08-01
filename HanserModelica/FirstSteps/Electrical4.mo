@@ -20,7 +20,8 @@ equation
   connect(constantVoltage.p, resistor.p) annotation (Line(points={{-40,30},{-40,40},{-20,40}}, color={0,0,255}));
   connect(resistor.n, inductor.p) annotation (Line(points={{0,40},{20,40}}, color={0,0,255}));
   connect(inductor.n, ground.p) annotation (Line(points={{40,40},{60,40},{60,0},{-40,0}}, color={0,0,255}));
-  annotation (Documentation(info="<html>
+  annotation (experiment(StopTime=1, Interval=0.001, Tolerance=1e-06),
+    Documentation(info="<html>
 <h4>Description</h4>
 
 <p>This is a graphical -- the fourth -- implementation of an R-L series circuit in Modelica.</p>

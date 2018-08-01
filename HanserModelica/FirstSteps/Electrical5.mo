@@ -4,7 +4,8 @@ model Electrical5 "R-L series circuit, implementation by extends"
     v=15,
     R=15,
     L=1.5);
-  annotation (Documentation(info="<html>
+  annotation (experiment(StopTime=1, Interval=0.001, Tolerance=1e-06),
+    Documentation(info="<html>
 <h4>Description</h4>
 
 <p>This is an implementation of an R-L series circuit in Modelica, based on inheritance.</p>

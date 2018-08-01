@@ -8,7 +8,8 @@ model TestVector2D "Application of Vector2D"
 equation
   der(v.x)=a.x/T;
   der(v.y)=a.y/T;
-  annotation (Documentation(info="<html>
+  annotation (experiment(StopTime=1, Interval=0.001, Tolerance=1e-06),
+    Documentation(info="<html>
 <h4>Description</h4>
 
 <p>This example tests the record <a href=\"modelica://HanserModelica.Classes.Vector2D\">Vector2D</a>.</p>

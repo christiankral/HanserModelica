@@ -11,7 +11,8 @@ model TestSingleLayer12over12 "Test model of SingleLayer12over12"
   parameter Modelica.SIunits.Angle orientiation[winding.m](
     each displayUnit="deg")=Modelica.ComplexMath.arg(N)
     "Orientation of complex numbers of turns";
-  annotation (Documentation(info="<html>
+  annotation (experiment(StopTime=1, Interval=0.001, Tolerance=1e-06),
+    Documentation(info="<html>
 <h4>Description</h4>
 
 <p>This example calculates the complex numbers of turns of the record

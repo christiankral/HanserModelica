@@ -82,7 +82,7 @@ equation
 
 <p>This example investigates a transient model of a multi phase induction machine.
 An ideal frequency inverter is modeled by using a simple 
-<a href=\"Modelica.Electrical.Machines.Utilities.VfController\">voltage frequency controller</a> 
+<a href=\"modelica://Modelica.Electrical.Machines.Utilities.VfController\">voltage frequency controller</a> 
 and a polyphase voltage source with signal input.
 Frequency is raised by a ramp, causing the induction machine with squirrel cage to start,
 and accelerating inertias. At time <code>tStep</code> a load step is applied.</p>

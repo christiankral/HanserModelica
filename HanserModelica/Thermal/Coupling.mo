@@ -25,7 +25,7 @@ model Coupling "Electro-thermal coupling"
   Modelica.Electrical.Analog.Basic.Ground ground
     annotation (Placement(transformation(extent={{-80,-50},{-60,-30}})));
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor(
-      T(start=TAmbient), C=C)
+                         C=C, T(start=TAmbient, fixed=true))
                          annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,

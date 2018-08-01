@@ -1,7 +1,8 @@
 within HanserModelica.Rotational;
 model Drive "Simple mechanical drive"
   extends Modelica.Icons.Example;
-  Modelica.Mechanics.Rotational.Components.Inertia inertia(J=0.4) annotation (Placement(transformation(extent={{20,-10},{40,10}})));
+  Modelica.Mechanics.Rotational.Components.Inertia inertia(J=0.4,
+    phi(start=0, fixed=true), w(start=0, fixed=true)) annotation (Placement(transformation(extent={{20,-10},{40,10}})));
   Modelica.Mechanics.Rotational.Sensors.MultiSensor multiSensor annotation (Placement(visible = true, transformation(extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Mechanics.Rotational.Sources.QuadraticSpeedDependentTorque load(
     tau_nominal=-100,TorqueDirection=false,w(displayUnit="rpm"),

@@ -5,6 +5,12 @@ class ReleaseNotes "Release Notes"
     preferredView = "info",
     Documentation(info="<html>
 
+<h5>Version 1.0.1, 2018-08-22</h5>
+<ul>
+<li>Fix error in coordinates of annoation in 
+    <a href=\"modelica://HanserModelica.Rotational.TestDCPMMachine\">TestDCPMMachine</a></li>
+</ul>
+
 <h5>Version 1.0.0, 2018-08-01</h5>
 <ul>
 <li>Updated documentation</li>

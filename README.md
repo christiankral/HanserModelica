@@ -8,7 +8,7 @@ HanserModelica is a Modelica open source educational library on object oriented 
 
 - Fundemantals
 - Modelica
-  - [First steps](https://github.com/christiankral/HanserModelica/tree/master/HanserModelica/FirstSteps)
+  - [First steps](https://github.com/christiankral/HanserModelica/tree/master/HanserModelica/FirstSteps) see [YouTube video](https://youtu.be/esGAcZ_ViRU)
   - [Variables and types](https://github.com/christiankral/HanserModelica/tree/master/HanserModelica/VariablesTypes)
   - [Modelica classes and concepts](https://github.com/christiankral/HanserModelica/tree/master/HanserModelica/Classes)
 - Modeling concepts

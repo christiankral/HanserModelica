@@ -4,6 +4,10 @@ HanserModelica is a Modelica open source educational library on object oriented 
 
 ![Modelica - Objektorientierte Modellerung von Drehfeldmaschinen](https://github.com/christiankral/HanserModelica/blob/master/HanserModelica/Resources/Images/45551_Kral_165x240_3D_Soft.png?raw=true)
 
+Watch the YouTube video on creating the model [`FirstSteps.Example4`](https://www.youtube.com/watch?v=esGAcZ_ViRU).
+
+Contact the author by creating a [New GitHub Issue](https://github.com/christiankral/HanserModelica/issues/new). 
+
 ## Content of the book (translated to English)
 
 - Fundemantals

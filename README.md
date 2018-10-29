@@ -6,7 +6,7 @@ HanserModelica is a Modelica open source educational library on object oriented 
 
 Watch the YouTube video on creating the model [`FirstSteps.Example4`](https://www.youtube.com/watch?v=esGAcZ_ViRU).
 
-Contact the author by creating a [New GitHub Issue](https://github.com/christiankral/HanserModelica/issues/new). 
+Contact the author by creating a [New GitHub Issue](https://github.com/christiankral/HanserModelica/issues/new). Get more information about the [author](https://christiankral.net).
 
 ## Content of the book (translated to English)
 

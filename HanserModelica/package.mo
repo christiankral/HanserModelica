@@ -5,8 +5,8 @@ package HanserModelica "Educational open source libray on <html><a href=\"https:
 
   annotation (
     preferredView="info",
-    version="1.0.2",
-    versionDate="2019-02-14",
+    version="1.X.X",
+    versionDate="2019-XX-XX",
     uses(Complex(version="3.2.2"), Modelica(version="3.2.2")),
   Documentation(info="<html>
 <p><a href=\"https://github.com/christiankral/HanserModelica\">HanserModelica</a>

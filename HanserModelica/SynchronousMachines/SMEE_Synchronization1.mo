@@ -33,7 +33,7 @@ model SMEE_Synchronization1 "Electrical excited synchronous machine synchronized
     statorCoreParameters(VRef=100),
     strayLoadParameters(IRef=100),
     brushParameters(ILinear=0.01),
-    ir(fixed=true),
+    ir(each fixed=true),
     wMechanical(fixed=true,start=wNominal),
     m=m,
     Rs=smeeData.Rs*m/3,

@@ -28,7 +28,7 @@ model SMEE_DOL "Electrical excited synchronous machine starting direct on line"
     statorCoreParameters(VRef=100),
     strayLoadParameters(IRef=100),
     brushParameters(ILinear=0.01),
-    ir(fixed=true),
+    ir(each fixed=true),
     wMechanical(fixed=true),
     m=m,
     Rs=smeeData.Rs*m/3,

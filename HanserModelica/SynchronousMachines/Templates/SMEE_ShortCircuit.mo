@@ -32,7 +32,7 @@ partial model SMEE_ShortCircuit "Template for short circuits of electrical excit
     statorCoreParameters(VRef=100),
     strayLoadParameters(IRef=100),
     brushParameters(ILinear=0.01),
-    ir(fixed=true),
+    ir(each fixed=true),
     m=m,
     Rs=smeeData.Rs*m/3,
     Lssigma=smeeData.Lssigma*m/3,

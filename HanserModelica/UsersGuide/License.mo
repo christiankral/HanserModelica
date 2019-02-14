@@ -7,11 +7,11 @@ class License "BSD-3-Clause"
 <h4>License</h4>
 
 <p>
-This library is published under the 
+This library is published under the
 <a href=\"https://opensource.org/licenses/BSD-3-Clause\">BSD-3-Clause</a>.
 </p>
 <p>
-Copyright 2017-2018 Christian Kral
+Copyright 2017-2019 Christian Kral
 </p>
 
 <p>

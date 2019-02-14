@@ -5,9 +5,15 @@ class ReleaseNotes "Release Notes"
     preferredView = "info",
     Documentation(info="<html>
 
+<h5>Version 1.0.2, 2019-02-14</h5>
+<ul>
+<li>Added missing <code>each</code> prefix to array modifiers
+    <a href=\"https://github.com/christiankral/HanserModelica/pull/6\">#6</a></li>
+</ul>
+
 <h5>Version 1.0.1, 2018-08-22</h5>
 <ul>
-<li>Fix error in coordinates of annoation in 
+<li>Fix error in coordinates of annoation in
     <a href=\"modelica://HanserModelica.Rotational.TestDCPMMachine\">TestDCPMMachine</a></li>
 </ul>
 

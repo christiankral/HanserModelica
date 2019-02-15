@@ -1,5 +1,5 @@
 within ;
-package HanserModelica "Educational open source libray on <html><a href=\"https://www.hanser-fachbuch.de/buch/Modelica+Objektorientierte+Modellbildung+von+Drehfeldmaschinen/9783446455511\">Modelica, electrical engineering and polyphase electrical machines</a></html>"
+package HanserModelica "Educational open source library on <html><a href=\"https://www.hanser-fachbuch.de/buch/Modelica+Objektorientierte+Modellbildung+von+Drehfeldmaschinen/9783446455511\">Modelica, electrical engineering and polyphase electrical machines</a></html>"
 
   extends Modelica.Icons.ExamplesPackage;
 

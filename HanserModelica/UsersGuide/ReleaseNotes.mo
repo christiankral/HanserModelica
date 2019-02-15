@@ -13,7 +13,7 @@ class ReleaseNotes "Release Notes"
 
 <h5>Version 1.0.1, 2018-08-22</h5>
 <ul>
-<li>Fix error in coordinates of annoation in
+<li>Fix error in coordinates of annotation in
     <a href=\"modelica://HanserModelica.Rotational.TestDCPMMachine\">TestDCPMMachine</a></li>
 </ul>
 

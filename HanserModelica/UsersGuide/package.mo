@@ -29,7 +29,7 @@ Other examples may be added or removed depending on the actual edition of the as
 <h4>Content of the book (translated to English)</h4>
 
 <ul>
-<li>Fundemantals</li>
+<li>Fundamentals</li>
 <li>Modelica</li>
     <ul>
     <li><a href=\"modelica://HanserModelica.FirstSteps\">First steps</a></li>

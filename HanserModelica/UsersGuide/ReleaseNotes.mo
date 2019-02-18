@@ -5,6 +5,15 @@ class ReleaseNotes "Release Notes"
     preferredView = "info",
     Documentation(info="<html>
 
+<h5>Version 1.0.3, 2019-02-18</h5>
+<ul>
+<li>Fix typos, see
+   <a href=\"https://github.com/christiankral/HanserModelica/pull/7\">#7</a>
+   and 
+   <a href=\"https://github.com/christiankral/HanserModelica/issues/8\">#8</a></li>
+<li>
+</ul>
+
 <h5>Version 1.0.2, 2019-02-14</h5>
 <ul>
 <li>Added missing <code>each</code> prefix to array modifiers

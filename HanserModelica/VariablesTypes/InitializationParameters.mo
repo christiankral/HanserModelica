@@ -1,7 +1,7 @@
 within HanserModelica.VariablesTypes;
 model InitializationParameters "Initialization of parameters"
   extends Modelica.Icons.Example;
-  parameter Integer a=5;                 // Explicit assingment
+  parameter Integer a=5;                 // Explicit assignment
   parameter Real b(start=0);             // Not fixed
   parameter Real c(fixed=false);         // Not assigned here
   parameter Real d(start=0,fixed=false); // Only start value is assigned here

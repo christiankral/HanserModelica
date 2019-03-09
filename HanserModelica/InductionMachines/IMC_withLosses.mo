@@ -64,7 +64,7 @@ public
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-40,90})));
-  MoveTo_Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensor(m=m) annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensor(m=m) annotation (Placement(transformation(
         origin={-70,90},
         extent={{-10,10},{10,-10}},
         rotation=0)));

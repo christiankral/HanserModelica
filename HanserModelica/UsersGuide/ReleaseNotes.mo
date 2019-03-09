@@ -5,6 +5,13 @@ class ReleaseNotes "Release Notes"
     preferredView = "info",
     Documentation(info="<html>
 
+<h5>Version 1.1.0, 2019-03-09</h5>
+<ul>
+<li>Switch to Modelica Standard Library 3.2.3, see
+   <a href=\"https://github.com/christiankral/HanserModelica/issues/9\">#9</a></li>
+<li>
+</ul>
+
 <h5>Version 1.0.3, 2019-02-18</h5>
 <ul>
 <li>Fix typos, see

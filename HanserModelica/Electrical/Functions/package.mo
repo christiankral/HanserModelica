@@ -1,6 +1,6 @@
 within HanserModelica.Electrical;
 package Functions "Functions"
-extends MoveTo_Modelica.Icons.FunctionsPackage;
+extends Modelica.Icons.FunctionsPackage;
 
 annotation (Documentation(info="<html>
 <p>This package contains functions.</p>

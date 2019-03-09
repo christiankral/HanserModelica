@@ -80,7 +80,7 @@ model SMEE_LoadImpedance1 "Electrical excited synchronous machine operating at v
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-70,10})));
-  MoveTo_Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.MultiSensor multiSensor(m=m) annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.MultiSensor multiSensor(m=m) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={0,26})));
@@ -96,14 +96,14 @@ model SMEE_LoadImpedance1 "Electrical excited synchronous machine operating at v
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-50,10})));
-  MoveTo_Modelica.Magnetic.QuasiStatic.FundamentalWave.Sensors.RotorDisplacementAngle rotorDisplacementAngle(m=m, p=smee.p) annotation (Placement(transformation(
+  Modelica.Magnetic.QuasiStatic.FundamentalWave.Sensors.RotorDisplacementAngle rotorDisplacementAngle(m=m, p=smee.p) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=90,
         origin={30,-10})));
 
   Modelica.Electrical.QuasiStationary.MultiPhase.Basic.VariableImpedance impedance(m=m)
                                                                                    annotation (Placement(transformation(extent={{-20,30},{-40,50}})));
-  MoveTo_Modelica.ComplexBlocks.Sources.ComplexRampPhasor complexRamp[m](
+  Modelica.ComplexBlocks.Sources.ComplexRampPhasor complexRamp[m](
     useLogRamp=fill(true, m),
     startTime=fill(0, m),
     duration=fill(1, m),

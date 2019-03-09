@@ -54,7 +54,7 @@ model SMEE_DOL "Electrical excited synchronous machine starting direct on line"
         extent={{-10,-10},{10,10}},
         rotation=0)));
   Modelica.Mechanics.Rotational.Sensors.MultiSensor mechanicalSensor annotation (Placement(transformation(extent={{40,-50},{60,-30}})));
-  MoveTo_Modelica.Electrical.MultiPhase.Sensors.MultiSensor multiSensor(m=m) annotation (Placement(transformation(
+  Modelica.Electrical.MultiPhase.Sensors.MultiSensor multiSensor(m=m) annotation (Placement(transformation(
         origin={40,30},
         extent={{-10,-10},{10,10}},
         rotation=270)));

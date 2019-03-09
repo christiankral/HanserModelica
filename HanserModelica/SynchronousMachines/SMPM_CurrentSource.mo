@@ -15,10 +15,10 @@ model SMPM_CurrentSource "Permanent magnet synchronous machine fed by current so
   parameter Modelica.SIunits.Current IsOperation=100 "Operating current";
   parameter Modelica.SIunits.Angle epsilonOperation = -0.741 "Operation current angle";
   parameter Boolean positiveRange = false "Use positive range of angles, if true";
-  Modelica.SIunits.Angle phii = MoveTo_Modelica.Math.wrapAngle(smpm.arg_is[1],positiveRange) "Angle of current";
-  Modelica.SIunits.Angle phiv = MoveTo_Modelica.Math.wrapAngle(smpm.arg_vs[1],positiveRange) "Angle of voltage";
-  Modelica.SIunits.Angle phis = MoveTo_Modelica.Math.wrapAngle(phiv-phii,positiveRange) "Angle between voltage and current";
-  Modelica.SIunits.Angle epsilon = MoveTo_Modelica.Math.wrapAngle(phis-theta,positiveRange) "Current angle";
+  Modelica.SIunits.Angle phii = Modelica.Math.wrapAngle(smpm.arg_is[1],positiveRange) "Angle of current";
+  Modelica.SIunits.Angle phiv = Modelica.Math.wrapAngle(smpm.arg_vs[1],positiveRange) "Angle of voltage";
+  Modelica.SIunits.Angle phis = Modelica.Math.wrapAngle(phiv-phii,positiveRange) "Angle between voltage and current";
+  Modelica.SIunits.Angle epsilon = Modelica.Math.wrapAngle(phis-theta,positiveRange) "Current angle";
   Modelica.Blocks.Sources.Constant iq(k=IsOperation*cos(epsilonOperation)*3/m) annotation (Placement(
         transformation(extent={{-90,40},{-70,60}})));
   Modelica.Blocks.Sources.Constant id(k=IsOperation*sin(epsilonOperation)*3/m) annotation (Placement(transformation(extent={{-90,70},{-70,90}})));
@@ -95,11 +95,11 @@ model SMPM_CurrentSource "Permanent magnet synchronous machine fed by current so
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={20,80})));
-  MoveTo_Modelica.Magnetic.QuasiStatic.FundamentalWave.Sensors.RotorDisplacementAngle rotorDisplacementAngle(m=m, p=smpmData.p) annotation (Placement(transformation(
+  Modelica.Magnetic.QuasiStatic.FundamentalWave.Sensors.RotorDisplacementAngle rotorDisplacementAngle(m=m, p=smpmData.p) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=90,
         origin={30,10})));
-  MoveTo_Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensor(m=m) annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensor(m=m) annotation (Placement(transformation(
         extent={{10,10},{-10,-10}},
         rotation=90,
         origin={0,50})));

@@ -27,7 +27,7 @@ model IMC_DOL "Induction machine with squirrel cage started directly on line (DO
   Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.PowerSensor
     powerSensorQS(m=m)
     annotation (Placement(transformation(extent={{-40,70},{-20,90}})));
-  MoveTo_Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensorQS(m=m) annotation (Placement(transformation(extent={{-10,70},{10,90}})));
+  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensorQS(m=m) annotation (Placement(transformation(extent={{-10,70},{10,90}})));
   Modelica.Electrical.QuasiStationary.MultiPhase.Ideal.IdealClosingSwitch
     idealCloserQS(final m=m,Ron=fill(1e-5*m/3, m),Goff=fill(1e-5*3/m, m))
     annotation (Placement(transformation(origin={-60,70},extent={{10,10},{-10,-10}},rotation=270)));

@@ -1,7 +1,7 @@
 within HanserModelica.SynchronousMachines.ParameterRecords;
 record SMEE1 "Machine parameters of electrical excited synchronous machine with rotor saliency"
   import Modelica.Constants.pi;
-  extends MoveTo_Modelica.Electrical.Machines.Utilities.SynchronousMachineData(
+  extends Modelica.Electrical.Machines.Utilities.SynchronousMachineData(
     SNominal = 30000,
     VsNominal = 100,
     fsNominal = 50,

@@ -66,7 +66,7 @@ model IMS_Characteristics1 "Characteristic curves of induction machine with slip
         rotation=0,
         origin={-80,10})));
   Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.PowerSensor powerSensor(m=m) annotation (Placement(transformation(extent={{-70,70},{-50,90}})));
-  MoveTo_Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor currentSensor(m=m) annotation (Placement(transformation(extent={{-10,70},{10,90}})));
+  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor currentSensor(m=m) annotation (Placement(transformation(extent={{-10,70},{10,90}})));
   Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star
     starMachine(m=mBase)
     annotation (Placement(transformation(

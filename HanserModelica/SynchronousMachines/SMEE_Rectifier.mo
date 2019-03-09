@@ -53,7 +53,7 @@ model SMEE_Rectifier "Electrical excited synchronous machine with rectifier"
     TeOperational=smeeData.TeRef,
     alpha20e=smeeData.alpha20e)
                           annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
-  parameter MoveTo_Modelica.Electrical.Machines.Utilities.SynchronousMachineData smeeData(
+  parameter Modelica.Electrical.Machines.Utilities.SynchronousMachineData smeeData(
     SNominal=30e3,
     VsNominal=100,
     fsNominal=50,

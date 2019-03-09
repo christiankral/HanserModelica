@@ -36,7 +36,7 @@ model IMC_YD "Induction machine with squirrel cage starting Y-D"
     effectiveStatorTurns=imcData.effectiveStatorTurns,
     alpha20r=imcData.alpha20r,
     TrOperational=imcData.TrRef) annotation (Placement(transformation(extent={{20,10},{40,30}})));
-  MoveTo_Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensorQS(m=m) annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensorQS(m=m) annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=270,
         origin={30,70})));
@@ -60,7 +60,7 @@ model IMC_YD "Induction machine with squirrel cage starting Y-D"
         origin={0,90},
         extent={{-10,10},{10,-10}},
         rotation=0)));
-  MoveTo_Modelica.Magnetic.QuasiStatic.FundamentalWave.Utilities.SwitchYD switchYDQS(final m=m) annotation (Placement(transformation(extent={{20,30},{40,50}})));
+  Modelica.Magnetic.QuasiStatic.FundamentalWave.Utilities.SwitchYD switchYDQS(final m=m) annotation (Placement(transformation(extent={{20,30},{40,50}})));
   Modelica.Blocks.Sources.BooleanStep booleanStepYDQS[m](each startTime=tStart2) annotation (Placement(transformation(extent={{-40,30},{-20,50}})));
   Modelica.Mechanics.Rotational.Components.Inertia loadInertiaQS(J=JLoad) annotation (Placement(transformation(extent={{50,10},{70,30}})));
   Modelica.Mechanics.Rotational.Sources.QuadraticSpeedDependentTorque quadraticLoadTorqueQS(

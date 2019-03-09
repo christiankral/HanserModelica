@@ -33,12 +33,12 @@ model RLSeriesFrequencySweep "Series circuit with Bode analysis"
         rotation=180,
         origin={-70,30})));
 equation
-  connect(frequencySweep.y, voltageSource.f) annotation (Line(points={{-59,-40},{-50,-40},{-50,-24},{-40,-24}}, color={0,0,127}));
+  connect(frequencySweep.y, voltageSource.f) annotation (Line(points={{-59,-40},{-50,-40},{-50,-26},{-42,-26}}, color={0,0,127}));
   connect(ground.pin, voltageSource.pin_n) annotation (Line(points={{-30,-40},
           {-30,-35},{-30,-30}}, color={85,170,255}));
   connect(resistor.pin_n, inductor.pin_p) annotation (Line(points={{40,0},{52,0}},
                                   color={85,170,255}));
-  connect(complexConst.y, voltageSource.V) annotation (Line(points={{-59,0},{-50,0},{-50,-16},{-40,-16}}, color={85,170,255}));
+  connect(complexConst.y, voltageSource.V) annotation (Line(points={{-59,0},{-50,0},{-50,-14},{-42,-14}}, color={85,170,255}));
   connect(voltageSensor.pin_p, resistor.pin_p) annotation (Line(points={{20,20},{10,20},{10,0},{20,0}},
                                                                                                color={85,170,255}));
   connect(voltageSensor.pin_n, inductor.pin_p) annotation (Line(points={{40,20},{52,20},{52,0}}, color={85,170,255}));

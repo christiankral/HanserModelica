@@ -51,7 +51,7 @@ partial model SMEE_ShortCircuit "Template for short circuits of electrical excit
         origin={-10,-60},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  MoveTo_Modelica.Electrical.MultiPhase.Sensors.MultiSensor multiSensor(m=m) annotation (Placement(transformation(
+  Modelica.Electrical.MultiPhase.Sensors.MultiSensor multiSensor(m=m) annotation (Placement(transformation(
         origin={20,30},
         extent={{-10,-10},{10,10}},
         rotation=270)));

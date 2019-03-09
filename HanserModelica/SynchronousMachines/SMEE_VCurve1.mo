@@ -18,10 +18,10 @@ model SMEE_VCurve1 "V curves of electrical excited synchronous machine operated 
   output Modelica.SIunits.Current ie = smee.ie "Excitation current";
   Modelica.SIunits.Angle theta=rotorDisplacementAngle.rotorDisplacementAngle "Rotor displacement angle";
   parameter Boolean positiveRange = false "Use positive range of angles, if true";
-  Modelica.SIunits.Angle phii = MoveTo_Modelica.Math.wrapAngle(smee.arg_is[1],positiveRange) "Angle of current";
-  Modelica.SIunits.Angle phiv = MoveTo_Modelica.Math.wrapAngle(smee.arg_vs[1],positiveRange) "Angle of voltage";
-  Modelica.SIunits.Angle phis = MoveTo_Modelica.Math.wrapAngle(phiv-phii,positiveRange) "Angle between voltage and current";
-  Modelica.SIunits.Angle epsilon = MoveTo_Modelica.Math.wrapAngle(phis-theta,positiveRange) "Current angle";
+  Modelica.SIunits.Angle phii = Modelica.Math.wrapAngle(smee.arg_is[1],positiveRange) "Angle of current";
+  Modelica.SIunits.Angle phiv = Modelica.Math.wrapAngle(smee.arg_vs[1],positiveRange) "Angle of voltage";
+  Modelica.SIunits.Angle phis = Modelica.Math.wrapAngle(phiv-phii,positiveRange) "Angle between voltage and current";
+  Modelica.SIunits.Angle epsilon = Modelica.Math.wrapAngle(phis-theta,positiveRange) "Current angle";
 
   Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.SynchronousMachines.SM_ElectricalExcited smee(
     phiMechanical(start=-(pi + gamma0)/p, fixed=true),
@@ -92,7 +92,7 @@ model SMEE_VCurve1 "V curves of electrical excited synchronous machine operated 
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-90,80})));
-  MoveTo_Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.MultiSensor multiSensor(m=m) annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.MultiSensor multiSensor(m=m) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={0,60})));
@@ -109,7 +109,7 @@ model SMEE_VCurve1 "V curves of electrical excited synchronous machine operated 
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-50,40})));
-  MoveTo_Modelica.Magnetic.QuasiStatic.FundamentalWave.Sensors.RotorDisplacementAngle rotorDisplacementAngle(m=m, p=smee.p) annotation (Placement(transformation(
+  Modelica.Magnetic.QuasiStatic.FundamentalWave.Sensors.RotorDisplacementAngle rotorDisplacementAngle(m=m, p=smee.p) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=90,
         origin={30,20})));

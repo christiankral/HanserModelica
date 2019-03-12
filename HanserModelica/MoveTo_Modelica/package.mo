@@ -3,7 +3,7 @@ package MoveTo_Modelica "Package of components currently not supported by OpenMo
   extends Modelica.Icons.InternalPackage;
 
 annotation (preferredView = "info",Documentation(info="<html>
-<p>Since version 1.1.0 of HanserModelica this package has only one inentions left</p>
+<p>Since version 1.1.0 of HanserModelica this package has only one intention left</p>
 
 <h4>Workaround for known bugs of OpenModelica</h4>
 <p>Known issues of OpenModelica which have not yet been fixed, may require some components which are

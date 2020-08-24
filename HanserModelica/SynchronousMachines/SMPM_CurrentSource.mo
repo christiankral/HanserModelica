@@ -150,7 +150,7 @@ equation
   connect(starM.plug_p, voltageRMSSensor.plug_p) annotation (Line(points={{-50,40},{-40,40}}, color={85,170,255}));
   annotation (
     experiment(StopTime=2.0, Interval=1E-4, Tolerance=1E-6),
-    Documentation(info="<html>
+    Documentation(info= "<html>
 
 <h4>Description</h4>
 
@@ -181,7 +181,7 @@ to numerically stabilize the simulation.</p>
 <li><code>smpm.wMechanical</code>: speed</li>
 <li><code>smpm.abs_vs[1]</code>: RMS stator voltage of phase 1</li>
 <li><code>smpm.abs_vs[1]</code> against <code>smpm.wMechanical</code>: voltage versus speed characteristic of machine</li>
-<li><code>phis</code>against <code>smpm.wMechanical</code>: phase angle between voltage and current phasor against speed</li>
+<li><code>phis</code> against <code>smpm.wMechanical</code>: phase angle between voltage and current phasor against speed</li>
 <li><code>epsilon</code> against <code>smpm.wMechanical</code>: current angle against speed</li>
 <li><code>theta</code> against <code>smpm.wMechanical</code>: rotor displacement angle against speed</li>
 </ul>

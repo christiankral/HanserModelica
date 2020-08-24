@@ -170,7 +170,7 @@ equation
   annotation (experiment(StopTime=2.5,Interval=0.0001,Tolerance=1e-06),
     __OpenModelica_simulationFlags(jacobian = "", nls = "newton", s = "dassl", lv = "LOG_STATS"),
     Documentation(
-        info="<html>
+        info= "<html>
 
 <h4>Description</h4>
 
@@ -187,7 +187,7 @@ accelerating inertias against load torque quadratic dependent on speed, finally 
 <li><code>imcQS.tauElectrical</code> against <code>imcQS.wMechanical</code>: quasi static torque speed characteristic</li>
 <li><code>currentRMSsensor.I</code>: quasi RMS stator current of transient machine</li>
 <li><code>currentRMSSensorQS.I</code>: RMS line current of phase 1 of quasi static machine</li>
-<li><code>imcQS.abs_i[1]</code>: RMS stator current of phase 1 of quasi static machine</li>
+<li><code>imcQS.abs_is[1]</code>: RMS stator current of phase 1 of quasi static machine</li>
 <li><code>imc.stator.electroMagneticConverter.abs_Phi</code>: magnitude of stator flux of transient machine</li>
 <li><code>imcQS.stator.electroMagneticConverter.abs_Phi</code>: magnitude of stator flux of quasi static machine</li>
 <li><code>imcQS.arg_vs[1]</code>: phase angle of stator phase voltage 1, quasi static machine</li>

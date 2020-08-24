@@ -225,9 +225,7 @@ equation
                   textStyle={TextStyle.Bold},
           textString="%m phase quasi static",        lineColor={0,0,0})}),
         experiment(StopTime=1, Interval=0.0001, Tolerance=1E-6),
-    Documentation(info="<html>
-
-<h4>Description</h4>
+    Documentation(info= "<html><head></head><body><h4>Description</h4>
 
 <p>
 This example compares a time transient and a quasi static model of a multi phase induction machine. 
@@ -245,9 +243,9 @@ against load torque quadratic dependent on speed, finally reaching nominal speed
 <li><code>imcQS.wMechanical</code>: quasi static speed</li>
 <li><code>imcQS.tauElectrical</code> against <code>imcQS.wMechanical</code>: quasi static torque speed characteristic</li>
 <li><code>currentRMSsensor.I</code>: quasi RMS stator current of transient machine</li>
-<li><code>currentSensorQS.abs_i[1]</code>: RMS stator current of phase 1 of quasi static machine</li>
+<li><code>currentRMSSensorQS.I</code>: RMS stator current of phase 1 of quasi static machine</li>
 <li><code>imc.stator.electroMagneticConverter.abs_Phi</code>: magnitude of stator flux of transient machine</li>
 <li><code>imcQS.stator.electroMagneticConverter.abs_Phi</code>: magnitude of stator flux of quasi static machine</li>
 </ul>
-</html>"));
+</body></html>"));
 end IMC_DOL;

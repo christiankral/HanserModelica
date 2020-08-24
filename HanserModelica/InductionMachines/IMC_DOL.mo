@@ -243,7 +243,7 @@ against load torque quadratic dependent on speed, finally reaching nominal speed
 <li><code>imcQS.wMechanical</code>: quasi static speed</li>
 <li><code>imcQS.tauElectrical</code> against <code>imcQS.wMechanical</code>: quasi static torque speed characteristic</li>
 <li><code>currentRMSsensor.I</code>: quasi RMS stator current of transient machine</li>
-<li><code>currentRMSSensorQS.I</code>: RMS stator current of phase 1 of quasi static machine</li>
+<li><code>currentRMSSensorQS.I</code>: RMS stator current of quasi static machine</li>
 <li><code>imc.stator.electroMagneticConverter.abs_Phi</code>: magnitude of stator flux of transient machine</li>
 <li><code>imcQS.stator.electroMagneticConverter.abs_Phi</code>: magnitude of stator flux of quasi static machine</li>
 </ul>

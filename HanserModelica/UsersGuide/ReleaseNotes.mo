@@ -3,7 +3,13 @@ class ReleaseNotes "Release Notes"
   extends Modelica.Icons.ReleaseNotes;
   annotation (
     preferredView = "info",
-    Documentation(info="<html>
+    Documentation(info= "<html>
+
+<h5>Version 1.1.1, 2020-08-24</h5>
+<ul>
+<li>Fix documentation, see
+   <a href=\"https://github.com/christiankral/HanserModelica/issues/11\">#11</a></li>
+</ul>
 
 <h5>Version 1.1.0, 2019-03-24</h5>
 <ul>
@@ -14,7 +20,6 @@ class ReleaseNotes "Release Notes"
    <a href=\"https://github.com/christiankral/HanserModelica/pull/7\">#7</a>
    and 
    <a href=\"https://github.com/christiankral/HanserModelica/issues/8\">#8</a></li>
-<li>
 </ul>
 
 <h5>Version 1.0.2, 2019-02-14</h5>

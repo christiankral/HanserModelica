@@ -5,6 +5,12 @@ class ReleaseNotes "Release Notes"
     preferredView = "info",
     Documentation(info= "<html>
 
+<h5>Version 1.1.2, 2022-04-14</h5>
+<ul>
+<li>Add <code>final</code> attribute in <a href=\"modelica://HanserModelica.Machines.TestSingleLayer12over12\">TestSingleLayer12over12</a> to fix issue <a href=\"https://github.com/OpenModelica/OpenModelica/issues/8539\">OpenModelica#8539</a>, see
+   <a href=\"https://github.com/christiankral/HanserModelica/pull/13\">#13</a></li>
+</ul>
+
 <h5>Version 1.1.1, 2020-08-24</h5>
 <ul>
 <li>Fix documentation, see

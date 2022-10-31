@@ -5,9 +5,9 @@ package HanserModelica "Educational open source library on <html><a href=\"https
 
   annotation (
     preferredView="info",
-    version="1.1.2",
-    versionDate="2022-04-14",
-    uses(Complex(version="3.2.3"), Modelica(version="3.2.3")),
+    version="2.0.0",
+    versionDate="2022-10-31",
+    uses(Complex(version="4.0.0"), Modelica(version="4.0.0")),
   Documentation(info="<html>
 <p><a href=\"https://github.com/christiankral/HanserModelica\">HanserModelica</a>
 is a Modelica open source educational library on object oriented modeling applied to electrical engineering and

@@ -3,15 +3,18 @@ model IMC_Transformer "Induction machine with squirrel cage starting with transf
   import Modelica.Constants.pi;
   extends Modelica.Icons.Example;
   constant Integer m=3 "Number of phases";
-  parameter Modelica.SIunits.Voltage VsNominal=100 "Nominal RMS voltage per phase";
-  parameter Modelica.SIunits.Current IsNominal=100 "Nominal RMS current per phase";
-  parameter Modelica.SIunits.Frequency fsNominal=50 "Nominal frequency";
-  parameter Modelica.SIunits.Time tStart1=0.1 "Start time";
-  parameter Modelica.SIunits.Time tStart2=2.0 "Start time of bypass transformer";
-  parameter Modelica.SIunits.Torque TLoad=161.4 "Nominal load torque";
-  parameter Modelica.SIunits.AngularVelocity wLoad(displayUnit="rev/min")=
-       1440.45*2*Modelica.Constants.pi/60 "Nominal load speed";
-  parameter Modelica.SIunits.Inertia JLoad=0.29 "Load's moment of inertia";
+  parameter Modelica.Units.SI.Voltage VsNominal=100
+    "Nominal RMS voltage per phase";
+  parameter Modelica.Units.SI.Current IsNominal=100
+    "Nominal RMS current per phase";
+  parameter Modelica.Units.SI.Frequency fsNominal=50 "Nominal frequency";
+  parameter Modelica.Units.SI.Time tStart1=0.1 "Start time";
+  parameter Modelica.Units.SI.Time tStart2=2.0
+    "Start time of bypass transformer";
+  parameter Modelica.Units.SI.Torque TLoad=161.4 "Nominal load torque";
+  parameter Modelica.Units.SI.AngularVelocity wLoad(displayUnit="rev/min") =
+    1440.45*2*Modelica.Constants.pi/60 "Nominal load speed";
+  parameter Modelica.Units.SI.Inertia JLoad=0.29 "Load's moment of inertia";
   Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.InductionMachines.IM_SquirrelCage imcQS(
     p=imcData.p,
     fsNominal=imcData.fsNominal,
@@ -35,38 +38,46 @@ model IMC_Transformer "Induction machine with squirrel cage starting with transf
     effectiveStatorTurns=imcData.effectiveStatorTurns,
     alpha20r=imcData.alpha20r,
     TrOperational=imcData.TrRef) annotation (Placement(transformation(extent={{80,10},{60,30}})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensorQS(m=m) annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStatic.Polyphase.Sensors.CurrentQuasiRMSSensor
+    currentRMSSensorQS(m=m) annotation (Placement(transformation(
         origin={-40,80},
         extent={{-10,10},{10,-10}},
         rotation=0)));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sources.VoltageSource sineVoltageQS(
+  Modelica.Electrical.QuasiStatic.Polyphase.Sources.VoltageSource sineVoltageQS(
     final m=m,
     f=fsNominal,
-    V=fill(VsNominal/sqrt(3), m)) annotation (Placement(transformation(origin={-70,80}, extent={{10,10},{-10,-10}})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star starQS(final m=m) annotation (Placement(transformation(
+    V=fill(VsNominal/sqrt(3), m)) annotation (Placement(transformation(origin={
+            -70,80}, extent={{10,10},{-10,-10}})));
+  Modelica.Electrical.QuasiStatic.Polyphase.Basic.Star starQS(final m=m)
+    annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=90,
         origin={-80,50})));
-  Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground groundQS annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStatic.SinglePhase.Basic.Ground groundQS annotation
+    (Placement(transformation(
         origin={-80,20},
         extent={{-10,-10},{10,10}},
         rotation=0)));
   Modelica.Blocks.Sources.BooleanStep booleanStep1QS[m](each startTime=tStart1) annotation (Placement(transformation(extent={{-60,40},{-40,60}})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Ideal.IdealClosingSwitch idealCloserQS(
+  Modelica.Electrical.QuasiStatic.Polyphase.Ideal.IdealClosingSwitch
+    idealCloserQS(
     final m=m,
     Ron=fill(1e-5, m),
     Goff=fill(1e-5, m)) annotation (Placement(transformation(
         origin={-10,80},
         extent={{-10,10},{10,-10}},
         rotation=0)));
-  Modelica.Electrical.QuasiStationary.Machines.BasicMachines.Transformers.Yy.Yy00 transformerQS(
+  Modelica.Electrical.QuasiStatic.Machines.BasicMachines.Transformers.Yy.Yy00
+    transformerQS(
     n=transformerData.n,
     R1=transformerData.R1,
     L1sigma=transformerData.L1sigma,
     R2=transformerData.R2,
     L2sigma=transformerData.L2sigma,
     alpha20_1(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero,
+
     alpha20_2(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero,
+
     T1Ref=293.15,
     T2Ref=293.15,
     T1Operational=293.15,
@@ -75,7 +86,8 @@ model IMC_Transformer "Induction machine with squirrel cage starting with transf
         rotation=0,
         origin={20,80})));
 
-  Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground ground2QS annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStatic.SinglePhase.Basic.Ground ground2QS
+    annotation (Placement(transformation(
         origin={20,50},
         extent={{-10,-10},{10,10}},
         rotation=0)));
@@ -95,7 +107,8 @@ model IMC_Transformer "Induction machine with squirrel cage starting with transf
     v_sc=0.06,
     P_sc=500) "Transformer parameters" annotation (Placement(transformation(extent={{80,80},{100,100}})));
   Modelica.Blocks.Sources.BooleanStep booleanStep2QS[m](each startTime=tStart2) annotation (Placement(transformation(extent={{-60,10},{-40,30}})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Ideal.IdealCommutingSwitch idealCommutingSwitchQS(
+  Modelica.Electrical.QuasiStatic.Polyphase.Ideal.IdealCommutingSwitch
+    idealCommutingSwitchQS(
     final m=m,
     Ron=fill(1e-5, m),
     Goff=fill(50E-5, m)) annotation (Placement(transformation(
@@ -110,7 +123,8 @@ model IMC_Transformer "Induction machine with squirrel cage starting with transf
     useSupport=false) annotation (Placement(transformation(extent={{0,10},{20,30}})));
   Modelica.Magnetic.QuasiStatic.FundamentalWave.Utilities.TerminalBox terminalBoxQS(terminalConnection="D", m=m)
                                                                                                             annotation (Placement(transformation(extent={{80,26},{60,46}})));
-  Modelica.Magnetic.FundamentalWave.BasicMachines.AsynchronousInductionMachines.AIM_SquirrelCage imc(
+  Modelica.Magnetic.FundamentalWave.BasicMachines.InductionMachines.IM_SquirrelCage
+    imc(
     p=imcData.p,
     fsNominal=imcData.fsNominal,
     TsRef=imcData.TsRef,
@@ -133,19 +147,21 @@ model IMC_Transformer "Induction machine with squirrel cage starting with transf
     TsOperational=imcData.TsRef,
     effectiveStatorTurns=imcData.effectiveStatorTurns,
     alpha20r=imcData.alpha20r,
-    TrOperational=imcData.TrRef) annotation (Placement(transformation(extent={{80,-90},{60,-70}})));
-  Modelica.Electrical.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensor(m=m) annotation (Placement(transformation(
+    TrOperational=imcData.TrRef)
+    annotation (Placement(transformation(extent={{80,-90},{60,-70}})));
+  Modelica.Electrical.Polyphase.Sensors.CurrentQuasiRMSSensor currentRMSSensor(
+      m=m) annotation (Placement(transformation(
         origin={-40,-20},
         extent={{-10,10},{10,-10}},
         rotation=0)));
-  Modelica.Electrical.MultiPhase.Sources.SineVoltage sineVoltage(
+  Modelica.Electrical.Polyphase.Sources.SineVoltage sineVoltage(
     final m=m,
-    freqHz=fill(fsNominal, m),
-    V=fill(sqrt(2/3)*VsNominal, m)) annotation (Placement(transformation(
-        origin={-70,-20},
-        extent={{10,10},{-10,-10}})));
-  Modelica.Electrical.MultiPhase.Basic.Star star(final m=m) annotation (
-      Placement(transformation(extent={{10,-10},{-10,10}},
+    f=fill(fsNominal, m),
+    V=fill(sqrt(2/3)*VsNominal, m)) annotation (Placement(transformation(origin
+          ={-70,-20}, extent={{10,10},{-10,-10}})));
+  Modelica.Electrical.Polyphase.Basic.Star star(final m=m) annotation (
+      Placement(transformation(
+        extent={{10,-10},{-10,10}},
         rotation=90,
         origin={-80,-50})));
   Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
@@ -155,7 +171,7 @@ model IMC_Transformer "Induction machine with squirrel cage starting with transf
         rotation=0)));
   Modelica.Blocks.Sources.BooleanStep booleanStep1[m](each startTime=
         tStart1) annotation (Placement(transformation(extent={{-60,-60},{-40,-40}})));
-  Modelica.Electrical.MultiPhase.Ideal.IdealClosingSwitch idealCloser(
+  Modelica.Electrical.Polyphase.Ideal.IdealClosingSwitch idealCloser(
     final m=m,
     Ron=fill(1e-5, m),
     Goff=fill(1e-5, m)) annotation (Placement(transformation(
@@ -184,13 +200,11 @@ model IMC_Transformer "Induction machine with squirrel cage starting with transf
         rotation=0)));
   Modelica.Blocks.Sources.BooleanStep booleanStep2[m](each startTime=
         tStart2) annotation (Placement(transformation(extent={{-60,-90},{-40,-70}})));
-  Modelica.Electrical.MultiPhase.Ideal.IdealCommutingSwitch
-    idealCommutingSwitch(
+  Modelica.Electrical.Polyphase.Ideal.IdealCommutingSwitch idealCommutingSwitch(
     final m=m,
     Ron=fill(1e-5, m),
-    Goff=fill(50E-5, m)) annotation (Placement(transformation(
-        extent={{60,-10},{40,-30}},
-        rotation=0)));
+    Goff=fill(50E-5, m)) annotation (Placement(transformation(extent={{60,-10},
+            {40,-30}}, rotation=0)));
   Modelica.Mechanics.Rotational.Components.Inertia loadInertia(J=JLoad)
     annotation (Placement(transformation(extent={{50,-90},{30,-70}})));
   Modelica.Mechanics.Rotational.Sources.QuadraticSpeedDependentTorque

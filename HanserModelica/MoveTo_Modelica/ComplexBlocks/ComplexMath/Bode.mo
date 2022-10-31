@@ -1,7 +1,8 @@
 ﻿within HanserModelica.MoveTo_Modelica.ComplexBlocks.ComplexMath;
 block Bode "Calculate quantities to plot Bode diagram"
   parameter Boolean useDivisor = true "Use divisor input, if true" annotation(Evaluate = true, HideResult = true, choices(  checkBox = true));
-  constant Modelica.SIunits.AmplitudeLevelDifference dB = 20 "Amplitude level difference";
+  constant Modelica.Units.SI.AmplitudeLevelDifference dB=20
+    "Amplitude level difference";
   Modelica.ComplexBlocks.Interfaces.ComplexInput u "Dividend if useDivisor == true" annotation (Placement(transformation(extent={{-140,40},{-100,80}}), iconTransformation(extent={{-140,40},{-100,80}})));
   Modelica.ComplexBlocks.Interfaces.ComplexInput divisor if useDivisor "Divisor" annotation (Placement(transformation(extent={{-140,-80},{-100,-40}}), iconTransformation(extent={{-140,-80},{-100,-40}})));
   Modelica.Blocks.Interfaces.RealOutput abs_y "Absolute value of ratio u / divisor" annotation (Placement(transformation(

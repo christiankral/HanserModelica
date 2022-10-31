@@ -1,32 +1,41 @@
 within HanserModelica.Electrical;
 model StarDelta "Example of three-phase star connected sources and delta connected load"
   extends Modelica.Icons.Example;
-  Modelica.Electrical.MultiPhase.Basic.Star star annotation (Placement(transformation(
+  Modelica.Electrical.Polyphase.Basic.Star star annotation (Placement(
+        transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-70,-10})));
-  Modelica.Electrical.MultiPhase.Basic.Delta delta annotation (Placement(transformation(
+  Modelica.Electrical.Polyphase.Basic.Delta delta annotation (Placement(
+        transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={80,2})));
   Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(transformation(extent={{-90,-40},{-70,-20}})));
-  Modelica.Electrical.MultiPhase.Sources.SineVoltage sineVoltage(
-    phase=-Modelica.Electrical.MultiPhase.Functions.symmetricOrientation(3),
-    freqHz=fill(50, 3),
+  Modelica.Electrical.Polyphase.Sources.SineVoltage sineVoltage(
+    phase=-Modelica.Electrical.Polyphase.Functions.symmetricOrientation(3),
+    f=fill(50, 3),
     V=fill(sqrt(2)*230, 3)) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-70,20})));
-  Modelica.Electrical.MultiPhase.Ideal.IdealClosingSwitch switch(Ron=fill(1E-5, 3), Goff=fill(1E-5, 3)) annotation (Placement(transformation(extent={{-60,30},{-40,50}})));
-  Modelica.Electrical.MultiPhase.Basic.Resistor resistor(R=fill(1, 3)) annotation (Placement(transformation(extent={{-30,30},{-10,50}})));
-  Modelica.Electrical.MultiPhase.Basic.Inductor inductor(L=fill(0.01, 3)) annotation (Placement(transformation(extent={{0,30},{20,50}})));
+  Modelica.Electrical.Polyphase.Ideal.IdealClosingSwitch switch(Ron=fill(1E-5,
+        3), Goff=fill(1E-5, 3))
+    annotation (Placement(transformation(extent={{-60,30},{-40,50}})));
+  Modelica.Electrical.Polyphase.Basic.Resistor resistor(R=fill(1, 3))
+    annotation (Placement(transformation(extent={{-30,30},{-10,50}})));
+  Modelica.Electrical.Polyphase.Basic.Inductor inductor(L=fill(0.01, 3))
+    annotation (Placement(transformation(extent={{0,30},{20,50}})));
   Modelica.Blocks.Sources.BooleanStep booleanStep[3](startTime=fill(0.02, 3)) annotation (Placement(transformation(extent={{-90,50},{-70,70}})));
-  Modelica.Electrical.MultiPhase.Basic.Inductor inductorLoad(L=fill(0.1, 3)) annotation (Placement(transformation(
+  Modelica.Electrical.Polyphase.Basic.Inductor inductorLoad(L=fill(0.1, 3))
+    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={50,0})));
-  Modelica.Electrical.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensor annotation (Placement(transformation(extent={{60,50},{80,30}})));
-  Modelica.Electrical.MultiPhase.Sensors.CurrentSensor currentSensor annotation (Placement(transformation(extent={{30,50},{50,30}})));
+  Modelica.Electrical.Polyphase.Sensors.CurrentQuasiRMSSensor currentRMSSensor
+    annotation (Placement(transformation(extent={{60,50},{80,30}})));
+  Modelica.Electrical.Polyphase.Sensors.CurrentSensor currentSensor
+    annotation (Placement(transformation(extent={{30,50},{50,30}})));
   Modelica.Blocks.Math.RootMeanSquare rootMeanSquare[3](f=fill(50, 3)) annotation (Placement(transformation(extent={{20,50},{0,70}})));
 initial equation
   inductorLoad.i[1:3]=zeros(3);

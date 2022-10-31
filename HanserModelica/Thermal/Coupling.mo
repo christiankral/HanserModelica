@@ -1,14 +1,16 @@
 within HanserModelica.Thermal;
 model Coupling "Electro-thermal coupling"
   extends Modelica.Icons.Example;
-  parameter Modelica.SIunits.Voltage v = 100 "DC supply voltage";
-  parameter Modelica.SIunits.Resistance RRef = 10 "Resistance at TRef";
-  parameter Modelica.SIunits.Temperature TRef = 20+273.15 "Reference temperature";
-  parameter Modelica.SIunits.LinearTemperatureCoefficient alphaRef = 0.004
+  parameter Modelica.Units.SI.Voltage v=100 "DC supply voltage";
+  parameter Modelica.Units.SI.Resistance RRef=10 "Resistance at TRef";
+  parameter Modelica.Units.SI.Temperature TRef=20 + 273.15
+    "Reference temperature";
+  parameter Modelica.Units.SI.LinearTemperatureCoefficient alphaRef=0.004
     "Linear temperature coefficient at reference temperature";
-  parameter Modelica.SIunits.Temperature TAmbient = 20+273.15 "Ambient temperature";
-  parameter Modelica.SIunits.ThermalResistance R = 0.08 "Thermal resistance";
-  parameter Modelica.SIunits.HeatCapacity C = 1500 "Thermal capacitance";
+  parameter Modelica.Units.SI.Temperature TAmbient=20 + 273.15
+    "Ambient temperature";
+  parameter Modelica.Units.SI.ThermalResistance R=0.08 "Thermal resistance";
+  parameter Modelica.Units.SI.HeatCapacity C=1500 "Thermal capacitance";
   Modelica.Electrical.Analog.Basic.Resistor resistor(
     R=RRef,
     T_ref=TRef,

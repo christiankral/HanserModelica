@@ -3,17 +3,21 @@ model IMC_Inverter1 "Induction machine with squirrel cage and inverter"
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   parameter Integer m=3 "Number of phases";
-  parameter Modelica.SIunits.Voltage VsNominal=100 "Nominal RMS voltage per phase";
-  parameter Modelica.SIunits.Current IsNominal=100 "Nominal RMS current per phase";
-  parameter Modelica.SIunits.Frequency fsNominal=imcData.fsNominal "Nominal frequency";
-  parameter Modelica.SIunits.Frequency f=fsNominal "Maximum operational frequency";
-  Modelica.SIunits.Frequency fActual=ramp.y "Actual frequency";
-  parameter Modelica.SIunits.Time tRamp=1 "Frequency ramp";
-  parameter Modelica.SIunits.Torque TLoad=161.4 "Nominal load torque";
-  parameter Modelica.SIunits.Time tStep=1.5 "Time of load torque step";
-  parameter Modelica.SIunits.Inertia JLoad=0.29 "Load's moment of inertia";
-  output Modelica.SIunits.Current I=currentRMSSensor.I "Transient RMS current";
-  Modelica.Magnetic.FundamentalWave.BasicMachines.AsynchronousInductionMachines.AIM_SquirrelCage
+  parameter Modelica.Units.SI.Voltage VsNominal=100
+    "Nominal RMS voltage per phase";
+  parameter Modelica.Units.SI.Current IsNominal=100
+    "Nominal RMS current per phase";
+  parameter Modelica.Units.SI.Frequency fsNominal=imcData.fsNominal
+    "Nominal frequency";
+  parameter Modelica.Units.SI.Frequency f=fsNominal
+    "Maximum operational frequency";
+  Modelica.Units.SI.Frequency fActual=ramp.y "Actual frequency";
+  parameter Modelica.Units.SI.Time tRamp=1 "Frequency ramp";
+  parameter Modelica.Units.SI.Torque TLoad=161.4 "Nominal load torque";
+  parameter Modelica.Units.SI.Time tStep=1.5 "Time of load torque step";
+  parameter Modelica.Units.SI.Inertia JLoad=0.29 "Load's moment of inertia";
+  output Modelica.Units.SI.Current I=currentRMSSensor.I "Transient RMS current";
+  Modelica.Magnetic.FundamentalWave.BasicMachines.InductionMachines.IM_SquirrelCage
     imc(
     p=imcData.p,
     fsNominal=imcData.fsNominal,
@@ -37,8 +41,8 @@ model IMC_Inverter1 "Induction machine with squirrel cage and inverter"
     TsOperational=imcData.TsRef,
     effectiveStatorTurns=imcData.effectiveStatorTurns,
     alpha20r=imcData.alpha20r,
-    TrOperational=imcData.TrRef) annotation (Placement(transformation(extent={
-            {20,-90},{40,-70}})));
+    TrOperational=imcData.TrRef)
+    annotation (Placement(transformation(extent={{20,-90},{40,-70}})));
   Modelica.Blocks.Sources.Ramp ramp(duration=tRamp, height=f) annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
   Modelica.Electrical.Machines.Utilities.VfController vfController(
     final m=m,
@@ -46,13 +50,13 @@ model IMC_Inverter1 "Induction machine with squirrel cage and inverter"
     fNominal=fsNominal,
     VNominal=VsNominal)                 annotation (Placement(
         transformation(extent={{-40,-10},{-20,10}})));
-  Modelica.Electrical.MultiPhase.Sources.SignalVoltage signalVoltage(
-      final m=m) annotation (Placement(transformation(
+  Modelica.Electrical.Polyphase.Sources.SignalVoltage signalVoltage(final m=m)
+    annotation (Placement(transformation(
         origin={-10,-30},
         extent={{-10,10},{10,-10}},
         rotation=180)));
-  Modelica.Electrical.MultiPhase.Basic.Star star(final m=m) annotation (
-     Placement(transformation(extent={{-30,-40},{-50,-20}})));
+  Modelica.Electrical.Polyphase.Basic.Star star(final m=m)
+    annotation (Placement(transformation(extent={{-30,-40},{-50,-20}})));
   Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
         transformation(
         origin={-60,-30},
@@ -67,8 +71,12 @@ model IMC_Inverter1 "Induction machine with squirrel cage and inverter"
     offsetTorque=0) annotation (Placement(transformation(extent={{96,-90},
             {76,-70}})));
   Modelica.Electrical.Machines.Utilities.MultiTerminalBox terminalBox(terminalConnection="Y", m=m) annotation (Placement(transformation(extent={{20,-74},{40,-54}})));
-  Modelica.Electrical.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensor(final m=m) annotation (Placement(transformation(origin={20,-30}, extent={{-10,10},{10,-10}})));
-  Modelica.Electrical.MultiPhase.Basic.Star starMachine(final m=Modelica.Electrical.MultiPhase.Functions.numberOfSymmetricBaseSystems(m)) annotation (Placement(transformation(
+  Modelica.Electrical.Polyphase.Sensors.CurrentQuasiRMSSensor currentRMSSensor(
+      final m=m) annotation (Placement(transformation(origin={20,-30}, extent={
+            {-10,10},{10,-10}})));
+  Modelica.Electrical.Polyphase.Basic.Star starMachine(final m=
+        Modelica.Electrical.Polyphase.Functions.numberOfSymmetricBaseSystems(m))
+    annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={0,-74})));
@@ -76,8 +84,10 @@ model IMC_Inverter1 "Induction machine with squirrel cage and inverter"
         origin={-30,-74},
         extent={{-10,-10},{10,10}},
         rotation=270)));
-  Modelica.Electrical.MultiPhase.Sensors.VoltageQuasiRMSSensor voltageRMSSensor(final m=m)   annotation (
-    Placement(transformation(origin={54,-54},    extent={{10,10},{-10,-10}},
+  Modelica.Electrical.Polyphase.Sensors.VoltageQuasiRMSSensor voltageRMSSensor(
+      final m=m) annotation (Placement(transformation(
+        origin={54,-54},
+        extent={{10,10},{-10,-10}},
         rotation=270)));
   parameter ParameterRecords.IMC imcData "Induction machine parameters" annotation (Placement(transformation(extent={{50,-10},{70,10}})));
 initial equation

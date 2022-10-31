@@ -2,9 +2,9 @@ within HanserModelica.Classes;
 function wrapAngle "Wrap angle to interval ]-pi,pi] or [0,2*pi["
   extends Modelica.Math.Icons.AxisCenter;
   import Modelica.Constants.pi;
-  input Modelica.SIunits.Angle u "Input angle";
+  input Modelica.Units.SI.Angle u "Input angle";
   input Boolean positiveRange=false "Use only positive output range, if true";
-  output Modelica.SIunits.Angle y "Wrapped output angle";
+  output Modelica.Units.SI.Angle y "Wrapped output angle";
 
 algorithm
   y :=mod(u, 2*pi);

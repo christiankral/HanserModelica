@@ -1,8 +1,8 @@
 within HanserModelica.Electrical;
 model Tables "Application of tables"
   extends Modelica.Icons.Example;
-  parameter Modelica.SIunits.Inductance L = 2 "Inductance";
-  parameter Modelica.SIunits.Voltage v = 20 "Total DC voltage";
+  parameter Modelica.Units.SI.Inductance L=2 "Inductance";
+  parameter Modelica.Units.SI.Voltage v=20 "Total DC voltage";
   Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(transformation(extent={{-50,-20},{-30,0}})));
   Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V=v) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},

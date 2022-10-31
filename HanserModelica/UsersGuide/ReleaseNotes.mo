@@ -3,7 +3,12 @@ class ReleaseNotes "Release Notes"
   extends Modelica.Icons.ReleaseNotes;
   annotation (
     preferredView = "info",
-    Documentation(info= "<html>
+    Documentation(info="<html>
+
+<h5>Version 2.0.0, 2022-10-31</h5>
+<ul>
+<li>Switch to Modelica Standard Library 4.0.0</li>
+</ul>
 
 <h5>Version 1.1.2, 2022-04-14</h5>
 <ul>

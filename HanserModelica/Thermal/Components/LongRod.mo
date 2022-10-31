@@ -1,10 +1,13 @@
 within HanserModelica.Thermal.Components;
 model LongRod "Long rod consisting of n short rods"
   parameter Integer n = 3 "Number of short rods";
-  parameter Modelica.SIunits.HeatCapacity C = 1500 "Total heat capacity of long rod element";
-  parameter Modelica.SIunits.ThermalResistance R = 0.08 "Total heat resistance of long rod element";
-  parameter Modelica.SIunits.Temperature T0=293.15 "Initial temperature of inner rod elements";
-  Modelica.SIunits.Temperature T[n] = shortRod.T "Heat capacitor temperatures";
+  parameter Modelica.Units.SI.HeatCapacity C=1500
+    "Total heat capacity of long rod element";
+  parameter Modelica.Units.SI.ThermalResistance R=0.08
+    "Total heat resistance of long rod element";
+  parameter Modelica.Units.SI.Temperature T0=293.15
+    "Initial temperature of inner rod elements";
+  Modelica.Units.SI.Temperature T[n]=shortRod.T "Heat capacitor temperatures";
 
   ShortRod shortRod[n](final C=fill(C/n, n),final R=fill(R/n, n),final T0=fill(T0, n)) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));

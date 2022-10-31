@@ -1,9 +1,9 @@
 within HanserModelica.Electrical;
 model Signals "Application of signals, sources, sesors"
   extends Modelica.Icons.Example;
-  parameter Modelica.SIunits.Resistance R = 10 "Resistance";
-  parameter Modelica.SIunits.Inductance L = 2 "Inductance";
-  parameter Modelica.SIunits.Current IRef = 0.25 "Reference current";
+  parameter Modelica.Units.SI.Resistance R=10 "Resistance";
+  parameter Modelica.Units.SI.Inductance L=2 "Inductance";
+  parameter Modelica.Units.SI.Current IRef=0.25 "Reference current";
   Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
   Modelica.Electrical.Analog.Basic.Resistor resistor(R=R) annotation (Placement(transformation(extent={{30,10},{50,30}})));
   Modelica.Electrical.Analog.Basic.Inductor inductor(L=L, i(start=0, fixed=true)) annotation (Placement(transformation(extent={{60,10},{80,30}})));

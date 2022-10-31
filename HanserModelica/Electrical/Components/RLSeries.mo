@@ -3,7 +3,7 @@ model RLSeries "R-L series circuit"
   extends Modelica.Electrical.Analog.Interfaces.TwoPin;
   parameter Real R(start=1) "Resistance";
   parameter Real L(start=1) "Inductance";
-  Modelica.SIunits.Current i(start=0) = p.i "Current";
+  Modelica.Units.SI.Current i(start=0) = p.i "Current";
   Modelica.Electrical.Analog.Basic.Resistor resistor(final R=R) annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
   Modelica.Electrical.Analog.Basic.Inductor inductor(final L=L) annotation (Placement(transformation(extent={{20,-10},{40,10}})));
 equation

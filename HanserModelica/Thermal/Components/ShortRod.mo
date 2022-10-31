@@ -1,9 +1,12 @@
 within HanserModelica.Thermal.Components;
 model ShortRod "Short rod"
-  parameter Modelica.SIunits.HeatCapacity C = 1500 "Heat capacity of rod element";
-  parameter Modelica.SIunits.ThermalResistance R = 0.08 "Heat resistance of rod element";
-  parameter Modelica.SIunits.Temperature T0=293.15 "Initial temperature of rod element";
-  Modelica.SIunits.Temperature T = heatCapacitor.T "Heat capacitor temperature";
+  parameter Modelica.Units.SI.HeatCapacity C=1500
+    "Heat capacity of rod element";
+  parameter Modelica.Units.SI.ThermalResistance R=0.08
+    "Heat resistance of rod element";
+  parameter Modelica.Units.SI.Temperature T0=293.15
+    "Initial temperature of rod element";
+  Modelica.Units.SI.Temperature T=heatCapacitor.T "Heat capacitor temperature";
 
   Modelica.Thermal.HeatTransfer.Components.ThermalResistor thermalResistor1(final R=R/2)
     annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));

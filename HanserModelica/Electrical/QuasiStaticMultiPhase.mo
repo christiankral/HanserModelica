@@ -2,32 +2,37 @@ within HanserModelica.Electrical;
 model QuasiStaticMultiPhase "Quasi static multi phase circuit"
   extends Modelica.Icons.Example;
 
-  Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Inductor inductor(L=fill(0.0008, 3))
-                                                                                   annotation (Placement(transformation(extent={{-2,10},{18,30}})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Basic.VariableConductor conductor annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStatic.Polyphase.Basic.Inductor inductor(L=fill(
+        0.0008, 3))
+    annotation (Placement(transformation(extent={{-2,10},{18,30}})));
+  Modelica.Electrical.QuasiStatic.Polyphase.Basic.VariableConductor conductor
+    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={30,0})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Inductor mainInductor(L=fill(0.01, 3)) annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStatic.Polyphase.Basic.Inductor mainInductor(L=fill(
+        0.01, 3)) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-20,0})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sources.VoltageSource voltageSource(
+  Modelica.Electrical.QuasiStatic.Polyphase.Sources.VoltageSource voltageSource(
     f=50,
     V=fill(100, 3),
-    phi=-Modelica.Electrical.MultiPhase.Functions.symmetricOrientation(3),
-    gamma(fixed=true, start=0))
-                      annotation (Placement(transformation(
+    phi=-Modelica.Electrical.Polyphase.Functions.symmetricOrientation(3),
+    gamma(fixed=true, start=0)) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-70,0})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.MultiSensor sensor annotation (Placement(transformation(extent={{-50,10},{-30,30}})));
+  Modelica.Electrical.QuasiStatic.Polyphase.Sensors.MultiSensor sensor
+    annotation (Placement(transformation(extent={{-50,10},{-30,30}})));
   Modelica.Blocks.Sources.Ramp ramp[3](
     height=fill(60, 3),
     duration=fill(1, 3),
     offset=fill(-30, 3)) annotation (Placement(transformation(extent={{80,-10},{60,10}})));
-  Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground ground annotation (Placement(transformation(extent={{-80,-72},{-60,-52}})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star star annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStatic.SinglePhase.Basic.Ground ground
+    annotation (Placement(transformation(extent={{-80,-72},{-60,-52}})));
+  Modelica.Electrical.QuasiStatic.Polyphase.Basic.Star star annotation (
+      Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-70,-30})));

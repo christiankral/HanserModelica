@@ -19,7 +19,8 @@ model TestTransformer "Test of transformer model"
         rotation=270,
         origin={40,10})));
   Modelica.Electrical.Analog.Ideal.IdealClosingSwitch switch(Ron=1e-5, Goff=1e-5) annotation (Placement(transformation(extent={{0,20},{20,40}})));
-  Modelica.Electrical.Analog.Sources.SineVoltage sineVoltage(V=sqrt(2)*6900, freqHz=50) annotation (Placement(transformation(
+  Modelica.Electrical.Analog.Sources.SineVoltage sineVoltage(V=sqrt(2)*6900, f=
+        50) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-72,10})));

@@ -11,8 +11,8 @@ protected
   Integer Sg = if winding.doubleLayer then div(winding.Sprime,2) else winding.Sprime "Number of slots per coil group";
   Integer yShift = div(winding.Sprime, winding.m) "Slot displacement between two adjacent windings";
   Integer coilSideCounter[Sg]=zeros(Sg) "Coil side counter to validate winding";
-  Modelica.SIunits.Angle dgamma "Local coil width";
-  Modelica.SIunits.Angle gamma "Local orientation of coil";
+  Modelica.Units.SI.Angle dgamma "Local coil width";
+  Modelica.Units.SI.Angle gamma "Local orientation of coil";
   Real xic "Local skewing factor of coil";
 algorithm
   // Check for odd number of phases

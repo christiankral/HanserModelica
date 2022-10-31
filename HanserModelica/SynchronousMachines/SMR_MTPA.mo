@@ -3,20 +3,27 @@ model SMR_MTPA "Synchronous reluctance machine, investigating maximum torque per
    extends Modelica.Icons.Example;
    import Modelica.Constants.pi;
    parameter Integer m = 3 "Number of phases";
-   parameter Modelica.SIunits.Voltage VNominal = 100 "Nominal RMS voltage per phase";
-   parameter Modelica.SIunits.Frequency fsNominal = 50 "Nominal frequency";
-   parameter Modelica.SIunits.Frequency f = 50 "Actual frequency";
-   parameter Modelica.SIunits.Time tRamp = 1 "Frequency ramp";
-   parameter Modelica.SIunits.Torque TLoad = 88.67 "Nominal load torque";
-   parameter Modelica.SIunits.Time tStep = 1.2 "Time of load torque step";
-   parameter Modelica.SIunits.Inertia JLoad = 0.29 "Load's moment of inertia";
-   parameter Modelica.SIunits.AngularVelocity wNominal = 2 * pi * fsNominal / smrData.p "Nominal angular velocity";
-   Modelica.SIunits.Angle theta = rotorDisplacementAngle.rotorDisplacementAngle "Rotor displacement angle, quasi stastic";
+  parameter Modelica.Units.SI.Voltage VNominal=100
+    "Nominal RMS voltage per phase";
+  parameter Modelica.Units.SI.Frequency fsNominal=50 "Nominal frequency";
+  parameter Modelica.Units.SI.Frequency f=50 "Actual frequency";
+  parameter Modelica.Units.SI.Time tRamp=1 "Frequency ramp";
+  parameter Modelica.Units.SI.Torque TLoad=88.67 "Nominal load torque";
+  parameter Modelica.Units.SI.Time tStep=1.2 "Time of load torque step";
+  parameter Modelica.Units.SI.Inertia JLoad=0.29 "Load's moment of inertia";
+  parameter Modelica.Units.SI.AngularVelocity wNominal=2*pi*fsNominal/smrData.p
+    "Nominal angular velocity";
+  Modelica.Units.SI.Angle theta=rotorDisplacementAngle.rotorDisplacementAngle
+    "Rotor displacement angle, quasi stastic";
    parameter Boolean positiveRange = false "Use positive range of angles, if true";
-   Modelica.SIunits.Angle phii = Modelica.Math.wrapAngle(smr.arg_is[1], positiveRange) "Angle of current";
-   Modelica.SIunits.Angle phiv = Modelica.Math.wrapAngle(smr.arg_vs[1], positiveRange) "Angle of voltage";
-   Modelica.SIunits.Angle phis = Modelica.Math.wrapAngle(phiv - phii, positiveRange) "Angle between voltage and current";
-   Modelica.SIunits.Angle epsilon = Modelica.Math.wrapAngle(phis - theta, positiveRange) "Current angle";
+  Modelica.Units.SI.Angle phii=Modelica.Math.wrapAngle(smr.arg_is[1],
+      positiveRange) "Angle of current";
+  Modelica.Units.SI.Angle phiv=Modelica.Math.wrapAngle(smr.arg_vs[1],
+      positiveRange) "Angle of voltage";
+  Modelica.Units.SI.Angle phis=Modelica.Math.wrapAngle(phiv - phii,
+      positiveRange) "Angle between voltage and current";
+  Modelica.Units.SI.Angle epsilon=Modelica.Math.wrapAngle(phis - theta,
+      positiveRange) "Current angle";
    Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.SynchronousMachines.SM_ReluctanceRotor smr(p = smrData.p, fsNominal = smrData.fsNominal, TsRef = smrData.TsRef, Jr = smrData.Jr, Js = smrData.Js, frictionParameters = smrData.frictionParameters, statorCoreParameters = smrData.statorCoreParameters, strayLoadParameters = smrData.strayLoadParameters,                                        Lrsigmad = smrData.Lrsigmad, Lrsigmaq = smrData.Lrsigmaq, Rrd = smrData.Rrd, Rrq = smrData.Rrq, TrRef = smrData.TrRef, phiMechanical(fixed = true, start = 0), m = m, effectiveStatorTurns = smrData.effectiveStatorTurns, Rs = smrData.Rs * m / 3, Lssigma = smrData.Lssigma * m / 3, Lmd = smrData.Lmd * m / 3, Lmq = smrData.Lmq * m / 3,
      TrOperational=smrData.TrRef,
      useDamperCage=false,
@@ -26,24 +33,40 @@ model SMR_MTPA "Synchronous reluctance machine, investigating maximum torque per
      Placement(transformation(extent = {{0, 0}, {20, 20}})));
    Modelica.Mechanics.Rotational.Sources.ConstantSpeed quadraticSpeedDependentTorque(w_fixed = wNominal) annotation (
      Placement(transformation(extent = {{80, 0}, {60, 20}})));
-   Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star starMachine(m = Modelica.Electrical.MultiPhase.Functions.numberOfSymmetricBaseSystems(m)) annotation (
-     Placement(transformation(extent = {{-10, 10}, {10, -10}}, rotation = 180, origin = {-20, 10})));
-   Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground groundM annotation (
-     Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 0, origin = {-50, 0})));
+  Modelica.Electrical.QuasiStatic.Polyphase.Basic.Star starMachine(m=
+        Modelica.Electrical.Polyphase.Functions.numberOfSymmetricBaseSystems(m))
+    annotation (Placement(transformation(
+        extent={{-10,10},{10,-10}},
+        rotation=180,
+        origin={-20,10})));
+  Modelica.Electrical.QuasiStatic.SinglePhase.Basic.Ground groundM annotation (
+      Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={-50,0})));
    Modelica.Magnetic.QuasiStatic.FundamentalWave.Utilities.MultiTerminalBox terminalBox(terminalConnection = "Y", m = m) annotation (
      Placement(transformation(extent = {{0, 16}, {20, 36}})));
    Modelica.Magnetic.QuasiStatic.FundamentalWave.Utilities.CurrentController currentController(m = m, p = smr.p) annotation (
      Placement(transformation(extent = {{-40, 70}, {-20, 90}})));
    Modelica.Mechanics.Rotational.Sensors.AngleSensor angleSensor annotation (
      Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {40, 50})));
-   Modelica.Electrical.QuasiStationary.MultiPhase.Sources.ReferenceCurrentSource referenceCurrentSource(m = m) annotation (
-     Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation = 90, origin = {10, 80})));
-   Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star star(m = m) annotation (
-     Placement(transformation(origin = {60, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 270)));
-   Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground grounde annotation (
-     Placement(transformation(extent = {{-10, -10}, {10, 10}}, origin = {60, 60})));
-   Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Resistor resistor(m = m, R_ref = fill(1e5, m)) annotation (
-     Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {30, 80})));
+  Modelica.Electrical.QuasiStatic.Polyphase.Sources.ReferenceCurrentSource
+    referenceCurrentSource(m=m) annotation (Placement(transformation(
+        extent={{10,-10},{-10,10}},
+        rotation=90,
+        origin={10,80})));
+  Modelica.Electrical.QuasiStatic.Polyphase.Basic.Star star(m=m) annotation (
+      Placement(transformation(
+        origin={60,80},
+        extent={{-10,-10},{10,10}},
+        rotation=270)));
+  Modelica.Electrical.QuasiStatic.SinglePhase.Basic.Ground grounde annotation (
+      Placement(transformation(extent={{-10,-10},{10,10}}, origin={60,60})));
+  Modelica.Electrical.QuasiStatic.Polyphase.Basic.Resistor resistor(m=m, R_ref=
+        fill(1e5, m)) annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={30,80})));
    Modelica.Magnetic.QuasiStatic.FundamentalWave.Sensors.RotorDisplacementAngle rotorDisplacementAngle(
      m=m,
      p=smrData.p,
@@ -51,12 +74,19 @@ model SMR_MTPA "Synchronous reluctance machine, investigating maximum torque per
          extent={{10,-10},{-10,10}},
          rotation=90,
          origin={40,10})));
-   Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensor(m = m) annotation (
-     Placement(transformation(extent = {{10, 10}, {-10, -10}}, rotation = 90, origin = {10, 50})));
-   Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.VoltageQuasiRMSSensor voltageRMSSensor(m = m) annotation (
-     Placement(transformation(extent = {{-30, 50}, {-10, 30}})));
-   Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star starM(m = m) annotation (
-     Placement(transformation(extent = {{-10, 10}, {10, -10}}, rotation = 270, origin = {-40, 30})));
+  Modelica.Electrical.QuasiStatic.Polyphase.Sensors.CurrentQuasiRMSSensor
+    currentRMSSensor(m=m) annotation (Placement(transformation(
+        extent={{10,10},{-10,-10}},
+        rotation=90,
+        origin={10,50})));
+  Modelica.Electrical.QuasiStatic.Polyphase.Sensors.VoltageQuasiRMSSensor
+    voltageRMSSensor(m=m)
+    annotation (Placement(transformation(extent={{-30,50},{-10,30}})));
+  Modelica.Electrical.QuasiStatic.Polyphase.Basic.Star starM(m=m) annotation (
+      Placement(transformation(
+        extent={{-10,10},{10,-10}},
+        rotation=270,
+        origin={-40,30})));
    Modelica.ComplexBlocks.Sources.ComplexRotatingPhasor rotSource(magnitude = 100, w = 2 * pi) annotation (
      Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {-70, 20})));
    Modelica.ComplexBlocks.ComplexMath.ComplexToReal toReal annotation (

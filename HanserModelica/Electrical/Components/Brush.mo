@@ -1,8 +1,8 @@
 within HanserModelica.Electrical.Components;
 model Brush "Electrical brush model"
   extends Modelica.Electrical.Analog.Interfaces.OnePort;
-  parameter Modelica.SIunits.Current ILinear "Current limit of linear range";
-  parameter Modelica.SIunits.Voltage V=2 "Brush voltage limit";
+  parameter Modelica.Units.SI.Current ILinear "Current limit of linear range";
+  parameter Modelica.Units.SI.Voltage V=2 "Brush voltage limit";
 equation
   v = smooth(0,HanserModelica.Electrical.Functions.brush(i,ILinear,V));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={

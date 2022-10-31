@@ -2,19 +2,25 @@ within HanserModelica.InductionMachines;
 model IMC_Steinmetz "Induction machine with squirrel cage and Steinmetz-connection"
   extends Modelica.Icons.Example;
   constant Integer m=3 "Number of phases";
-  parameter Modelica.SIunits.Voltage VsNominal=100 "Nominal RMS voltage per phase";
-  parameter Modelica.SIunits.Current IsNominal=100 "Nominal RMS current per phase";
-  parameter Modelica.SIunits.Frequency fsNominal=imcData.fsNominal "Nominal frequency";
-  parameter Modelica.SIunits.Time tStart1=0.1 "Start time";
-  parameter Modelica.SIunits.Capacitance Cr=0.0035 "Motor's running capacitor";
-  parameter Modelica.SIunits.Capacitance Cs=5*Cr "Motor's (additional) starting capacitor";
-  parameter Modelica.SIunits.AngularVelocity wSwitch(displayUnit="rev/min")=
-    1350*2*Modelica.Constants.pi/60 "Speed for switching off the starting capacitor";
-  parameter Modelica.SIunits.Torque tauLoad=2/3*161.4 "Nominal load torque";
-  parameter Modelica.SIunits.AngularVelocity wLoad(displayUnit="rev/min")=
+  parameter Modelica.Units.SI.Voltage VsNominal=100
+    "Nominal RMS voltage per phase";
+  parameter Modelica.Units.SI.Current IsNominal=100
+    "Nominal RMS current per phase";
+  parameter Modelica.Units.SI.Frequency fsNominal=imcData.fsNominal
+    "Nominal frequency";
+  parameter Modelica.Units.SI.Time tStart1=0.1 "Start time";
+  parameter Modelica.Units.SI.Capacitance Cr=0.0035 "Motor's running capacitor";
+  parameter Modelica.Units.SI.Capacitance Cs=5*Cr
+    "Motor's (additional) starting capacitor";
+  parameter Modelica.Units.SI.AngularVelocity wSwitch(displayUnit="rev/min") =
+    1350*2*Modelica.Constants.pi/60
+    "Speed for switching off the starting capacitor";
+  parameter Modelica.Units.SI.Torque tauLoad=2/3*161.4 "Nominal load torque";
+  parameter Modelica.Units.SI.AngularVelocity wLoad(displayUnit="rev/min") =
     1462.5*2*Modelica.Constants.pi/60 "Nominal load speed";
-  parameter Modelica.SIunits.Inertia JLoad=0.29 "Load's moment of inertia";
-  Modelica.Magnetic.FundamentalWave.BasicMachines.AsynchronousInductionMachines.AIM_SquirrelCage imc(
+  parameter Modelica.Units.SI.Inertia JLoad=0.29 "Load's moment of inertia";
+  Modelica.Magnetic.FundamentalWave.BasicMachines.InductionMachines.IM_SquirrelCage
+    imc(
     p=imcData.p,
     fsNominal=imcData.fsNominal,
     TsRef=imcData.TsRef,
@@ -36,9 +42,11 @@ model IMC_Steinmetz "Induction machine with squirrel cage and Steinmetz-connecti
     effectiveStatorTurns=imcData.effectiveStatorTurns,
     TsOperational=imcData.TsRef,
     alpha20r=imcData.alpha20r,
-    TrOperational=imcData.TrRef) annotation (Placement(transformation(extent={{-20,-50},{0,-30}})));
-  Modelica.Electrical.Analog.Sources.SineVoltage sineVoltage(freqHz=fsNominal, V=sqrt(2)*VsNominal) annotation (Placement(
-        transformation(extent={{-50,90},{-70,70}})));
+    TrOperational=imcData.TrRef)
+    annotation (Placement(transformation(extent={{-20,-50},{0,-30}})));
+  Modelica.Electrical.Analog.Sources.SineVoltage sineVoltage(f=fsNominal, V=
+        sqrt(2)*VsNominal)
+    annotation (Placement(transformation(extent={{-50,90},{-70,70}})));
   Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
         transformation(
         origin={-90,80},
@@ -57,15 +65,18 @@ model IMC_Steinmetz "Induction machine with squirrel cage and Steinmetz-connecti
     tau_nominal=-tauLoad,
     useSupport=false) annotation (Placement(transformation(extent={{90,-50},{70,-30}})));
   Modelica.Electrical.Machines.Utilities.TerminalBox terminalBox(terminalConnection="D") annotation (Placement(transformation(extent={{-20,-34},{0,-14}})));
-  Modelica.Electrical.MultiPhase.Basic.PlugToPin_p pin3(m=m, k=3) annotation (Placement(transformation(
+  Modelica.Electrical.Polyphase.Basic.PlugToPin_p pin3(m=m, k=3) annotation (
+      Placement(transformation(
         origin={-30,18},
         extent={{-10,-10},{10,10}},
         rotation=90)));
-  Modelica.Electrical.MultiPhase.Basic.PlugToPin_p pin2(m=m, k=2) annotation (Placement(transformation(
+  Modelica.Electrical.Polyphase.Basic.PlugToPin_p pin2(m=m, k=2) annotation (
+      Placement(transformation(
         origin={-10,18},
         extent={{-10,-10},{10,10}},
         rotation=90)));
-  Modelica.Electrical.MultiPhase.Basic.PlugToPin_p pin1(m=m, k=1) annotation (Placement(transformation(
+  Modelica.Electrical.Polyphase.Basic.PlugToPin_p pin1(m=m, k=1) annotation (
+      Placement(transformation(
         origin={10,18},
         extent={{-10,-10},{10,10}},
         rotation=90)));
@@ -88,7 +99,8 @@ model IMC_Steinmetz "Induction machine with squirrel cage and Steinmetz-connecti
         extent={{-10,-10},{10,10}},
         rotation=90)));
   Modelica.Mechanics.Rotational.Sensors.SpeedSensor speedSensor annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={30,-20})));
-  Modelica.Electrical.MultiPhase.Sensors.CurrentSensor currentSensor annotation (Placement(transformation(
+  Modelica.Electrical.Polyphase.Sensors.CurrentSensor currentSensor annotation
+    (Placement(transformation(
         origin={-10,-10},
         extent={{-10,-10},{10,10}},
         rotation=270)));

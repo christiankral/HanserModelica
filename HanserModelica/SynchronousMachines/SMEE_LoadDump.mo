@@ -3,25 +3,30 @@ model SMEE_LoadDump "Electrical excited synchronous machine with voltage control
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   constant Integer m=3 "Number of phases";
-  parameter Modelica.SIunits.AngularVelocity wNominal=2*pi*smeeData.fsNominal
-      /smee.p "Nominal speed";
-  parameter Modelica.SIunits.Impedance ZNominal=3*smeeData.VsNominal^2/
+  parameter Modelica.Units.SI.AngularVelocity wNominal=2*pi*smeeData.fsNominal/
+      smee.p "Nominal speed";
+  parameter Modelica.Units.SI.Impedance ZNominal=3*smeeData.VsNominal^2/
       smeeData.SNominal "Nominal load impedance";
   parameter Real powerFactor(
     min=0,
     max=1) = 0.8 "Load power factor";
-  parameter Modelica.SIunits.Resistance RLoad=ZNominal*powerFactor
+  parameter Modelica.Units.SI.Resistance RLoad=ZNominal*powerFactor
     "Load resistance";
-  parameter Modelica.SIunits.Inductance LLoad=ZNominal*sqrt(1-powerFactor^2)/(2*pi*smeeData.fsNominal) "Load inductance";
-  parameter Modelica.SIunits.Voltage Ve0=smee.IeOpenCircuit*
-    Modelica.Electrical.Machines.Thermal.convertResistance(smee.Re,smee.TeRef,smee.alpha20e,smee.TeOperational)
-    "No load excitation voltage";
+  parameter Modelica.Units.SI.Inductance LLoad=ZNominal*sqrt(1 - powerFactor^2)
+      /(2*pi*smeeData.fsNominal) "Load inductance";
+  parameter Modelica.Units.SI.Voltage Ve0=smee.IeOpenCircuit*
+      Modelica.Electrical.Machines.Thermal.convertResistance(
+      smee.Re,
+      smee.TeRef,
+      smee.alpha20e,
+      smee.TeOperational) "No load excitation voltage";
   parameter Real k=2*Ve0/smeeData.VsNominal "Voltage controller: gain";
-  parameter Modelica.SIunits.Time Ti=smeeData.Td0Transient/2
+  parameter Modelica.Units.SI.Time Ti=smeeData.Td0Transient/2
     "Voltage controller: integral time constant";
   output Real controlError=(setPointGain.y - voltageRMSSensor.V)/smeeData.VsNominal;
-  output Modelica.SIunits.Current ie = smee.ie "Excitation current";
-  Modelica.Magnetic.FundamentalWave.BasicMachines.SynchronousInductionMachines.SM_ElectricalExcited smee(
+  output Modelica.Units.SI.Current ie=smee.ie "Excitation current";
+  Modelica.Magnetic.FundamentalWave.BasicMachines.SynchronousMachines.SM_ElectricalExcited
+    smee(
     fsNominal=smeeData.fsNominal,
     TsRef=smeeData.TsRef,
     Lrsigmad=smeeData.Lrsigmad,
@@ -52,7 +57,7 @@ model SMEE_LoadDump "Electrical excited synchronous machine with voltage control
     TrOperational=smeeData.TrRef,
     TeOperational=smeeData.TeRef,
     alpha20e=smeeData.alpha20e)
-                          annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
+    annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
 
   Modelica.Electrical.Machines.Utilities.TerminalBox terminalBox(terminalConnection="Y") annotation (Placement(transformation(extent={{0,-24},{20,-4}})));
   Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
@@ -80,7 +85,7 @@ model SMEE_LoadDump "Electrical excited synchronous machine with voltage control
     yMax=2.5*Ve0,
     yMin=0,
     Td=0.001,
-    initType=Modelica.Blocks.Types.InitPID.InitialState)
+    initType=Modelica.Blocks.Types.Init.InitialState)
     annotation (Placement(transformation(extent={{-70,-20},{-50,-40}})));
   Modelica.Electrical.Analog.Sources.SignalVoltage excitationVoltage
     annotation (Placement(transformation(
@@ -97,7 +102,7 @@ model SMEE_LoadDump "Electrical excited synchronous machine with voltage control
         rotation=270)));
   Modelica.Blocks.Sources.BooleanPulse loadControl(period=4, startTime=2)
     annotation (Placement(transformation(extent={{-70,10},{-50,30}})));
-  Modelica.Electrical.MultiPhase.Ideal.CloserWithArc switch(
+  Modelica.Electrical.Polyphase.Ideal.CloserWithArc switch(
     m=m,
     Ron=fill(1e-5, m),
     Goff=fill(1e-5, m),
@@ -106,19 +111,17 @@ model SMEE_LoadDump "Electrical excited synchronous machine with voltage control
     Vmax=fill(60, m),
     closerWithArc(off(start=fill(true, m), fixed=fill(true, m))))
     annotation (Placement(transformation(extent={{0,60},{-20,40}})));
-  Modelica.Electrical.MultiPhase.Basic.Resistor loadResistor(m=m, R=fill(
-        RLoad, m))
-    annotation (Placement(transformation(extent={{-30,40},{-50,60}})));
-  Modelica.Electrical.MultiPhase.Basic.Inductor loadInductor(m=m, L=fill(
-        LLoad, m))
-    annotation (Placement(transformation(extent={{-60,40},{-80,60}})));
-  Modelica.Electrical.MultiPhase.Basic.Star star(m=m) annotation (
-      Placement(transformation(
+  Modelica.Electrical.Polyphase.Basic.Resistor loadResistor(m=m, R=fill(RLoad,
+        m)) annotation (Placement(transformation(extent={{-30,40},{-50,60}})));
+  Modelica.Electrical.Polyphase.Basic.Inductor loadInductor(m=m, L=fill(LLoad,
+        m)) annotation (Placement(transformation(extent={{-60,40},{-80,60}})));
+  Modelica.Electrical.Polyphase.Basic.Star star(m=m) annotation (Placement(
+        transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-90,30})));
 protected
-  constant Modelica.SIunits.MagneticFlux unitMagneticFlux=1
+  constant Modelica.Units.SI.MagneticFlux unitMagneticFlux=1
     annotation (HideResult=true);
 public
   Modelica.Blocks.Sources.Ramp speedRamp(height=wNominal, duration=1)

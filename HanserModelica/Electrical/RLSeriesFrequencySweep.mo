@@ -3,28 +3,36 @@ model RLSeriesFrequencySweep "Series circuit with Bode analysis"
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   output Real abs_y = bode.abs_y "Magnitude of voltage ratio";
-  output Modelica.SIunits.AmplitudeLevelDifference dB_y = bode.dB_y "Log10 of magnitude of voltage ratio in dB";
-  output Modelica.SIunits.Angle arg_y = bode.arg_y "Angle of voltage ratio";
-  Modelica.ComplexBlocks.Sources.LogFrequencySweep frequencySweep(
+  output Modelica.Units.SI.AmplitudeLevelDifference dB_y=bode.dB_y
+    "Log10 of magnitude of voltage ratio in dB";
+  output Modelica.Units.SI.Angle arg_y=bode.arg_y "Angle of voltage ratio";
+  Modelica.Blocks.Sources.LogFrequencySweep frequencySweep(
     duration=1,
     wMin=1,
     wMax=10E3) annotation (Placement(transformation(
         origin={-70,-40},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  Modelica.Electrical.QuasiStationary.SinglePhase.Sources.VariableVoltageSource voltageSource(gamma(fixed=true, start=0)) annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStatic.SinglePhase.Sources.VariableVoltageSource
+    voltageSource(gamma(fixed=true, start=0)) annotation (Placement(
+        transformation(
         origin={-30,-20},
         extent={{-10,10},{10,-10}},
         rotation=270)));
-  Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground ground annotation (Placement(transformation(extent={{-40,-60},{-20,-40}})));
-  Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Resistor resistor(R_ref=100) annotation (Placement(transformation(extent={{20,-10},{40,10}})));
-  Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Inductor inductor(L=1/(2*pi)) annotation (Placement(transformation(extent={{52,-10},{72,10}})));
+  Modelica.Electrical.QuasiStatic.SinglePhase.Basic.Ground ground
+    annotation (Placement(transformation(extent={{-40,-60},{-20,-40}})));
+  Modelica.Electrical.QuasiStatic.SinglePhase.Basic.Resistor resistor(R_ref=100)
+    annotation (Placement(transformation(extent={{20,-10},{40,10}})));
+  Modelica.Electrical.QuasiStatic.SinglePhase.Basic.Inductor inductor(L=1/(2*pi))
+    annotation (Placement(transformation(extent={{52,-10},{72,10}})));
   Modelica.ComplexBlocks.Sources.ComplexConstant complexConst(k=Complex(10, 0)) annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
-  Modelica.Electrical.QuasiStationary.SinglePhase.Sensors.CurrentSensor currentSensor annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStatic.SinglePhase.Sensors.CurrentSensor
+    currentSensor annotation (Placement(transformation(
         extent={{10,10},{-10,-10}},
         rotation=180,
         origin={-10,0})));
-  Modelica.Electrical.QuasiStationary.SinglePhase.Sensors.VoltageSensor voltageSensor annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStatic.SinglePhase.Sensors.VoltageSensor
+    voltageSensor annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=0,
         origin={30,20})));
@@ -44,7 +52,7 @@ equation
   connect(voltageSensor.pin_n, inductor.pin_p) annotation (Line(points={{40,20},{52,20},{52,0}}, color={85,170,255}));
   connect(ground.pin, inductor.pin_n) annotation (Line(points={{-30,-40},{80,-40},{80,0},{72,0}}, color={85,170,255}));
   connect(bode.divisor, complexConst.y) annotation (Line(points={{-58,24},{-50,24},{-50,0},{-59,0}}, color={85,170,255}));
-  connect(bode.u, voltageSensor.y) annotation (Line(points={{-58,36},{30,36},{30,31}}, color={85,170,255}));
+  connect(bode.u,voltageSensor.v)  annotation (Line(points={{-58,36},{30,36},{30,31}}, color={85,170,255}));
   connect(currentSensor.pin_p, voltageSource.pin_p) annotation (Line(points={{-20,0},{-30,0},{-30,-10}}, color={85,170,255}));
   connect(currentSensor.pin_n, resistor.pin_p) annotation (Line(points={{0,0},{20,0}}, color={85,170,255}));
   annotation (Documentation(info="<html>

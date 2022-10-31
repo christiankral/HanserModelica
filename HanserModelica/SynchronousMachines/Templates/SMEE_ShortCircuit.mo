@@ -4,15 +4,22 @@ partial model SMEE_ShortCircuit "Template for short circuits of electrical excit
   import Modelica.Constants.pi;
   parameter Integer m=3 "Number of phases";
   parameter Integer p=2 "Number of poles";
-  parameter Modelica.SIunits.Angle phi=Modelica.SIunits.Conversions.from_deg(0) "Phase angle lag of machine voltages";
-  parameter Modelica.SIunits.Voltage VNominal=100 "Nominal RMS voltage per phase";
-  parameter Modelica.SIunits.Frequency fNominal=50 "Nominal frequency";
-  parameter Modelica.SIunits.Voltage Ve=smeeData.Re*smeeData.IeOpenCircuit "Excitation voltage";
-  parameter Modelica.SIunits.Angle gamma0(displayUnit="deg") = 0 "Initial rotor displacement angle";
-  parameter Modelica.SIunits.AngularVelocity wNominal=2*pi*smeeData.fsNominal/p "Nominal angular velocity";
-  Modelica.SIunits.Current irRMS = sqrt(smee.ir[1]^2+smee.ir[2]^2)/sqrt(2) "Quasi RMS rotor current";
-  output Modelica.SIunits.Current ie = smee.ie "Excitation current";
-  Modelica.Magnetic.FundamentalWave.BasicMachines.SynchronousInductionMachines.SM_ElectricalExcited smee(
+  parameter Modelica.Units.SI.Angle phi=Modelica.Units.Conversions.from_deg(0)
+    "Phase angle lag of machine voltages";
+  parameter Modelica.Units.SI.Voltage VNominal=100
+    "Nominal RMS voltage per phase";
+  parameter Modelica.Units.SI.Frequency fNominal=50 "Nominal frequency";
+  parameter Modelica.Units.SI.Voltage Ve=smeeData.Re*smeeData.IeOpenCircuit
+    "Excitation voltage";
+  parameter Modelica.Units.SI.Angle gamma0(displayUnit="deg") = 0
+    "Initial rotor displacement angle";
+  parameter Modelica.Units.SI.AngularVelocity wNominal=2*pi*smeeData.fsNominal/
+      p "Nominal angular velocity";
+  Modelica.Units.SI.Current irRMS=sqrt(smee.ir[1]^2 + smee.ir[2]^2)/sqrt(2)
+    "Quasi RMS rotor current";
+  output Modelica.Units.SI.Current ie=smee.ie "Excitation current";
+  Modelica.Magnetic.FundamentalWave.BasicMachines.SynchronousMachines.SM_ElectricalExcited
+    smee(
     phiMechanical(start=-(pi + gamma0)/smee.p, fixed=true),
     fsNominal=smeeData.fsNominal,
     TsRef=smeeData.TsRef,
@@ -46,22 +53,24 @@ partial model SMEE_ShortCircuit "Template for short circuits of electrical excit
     TrOperational=smeeData.TrRef,
     TeOperational=smeeData.TeRef,
     alpha20e=smeeData.alpha20e)
-      annotation (Placement(transformation(extent={{10,-40},{30,-20}})));
+    annotation (Placement(transformation(extent={{10,-40},{30,-20}})));
   Modelica.Electrical.Analog.Basic.Ground groundMachine annotation (Placement(transformation(
         origin={-10,-60},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  Modelica.Electrical.MultiPhase.Sensors.MultiSensor multiSensor(m=m) annotation (Placement(transformation(
+  Modelica.Electrical.Polyphase.Sensors.MultiSensor multiSensor(m=m)
+    annotation (Placement(transformation(
         origin={20,30},
         extent={{-10,-10},{10,10}},
         rotation=270)));
-  Modelica.Electrical.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensor(m=m) annotation (Placement(transformation(
+  Modelica.Electrical.Polyphase.Sensors.CurrentQuasiRMSSensor currentRMSSensor(
+      m=m) annotation (Placement(transformation(
         origin={20,0},
         extent={{-10,-10},{10,10}},
         rotation=270)));
   Modelica.Electrical.Machines.Utilities.TerminalBox terminalBox(terminalConnection="Y", m=m) annotation (Placement(transformation(extent={{10,-24},{30,-4}})));
 
-  Modelica.Electrical.MultiPhase.Ideal.IdealClosingSwitch switch(
+  Modelica.Electrical.Polyphase.Ideal.IdealClosingSwitch switch(
     final m=m,
     Ron=fill(1e-5*m/3, m),
     Goff=fill(1e-5*m/3, m)) annotation (Placement(transformation(
@@ -75,9 +84,12 @@ partial model SMEE_ShortCircuit "Template for short circuits of electrical excit
         origin={-60,40},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  Modelica.Electrical.MultiPhase.Basic.PlugToPin_p pin1(m=m, k=1) annotation (Placement(transformation(extent={{-30,60},{-50,80}})));
-  Modelica.Electrical.MultiPhase.Basic.PlugToPin_p pin2(m=m, k=2) annotation (Placement(transformation(extent={{-30,40},{-50,60}})));
-  Modelica.Electrical.MultiPhase.Basic.PlugToPin_p pin3(m=m, k=3) annotation (Placement(transformation(extent={{-30,20},{-50,40}})));
+  Modelica.Electrical.Polyphase.Basic.PlugToPin_p pin1(m=m, k=1)
+    annotation (Placement(transformation(extent={{-30,60},{-50,80}})));
+  Modelica.Electrical.Polyphase.Basic.PlugToPin_p pin2(m=m, k=2)
+    annotation (Placement(transformation(extent={{-30,40},{-50,60}})));
+  Modelica.Electrical.Polyphase.Basic.PlugToPin_p pin3(m=m, k=3)
+    annotation (Placement(transformation(extent={{-30,20},{-50,40}})));
   Modelica.Electrical.Machines.Sensors.MechanicalPowerSensor mechanicalPowerSensor annotation (Placement(transformation(extent={{40,-40},{60,-20}})));
   Modelica.Mechanics.Rotational.Sources.ConstantSpeed constantSpeed(useSupport=false, final w_fixed=wNominal) annotation (Placement(transformation(extent={{90,-40},{70,-20}})));
   Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V=Ve)                     annotation (Placement(transformation(

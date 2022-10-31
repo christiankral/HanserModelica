@@ -1,22 +1,26 @@
 within HanserModelica.Rotational.Components;
 model DCPMMachine "Permanent magnet DC machine"
-  parameter Modelica.SIunits.Resistance Ra "Armature resistance";
-  parameter Modelica.SIunits.Inductance La "Armature inductance";
-  parameter Modelica.SIunits.ElectricalTorqueConstant k "Transformation coefficient";
-  parameter Modelica.SIunits.Inertia Jr "Rotor inertia";
-  Modelica.SIunits.Torque tauElectrical = -emf.flange.tau "Electromagnetic tourque";
-  Modelica.SIunits.Torque tauShaft = -flange.tau "Shaft torque";
-  Modelica.SIunits.Angle phiMechanical(start=0) = flange.phi "Angle";
-  Modelica.SIunits.AngularVelocity wMechanical(start=0) = der(flange.phi) "Angular velocity";
-  Modelica.SIunits.Voltage va = pin_ap.v-pin_an.v "Armature voltage";
-  Modelica.SIunits.Current ia(start=0) = pin_ap.i "Armature current";
+  parameter Modelica.Units.SI.Resistance Ra "Armature resistance";
+  parameter Modelica.Units.SI.Inductance La "Armature inductance";
+  parameter Modelica.Units.SI.ElectricalTorqueConstant k
+    "Transformation coefficient";
+  parameter Modelica.Units.SI.Inertia Jr "Rotor inertia";
+  Modelica.Units.SI.Torque tauElectrical=-emf.flange.tau
+    "Electromagnetic tourque";
+  Modelica.Units.SI.Torque tauShaft=-flange.tau "Shaft torque";
+  Modelica.Units.SI.Angle phiMechanical(start=0) = flange.phi "Angle";
+  Modelica.Units.SI.AngularVelocity wMechanical(start=0) = der(flange.phi)
+    "Angular velocity";
+  Modelica.Units.SI.Voltage va=pin_ap.v - pin_an.v "Armature voltage";
+  Modelica.Units.SI.Current ia(start=0) = pin_ap.i "Armature current";
 
   Modelica.Electrical.Analog.Interfaces.PositivePin pin_ap "Positive armature pin" annotation (Placement(visible = true,transformation(extent = {{-70, 30}, {-50, 50}}, rotation = 0), iconTransformation(extent = {{-70, 90}, {-50, 110}}, rotation = 0)));
   Modelica.Electrical.Analog.Interfaces.NegativePin pin_an "Negative armature pin" annotation (Placement(visible = true,transformation(extent = {{50, 30}, {70, 50}}, rotation = 0), iconTransformation(extent = {{50, 92}, {70, 112}}, rotation = 0)));
   Modelica.Mechanics.Rotational.Interfaces.Flange_a flange "Shaft"
     annotation (Placement(transformation(extent={{90,-10},{110,10}})));
   Modelica.Electrical.Analog.Basic.Resistor resistor(final R=Ra) annotation (Placement(visible = true, transformation(origin = {-60, 20}, extent = {{-10, -10}, {10, 10}}, rotation = 270)));
-  Modelica.Electrical.Analog.Basic.EMF emf(final k=k) annotation (Placement(transformation(extent={{-10,10},{10,-10}})));
+  Modelica.Electrical.Analog.Basic.RotationalEMF emf(final k=k)
+    annotation (Placement(transformation(extent={{-10,10},{10,-10}})));
   Modelica.Electrical.Analog.Basic.Inductor inductor(final L=La) annotation (Placement(visible = true, transformation(origin = {-60, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 270)));
   Modelica.Mechanics.Rotational.Components.Inertia inertia(final J=Jr) annotation (Placement(transformation(extent={{20,-10},{40,10}})));
 equation

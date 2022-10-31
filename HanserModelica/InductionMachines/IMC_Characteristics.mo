@@ -3,35 +3,42 @@ model IMC_Characteristics "Characteristic curves of Induction machine with squir
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   parameter Integer m=3 "Number of phases";
-  parameter Modelica.SIunits.Voltage VsNominal=100 "Nominal stator RMS voltage per phase";
-  parameter Modelica.SIunits.Current IsNominal=100 "Nominal stator RMS voltage per phase";
-  parameter Modelica.SIunits.Frequency fsNominal=imcData.fsNominal "Nominal frequency";
-  parameter Modelica.SIunits.AngularVelocity w_Load(displayUnit="rev/min")=
-       1440.45*2*Modelica.Constants.pi/60 "Nominal load speed";
+  parameter Modelica.Units.SI.Voltage VsNominal=100
+    "Nominal stator RMS voltage per phase";
+  parameter Modelica.Units.SI.Current IsNominal=100
+    "Nominal stator RMS voltage per phase";
+  parameter Modelica.Units.SI.Frequency fsNominal=imcData.fsNominal
+    "Nominal frequency";
+  parameter Modelica.Units.SI.AngularVelocity w_Load(displayUnit="rev/min") =
+    1440.45*2*Modelica.Constants.pi/60 "Nominal load speed";
   parameter Integer p=imcData.p "Number of pole pairs";
   Real speedPerUnit = p*imc.wMechanical/(2*pi*fsNominal) "Per unit speed";
   Real slip = 1-speedPerUnit "Slip";
-  output Modelica.SIunits.Current I=currentRMSSensor.I " RMS current";
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sources.VoltageSource voltageSource(
+  output Modelica.Units.SI.Current I=currentRMSSensor.I " RMS current";
+  Modelica.Electrical.QuasiStatic.Polyphase.Sources.VoltageSource voltageSource(
     m=m,
     f=fsNominal,
     V=fill(VsNominal, m),
-    phi=-Modelica.Electrical.MultiPhase.Functions.symmetricOrientation(m)) annotation (Placement(transformation(
+    phi=-Modelica.Electrical.Polyphase.Functions.symmetricOrientation(m))
+    annotation (Placement(transformation(
         origin={-60,40},
         extent={{-10,-10},{10,10}},
         rotation=270)));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star star(m=m)
-    annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStatic.Polyphase.Basic.Star star(m=m) annotation (
+      Placement(transformation(
         origin={-70,20},
         extent={{-10,-10},{10,10}},
         rotation=180)));
-  Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground ground
-    annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStatic.SinglePhase.Basic.Ground ground annotation (
+      Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-90,20})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.PowerSensor powerSensor(m=m) annotation (Placement(transformation(extent={{-40,70},{-20,90}})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensor(m=m) annotation (Placement(transformation(extent={{-10,70},{10,90}})));
+  Modelica.Electrical.QuasiStatic.Polyphase.Sensors.PowerSensor powerSensor(m=m)
+    annotation (Placement(transformation(extent={{-40,70},{-20,90}})));
+  Modelica.Electrical.QuasiStatic.Polyphase.Sensors.CurrentQuasiRMSSensor
+    currentRMSSensor(m=m)
+    annotation (Placement(transformation(extent={{-10,70},{10,90}})));
   Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.InductionMachines.IM_SquirrelCage imc(
     Js=imcData.Js,
     p=imcData.p,
@@ -54,14 +61,11 @@ model IMC_Characteristics "Characteristic curves of Induction machine with squir
     TsOperational=imcData.TsRef,
     effectiveStatorTurns=imcData.effectiveStatorTurns,
     TrOperational=imcData.TrRef) annotation (Placement(transformation(extent={{20,30},{40,50}})));
-  Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground
-    groundMachine annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        origin={-10,10})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star
-    starMachine(m=
-        Modelica.Electrical.MultiPhase.Functions.numberOfSymmetricBaseSystems(
-                                                                     m))
+  Modelica.Electrical.QuasiStatic.SinglePhase.Basic.Ground groundMachine
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={-10,
+            10})));
+  Modelica.Electrical.QuasiStatic.Polyphase.Basic.Star starMachine(m=
+        Modelica.Electrical.Polyphase.Functions.numberOfSymmetricBaseSystems(m))
     annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=270,

@@ -3,50 +3,70 @@ model IMC_DOL "Induction machine with squirrel cage started directly on line (DO
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   parameter Integer m=3 "Number of phases";
-  parameter Integer mBase=Modelica.Electrical.MultiPhase.Functions.numberOfSymmetricBaseSystems(m)
+  parameter Integer mBase=Modelica.Electrical.Polyphase.Functions.numberOfSymmetricBaseSystems( m)
     "Number of base systems";
-  parameter Modelica.SIunits.Voltage VsNominal=100 "Nominal RMS voltage per phase";
-  parameter Modelica.SIunits.Current IsNominal=100 "Nominal RMS current per phase";
-  parameter Modelica.SIunits.Frequency fsNominal=imc.fsNominal "Nominal frequency";
-  parameter Modelica.SIunits.Time tOn=0.1 "Start time of machine";
-  parameter Modelica.SIunits.Torque tauLoad=161.4 "Nominal load torque";
-  parameter Modelica.SIunits.AngularVelocity
-    w_Load(displayUnit="rev/min")=1440.45*2*Modelica.Constants.pi/60 "Nominal load speed";
-  parameter Modelica.SIunits.Inertia JLoad=0.5 "Load inertia";
+  parameter Modelica.Units.SI.Voltage VsNominal=100
+    "Nominal RMS voltage per phase";
+  parameter Modelica.Units.SI.Current IsNominal=100
+    "Nominal RMS current per phase";
+  parameter Modelica.Units.SI.Frequency fsNominal=imc.fsNominal
+    "Nominal frequency";
+  parameter Modelica.Units.SI.Time tOn=0.1 "Start time of machine";
+  parameter Modelica.Units.SI.Torque tauLoad=161.4 "Nominal load torque";
+  parameter Modelica.Units.SI.AngularVelocity w_Load(displayUnit="rev/min") =
+    1440.45*2*Modelica.Constants.pi/60 "Nominal load speed";
+  parameter Modelica.Units.SI.Inertia JLoad=0.5 "Load inertia";
   parameter Integer p=2 "Number of pole pairs";
-  Modelica.SIunits.Current I=currentRMSSensor.I "Transient RMS current";
-  Modelica.SIunits.Current Iqs=currentRMSSensorQS.I "QS RMS current";
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sources.VoltageSource
-    voltageSourceQS(m=m,f=fsNominal,V=fill(VsNominal, m),
-    phi=-Modelica.Electrical.MultiPhase.Functions.symmetricOrientation(m))
-    annotation (Placement(transformation(origin={-60,40},extent={{-10,-10},{10,10}},rotation=270)));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star starQS(m=m)
-    annotation (Placement(transformation(origin={-70,20},extent={{-10,10},{10,-10}},rotation=180)));
-  Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground groundQS
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}},rotation=270,origin={-90,20})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.PowerSensor
-    powerSensorQS(m=m)
-    annotation (Placement(transformation(extent={{-40,70},{-20,90}})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensorQS(m=m) annotation (Placement(transformation(extent={{-10,70},{10,90}})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Ideal.IdealClosingSwitch
-    idealCloserQS(final m=m,Ron=fill(1e-5*m/3, m),Goff=fill(1e-5*3/m, m))
-    annotation (Placement(transformation(origin={-60,70},extent={{10,10},{-10,-10}},rotation=270)));
+  Modelica.Units.SI.Current I=currentRMSSensor.I "Transient RMS current";
+  Modelica.Units.SI.Current Iqs=currentRMSSensorQS.I "QS RMS current";
+  Modelica.Electrical.QuasiStatic.Polyphase.Sources.VoltageSource
+    voltageSourceQS(
+    m=m,
+    f=fsNominal,
+    V=fill(VsNominal, m),
+    phi=-Modelica.Electrical.Polyphase.Functions.symmetricOrientation(m))
+    annotation (Placement(transformation(
+        origin={-60,40},
+        extent={{-10,-10},{10,10}},
+        rotation=270)));
+  Modelica.Electrical.QuasiStatic.Polyphase.Basic.Star starQS(m=m) annotation (
+      Placement(transformation(
+        origin={-70,20},
+        extent={{-10,10},{10,-10}},
+        rotation=180)));
+  Modelica.Electrical.QuasiStatic.SinglePhase.Basic.Ground groundQS annotation
+    (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={-90,20})));
+  Modelica.Electrical.QuasiStatic.Polyphase.Sensors.PowerSensor powerSensorQS(m
+      =m) annotation (Placement(transformation(extent={{-40,70},{-20,90}})));
+  Modelica.Electrical.QuasiStatic.Polyphase.Sensors.CurrentQuasiRMSSensor
+    currentRMSSensorQS(m=m)
+    annotation (Placement(transformation(extent={{-10,70},{10,90}})));
+  Modelica.Electrical.QuasiStatic.Polyphase.Ideal.IdealClosingSwitch
+    idealCloserQS(
+    final m=m,
+    Ron=fill(1e-5*m/3, m),
+    Goff=fill(1e-5*3/m, m)) annotation (Placement(transformation(
+        origin={-60,70},
+        extent={{10,10},{-10,-10}},
+        rotation=270)));
   Modelica.Blocks.Sources.BooleanStep
     booleanStepQS[m](each startTime=tOn, each startValue=false)
     annotation (Placement(transformation(extent={{-100,60},{-80,80}})));
   Modelica.Electrical.Analog.Basic.Ground ground
     annotation (Placement(transformation(origin={-90,-80},extent={{-10,-10},{10,10}},rotation=270)));
-  Modelica.Electrical.MultiPhase.Basic.Star star(final m=m)
+  Modelica.Electrical.Polyphase.Basic.Star star(final m=m)
     annotation (Placement(transformation(extent={{-60,-90},{-80,-70}})));
-  Modelica.Electrical.MultiPhase.Sources.CosineVoltage cosineVoltage(
+  Modelica.Electrical.Polyphase.Sources.CosineVoltage cosineVoltage(
     final m=m,
-    freqHz=fill(fsNominal, m),
-    V=fill(sqrt(2.0)*VsNominal, m)) annotation (Placement(
-        transformation(
+    f=fill(fsNominal, m),
+    V=fill(sqrt(2.0)*VsNominal, m)) annotation (Placement(transformation(
         origin={-60,-60},
         extent={{10,10},{-10,-10}},
         rotation=90)));
-  Modelica.Electrical.MultiPhase.Ideal.IdealClosingSwitch idealCloser(
+  Modelica.Electrical.Polyphase.Ideal.IdealClosingSwitch idealCloser(
     final m=m,
     Ron=fill(1e-5*m/3, m),
     Goff=fill(1e-5*3/m, m)) annotation (Placement(transformation(
@@ -56,9 +76,11 @@ model IMC_DOL "Induction machine with squirrel cage started directly on line (DO
   Modelica.Blocks.Sources.BooleanStep booleanStep[m](each startTime=tOn,
       each startValue=false) annotation (Placement(transformation(
           extent={{-100,-40},{-80,-20}})));
-  Modelica.Electrical.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensor(final m=m) annotation (Placement(transformation(origin={0,-20}, extent={{-10,-10},{10,10}})));
+  Modelica.Electrical.Polyphase.Sensors.CurrentQuasiRMSSensor currentRMSSensor(
+      final m=m) annotation (Placement(transformation(origin={0,-20}, extent={{
+            -10,-10},{10,10}})));
   Modelica.Electrical.Machines.Utilities.MultiTerminalBox terminalBox(m=m, terminalConnection="Y") annotation (Placement(transformation(extent={{20,-54},{40,-34}})));
-  Modelica.Magnetic.FundamentalWave.BasicMachines.AsynchronousInductionMachines.AIM_SquirrelCage
+  Modelica.Magnetic.FundamentalWave.BasicMachines.InductionMachines.IM_SquirrelCage
     imc(
     Jr=imcData.Jr,
     Js=imcData.Js,
@@ -82,7 +104,8 @@ model IMC_DOL "Induction machine with squirrel cage started directly on line (DO
     m=m,
     TsOperational=imcData.TsRef,
     effectiveStatorTurns=imcData.effectiveStatorTurns,
-    TrOperational=imcData.TrRef) annotation (Placement(transformation(extent={{20,-70},{40,-50}})));
+    TrOperational=imcData.TrRef)
+    annotation (Placement(transformation(extent={{20,-70},{40,-50}})));
   Modelica.Mechanics.Rotational.Components.Inertia loadInertia(J=JLoad)
     annotation (Placement(transformation(extent={{50,-70},{70,-50}})));
   Modelica.Mechanics.Rotational.Sources.QuadraticSpeedDependentTorque
@@ -91,8 +114,8 @@ model IMC_DOL "Induction machine with squirrel cage started directly on line (DO
     tau_nominal=-tauLoad,
     TorqueDirection=false,
     useSupport=false) annotation (Placement(transformation(extent={{100,-70},{80,-50}})));
-  Modelica.Electrical.MultiPhase.Sensors.PowerSensor powerSensor(final
-      m=m) annotation (Placement(transformation(extent={{-40,-30},{-20,-10}})));
+  Modelica.Electrical.Polyphase.Sensors.PowerSensor powerSensor(final m=m)
+    annotation (Placement(transformation(extent={{-40,-30},{-20,-10}})));
   Modelica.Mechanics.Rotational.Components.Inertia loadInertiaQS(J=
         JLoad) annotation (Placement(transformation(extent={{50,30},{70,50}})));
   Modelica.Mechanics.Rotational.Sources.QuadraticSpeedDependentTorque
@@ -125,19 +148,17 @@ model IMC_DOL "Induction machine with squirrel cage started directly on line (DO
     TsOperational=imcData.TsRef,
     effectiveStatorTurns=imcData.effectiveStatorTurns,
     TrOperational=imcData.TrRef) annotation (Placement(transformation(extent={{20,30},{40,50}})));
-  Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground
-    groundMachineQS annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        origin={-10,10})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star
-    starMachineQS(m=
-        mBase)
+  Modelica.Electrical.QuasiStatic.SinglePhase.Basic.Ground groundMachineQS
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={-10,
+            10})));
+  Modelica.Electrical.QuasiStatic.Polyphase.Basic.Star starMachineQS(m=mBase)
     annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=270,
         origin={-10,30})));
   Modelica.Magnetic.QuasiStatic.FundamentalWave.Utilities.MultiTerminalBox terminalBoxQS(m=m, terminalConnection="Y") annotation (Placement(transformation(extent={{20,46},{40,66}})));
-  Modelica.Electrical.MultiPhase.Basic.Star starMachine(m = mBase) annotation (Placement(transformation(
+  Modelica.Electrical.Polyphase.Basic.Star starMachine(m=mBase) annotation (
+      Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=90,
         origin={-12,-70})));

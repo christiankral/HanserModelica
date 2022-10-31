@@ -4,19 +4,22 @@ model IMS_Characteristics1 "Characteristic curves of induction machine with slip
   import Modelica.Constants.pi;
   parameter Integer m=3 "Number of stator phases";
   parameter Integer mr=3 "Number of rotor phases";
-  parameter Integer mBase=Modelica.Electrical.MultiPhase.Functions.numberOfSymmetricBaseSystems(m)
+  parameter Integer mBase=Modelica.Electrical.Polyphase.Functions.numberOfSymmetricBaseSystems( m)
     "Number of base systems";
-  parameter Modelica.SIunits.Voltage VsNominal=100 "Nominal RMS voltage per phase";
-  parameter Modelica.SIunits.Current IsNominal=100 "Nominal RMS current per phase";
-  parameter Modelica.SIunits.Frequency fsNominal=imsData.fsNominal "Nominal frequency";
-  parameter Modelica.SIunits.Resistance Rr=0/imsData.turnsRatio^2 "Starting resistance";
+  parameter Modelica.Units.SI.Voltage VsNominal=100
+    "Nominal RMS voltage per phase";
+  parameter Modelica.Units.SI.Current IsNominal=100
+    "Nominal RMS current per phase";
+  parameter Modelica.Units.SI.Frequency fsNominal=imsData.fsNominal
+    "Nominal frequency";
+  parameter Modelica.Units.SI.Resistance Rr=0/imsData.turnsRatio^2
+    "Starting resistance";
   parameter Integer p=imsData.p "Number of pole pairs";
-  parameter Modelica.SIunits.AngularVelocity w_Load(displayUnit="rev/min")=
-       Modelica.SIunits.Conversions.from_rpm(1440.45)
-    "Nominal load speed";
+  parameter Modelica.Units.SI.AngularVelocity w_Load(displayUnit="rev/min") =
+    Modelica.Units.Conversions.from_rpm(1440.45) "Nominal load speed";
   Real speedPerUnit = p*ims.wMechanical/(2*pi*fsNominal) "Per unit speed";
   Real slip = 1-speedPerUnit "Slip";
-  output Modelica.SIunits.Current I=currentSensor.I " RMS current";
+  output Modelica.Units.SI.Current I=currentSensor.I " RMS current";
   Modelica.Magnetic.QuasiStatic.FundamentalWave.Utilities.MultiTerminalBox terminalBox(m=m, terminalConnection="Y") annotation (Placement(transformation(extent={{20,46},{40,66}})));
   Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.InductionMachines.IM_SlipRing ims(
     p=imsData.p,
@@ -47,48 +50,53 @@ model IMS_Characteristics1 "Characteristic curves of induction machine with slip
     effectiveStatorTurns=imsData.effectiveStatorTurns,
     TrOperational=imsData.TrRef)
                          annotation (Placement(transformation(extent={{20,30},{40,50}})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sources.VoltageSource voltageSource(
+  Modelica.Electrical.QuasiStatic.Polyphase.Sources.VoltageSource voltageSource(
     m=m,
-    phi=-Modelica.Electrical.MultiPhase.Functions.symmetricOrientation(m),
+    phi=-Modelica.Electrical.Polyphase.Functions.symmetricOrientation(m),
     f=fsNominal,
     V=fill(VsNominal, m)) annotation (Placement(transformation(
         origin={-80,60},
         extent={{-10,-10},{10,10}},
         rotation=270)));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star star(m=m)
-    annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStatic.Polyphase.Basic.Star star(m=m) annotation (
+      Placement(transformation(
         origin={-80,30},
         extent={{-10,-10},{10,10}},
         rotation=270)));
-  Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground ground
-    annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStatic.SinglePhase.Basic.Ground ground annotation (
+      Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-80,10})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.PowerSensor powerSensor(m=m) annotation (Placement(transformation(extent={{-70,70},{-50,90}})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor currentSensor(m=m) annotation (Placement(transformation(extent={{-10,70},{10,90}})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star
-    starMachine(m=mBase)
+  Modelica.Electrical.QuasiStatic.Polyphase.Sensors.PowerSensor powerSensor(m=m)
+    annotation (Placement(transformation(extent={{-70,70},{-50,90}})));
+  Modelica.Electrical.QuasiStatic.Polyphase.Sensors.CurrentQuasiRMSSensor
+    currentSensor(m=m)
+    annotation (Placement(transformation(extent={{-10,70},{10,90}})));
+  Modelica.Electrical.QuasiStatic.Polyphase.Basic.Star starMachine(m=mBase)
     annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=270,
         origin={-40,30})));
-  Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground
-    groundMachine annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        origin={-40,10})));
+  Modelica.Electrical.QuasiStatic.SinglePhase.Basic.Ground groundMachine
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={-40,
+            10})));
 
   Modelica.Mechanics.Rotational.Sources.Speed speed(exact=true) annotation (Placement(transformation(extent={{70,30},{50,50}})));
   Modelica.Blocks.Sources.Ramp ramp(
     height=3*2*pi*fsNominal/p,
     duration=1,
     offset=-2*pi*fsNominal/p) annotation (Placement(transformation(extent={{100,30},{80,50}})));
-  Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground groundRotor annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={-10,10})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star starRotor(m=mr) annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStatic.SinglePhase.Basic.Ground groundRotor
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={-10,
+            10})));
+  Modelica.Electrical.QuasiStatic.Polyphase.Basic.Star starRotor(m=mr)
+    annotation (Placement(transformation(
         origin={-10,30},
         extent={{-10,-10},{10,10}},
         rotation=270)));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Resistor resistor(m=mr, R_ref=fill(Rr, mr)) annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStatic.Polyphase.Basic.Resistor resistor(m=mr, R_ref
+      =fill(Rr, mr)) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={10,36})));

@@ -2,16 +2,16 @@ within HanserModelica.Magnetic.Components;
 model Transformer "Transformer model"
   parameter Integer N1 "Number of primary turns";
   parameter Integer N2 "Number of secondary turns";
-  parameter Modelica.SIunits.Resistance R1 "Primary resistance";
-  parameter Modelica.SIunits.Resistance R2 "Secondary resistance";
-  parameter Modelica.SIunits.Permeance G_m1sigma "Primary stray inductance";
-  parameter Modelica.SIunits.Permeance G_m2sigma "Secondary stray inductance";
-  parameter Modelica.SIunits.Reluctance R_m "Main field reluctance";
-  parameter Modelica.SIunits.Conductance Gc "Eddy current loss conductance";
-  Modelica.SIunits.Current i1(start=0) = p1.i "Primary current";
-  Modelica.SIunits.Current i2(start=0) = p2.i "Secondary current";
-  Modelica.SIunits.Voltage v1 = p1.v - n1.v "Primary voltage";
-  Modelica.SIunits.Voltage v2 = p2.v - n2.v "Secondary voltage";
+  parameter Modelica.Units.SI.Resistance R1 "Primary resistance";
+  parameter Modelica.Units.SI.Resistance R2 "Secondary resistance";
+  parameter Modelica.Units.SI.Permeance G_m1sigma "Primary stray inductance";
+  parameter Modelica.Units.SI.Permeance G_m2sigma "Secondary stray inductance";
+  parameter Modelica.Units.SI.Reluctance R_m "Main field reluctance";
+  parameter Modelica.Units.SI.Conductance Gc "Eddy current loss conductance";
+  Modelica.Units.SI.Current i1(start=0) = p1.i "Primary current";
+  Modelica.Units.SI.Current i2(start=0) = p2.i "Secondary current";
+  Modelica.Units.SI.Voltage v1=p1.v - n1.v "Primary voltage";
+  Modelica.Units.SI.Voltage v2=p2.v - n2.v "Secondary voltage";
   Modelica.Electrical.Analog.Interfaces.PositivePin p1 annotation (
     Placement(visible = true, transformation(extent = {{-110, 40}, {-90, 60}}, rotation = 0), iconTransformation(extent = {{-110, 90}, {-90, 110}}, rotation = 0)));
   Modelica.Electrical.Analog.Interfaces.PositivePin p2 annotation (

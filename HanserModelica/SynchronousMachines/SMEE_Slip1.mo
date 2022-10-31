@@ -3,25 +3,36 @@ model SMEE_Slip1 "Electrical excited synchronous machine operating at small slip
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   parameter Integer m=3 "Number of stator phases";
-  parameter Modelica.SIunits.Voltage VsNominal=100
+  parameter Modelica.Units.SI.Voltage VsNominal=100
     "Nominal RMS voltage per phase";
-  parameter Modelica.SIunits.Frequency fsNominal=smeeData.fsNominal "Nominal frequency";
-  parameter Modelica.SIunits.AngularVelocity w(displayUnit="rev/min")=
-    Modelica.SIunits.Conversions.from_rpm(1499) "Actual speed";
-  parameter Modelica.SIunits.Current IeMax=19 "Maximum excitation current";
-  parameter Modelica.SIunits.Current Ie0=10 "Open circuit excitation current for nominal voltage";
-  parameter Modelica.SIunits.Current ie=0 "Actual open circuit current";
-  parameter Modelica.SIunits.Angle gamma0(displayUnit="deg") = 0 "Initial rotor displacement angle";
+  parameter Modelica.Units.SI.Frequency fsNominal=smeeData.fsNominal
+    "Nominal frequency";
+  parameter Modelica.Units.SI.AngularVelocity w(displayUnit="rev/min") =
+    Modelica.Units.Conversions.from_rpm(1499) "Actual speed";
+  parameter Modelica.Units.SI.Current IeMax=19 "Maximum excitation current";
+  parameter Modelica.Units.SI.Current Ie0=10
+    "Open circuit excitation current for nominal voltage";
+  parameter Modelica.Units.SI.Current ie=0 "Actual open circuit current";
+  parameter Modelica.Units.SI.Angle gamma0(displayUnit="deg") = 0
+    "Initial rotor displacement angle";
   parameter Boolean positiveRange = false "Use positive range of angles, if true";
-  Modelica.SIunits.Angle phii=Modelica.Math.wrapAngle(smee.arg_is[1], positiveRange) "Angle of current";
-  Modelica.SIunits.Angle phiv=Modelica.Math.wrapAngle(smee.arg_vs[1], positiveRange) "Angle of voltage";
-  Modelica.SIunits.Angle phis = Modelica.Math.wrapAngle(phiv-phii,positiveRange) "Angle between voltage and current";
-  Modelica.SIunits.Angle epsilon = Modelica.Math.wrapAngle(phis-theta,positiveRange) "Current angle";
-  Modelica.SIunits.ComplexCurrent isr[m] = smee.is*Modelica.ComplexMath.exp(Complex(0,theta+pi/2)) "Stator current w.r.t. rotor fixed frame";
-  output Modelica.SIunits.Power P=multiSensor.apparentPowerTotal.re " real power";
-  output Modelica.SIunits.ReactivePower Q=multiSensor.apparentPowerTotal.im " reactive power";
-  output Modelica.SIunits.ApparentPower S=sqrt(P^2+Q^2) " apparent power";
-  Modelica.SIunits.Angle theta=rotorDisplacementAngle.rotorDisplacementAngle "Rotor displacement angle";
+  Modelica.Units.SI.Angle phii=Modelica.Math.wrapAngle(smee.arg_is[1],
+      positiveRange) "Angle of current";
+  Modelica.Units.SI.Angle phiv=Modelica.Math.wrapAngle(smee.arg_vs[1],
+      positiveRange) "Angle of voltage";
+  Modelica.Units.SI.Angle phis=Modelica.Math.wrapAngle(phiv - phii,
+      positiveRange) "Angle between voltage and current";
+  Modelica.Units.SI.Angle epsilon=Modelica.Math.wrapAngle(phis - theta,
+      positiveRange) "Current angle";
+  Modelica.Units.SI.ComplexCurrent isr[m]=smee.is*Modelica.ComplexMath.exp(
+      Complex(0, theta + pi/2)) "Stator current w.r.t. rotor fixed frame";
+  output Modelica.Units.SI.Power P=multiSensor.apparentPowerTotal.re
+    " real power";
+  output Modelica.Units.SI.ReactivePower Q=multiSensor.apparentPowerTotal.im
+    " reactive power";
+  output Modelica.Units.SI.ApparentPower S=sqrt(P^2 + Q^2) " apparent power";
+  Modelica.Units.SI.Angle theta=rotorDisplacementAngle.rotorDisplacementAngle
+    "Rotor displacement angle";
   Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.SynchronousMachines.SM_ElectricalExcited smee(
     p=2,
     fsNominal=smeeData.fsNominal,
@@ -72,40 +83,38 @@ model SMEE_Slip1 "Electrical excited synchronous machine operating at small slip
                                          annotation (Placement(
         transformation(extent={{100,20},{80,40}})));
 
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sources.VoltageSource
-    voltageSource(
+  Modelica.Electrical.QuasiStatic.Polyphase.Sources.VoltageSource voltageSource(
     m=m,
-    phi=-Modelica.Electrical.MultiPhase.Functions.symmetricOrientation(
-        m),
+    phi=-Modelica.Electrical.Polyphase.Functions.symmetricOrientation(m),
     V=fill(VsNominal, m),
     f=fsNominal) annotation (Placement(transformation(
         origin={-30,80},
         extent={{-10,-10},{10,10}},
         rotation=180)));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star star(m=m)
-    annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStatic.Polyphase.Basic.Star star(m=m) annotation (
+      Placement(transformation(
         origin={-60,80},
         extent={{-10,-10},{10,10}},
         rotation=180)));
-  Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground
-    grounde annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStatic.SinglePhase.Basic.Ground grounde annotation (
+      Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-70,50})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.MultiSensor multiSensor(m=m) annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStatic.Polyphase.Sensors.MultiSensor multiSensor(m=m)
+    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={0,66})));
   Modelica.Magnetic.QuasiStatic.FundamentalWave.Utilities.MultiTerminalBox terminalBox(m=m, terminalConnection="Y") annotation (Placement(transformation(extent={{-10,36},{10,56}})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star
-    starMachine(m=
-        Modelica.Electrical.MultiPhase.Functions.numberOfSymmetricBaseSystems(m))
+  Modelica.Electrical.QuasiStatic.Polyphase.Basic.Star starMachine(m=
+        Modelica.Electrical.Polyphase.Functions.numberOfSymmetricBaseSystems(m))
     annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
         origin={-20,50})));
-  Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground
-    groundMachine annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStatic.SinglePhase.Basic.Ground groundMachine
+    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-50,50})));

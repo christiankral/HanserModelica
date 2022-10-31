@@ -4,23 +4,24 @@ model SMEE_Rectifier "Electrical excited synchronous machine with rectifier"
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   constant Integer m=3 "Number of phases";
-  parameter Modelica.SIunits.AngularVelocity wNominal=2*pi*smeeData.fsNominal
-      /smee.p "Nominal speed";
-  parameter Modelica.SIunits.Voltage VDC0=sqrt(2*3)*smeeData.VsNominal
+  parameter Modelica.Units.SI.AngularVelocity wNominal=2*pi*smeeData.fsNominal/
+      smee.p "Nominal speed";
+  parameter Modelica.Units.SI.Voltage VDC0=sqrt(2*3)*smeeData.VsNominal
     "No-load DC voltage";
-  parameter Modelica.SIunits.Resistance RLoad=VDC0^2/smeeData.SNominal
+  parameter Modelica.Units.SI.Resistance RLoad=VDC0^2/smeeData.SNominal
     "Load resistance";
-  parameter Modelica.SIunits.Voltage Ve0=smee.IeOpenCircuit*
+  parameter Modelica.Units.SI.Voltage Ve0=smee.IeOpenCircuit*
       Modelica.Electrical.Machines.Thermal.convertResistance(
-            smee.Re,
-            smee.TeRef,
-            smee.alpha20e,
-            smee.TeOperational) "No load excitation voltage";
+      smee.Re,
+      smee.TeRef,
+      smee.alpha20e,
+      smee.TeOperational) "No load excitation voltage";
   parameter Real k=2*Ve0/smeeData.VsNominal "Voltage controller: gain";
-  parameter Modelica.SIunits.Time Ti=smeeData.Td0Transient/2
+  parameter Modelica.Units.SI.Time Ti=smeeData.Td0Transient/2
     "Voltage controller: integral time constant";
-  output Modelica.SIunits.Current ie = smee.ie "Excitation current";
-  Modelica.Magnetic.FundamentalWave.BasicMachines.SynchronousInductionMachines.SM_ElectricalExcited smee(
+  output Modelica.Units.SI.Current ie=smee.ie "Excitation current";
+  Modelica.Magnetic.FundamentalWave.BasicMachines.SynchronousMachines.SM_ElectricalExcited
+    smee(
     fsNominal=smeeData.fsNominal,
     TsRef=smeeData.TsRef,
     Lrsigmad=smeeData.Lrsigmad,
@@ -52,7 +53,7 @@ model SMEE_Rectifier "Electrical excited synchronous machine with rectifier"
     TrOperational=smeeData.TrRef,
     TeOperational=smeeData.TeRef,
     alpha20e=smeeData.alpha20e)
-                          annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
+    annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
   parameter Modelica.Electrical.Machines.Utilities.SynchronousMachineData smeeData(
     SNominal=30e3,
     VsNominal=100,
@@ -102,7 +103,7 @@ model SMEE_Rectifier "Electrical excited synchronous machine with rectifier"
     Ti=Ti,
     yMax=2.5*Ve0,
     yMin=0,
-    initType=Modelica.Blocks.Types.InitPID.InitialState,
+    initType=Modelica.Blocks.Types.Init.InitialState,
     Td=0.001)
     annotation (Placement(transformation(extent={{-70,-20},{-50,-40}})));
   Modelica.Electrical.Analog.Sources.SignalVoltage excitationVoltage
@@ -147,7 +148,7 @@ model SMEE_Rectifier "Electrical excited synchronous machine with rectifier"
         rotation=270,
         origin={-60,0})));
 protected
-  constant Modelica.SIunits.MagneticFlux unitMagneticFlux=1
+  constant Modelica.Units.SI.MagneticFlux unitMagneticFlux=1
     annotation (HideResult=true);
 public
   Modelica.Electrical.PowerConverters.ACDC.DiodeBridge2mPulse rectifier annotation (Placement(transformation(extent={{74,20},{54,40}})));

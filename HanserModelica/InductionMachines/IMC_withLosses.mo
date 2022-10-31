@@ -3,30 +3,36 @@ model IMC_withLosses "Induction machine with squirrel cage and losses"
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   constant Integer m=3 "Number of phases";
-  Modelica.SIunits.Power Ps=electricalPowerSensor.y.re "Stator active power";
-  Modelica.SIunits.ReactivePower Qs=electricalPowerSensor.y.im "Stator reactive power";
-  Modelica.SIunits.ApparentPower Ss=sqrt(Ps^2 + Qs^2) "Stator apparent power";
+  Modelica.Units.SI.Power Ps=electricalPowerSensor.apparentPower.re
+    "Stator active power";
+  Modelica.Units.SI.ReactivePower Qs=electricalPowerSensor.apparentPower.im
+    "Stator reactive power";
+  Modelica.Units.SI.ApparentPower Ss=sqrt(Ps^2 + Qs^2) "Stator apparent power";
 protected
   parameter Real Ptable[:]={1E-6,1845,3549,5325,7521,9372,11010,12930,
       14950,16360,18500,18560,20180,22170} "Table of measured power data";
   parameter Real Itable[:]={11.0,11.20,12.27,13.87,16.41,18.78,21.07,
       23.92,27.05,29.40,32.85,32.95,35.92,39.35} "Table of measured current data";
-  parameter Real wtable[:]=Modelica.SIunits.Conversions.from_rpm({1500,1496,1493,1490,1486,1482,1479,1475,1471,
+  parameter Real wtable[:]=Modelica.Units.Conversions.from_rpm(  {1500,1496,1493,1490,1486,1482,1479,1475,1471,
       1467,1462,1462,1458,1453}) "Table of measured speed data";
   parameter Real ctable[:]={0.085,0.327,0.506,0.636,0.741,0.797,0.831,
       0.857,0.875,0.887,0.896,0.896,0.902,0.906} "Table of measured power factor data";
   parameter Real etable[:]={0,0.7250,0.8268,0.8698,0.8929,0.9028,0.9064,
       0.9088,0.9089,0.9070,0.9044,0.9043,0.9008,0.8972} "Table of measured efficiency data";
 public
-  output Modelica.SIunits.Power Pm=powerSensor.power "Mechanical output power";
-  output Modelica.SIunits.Power Ps_sim=sqrt(3)*imcData.VsNominal*I_sim*pfs_sim "Simulated stator power";
-  output Modelica.SIunits.Power Ps_meas=sqrt(3)*imcData.VsNominal*I_meas*pfs_meas "Simulated stator power";
-  output Modelica.SIunits.Power loss_sim=Ps_sim-Pm "Simulated total losses";
-  output Modelica.SIunits.Power loss_meas=Ps_meas-Pm "Measured total losses";
-  output Modelica.SIunits.Current I_sim=currentRMSSensor.I "Simulated current";
-  output Modelica.SIunits.Current I_meas=combiTable1Ds.y[1] "Measured current";
-  output Modelica.SIunits.AngularVelocity w_sim(displayUnit="rev/min") = imc.wMechanical "Simulated speed";
-  output Modelica.SIunits.AngularVelocity w_meas(displayUnit="rev/min")=combiTable1Ds.y[2] "Measured speed";
+  output Modelica.Units.SI.Power Pm=powerSensor.power "Mechanical output power";
+  output Modelica.Units.SI.Power Ps_sim=sqrt(3)*imcData.VsNominal*I_sim*pfs_sim
+    "Simulated stator power";
+  output Modelica.Units.SI.Power Ps_meas=sqrt(3)*imcData.VsNominal*I_meas*
+      pfs_meas "Simulated stator power";
+  output Modelica.Units.SI.Power loss_sim=Ps_sim - Pm "Simulated total losses";
+  output Modelica.Units.SI.Power loss_meas=Ps_meas - Pm "Measured total losses";
+  output Modelica.Units.SI.Current I_sim=currentRMSSensor.I "Simulated current";
+  output Modelica.Units.SI.Current I_meas=combiTable1Ds.y[1] "Measured current";
+  output Modelica.Units.SI.AngularVelocity w_sim(displayUnit="rev/min") = imc.wMechanical
+    "Simulated speed";
+  output Modelica.Units.SI.AngularVelocity w_meas(displayUnit="rev/min") =
+    combiTable1Ds.y[2] "Measured speed";
   output Real pfs_sim=if noEvent(Ss > Modelica.Constants.small) then Ps/
       Ss else 0 "Simulated power factor";
   output Real pfs_meas=combiTable1Ds.y[3] "Measured power factor";
@@ -60,27 +66,30 @@ public
     TrOperational=imcData.TNominal)
                                annotation (Placement(transformation(extent={{-20,60},{0,80}})));
   Modelica.Magnetic.QuasiStatic.FundamentalWave.Utilities.MultiTerminalBox terminalBox(terminalConnection="D", m=m) annotation (Placement(transformation(extent={{-20,76},{0,96}})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.PowerSensor electricalPowerSensor(m=m) annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStatic.Polyphase.Sensors.PowerSensor
+    electricalPowerSensor(m=m) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-40,90})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensor(m=m) annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStatic.Polyphase.Sensors.CurrentQuasiRMSSensor
+    currentRMSSensor(m=m) annotation (Placement(transformation(
         origin={-70,90},
         extent={{-10,10},{10,-10}},
         rotation=0)));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sources.VoltageSource sineVoltage(
+  Modelica.Electrical.QuasiStatic.Polyphase.Sources.VoltageSource sineVoltage(
     final m=m,
     f=imcData.fsNominal,
-    V=fill(imcData.VsNominal/sqrt(3), m))
-                                  annotation (Placement(transformation(
+    V=fill(imcData.VsNominal/sqrt(3), m)) annotation (Placement(transformation(
         origin={-90,70},
         extent={{-10,-10},{10,10}},
         rotation=270)));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star star(final m=m) annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStatic.Polyphase.Basic.Star star(final m=m)
+    annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=90,
         origin={-90,40})));
-  Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground ground annotation (Placement(transformation(origin={-90,10}, extent={{-10,-10},{10,10}})));
+  Modelica.Electrical.QuasiStatic.SinglePhase.Basic.Ground ground annotation (
+      Placement(transformation(origin={-90,10}, extent={{-10,-10},{10,10}})));
   Modelica.Mechanics.Rotational.Sensors.PowerSensor powerSensor annotation (Placement(transformation(extent={{10,60},{30,80}})));
   Modelica.Mechanics.Rotational.Components.Inertia loadInertia(J=imcData.Jr) annotation (Placement(transformation(extent={{40,60},{60,80}})));
   Modelica.Mechanics.Rotational.Sources.Torque torque annotation (Placement(transformation(extent={{90,60},{70,80}})));

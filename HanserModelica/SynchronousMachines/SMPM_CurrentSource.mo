@@ -3,22 +3,31 @@ model SMPM_CurrentSource "Permanent magnet synchronous machine fed by current so
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   parameter Integer m=3 "Number of phases";
-  parameter Modelica.SIunits.Voltage VNominal=100 "Nominal RMS voltage per phase";
-  parameter Modelica.SIunits.Frequency fNominal=smpmData.fsNominal "Nominal frequency";
-  parameter Modelica.SIunits.Frequency f=50 "Actual frequency";
-  parameter Modelica.SIunits.Time tRamp=1 "Frequency ramp";
-  parameter Modelica.SIunits.AngularFrequency wNominal = 2*pi*fNominal/smpmData.p "Nominal angular velocity";
-  parameter Modelica.SIunits.Torque TLoad=139.3 "Nominal load torque";
-  parameter Modelica.SIunits.Time tStep=1.2 "Time of load torque step";
-  parameter Modelica.SIunits.Inertia JLoad=0.29 "Load's moment of inertia";
-  Modelica.SIunits.Angle theta=rotorDisplacementAngle.rotorDisplacementAngle "Rotor displacement angle, quasi stastic";
-  parameter Modelica.SIunits.Current IsOperation=100 "Operating current";
-  parameter Modelica.SIunits.Angle epsilonOperation = -0.741 "Operation current angle";
+  parameter Modelica.Units.SI.Voltage VNominal=100
+    "Nominal RMS voltage per phase";
+  parameter Modelica.Units.SI.Frequency fNominal=smpmData.fsNominal
+    "Nominal frequency";
+  parameter Modelica.Units.SI.Frequency f=50 "Actual frequency";
+  parameter Modelica.Units.SI.Time tRamp=1 "Frequency ramp";
+  parameter Modelica.Units.SI.AngularFrequency wNominal=2*pi*fNominal/smpmData.p
+    "Nominal angular velocity";
+  parameter Modelica.Units.SI.Torque TLoad=139.3 "Nominal load torque";
+  parameter Modelica.Units.SI.Time tStep=1.2 "Time of load torque step";
+  parameter Modelica.Units.SI.Inertia JLoad=0.29 "Load's moment of inertia";
+  Modelica.Units.SI.Angle theta=rotorDisplacementAngle.rotorDisplacementAngle
+    "Rotor displacement angle, quasi stastic";
+  parameter Modelica.Units.SI.Current IsOperation=100 "Operating current";
+  parameter Modelica.Units.SI.Angle epsilonOperation=-0.741
+    "Operation current angle";
   parameter Boolean positiveRange = false "Use positive range of angles, if true";
-  Modelica.SIunits.Angle phii = Modelica.Math.wrapAngle(smpm.arg_is[1],positiveRange) "Angle of current";
-  Modelica.SIunits.Angle phiv = Modelica.Math.wrapAngle(smpm.arg_vs[1],positiveRange) "Angle of voltage";
-  Modelica.SIunits.Angle phis = Modelica.Math.wrapAngle(phiv-phii,positiveRange) "Angle between voltage and current";
-  Modelica.SIunits.Angle epsilon = Modelica.Math.wrapAngle(phis-theta,positiveRange) "Current angle";
+  Modelica.Units.SI.Angle phii=Modelica.Math.wrapAngle(smpm.arg_is[1],
+      positiveRange) "Angle of current";
+  Modelica.Units.SI.Angle phiv=Modelica.Math.wrapAngle(smpm.arg_vs[1],
+      positiveRange) "Angle of voltage";
+  Modelica.Units.SI.Angle phis=Modelica.Math.wrapAngle(phiv - phii,
+      positiveRange) "Angle between voltage and current";
+  Modelica.Units.SI.Angle epsilon=Modelica.Math.wrapAngle(phis - theta,
+      positiveRange) "Current angle";
   Modelica.Blocks.Sources.Constant iq(k=IsOperation*cos(epsilonOperation)*3/m) annotation (Placement(
         transformation(extent={{-90,40},{-70,60}})));
   Modelica.Blocks.Sources.Constant id(k=IsOperation*sin(epsilonOperation)*3/m) annotation (Placement(transformation(extent={{-90,70},{-70,90}})));
@@ -56,16 +65,14 @@ model SMPM_CurrentSource "Permanent magnet synchronous machine fed by current so
   Modelica.Mechanics.Rotational.Components.Inertia inertiaLoad(J=0.29)
     annotation (Placement(transformation(extent={{50,0},{70,20}})));
   Modelica.Mechanics.Rotational.Sources.QuadraticSpeedDependentTorque quadraticTorque(tau_nominal=-TLoad, w_nominal(displayUnit="rpm") = wNominal) annotation (Placement(transformation(extent={{100,0},{80,20}})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star
-    starMachine(m=
-        Modelica.Electrical.MultiPhase.Functions.numberOfSymmetricBaseSystems(
-                                                                     m))
+  Modelica.Electrical.QuasiStatic.Polyphase.Basic.Star starMachine(m=
+        Modelica.Electrical.Polyphase.Functions.numberOfSymmetricBaseSystems(m))
     annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
         origin={-30,10})));
-  Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground
-    groundM annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStatic.SinglePhase.Basic.Ground groundM annotation (
+      Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-60,0})));
@@ -78,20 +85,20 @@ model SMPM_CurrentSource "Permanent magnet synchronous machine fed by current so
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={30,50})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sources.ReferenceCurrentSource referenceCurrentSource(m=m) annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStatic.Polyphase.Sources.ReferenceCurrentSource
+    referenceCurrentSource(m=m) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=90,
         origin={0,80})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star star(m=m)
-    annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStatic.Polyphase.Basic.Star star(m=m) annotation (
+      Placement(transformation(
         origin={50,80},
         extent={{-10,-10},{10,10}},
         rotation=270)));
-  Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground
-    grounde annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        origin={50,60})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Resistor resistor(m=m, R_ref=fill(1e5, m)) annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStatic.SinglePhase.Basic.Ground grounde annotation (
+      Placement(transformation(extent={{-10,-10},{10,10}}, origin={50,60})));
+  Modelica.Electrical.QuasiStatic.Polyphase.Basic.Resistor resistor(m=m, R_ref=
+        fill(1e5, m)) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={20,80})));
@@ -99,12 +106,16 @@ model SMPM_CurrentSource "Permanent magnet synchronous machine fed by current so
         extent={{10,-10},{-10,10}},
         rotation=90,
         origin={30,10})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensor(m=m) annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStatic.Polyphase.Sensors.CurrentQuasiRMSSensor
+    currentRMSSensor(m=m) annotation (Placement(transformation(
         extent={{10,10},{-10,-10}},
         rotation=90,
         origin={0,50})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.VoltageQuasiRMSSensor voltageRMSSensor(m=m) annotation (Placement(transformation(extent={{-40,50},{-20,30}})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star starM(m=m) annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStatic.Polyphase.Sensors.VoltageQuasiRMSSensor
+    voltageRMSSensor(m=m)
+    annotation (Placement(transformation(extent={{-40,50},{-20,30}})));
+  Modelica.Electrical.QuasiStatic.Polyphase.Basic.Star starM(m=m) annotation (
+      Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=270,
         origin={-50,30})));

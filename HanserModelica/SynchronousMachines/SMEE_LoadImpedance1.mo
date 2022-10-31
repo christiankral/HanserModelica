@@ -3,23 +3,33 @@ model SMEE_LoadImpedance1 "Electrical excited synchronous machine operating at v
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   parameter Integer m=3 "Number of stator phases";
-  parameter Modelica.SIunits.Voltage VsNominal=smeeData.VsNominal "Nominal RMS voltage per phase";
-  parameter Modelica.SIunits.Current IsNominal = smeeData.SNominal/m/VsNominal "Nominal current";
-  parameter Modelica.SIunits.Angle phi = -45*pi/180  "Load impedance angle";
-  parameter Modelica.SIunits.Impedance ZsNominal = VsNominal/IsNominal "Nominal impedance";
-  parameter Modelica.SIunits.Frequency fsNominal=smeeData.fsNominal "Nominal frequency";
-  parameter Modelica.SIunits.AngularVelocity w(displayUnit="rev/min")=2*pi*fsNominal/smee.p "Actual speed";
-  parameter Modelica.SIunits.Current IeMax=19 "Maximum excitation current";
-  parameter Modelica.SIunits.Current Ie0=10 "Open circuit excitation current for nominal voltage";
-  parameter Modelica.SIunits.Current ie=Ie0 "Actual open circuit current";
-  parameter Modelica.SIunits.Angle gamma0(displayUnit="deg") = 0
+  parameter Modelica.Units.SI.Voltage VsNominal=smeeData.VsNominal
+    "Nominal RMS voltage per phase";
+  parameter Modelica.Units.SI.Current IsNominal=smeeData.SNominal/m/VsNominal
+    "Nominal current";
+  parameter Modelica.Units.SI.Angle phi=-45*pi/180 "Load impedance angle";
+  parameter Modelica.Units.SI.Impedance ZsNominal=VsNominal/IsNominal
+    "Nominal impedance";
+  parameter Modelica.Units.SI.Frequency fsNominal=smeeData.fsNominal
+    "Nominal frequency";
+  parameter Modelica.Units.SI.AngularVelocity w(displayUnit="rev/min") = 2*pi*
+    fsNominal/smee.p "Actual speed";
+  parameter Modelica.Units.SI.Current IeMax=19 "Maximum excitation current";
+  parameter Modelica.Units.SI.Current Ie0=10
+    "Open circuit excitation current for nominal voltage";
+  parameter Modelica.Units.SI.Current ie=Ie0 "Actual open circuit current";
+  parameter Modelica.Units.SI.Angle gamma0(displayUnit="deg") = 0
     "Initial rotor displacement angle";
   parameter Boolean positiveRange = false "Use positive range of angles, if true";
-  Modelica.SIunits.ComplexCurrent isr[m] = smee.is*Modelica.ComplexMath.exp(Complex(0,theta+pi/2)) "Stator current w.r.t. rotor fixed frame";
-  output Modelica.SIunits.Power P=multiSensor.apparentPowerTotal.re " real power";
-  output Modelica.SIunits.ReactivePower Q=multiSensor.apparentPowerTotal.im " reactive power";
-  output Modelica.SIunits.ApparentPower S=sqrt(P^2+Q^2) " apparent power";
-  Modelica.SIunits.Angle theta=rotorDisplacementAngle.rotorDisplacementAngle "Rotor displacement angle";
+  Modelica.Units.SI.ComplexCurrent isr[m]=smee.is*Modelica.ComplexMath.exp(
+      Complex(0, theta + pi/2)) "Stator current w.r.t. rotor fixed frame";
+  output Modelica.Units.SI.Power P=multiSensor.apparentPowerTotal.re
+    " real power";
+  output Modelica.Units.SI.ReactivePower Q=multiSensor.apparentPowerTotal.im
+    " reactive power";
+  output Modelica.Units.SI.ApparentPower S=sqrt(P^2 + Q^2) " apparent power";
+  Modelica.Units.SI.Angle theta=rotorDisplacementAngle.rotorDisplacementAngle
+    "Rotor displacement angle";
   Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.SynchronousMachines.SM_ElectricalExcited smee(
     p=2,
     fsNominal=smeeData.fsNominal,
@@ -70,29 +80,30 @@ model SMEE_LoadImpedance1 "Electrical excited synchronous machine operating at v
                                          annotation (Placement(
         transformation(extent={{100,-20},{80,0}})));
 
-  Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star star(m=m)
-    annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStatic.Polyphase.Basic.Star star(m=m) annotation (
+      Placement(transformation(
         origin={-60,40},
         extent={{-10,-10},{10,10}},
         rotation=180)));
-  Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground
-    grounde annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStatic.SinglePhase.Basic.Ground grounde annotation (
+      Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-70,10})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.MultiSensor multiSensor(m=m) annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStatic.Polyphase.Sensors.MultiSensor multiSensor(m=m)
+    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={0,26})));
   Modelica.Magnetic.QuasiStatic.FundamentalWave.Utilities.MultiTerminalBox terminalBox(m=m, terminalConnection="Y") annotation (Placement(transformation(extent={{-10,-4},{10,16}})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star
-    starMachine(m=Modelica.Electrical.MultiPhase.Functions.numberOfSymmetricBaseSystems(m))
+  Modelica.Electrical.QuasiStatic.Polyphase.Basic.Star starMachine(m=
+        Modelica.Electrical.Polyphase.Functions.numberOfSymmetricBaseSystems(m))
     annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
         origin={-20,10})));
-  Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground
-    groundMachine annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStatic.SinglePhase.Basic.Ground groundMachine
+    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-50,10})));
@@ -101,8 +112,8 @@ model SMEE_LoadImpedance1 "Electrical excited synchronous machine operating at v
         rotation=90,
         origin={30,-10})));
 
-  Modelica.Electrical.QuasiStationary.MultiPhase.Basic.VariableImpedance impedance(m=m)
-                                                                                   annotation (Placement(transformation(extent={{-20,30},{-40,50}})));
+  Modelica.Electrical.QuasiStatic.Polyphase.Basic.VariableImpedance impedance(m
+      =m) annotation (Placement(transformation(extent={{-20,30},{-40,50}})));
   Modelica.ComplexBlocks.Sources.ComplexRampPhasor complexRamp[m](
     useLogRamp=fill(true, m),
     startTime=fill(0, m),

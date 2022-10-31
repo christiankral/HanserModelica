@@ -4,36 +4,38 @@ model IMS_Start "Starting of induction machine with slip rings"
   import Modelica.Constants.pi;
   parameter Integer m=3 "Number of stator phases";
   parameter Integer mr=3 "Number of rotor phases";
-  parameter Modelica.SIunits.Voltage VsNominal=100 "Nominal RMS voltage per phase";
-  parameter Modelica.SIunits.Current IsNominal=100 "Nominal RMS current per phase";
-  parameter Modelica.SIunits.Frequency fsNominal=ims.fsNominal "Nominal frequency";
-  parameter Modelica.SIunits.Time tOn=0.1 "Start time of machine";
-  parameter Modelica.SIunits.Resistance RStart=0.16/imsData.turnsRatio^ 2 "Starting resistance";
-  parameter Modelica.SIunits.Time tRheostat=1.0 "Time of shortening the rheostat";
-  parameter Modelica.SIunits.Torque tauLoad=161.4 "Nominal load torque";
-  parameter Modelica.SIunits.AngularVelocity w_Load(displayUnit="rev/min")=
-    Modelica.SIunits.Conversions.from_rpm(1440.45) "Nominal load speed";
-  parameter Modelica.SIunits.Inertia JLoad=0.29 "Load inertia";
-  output Modelica.SIunits.Current I=currentRMSSensor.I "Transient RMS current";
-  output Modelica.SIunits.Current Iqs=currentRMSSensorQS.I "QS RMS current";
+  parameter Modelica.Units.SI.Voltage VsNominal=100
+    "Nominal RMS voltage per phase";
+  parameter Modelica.Units.SI.Current IsNominal=100
+    "Nominal RMS current per phase";
+  parameter Modelica.Units.SI.Frequency fsNominal=ims.fsNominal
+    "Nominal frequency";
+  parameter Modelica.Units.SI.Time tOn=0.1 "Start time of machine";
+  parameter Modelica.Units.SI.Resistance RStart=0.16/imsData.turnsRatio^2
+    "Starting resistance";
+  parameter Modelica.Units.SI.Time tRheostat=1.0
+    "Time of shortening the rheostat";
+  parameter Modelica.Units.SI.Torque tauLoad=161.4 "Nominal load torque";
+  parameter Modelica.Units.SI.AngularVelocity w_Load(displayUnit="rev/min") =
+    Modelica.Units.Conversions.from_rpm(1440.45) "Nominal load speed";
+  parameter Modelica.Units.SI.Inertia JLoad=0.29 "Load inertia";
+  output Modelica.Units.SI.Current I=currentRMSSensor.I "Transient RMS current";
+  output Modelica.Units.SI.Current Iqs=currentRMSSensorQS.I "QS RMS current";
   Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
         transformation(
         origin={-90,-80},
         extent={{-10,-10},{10,10}},
         rotation=270)));
-  Modelica.Electrical.MultiPhase.Basic.Star star(final m=m) annotation (
-     Placement(transformation(
-        extent={{10,-10},{-10,10}},
-        origin={-70,-80})));
-  Modelica.Electrical.MultiPhase.Sources.SineVoltage sineVoltage(
+  Modelica.Electrical.Polyphase.Basic.Star star(final m=m) annotation (
+      Placement(transformation(extent={{10,-10},{-10,10}}, origin={-70,-80})));
+  Modelica.Electrical.Polyphase.Sources.SineVoltage sineVoltage(
     final m=m,
-    freqHz=fill(fsNominal, m),
-    V=fill(sqrt(2.0)*VsNominal, m)) annotation (Placement(
-        transformation(
+    f=fill(fsNominal, m),
+    V=fill(sqrt(2.0)*VsNominal, m)) annotation (Placement(transformation(
         origin={-60,-60},
         extent={{10,-10},{-10,10}},
         rotation=90)));
-  Modelica.Electrical.MultiPhase.Ideal.IdealClosingSwitch idealCloser(
+  Modelica.Electrical.Polyphase.Ideal.IdealClosingSwitch idealCloser(
     final m=m,
     Ron=fill(1e-5*m/3, m),
     Goff=fill(1e-5*3/m, m)) annotation (Placement(transformation(
@@ -41,10 +43,12 @@ model IMS_Start "Starting of induction machine with slip rings"
         extent={{-10,-10},{10,10}},
         rotation=90)));
   Modelica.Blocks.Sources.BooleanStep booleanStep[m](each startTime=tOn) annotation (Placement(transformation(extent={{-100,-40},{-80,-20}})));
-  Modelica.Electrical.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensor(m=m) annotation (Placement(transformation(origin={0,-20}, extent={{-10,-10},{10,10}})));
+  Modelica.Electrical.Polyphase.Sensors.CurrentQuasiRMSSensor currentRMSSensor(
+      m=m) annotation (Placement(transformation(origin={0,-20}, extent={{-10,-10},
+            {10,10}})));
   Modelica.Electrical.Machines.Utilities.MultiTerminalBox terminalBoxM(m=m, terminalConnection="Y") annotation (Placement(transformation(extent={{20,-54},{40,-34}})));
   Modelica.Magnetic.QuasiStatic.FundamentalWave.Utilities.MultiTerminalBox terminalBoxQS(m=m, terminalConnection="Y") annotation (Placement(transformation(extent={{20,46},{40,66}})));
-  Modelica.Magnetic.FundamentalWave.BasicMachines.AsynchronousInductionMachines.AIM_SlipRing
+  Modelica.Magnetic.FundamentalWave.BasicMachines.InductionMachines.IM_SlipRing
     ims(
     Jr=imsData.Jr,
     Js=imsData.Js,
@@ -75,7 +79,8 @@ model IMS_Start "Starting of induction machine with slip rings"
     m=m,
     effectiveStatorTurns=imsData.effectiveStatorTurns,
     TsOperational=imsData.TsRef,
-    TrOperational=imsData.TrRef) annotation (Placement(transformation(extent={{20,-70},{40,-50}})));
+    TrOperational=imsData.TrRef)
+    annotation (Placement(transformation(extent={{20,-70},{40,-50}})));
   Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.InductionMachines.IM_SlipRing imsQS(
     p=imsData.p,
     fsNominal=imsData.fsNominal,
@@ -128,26 +133,31 @@ model IMS_Start "Starting of induction machine with slip rings"
     TorqueDirection=false,
     useSupport=false,
     w_nominal=w_Load) annotation (Placement(transformation(extent={{100,30},{80,50}})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sources.VoltageSource
+  Modelica.Electrical.QuasiStatic.Polyphase.Sources.VoltageSource
     voltageSourceQS(
     m=m,
-    phi=-Modelica.Electrical.MultiPhase.Functions.symmetricOrientation(m),
+    phi=-Modelica.Electrical.Polyphase.Functions.symmetricOrientation(m),
     f=fsNominal,
     V=fill(VsNominal, m)) annotation (Placement(transformation(
         origin={-60,40},
         extent={{-10,-10},{10,10}},
         rotation=270)));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star starQS(m=m) annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStatic.Polyphase.Basic.Star starQS(m=m) annotation (
+      Placement(transformation(
         origin={-70,20},
         extent={{-10,-10},{10,10}},
         rotation=180)));
-  Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground groundQS annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStatic.SinglePhase.Basic.Ground groundQS annotation
+    (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-90,20})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.PowerSensor powerSensorQS(m=m) annotation (Placement(transformation(extent={{-40,70},{-20,90}})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensorQS(m=m) annotation (Placement(transformation(extent={{-10,70},{10,90}})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Ideal.IdealClosingSwitch
+  Modelica.Electrical.QuasiStatic.Polyphase.Sensors.PowerSensor powerSensorQS(m
+      =m) annotation (Placement(transformation(extent={{-40,70},{-20,90}})));
+  Modelica.Electrical.QuasiStatic.Polyphase.Sensors.CurrentQuasiRMSSensor
+    currentRMSSensorQS(m=m)
+    annotation (Placement(transformation(extent={{-10,70},{10,90}})));
+  Modelica.Electrical.QuasiStatic.Polyphase.Ideal.IdealClosingSwitch
     idealCloserQS(
     final m=m,
     Ron=fill(1e-5*m/3, m),
@@ -157,16 +167,20 @@ model IMS_Start "Starting of induction machine with slip rings"
         rotation=270)));
   Modelica.Blocks.Sources.BooleanStep booleanStepQS[m](each startTime=tOn, each startValue=false) annotation (Placement(
         transformation(extent={{-100,60},{-80,80}})));
-  Modelica.Electrical.MultiPhase.Sensors.PowerSensor powerSensor(m=m) annotation (Placement(transformation(extent={{-40,-30},{-20,-10}})));
-  Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star
-    starMachineQS(m=Modelica.Electrical.MultiPhase.Functions.numberOfSymmetricBaseSystems(m)) annotation (Placement(transformation(
+  Modelica.Electrical.Polyphase.Sensors.PowerSensor powerSensor(m=m)
+    annotation (Placement(transformation(extent={{-40,-30},{-20,-10}})));
+  Modelica.Electrical.QuasiStatic.Polyphase.Basic.Star starMachineQS(m=
+        Modelica.Electrical.Polyphase.Functions.numberOfSymmetricBaseSystems(m))
+    annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=270,
         origin={-10,30})));
-  Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground  groundMachineQS annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        origin={-10,10})));
-  Modelica.Electrical.MultiPhase.Basic.Star starMachine(final m=Modelica.Electrical.MultiPhase.Functions.numberOfSymmetricBaseSystems(m)) annotation (Placement(transformation(
+  Modelica.Electrical.QuasiStatic.SinglePhase.Basic.Ground groundMachineQS
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={-10,
+            10})));
+  Modelica.Electrical.Polyphase.Basic.Star starMachine(final m=
+        Modelica.Electrical.Polyphase.Functions.numberOfSymmetricBaseSystems(m))
+    annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=90,
         origin={-12,-70})));

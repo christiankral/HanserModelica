@@ -1,18 +1,22 @@
 within HanserModelica.Electrical;
 model Rectifier "Three-phase six-pulse rectifier with resistive load"
   extends Modelica.Icons.Example;
-  Modelica.Electrical.MultiPhase.Sources.SineVoltage sineVoltage(
-    phase=-Modelica.Electrical.MultiPhase.Functions.symmetricOrientation(3),
-    freqHz=fill(50, 3),V=fill(sqrt(2)*100, 3)) annotation (Placement(transformation(
+  Modelica.Electrical.Polyphase.Sources.SineVoltage sineVoltage(
+    phase=-Modelica.Electrical.Polyphase.Functions.symmetricOrientation(3),
+    f=fill(50, 3),
+    V=fill(sqrt(2)*100, 3)) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-90,40})));
-  Modelica.Electrical.MultiPhase.Basic.Star star annotation (Placement(transformation(
+  Modelica.Electrical.Polyphase.Basic.Star star annotation (Placement(
+        transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-90,10})));
-  Modelica.Electrical.MultiPhase.Basic.Inductor inductor(L=fill(0.3E-3, 3)) annotation (Placement(transformation(extent={{-70,40},{-50,60}})));
-  Modelica.Electrical.MultiPhase.Basic.Resistor resistor(R=fill(0.03, 3)) annotation (Placement(transformation(
+  Modelica.Electrical.Polyphase.Basic.Inductor inductor(L=fill(0.3E-3, 3))
+    annotation (Placement(transformation(extent={{-70,40},{-50,60}})));
+  Modelica.Electrical.Polyphase.Basic.Resistor resistor(R=fill(0.03, 3))
+    annotation (Placement(transformation(
         extent={{10,10},{-10,-10}},
         rotation=180,
         origin={-30,50})));

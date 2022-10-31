@@ -2,13 +2,19 @@ within HanserModelica.SynchronousMachines;
 model SMEE_DOL "Electrical excited synchronous machine starting direct on line"
   extends Modelica.Icons.Example;
   parameter Integer m=3 "Number of phases";
-  parameter Modelica.SIunits.Voltage VNominal=100 "Nominal RMS voltage per phase";
-  parameter Modelica.SIunits.Frequency fNominal=50 "Nominal frequency";
-  parameter Modelica.SIunits.Voltage Ve=smeeData.Re*smeeData.IeOpenCircuit "Excitation current";
-  parameter Modelica.SIunits.Angle gamma0(displayUnit="deg") = 0 "Initial rotor displacement angle";
-  Modelica.SIunits.Current irRMS = sqrt(smee.ir[1]^2+smee.ir[2]^2)/sqrt(2) "Quasi RMS rotor current";
-  Modelica.SIunits.Angle theta = rotorDisplacementAngle.rotorDisplacementAngle "Rotor displacement angle";
-  Modelica.Magnetic.FundamentalWave.BasicMachines.SynchronousInductionMachines.SM_ElectricalExcited smee(
+  parameter Modelica.Units.SI.Voltage VNominal=100
+    "Nominal RMS voltage per phase";
+  parameter Modelica.Units.SI.Frequency fNominal=50 "Nominal frequency";
+  parameter Modelica.Units.SI.Voltage Ve=smeeData.Re*smeeData.IeOpenCircuit
+    "Excitation current";
+  parameter Modelica.Units.SI.Angle gamma0(displayUnit="deg") = 0
+    "Initial rotor displacement angle";
+  Modelica.Units.SI.Current irRMS=sqrt(smee.ir[1]^2 + smee.ir[2]^2)/sqrt(2)
+    "Quasi RMS rotor current";
+  Modelica.Units.SI.Angle theta=rotorDisplacementAngle.rotorDisplacementAngle
+    "Rotor displacement angle";
+  Modelica.Magnetic.FundamentalWave.BasicMachines.SynchronousMachines.SM_ElectricalExcited
+    smee(
     phiMechanical(start=-(Modelica.Constants.pi + gamma0)/smee.p, fixed=true),
     fsNominal=smeeData.fsNominal,
     TsRef=smeeData.TsRef,
@@ -43,7 +49,7 @@ model SMEE_DOL "Electrical excited synchronous machine starting direct on line"
     TrOperational=smeeData.TrRef,
     TeOperational=smeeData.TeRef,
     alpha20e=smeeData.alpha20e)
-      annotation (Placement(transformation(extent={{-20,-50},{0,-30}})));
+    annotation (Placement(transformation(extent={{-20,-50},{0,-30}})));
   Modelica.Electrical.Machines.Sensors.RotorDisplacementAngle rotorDisplacementAngle(p=smee.p, m=m) annotation (Placement(transformation(
         origin={20,-40},
         extent={{-10,10},{10,-10}},
@@ -54,21 +60,23 @@ model SMEE_DOL "Electrical excited synchronous machine starting direct on line"
         extent={{-10,-10},{10,10}},
         rotation=0)));
   Modelica.Mechanics.Rotational.Sensors.MultiSensor mechanicalSensor annotation (Placement(transformation(extent={{40,-50},{60,-30}})));
-  Modelica.Electrical.MultiPhase.Sensors.MultiSensor multiSensor(m=m) annotation (Placement(transformation(
+  Modelica.Electrical.Polyphase.Sensors.MultiSensor multiSensor(m=m)
+    annotation (Placement(transformation(
         origin={40,30},
         extent={{-10,-10},{10,10}},
         rotation=270)));
-  Modelica.Electrical.MultiPhase.Sensors.CurrentQuasiRMSSensor currentRMSSensor(m=m) annotation (Placement(transformation(
+  Modelica.Electrical.Polyphase.Sensors.CurrentQuasiRMSSensor currentRMSSensor(
+      m=m) annotation (Placement(transformation(
         origin={40,0},
         extent={{-10,-10},{10,10}},
         rotation=270)));
-  Modelica.Electrical.MultiPhase.Sources.SineVoltage sineVoltage(
+  Modelica.Electrical.Polyphase.Sources.SineVoltage sineVoltage(
     final m=m,
     final V=fill(VNominal*sqrt(2), m),
-    final freqHz=fill(fNominal, m)) annotation (Placement(transformation(
-          extent={{-10,40},{-30,60}})));
-  Modelica.Electrical.MultiPhase.Basic.Star star(final m=m) annotation (
-      Placement(transformation(extent={{-40,40},{-60,60}})));
+    final f=fill(fNominal, m))
+    annotation (Placement(transformation(extent={{-10,40},{-30,60}})));
+  Modelica.Electrical.Polyphase.Basic.Star star(final m=m)
+    annotation (Placement(transformation(extent={{-40,40},{-60,60}})));
   Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
         transformation(
         origin={-60,30},
@@ -84,7 +92,7 @@ model SMEE_DOL "Electrical excited synchronous machine starting direct on line"
         rotation=90)));
   Modelica.Electrical.Machines.Utilities.TerminalBox terminalBox(terminalConnection="Y", m=m) annotation (Placement(transformation(extent={{-20,-34},{0,-14}})));
 
-  Modelica.Electrical.MultiPhase.Ideal.IdealClosingSwitch switch(
+  Modelica.Electrical.Polyphase.Ideal.IdealClosingSwitch switch(
     final m=m,
     Ron=fill(1e-5*m/3, m),
     Goff=fill(1e-5*m/3, m)) annotation (Placement(transformation(

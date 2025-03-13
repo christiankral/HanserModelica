@@ -1,11 +1,11 @@
 within HanserModelica.Magnetic;
 model Coupling "Electro-magnetic coupling"
   extends Modelica.Icons.Example;
-  parameter Modelica.SIunits.Resistance R = 10 "Resistance";
-  parameter Modelica.SIunits.Inductance L = 2 "Inductance";
+  parameter Modelica.Units.SI.Resistance R = 10 "Resistance";
+  parameter Modelica.Units.SI.Inductance L = 2 "Inductance";
   parameter Integer N=1000 "Number of turns";
-  parameter Modelica.SIunits.Permeance G_m = L/N^2 "Permeance of the magnetic circuit";
-  parameter Modelica.SIunits.Voltage v = 20 "Total DC voltage";
+  parameter Modelica.Units.SI.Permeance G_m = L/N^2 "Permeance of the magnetic circuit";
+  parameter Modelica.Units.SI.Voltage v = 20 "Total DC voltage";
   Modelica.Magnetic.FluxTubes.Basic.ElectroMagneticConverter converter(N=N, i(fixed=true, start=0))
                                                                             annotation (Placement(transformation(extent={{0,-10},{20,10}})));
   Modelica.Magnetic.FluxTubes.Basic.ConstantPermeance permeance(G_m=G_m) annotation (Placement(transformation(

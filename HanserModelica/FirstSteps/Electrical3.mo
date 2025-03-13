@@ -2,12 +2,12 @@ within HanserModelica.FirstSteps;
 model Electrical3 "R-L series circuit, third implementation"
   extends Modelica.Icons.Example;
   // Parameters are constant variables
-  parameter Modelica.SIunits.Resistance R = 10 "Resistance";
-  parameter Modelica.SIunits.Inductance L = 2 "Inductance";
-  parameter Modelica.SIunits.Voltage v = 20 "Total DC voltage";
-  Modelica.SIunits.Voltage vR "Voltage drop of resistor";
-  Modelica.SIunits.Voltage vL "Voltage drop of inductor";
-  Modelica.SIunits.Current i "Current";
+  parameter Modelica.Units.SI.Resistance R = 10 "Resistance";
+  parameter Modelica.Units.SI.Inductance L = 2 "Inductance";
+  parameter Modelica.Units.SI.Voltage v = 20 "Total DC voltage";
+  Modelica.Units.SI.Voltage vR "Voltage drop of resistor";
+  Modelica.Units.SI.Voltage vL "Voltage drop of inductor";
+  Modelica.Units.SI.Current i "Current";
 initial equation
   i = 0;
 equation

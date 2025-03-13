@@ -5,6 +5,12 @@ class ReleaseNotes "Release Notes"
     preferredView = "info",
     Documentation(info="<html>
 
+<h5>Version 2.0.1, 2025-03-13</h5>
+<ul>
+<li>Fix issue with <code>SIunits</code>, see
+<a href=\"https://github.com/christiankral/HanserModelica/issues/15\">#15</a></li>
+</ul>
+
 <h5>Version 2.0.0, 2022-10-31</h5>
 <ul>
 <li>Switch to Modelica Standard Library 4.0.0</li>

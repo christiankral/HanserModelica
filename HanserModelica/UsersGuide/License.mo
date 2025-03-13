@@ -11,7 +11,7 @@ This library is published under the
 <a href=\"https://opensource.org/licenses/BSD-3-Clause\">BSD-3-Clause</a>.
 </p>
 <p>
-Copyright 2017-2019 Christian Kral
+Copyright 2017-2025 Christian Kral
 </p>
 
 <p>
